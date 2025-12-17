@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA Skills Radar Prototype</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f8f9fa; padding: 20px; }
+        .container { width: 100%; max-width: 700px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        select { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ddd; width: 100%; margin-bottom: 20px; cursor: pointer; }
+        canvas { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🎓 MBA Skills Comparison</h2>
+        
+        <label for="schoolSelect">Select a Program:</label>
+        <select id="schoolSelect" onchange="updateChart()">
+            <option value="stuart">IIT Stuart (Finance Focus)</option>
+            <option value="booth">Chicago Booth (Econ Focus)</option>
+            <option value="kellogg">Northwestern Kellogg (Marketing Focus)</option>
+        </select>
+
+        <canvas id="myRadarChart"></canvas>
+    </div>
+
+    <script>
+        // 1. MOCK DATA (This is what usually comes from your Python JSON)
+        const dataLibrary = {
+            stuart: {
+                label: "IIT Stuart MBA",
+                data: [5, 4, 2, 4, 3, 2], // Python, Finance, Marketing, Excel, Strategy, Leadership
+                color: 'rgba(54, 162, 235, 0.2)', // Blue
+                borderColor: 'rgba(54, 162, 235, 1)'
+            },
+            booth: {
+                label: "Chicago Booth MBA",
+                data: [3, 5, 2, 5, 4, 3], 
+                color: 'rgba(255, 99, 132, 0.2)', // Red
+                borderColor: 'rgba(255, 99, 132, 1)'
+            },
+            kellogg: {
+                label: "Kellogg MBA",
+                data: [2, 3, 5, 3, 5, 5], 
+                color: 'rgba(75, 192, 192, 0.2)', // Teal
+                borderColor: 'rgba(75, 192, 192, 1)'
+            }
+        };
+
+        const labels = ['Python/Tech', 'Finance/Quant', 'Marketing', 'Excel/Modeling', 'Strategy', 'Leadership'];
+
+        // 2. INITIALIZE CHART
+        const ctx = document.getElementById('myRadarChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: dataLibrary.stuart.label,
+                    data: dataLibrary.stuart.data,
+                    backgroundColor: dataLibrary.stuart.color,
+                    borderColor: dataLibrary.stuart.borderColor,
+                    borderWidth: 2,
+                    pointBackgroundColor: dataLibrary.stuart.borderColor
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 5, // Scores go from 0 to 5
+                        grid: { color: "rgba(0,0,0,0.05)" },
+                        pointLabels: { font: { size: 12, weight: 'bold' } }
+                    }
+                },
+                animation: {
+                    duration: 1000, // 1 second animation (The "Jello" speed)
+                    easing: 'easeOutElastic' // The "Bouncy" effect
+                }
+            }
+        });
+
+        // 3. THE "JELLO" FUNCTION
+        function updateChart() {
+            const selectedSchool = document.getElementById('schoolSelect').value;
+            const newData = dataLibrary[selectedSchool];
+
+            // Update Data
+            myChart.data.datasets[0].data = newData.data;
+            myChart.data.datasets[0].label = newData.label;
+            myChart.data.datasets[0].backgroundColor = newData.color;
+            myChart.data.datasets[0].borderColor = newData.borderColor;
+            myChart.data.datasets[0].pointBackgroundColor = newData.borderColor;
+
+            // Trigger the "Morph" animation
+            myChart.update(); 
+        }
+    </script>
+</body>
+</html>
