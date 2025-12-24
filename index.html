@@ -3,55 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA Skills Radar Prototype</title>
+    <title>MBA Skills Gap Analyzer</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f8f9fa; padding: 20px; }
-        .container { width: 100%; max-width: 700px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #333; margin-bottom: 20px; }
-        select { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ddd; width: 100%; margin-bottom: 20px; cursor: pointer; }
-        canvas { margin-top: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f0f2f5; padding: 40px; }
+        .container { width: 100%; max-width: 800px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #1a1a1a; margin-bottom: 10px; }
+        p.subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 30px; }
+        .controls { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; }
+        select { padding: 12px 20px; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; background-color: #fff; cursor: pointer; transition: all 0.2s; }
+        select:hover { border-color: #007bff; }
+        .chart-wrapper { position: relative; padding: 10px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>🎓 MBA Skills Comparison</h2>
+        <h2>🎓 MBA Skills Gap Analyzer</h2>
+        <p class="subtitle">Comparing program curricula against the 2025 Market Demand Baseline</p>
         
-        <label for="schoolSelect">Select a Program:</label>
-        <select id="schoolSelect" onchange="updateChart()">
-            <option value="stuart">IIT Stuart (Finance Focus)</option>
-            <option value="booth">Chicago Booth (Econ Focus)</option>
-            <option value="kellogg">Northwestern Kellogg (Marketing Focus)</option>
-        </select>
+        <div class="controls">
+            <select id="schoolSelect" onchange="updateChart()">
+                <option value="stuart">IIT Stuart (Finance Focus)</option>
+                <option value="booth">Chicago Booth (Econ Focus)</option>
+                <option value="kellogg">Northwestern Kellogg (Marketing Focus)</option>
+            </select>
+        </div>
 
-        <canvas id="myRadarChart"></canvas>
+        <div class="chart-wrapper">
+            <canvas id="myRadarChart"></canvas>
+        </div>
     </div>
 
     <script>
-        // 1. MOCK DATA (This is what usually comes from your Python JSON)
+        // 1. DATA LIBRARY (Pillars: Digital, Quant, Strategy, Management, Communication, Regulation)
+        const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
+        
+        const marketBaseline = [5, 4, 5, 4, 5, 3]; // Baseline derived from top market skillsets [cite: 435, 436]
+
         const dataLibrary = {
             stuart: {
                 label: "IIT Stuart MBA",
-                data: [5, 4, 2, 4, 3, 2], // Python, Finance, Marketing, Excel, Strategy, Leadership
-                color: 'rgba(54, 162, 235, 0.2)', // Blue
+                data: [1.8, 2.3, 3.2, 2.2, 2.1, 1.9]
+                color: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)'
             },
             booth: {
                 label: "Chicago Booth MBA",
-                data: [3, 5, 2, 5, 4, 3], 
-                color: 'rgba(255, 99, 132, 0.2)', // Red
-                borderColor: 'rgba(255, 99, 132, 1)'
+                data: [4, 5, 4, 3, 3, 3], 
+                color: 'rgba(255, 159, 64, 0.2)',
+                borderColor: 'rgba(255, 159, 64, 1)'
             },
             kellogg: {
                 label: "Kellogg MBA",
-                data: [2, 3, 5, 3, 5, 5], 
-                color: 'rgba(75, 192, 192, 0.2)', // Teal
+                data: [3, 3, 5, 5, 5, 2], 
+                color: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)'
             }
         };
-
-        const labels = ['Python/Tech', 'Finance/Quant', 'Marketing', 'Excel/Modeling', 'Strategy', 'Leadership'];
 
         // 2. INITIALIZE CHART
         const ctx = document.getElementById('myRadarChart').getContext('2d');
@@ -59,46 +68,56 @@
             type: 'radar',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: dataLibrary.stuart.label,
-                    data: dataLibrary.stuart.data,
-                    backgroundColor: dataLibrary.stuart.color,
-                    borderColor: dataLibrary.stuart.borderColor,
-                    borderWidth: 2,
-                    pointBackgroundColor: dataLibrary.stuart.borderColor
-                }]
+                datasets: [
+                    {
+                        label: dataLibrary.stuart.label,
+                        data: dataLibrary.stuart.data,
+                        backgroundColor: dataLibrary.stuart.color,
+                        borderColor: dataLibrary.stuart.borderColor,
+                        pointBackgroundColor: dataLibrary.stuart.borderColor,
+                        pointHoverRadius: 10, // The "Mold" effect
+                        fill: true
+                    },
+                    {
+                        label: 'Market Demand Baseline (2025)',
+                        data: marketBaseline,
+                        backgroundColor: 'rgba(255, 99, 132, 0.05)',
+                        borderColor: 'rgba(255, 99, 132, 0.4)',
+                        borderDash: [5, 5], // Dashed line for market target
+                        pointRadius: 0, // Keep focus on the school's data
+                        fill: true
+                    }
+                ]
             },
             options: {
+                responsive: true,
                 scales: {
                     r: {
-                        angleLines: { display: true },
                         suggestedMin: 0,
-                        suggestedMax: 5, // Scores go from 0 to 5
-                        grid: { color: "rgba(0,0,0,0.05)" },
-                        pointLabels: { font: { size: 12, weight: 'bold' } }
+                        suggestedMax: 5,
+                        ticks: { display: false }, // Cleaner look without numbers
+                        pointLabels: { font: { size: 13, weight: 'bold' } }
                     }
                 },
                 animation: {
-                    duration: 1000, // 1 second animation (The "Jello" speed)
-                    easing: 'easeOutElastic' // The "Bouncy" effect
+                    duration: 1000,
+                    easing: 'easeOutElastic' // Bouncy "Jello" transition
                 }
             }
         });
 
-        // 3. THE "JELLO" FUNCTION
+        // 3. UPDATE FUNCTION
         function updateChart() {
             const selectedSchool = document.getElementById('schoolSelect').value;
             const newData = dataLibrary[selectedSchool];
 
-            // Update Data
-            myChart.data.datasets[0].data = newData.data;
             myChart.data.datasets[0].label = newData.label;
+            myChart.data.datasets[0].data = newData.data;
             myChart.data.datasets[0].backgroundColor = newData.color;
             myChart.data.datasets[0].borderColor = newData.borderColor;
             myChart.data.datasets[0].pointBackgroundColor = newData.borderColor;
 
-            // Trigger the "Morph" animation
-            myChart.update(); 
+            myChart.update();
         }
     </script>
 </body>
