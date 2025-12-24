@@ -39,12 +39,13 @@
         // 1. DATA LIBRARY (Pillars: Digital, Quant, Strategy, Management, Communication, Regulation)
         const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
         
-        const marketBaseline = [5, 4, 5, 4, 5, 3]; // Baseline derived from top market skillsets [cite: 435, 436]
+        // Baseline derived from top market skillsets identified in Boshkoska (2025) [cite: 435, 436]
+        const marketBaseline = [5, 4, 5, 4, 5, 3]; 
 
         const dataLibrary = {
             stuart: {
                 label: "IIT Stuart MBA",
-                data: [1.8, 2.3, 3.2, 2.2, 2.1, 1.9]
+                data: [1.8, 2.3, 3.2, 2.2, 2.1, 1.9], // ADDED MISSING COMMA HERE
                 color: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)'
             },
@@ -75,7 +76,7 @@
                         backgroundColor: dataLibrary.stuart.color,
                         borderColor: dataLibrary.stuart.borderColor,
                         pointBackgroundColor: dataLibrary.stuart.borderColor,
-                        pointHoverRadius: 10, // The "Mold" effect
+                        pointHoverRadius: 10, 
                         fill: true
                     },
                     {
@@ -83,8 +84,8 @@
                         data: marketBaseline,
                         backgroundColor: 'rgba(255, 99, 132, 0.05)',
                         borderColor: 'rgba(255, 99, 132, 0.4)',
-                        borderDash: [5, 5], // Dashed line for market target
-                        pointRadius: 0, // Keep focus on the school's data
+                        borderDash: [5, 5], 
+                        pointRadius: 0, 
                         fill: true
                     }
                 ]
@@ -95,13 +96,13 @@
                     r: {
                         suggestedMin: 0,
                         suggestedMax: 5,
-                        ticks: { display: false }, // Cleaner look without numbers
+                        ticks: { display: false }, 
                         pointLabels: { font: { size: 13, weight: 'bold' } }
                     }
                 },
                 animation: {
                     duration: 1000,
-                    easing: 'easeOutElastic' // Bouncy "Jello" transition
+                    easing: 'easeOutElastic' 
                 }
             }
         });
