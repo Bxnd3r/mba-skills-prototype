@@ -9,23 +9,33 @@
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .tagline { color: #666; font-size: 13px; font-weight: 500; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
         .container { width: 100%; max-width: 1150px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 5px; }
-        h2 { text-align: center; color: #1a1a1a; margin-top: 0; margin-bottom: 15px; }
         
-        /* Search and Comparison Controls */
-        .controls { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap; }
-        .search-box { position: relative; width: 45%; min-width: 300px; }
-        input { width: 100%; padding: 12px 15px; font-size: 15px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; }
-        .results-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; z-index: 1000; max-height: 200px; overflow-y: auto; display: none; border-radius: 0 0 8px 8px; }
-        .results-list div { padding: 10px; cursor: pointer; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-        .results-list div:hover { background-color: #f8f9fa; }
+        /* Search and Tag UI */
+        .search-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; gap: 15px; width: 100%; }
+        .search-box { position: relative; width: 100%; max-width: 600px; }
+        input { width: 100%; padding: 14px 20px; font-size: 16px; border-radius: 12px; border: 2px solid #eee; transition: 0.2s; outline: none; }
+        input:focus { border-color: #007bff; }
+        .results-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; z-index: 1000; max-height: 200px; overflow-y: auto; display: none; border-radius: 0 0 12px 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .results-list div { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #f8f9fa; font-size: 14px; }
+        .results-list div:hover { background-color: #f0f7ff; }
+
+        /* School Tags Legend */
+        .school-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .school-tag { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        /* The Square Box with Hover X */
+        .color-box { width: 18px; height: 18px; border-radius: 4px; margin-right: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: 0.2s; }
+        .color-box::after { content: '×'; color: white; font-size: 16px; font-weight: bold; opacity: 0; transition: 0.2s; position: absolute; }
+        .color-box:hover::after { opacity: 1; }
+        .color-box:hover { filter: brightness(0.8); }
 
         .main-visual { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
         .chart-wrapper { position: relative; height: 480px; flex: 2; min-width: 400px; }
         .info-panel { flex: 1; min-width: 280px; background: #fcfcfc; padding: 20px; border-radius: 12px; border: 1px solid #eee; font-size: 13px; }
         
         .info-panel h4 { margin-top: 0; color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-bottom: 15px; }
-        .pillar-desc { margin-bottom: 15px; padding-left: 10px; border-left: 3px solid #ddd; }
-        .pillar-desc strong { color: #333; display: block; margin-bottom: 3px; }
+        .pillar-desc { margin-bottom: 12px; padding-left: 10px; border-left: 3px solid #ddd; }
+        .pillar-desc strong { display: block; margin-bottom: 2px; }
 
         .inventory-section { margin-top: 10px; border-top: 2px solid #eee; padding-top: 20px; width: 100%; }
         .course-item { background: #fafafa; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; padding: 12px; }
@@ -36,20 +46,15 @@
 </head>
 <body>
 
-    <div class="tagline">A tool to analyze and compare MBA skill output for students, schools, and employers</div>
+    <div class="tagline">Analyze and compare MBA skill output for students, schools, and employers</div>
 
     <div class="container">
-        <h2>MBA Skills Gap Analyzer</h2>
-        
-        <div class="controls">
+        <div class="search-area">
             <div class="search-box">
-                <input type="text" id="primarySearch" placeholder="Search Primary School (e.g. Stuart)..." oninput="showResults('primarySearch', 'primaryResults')">
-                <div id="primaryResults" class="results-list"></div>
+                <input type="text" id="schoolSearch" placeholder="Search for a school" oninput="showResults()" onkeydown="handleEnter(event)">
+                <div id="resultsList" class="results-list"></div>
             </div>
-            <div class="search-box">
-                <input type="text" id="secondarySearch" placeholder="Search Comparison School (e.g. Booth)..." oninput="showResults('secondarySearch', 'secondaryResults')">
-                <div id="secondaryResults" class="results-list"></div>
-            </div>
+            <div id="schoolTags" class="school-tags"></div>
         </div>
 
         <div class="main-visual">
@@ -59,30 +64,12 @@
             
             <div class="info-panel">
                 <h4>Skill Pillars Explained</h4>
-                <div class="pillar-desc">
-                    <strong>Digital Literacy</strong>
-                    Technical fluency in AI, data science (SQL/Python), and technology systems.
-                </div>
-                <div class="pillar-desc">
-                    <strong>Quant & Finance</strong>
-                    Analytical rigor, financial modeling, accounting, and capacity management.
-                </div>
-                <div class="pillar-desc">
-                    <strong>Strategic Thinking</strong>
-                    Business acumen, competitive positioning, and innovative planning.
-                </div>
-                <div class="pillar-desc">
-                    <strong>Management & Leadership</strong>
-                    Managing human capital, resource allocation, and collaborative teamwork.
-                </div>
-                <div class="pillar-desc">
-                    <strong>Communication</strong>
-                    Negotiation, stakeholder persuasion, and interpersonal presence.
-                </div>
-                <div class="pillar-desc">
-                    <strong>Regulation & Ethics</strong>
-                    Compliance, protecting standards, and ethical legal frameworks.
-                </div>
+                <div class="pillar-desc"><strong>Digital:</strong> AI literacy, data science (SQL/Python), and technology systems.</div>
+                <div class="pillar-desc"><strong>Quant:</strong> Financial modeling, accounting, and capacity management.</div>
+                <div class="pillar-desc"><strong>Strategy:</strong> Business acumen and strategic инновация management.</div>
+                <div class="pillar-desc"><strong>Management:</strong> Managing human capital and resource allocation.</div>
+                <div class="pillar-desc"><strong>Communication:</strong> Interpersonal stakeholder presence and persuasion.</div>
+                <div class="pillar-desc"><strong>Regulation:</strong> Ethical compliance and legal frameworks.</div>
                 <p style="font-size:11px; color:#888; border-top:1px solid #eee; padding-top:10px;">
                     Baseline based on Boshkoska (2025) market significance analysis of 6,400 job postings.
                 </p>
@@ -91,19 +78,21 @@
 
         <div class="inventory-section">
             <h3 id="inventoryTitle">Course Evidence & Audit Inventory</h3>
-            <div id="courseList">Select a school to view audit evidence...</div>
+            <div id="courseList">Add a school to view audit evidence...</div>
         </div>
     </div>
 
     <script>
         const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
         const marketBaseline = [3.5, 4.8, 4.0, 5.0, 4.5, 4.2]; 
-
-        const schools = [
-            { id: 'stuart', name: "Illinois Institute of Technology: Stuart School of Business", audit: "final_skills_audit.json" },
-            { id: 'booth', name: "University of Chicago: Booth School of Business", data: [4, 5, 4, 3, 3, 3] },
-            { id: 'kellogg', name: "Northwestern University: Kellogg School of Management", data: [3, 3, 5, 5, 5, 2] }
+        
+        const schoolsDB = [
+            { id: 'stuart', name: "Illinois Institute of Technology: Stuart School of Business", audit: "final_skills_audit.json", color: 'rgba(54, 162, 235, 1)' },
+            { id: 'booth', name: "University of Chicago: Booth School of Business", data: [4.2, 5.0, 4.5, 3.8, 3.5, 3.2], color: 'rgba(255, 99, 132, 1)' },
+            { id: 'kellogg', name: "Northwestern University: Kellogg School of Management", data: [3.5, 3.8, 5.0, 4.8, 5.0, 2.5], color: 'rgba(75, 192, 192, 1)' }
         ];
+
+        let selectedSchools = [];
 
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         const myChart = new Chart(ctx, {
@@ -111,63 +100,105 @@
             data: {
                 labels: labels,
                 datasets: [
-                    { label: 'Primary School', data: [0,0,0,0,0,0], backgroundColor: 'rgba(54, 162, 235, 0.2)', borderColor: 'rgba(54, 162, 235, 1)', pointRadius: 5, pointHitRadius: 35, fill: true },
-                    { label: 'Comparison School', data: [0,0,0,0,0,0], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)', pointRadius: 5, pointHitRadius: 35, fill: true },
-                    { label: 'Market Demand Baseline', data: marketBaseline, backgroundColor: 'rgba(255, 99, 132, 0.05)', borderColor: 'rgba(255, 99, 132, 0.4)', borderDash: [5, 5], pointRadius: 5, pointHitRadius: 35, fill: true }
+                    { label: 'Market Demand Baseline', data: marketBaseline, backgroundColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.2)', borderDash: [5, 5], pointRadius: 5, fill: true }
                 ]
             },
-            options: { maintainAspectRatio: false, scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { display: false }, pointLabels: { font: { size: 13, weight: 'bold' } } } } }
+            options: { 
+                maintainAspectRatio: false, 
+                plugins: { legend: { display: false } },
+                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { display: false }, pointLabels: { font: { size: 13, weight: 'bold' } } } } 
+            }
         });
 
-        function showResults(inputId, resultsId) {
-            const query = document.getElementById(inputId).value.toLowerCase();
-            const list = document.getElementById(resultsId);
+        function showResults() {
+            const query = document.getElementById('schoolSearch').value.toLowerCase();
+            const list = document.getElementById('resultsList');
             list.innerHTML = "";
             if (!query) { list.style.display = "none"; return; }
             
-            const filtered = schools.filter(s => s.name.toLowerCase().includes(query));
+            const filtered = schoolsDB.filter(s => s.name.toLowerCase().includes(query) && !selectedSchools.find(sel => sel.id === s.id));
             filtered.forEach(s => {
                 const div = document.createElement('div');
                 div.innerText = s.name;
-                div.onclick = () => selectSchool(s, inputId, resultsId);
+                div.onclick = () => selectSchool(s);
                 list.appendChild(div);
             });
-            list.style.display = "block";
+            list.style.display = filtered.length ? "block" : "none";
         }
 
-        async function selectSchool(school, inputId, resultsId) {
-            document.getElementById(inputId).value = school.name;
-            document.getElementById(resultsId).style.display = "none";
-            const dsIndex = inputId === 'primarySearch' ? 0 : 1;
+        function handleEnter(e) {
+            if (e.key === "Enter") {
+                const query = document.getElementById('schoolSearch').value.toLowerCase();
+                const match = schoolsDB.find(s => s.name.toLowerCase().includes(query) && !selectedSchools.find(sel => sel.id === s.id));
+                if (match) selectSchool(match);
+            }
+        }
 
+        async function selectSchool(school) {
+            if (selectedSchools.length >= 2) return;
+            
+            selectedSchools.push(school);
+            document.getElementById('schoolSearch').value = "";
+            document.getElementById('resultsList').style.display = "none";
+            
+            updateUI();
+            
+            let dataArr;
             if (school.audit) {
-                // Fetch and Calculate for Stuart
                 const [auditRes, descRes] = await Promise.all([fetch(school.audit), fetch('iit_courses.json')]);
                 const auditData = await auditRes.json();
                 const descData = await descRes.json();
-                
                 const totals = { "Digital": 0, "Quant": 0, "Strategy": 0, "Management": 0, "Communication": 0, "Regulation": 0 };
                 auditData.forEach(c => {
-                    labels.forEach(l => { totals[l] += (c.skills[l] || c.skills["Strategic"] || 0); });
+                    labels.forEach(l => totals[l] += (c.skills[l] || c.skills["Strategic"] || 0));
                 });
-                const avgs = labels.map(l => (totals[l] / auditData.length).toFixed(1));
-                
-                myChart.data.datasets[dsIndex].data = avgs;
-                myChart.data.datasets[dsIndex].label = school.name;
-                
-                if (dsIndex === 0) populateInventory(auditData, descData);
+                dataArr = labels.map(l => (totals[l] / auditData.length).toFixed(1));
+                if (selectedSchools.length === 1) populateInventory(auditData, descData);
             } else {
-                myChart.data.datasets[dsIndex].data = school.data;
-                myChart.data.datasets[dsIndex].label = school.name;
+                dataArr = school.data;
             }
+
+            myChart.data.datasets.push({
+                id: school.id,
+                label: school.name,
+                data: dataArr,
+                backgroundColor: school.color.replace('1)', '0.2)'),
+                borderColor: school.color,
+                pointRadius: 5,
+                fill: true
+            });
             myChart.update();
+        }
+
+        function removeSchool(schoolId) {
+            selectedSchools = selectedSchools.filter(s => s.id !== schoolId);
+            myChart.data.datasets = myChart.data.datasets.filter(ds => ds.id !== schoolId);
+            if (selectedSchools.length === 0) document.getElementById('courseList').innerHTML = "Add a school to view audit evidence...";
+            updateUI();
+            myChart.update();
+        }
+
+        function updateUI() {
+            const container = document.getElementById('schoolTags');
+            const search = document.getElementById('schoolSearch');
+            container.innerHTML = "";
+            
+            selectedSchools.forEach(s => {
+                const tag = document.createElement('div');
+                tag.className = "school-tag";
+                tag.innerHTML = `<div class="color-box" style="background:${s.color}" onclick="removeSchool('${s.id}')"></div> ${s.name}`;
+                container.appendChild(tag);
+            });
+
+            if (selectedSchools.length === 0) search.placeholder = "Search for a school";
+            else if (selectedSchools.length === 1) search.placeholder = "Search for a school to compare";
+            else search.placeholder = "Maximum schools selected";
         }
 
         function populateInventory(auditData, descData) {
             const list = document.getElementById('courseList');
             list.innerHTML = "";
             const descMap = Object.fromEntries(descData.map(d => [d.course.replace(/\s+/g,'').toLowerCase(), d.text]));
-
             auditData.forEach(c => {
                 const avg = (Object.values(c.skills).reduce((a,b)=>a+b,0)/6).toFixed(1);
                 const desc = descMap[c.course.replace(/\s+/g,'').toLowerCase()] || "Description not found.";
