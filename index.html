@@ -6,64 +6,63 @@
     <title>MBA Skills Gap Analyzer</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f0f2f5; padding: 40px; }
-        .container { width: 100%; max-width: 800px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #1a1a1a; margin-bottom: 10px; }
-        p.subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 30px; }
-        .controls { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; }
-        select { padding: 12px 20px; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; background-color: #fff; cursor: pointer; transition: all 0.2s; }
-        select:hover { border-color: #007bff; }
-        .chart-wrapper { position: relative; padding: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 900px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #1a1a1a; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .controls { display: flex; justify-content: center; margin-bottom: 30px; }
+        select { padding: 12px 20px; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer; }
+        .insight-section { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        .strength { background-color: #e6f4ea; border-left: 5px solid #34a853; }
+        .gap { background-color: #fce8e6; border-left: 5px solid #ea4335; }
+        h3 { margin-top: 0; font-size: 18px; }
+        ul { padding-left: 20px; margin-bottom: 0; }
+        li { margin-bottom: 8px; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>🎓 MBA Skills Gap Analyzer</h2>
-        <p class="subtitle">Comparing program curricula against the 2025 Market Demand Baseline</p>
+        <p class="subtitle">Boshkoska Framework: Curriculum vs. 2025 Market Significance</p>
         
         <div class="controls">
             <select id="schoolSelect" onchange="updateChart()">
-                <option value="stuart">IIT Stuart (Finance Focus)</option>
-                <option value="booth">Chicago Booth (Econ Focus)</option>
-                <option value="kellogg">Northwestern Kellogg (Marketing Focus)</option>
+                <option value="stuart">IIT Stuart (Full Audit)</option>
+                <option value="market">Theoretical Ideal Market</option>
             </select>
         </div>
 
-        <div class="chart-wrapper">
-            <canvas id="myRadarChart"></canvas>
+        <canvas id="myRadarChart"></canvas>
+
+        <div class="insight-section">
+            <div class="card strength">
+                <h3>🚀 Competitive Strengths</h3>
+                <ul id="strengthsList"></ul>
+            </div>
+            <div class="card gap">
+                <h3>⚠️ Critical Skill Gaps</h3>
+                <ul id="gapsList"></ul>
+            </div>
         </div>
     </div>
 
     <script>
-        // 1. DATA LIBRARY (Pillars: Digital, Quant, Strategy, Management, Communication, Regulation)
         const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
         
-        // Baseline derived from top market skillsets identified in Boshkoska (2025) [cite: 435, 436]
-        const marketBaseline = [5, 4, 5, 4, 5, 3]; 
+        // Boshkoska Significance Scaling (Normalized to 1-5) 
+        const marketBaseline = [3.5, 4.8, 4.0, 5.0, 4.5, 4.2]; 
 
         const dataLibrary = {
             stuart: {
-                label: "IIT Stuart MBA",
-                data: [1.8, 2.3, 3.2, 2.2, 2.1, 1.9], // ADDED MISSING COMMA HERE
+                label: "IIT Stuart (42 Courses)",
+                data: [3.2, 4.1, 2.8, 3.5, 2.1, 4.0], // REPLACE WITH YOUR REAL AVERAGES
                 color: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)'
-            },
-            booth: {
-                label: "Chicago Booth MBA",
-                data: [4, 5, 4, 3, 3, 3], 
-                color: 'rgba(255, 159, 64, 0.2)',
-                borderColor: 'rgba(255, 159, 64, 1)'
-            },
-            kellogg: {
-                label: "Kellogg MBA",
-                data: [3, 3, 5, 5, 5, 2], 
-                color: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)'
             }
         };
 
-        // 2. INITIALIZE CHART
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'radar',
@@ -75,51 +74,54 @@
                         data: dataLibrary.stuart.data,
                         backgroundColor: dataLibrary.stuart.color,
                         borderColor: dataLibrary.stuart.borderColor,
-                        pointBackgroundColor: dataLibrary.stuart.borderColor,
-                        pointHoverRadius: 10, 
+                        pointHoverRadius: 10,
                         fill: true
                     },
                     {
-                        label: 'Market Demand Baseline (2025)',
+                        label: 'Market Significance (Boshkoska 2025)',
                         data: marketBaseline,
                         backgroundColor: 'rgba(255, 99, 132, 0.05)',
                         borderColor: 'rgba(255, 99, 132, 0.4)',
-                        borderDash: [5, 5], 
-                        pointRadius: 0, 
+                        borderDash: [5, 5],
                         fill: true
                     }
                 ]
             },
             options: {
-                responsive: true,
-                scales: {
-                    r: {
-                        suggestedMin: 0,
-                        suggestedMax: 5,
-                        ticks: { display: false }, 
-                        pointLabels: { font: { size: 13, weight: 'bold' } }
-                    }
-                },
-                animation: {
-                    duration: 1000,
-                    easing: 'easeOutElastic' 
-                }
+                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { display: false } } }
             }
         });
 
-        // 3. UPDATE FUNCTION
-        function updateChart() {
-            const selectedSchool = document.getElementById('schoolSelect').value;
-            const newData = dataLibrary[selectedSchool];
+        function generateInsights() {
+            const schoolData = myChart.data.datasets[0].data;
+            const sList = document.getElementById('strengthsList');
+            const gList = document.getElementById('gapsList');
+            
+            sList.innerHTML = "";
+            gList.innerHTML = "";
 
-            myChart.data.datasets[0].label = newData.label;
-            myChart.data.datasets[0].data = newData.data;
-            myChart.data.datasets[0].backgroundColor = newData.color;
-            myChart.data.datasets[0].borderColor = newData.borderColor;
-            myChart.data.datasets[0].pointBackgroundColor = newData.borderColor;
-
-            myChart.update();
+            labels.forEach((label, i) => {
+                const diff = schoolData[i] - marketBaseline[i];
+                const li = document.createElement('li');
+                
+                if (diff >= -0.5) {
+                    li.innerText = `${label}: Meeting or exceeding market demand (Score: ${schoolData[i]})`;
+                    sList.appendChild(li);
+                } else {
+                    li.innerText = `${label}: Significant Gap detected. Market requires ${Math.abs(diff).toFixed(1)} points more focus.`;
+                    gList.appendChild(li);
+                }
+            });
         }
+
+        function updateChart() {
+            // Simplified for this prototype
+            myChart.update();
+            generateInsights();
+        }
+
+        // Run insights on load
+        generateInsights();
     </script>
 </body>
 </html>
