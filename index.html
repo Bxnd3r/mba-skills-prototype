@@ -7,14 +7,20 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 1100px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 10px; }
+        
+        /* Tagline added at the very top */
+        .tagline { color: #666; font-size: 14px; font-weight: 500; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .container { width: 100%; max-width: 1100px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 5px; }
         h2 { text-align: center; color: #1a1a1a; margin-top: 0; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 13px; }
+        
         .controls { display: flex; justify-content: center; margin-bottom: 20px; }
         select { padding: 12px 20px; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer; background-color: #fff; width: 100%; max-width: 600px; }
         
         .main-visual { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
-        .chart-wrapper { position: relative; height: 450px; flex: 2; min-width: 350px; }
+        /* Pulling the chart up more to prevent hanging off-page */
+        .chart-wrapper { position: relative; height: 420px; flex: 2; min-width: 350px; }
         .info-panel { flex: 1; min-width: 280px; background: #fcfcfc; padding: 20px; border-radius: 12px; border: 1px solid #eee; font-size: 13px; color: #444; }
         
         .info-panel h4 { margin-top: 0; color: #007bff; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
@@ -22,19 +28,24 @@
         .pillar-desc strong { color: #333; }
 
         .inventory-section { margin-top: 10px; border-top: 2px solid #eee; padding-top: 20px; width: 100%; }
-        .course-item { background: #fafafa; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; padding: 12px; }
+        .course-item { background: #fafafa; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; padding: 12px; transition: 0.2s; }
+        .course-item:hover { border-color: #007bff; background: #fff; }
+        
         summary { cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; list-style: none; outline: none; align-items: center; }
         summary::-webkit-details-marker { display: none; }
         .course-score-badge { background: #007bff; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
-        .course-details { margin-top: 15px; font-size: 14px; color: #555; line-height: 1.6; padding-left: 15px; border-left: 4px solid #007bff; }
-        .skill-matrix { margin-top: 10px; font-family: monospace; font-size: 12px; color: #333; background: #eee; padding: 5px; border-radius: 4px; }
+        
+        .course-details { margin-top: 15px; font-size: 14px; color: #444; line-height: 1.6; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid #007bff; }
+        .skill-matrix { margin-top: 12px; font-family: 'Courier New', monospace; font-size: 12px; color: #333; background: #f1f1f1; padding: 8px; border-radius: 4px; display: flex; justify-content: space-between; }
     </style>
 </head>
 <body>
 
+    <div class="tagline">A tool to analyze and compare MBA skill output for students, schools, and employers</div>
+
     <div class="container">
         <h2>MBA Skills Gap Analyzer</h2>
-        <p class="subtitle">Curriculum Alignment vs. Market Demand (Boshkoska Framework 2025)</p>
+        <p class="subtitle">Boshkoska Framework (2025): Real-time Market Alignment Audit</p>
         
         <div class="controls">
             <select id="schoolSelect" onchange="loadSchoolData()">
@@ -51,27 +62,27 @@
             
             <div class="info-panel">
                 <h4>Methodology</h4>
-                <p><strong>Boshkoska Framework:</strong> Analyzes 6,400 LinkedIn job postings across 53 O*NET MBA occupations[cite: 23, 118, 120]. It identifies "Relative Significance" of skills using TF-IDF weighted importance[cite: 58, 134].</p>
+                <p><strong>Boshkoska Framework:</strong> Analyzes 6,400 LinkedIn job postings to calculate the 'Relative Significance' of skills based on their weighted importance across all functional MBA clusters[cite: 23, 118, 432].</p>
                 
-                <h4>Skill Pillars</h4>
-                <div class="pillar-desc"><strong>Digital:</strong> AI, Big Data, and tech literacy[cite: 42, 79].</div>
-                <div class="pillar-desc"><strong>Quant:</strong> Financial modeling and data analysis[cite: 77, 433].</div>
-                <div class="pillar-desc"><strong>Strategy:</strong> Strategic planning and decision-making[cite: 77, 435].</div>
-                <div class="pillar-desc"><strong>Management:</strong> Human capital and resource allocation[cite: 25, 77, 435].</div>
-                <div class="pillar-desc"><strong>Communication:</strong> Stakeholder presence and persuasion[cite: 42, 337].</div>
-                <div class="pillar-desc"><strong>Regulation:</strong> Compliance and ethical frameworks.</div>
+                <h4>Skill Pillars Explained</h4>
+                <div class="pillar-desc"><strong>Digital:</strong> AI literacy, data tools (SQL/Python), and tech operations[cite: 77, 79].</div>
+                <div class="pillar-desc"><strong>Quant:</strong> Financial modeling, risk, and econometrics[cite: 77, 342].</div>
+                <div class="pillar-desc"><strong>Strategy:</strong> Strategic planning and decision-making frameworks[cite: 77, 435].</div>
+                <div class="pillar-desc"><strong>Management:</strong> Human capital and resource allocation[cite: 77, 435].</div>
+                <div class="pillar-desc"><strong>Communication:</strong> Stakeholder presence and persuasion[cite: 337, 447].</div>
+                <div class="pillar-desc"><strong>Regulation:</strong> Ethical compliance and legal standards[cite: 436, 447].</div>
             </div>
         </div>
 
         <div class="inventory-section">
             <h3>Course Evidence & Audit Inventory</h3>
-            <div id="courseList">Select a school to view audit details...</div>
+            <div id="courseList">Initializing audit data...</div>
         </div>
     </div>
 
     <script>
         const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
-        // Market baseline values derived from Boshkoska Significance scores [cite: 433, 435]
+        // Market baseline values based on Boshkoska significance findings 
         const marketBaseline = [3.5, 4.8, 4.0, 5.0, 4.5, 4.2]; 
 
         const ctx = document.getElementById('myRadarChart').getContext('2d');
@@ -87,7 +98,7 @@
                         borderColor: 'rgba(54, 162, 235, 1)',
                         pointRadius: 6,
                         pointHoverRadius: 12,
-                        pointHitRadius: 30,
+                        pointHitRadius: 35, // High sensitivity for easy hovering
                         fill: true
                     },
                     {
@@ -98,7 +109,7 @@
                         borderDash: [5, 5],
                         pointRadius: 6,
                         pointHoverRadius: 10,
-                        pointHitRadius: 30,
+                        pointHitRadius: 35,
                         fill: true
                     }
                 ]
@@ -111,47 +122,68 @@
         });
 
         async function loadSchoolData() {
-            const fileName = document.getElementById('schoolSelect').value;
+            const auditFileName = document.getElementById('schoolSelect').value;
             const schoolName = document.getElementById('schoolSelect').options[document.getElementById('schoolSelect').selectedIndex].text;
             
             try {
-                const response = await fetch(fileName);
-                const data = await response.json();
+                // 1. Fetch Audit Scores and Raw Descriptions
+                const [auditRes, descRes] = await Promise.all([
+                    fetch(auditFileName),
+                    fetch('iit_courses.json') // Assumes original descriptions are here
+                ]);
                 
-                // 1. Calculate Averages for the Radar Chart
+                const auditData = await auditRes.json();
+                const descData = await descRes.json();
+                
+                // 2. Map Descriptions to Audited Courses
+                const descMap = {};
+                descData.forEach(item => {
+                    const cleanName = item.course.replace(/\s+/g, '').toLowerCase();
+                    descMap[cleanName] = item.text;
+                });
+
+                // 3. Calculate Averages
                 const pillars = ["Digital", "Quant", "Strategy", "Management", "Communication", "Regulation"];
                 const totals = { "Digital": 0, "Quant": 0, "Strategy": 0, "Management": 0, "Communication": 0, "Regulation": 0 };
                 
-                data.forEach(c => {
+                auditData.forEach(c => {
                     pillars.forEach(p => {
-                        // Handle naming variations (Strategy vs Strategic)
                         const score = c.skills[p] || c.skills["Strategic"] || 0;
                         totals[p] += score;
                     });
                 });
 
-                const averages = pillars.map(p => (totals[p] / data.length).toFixed(1));
+                const averages = pillars.map(p => (totals[p] / auditData.length).toFixed(1));
 
-                // 2. Update Chart
+                // 4. Update Radar Chart
                 myChart.data.datasets[0].label = schoolName;
                 myChart.data.datasets[0].data = averages;
                 myChart.update();
 
-                // 3. Populate Inventory List
+                // 5. Populate Inventory with Expander
                 const list = document.getElementById('courseList');
                 list.innerHTML = "";
-                data.forEach(c => {
-                    const avg = (Object.values(c.skills).reduce((a,b) => a+b, 0) / 6).toFixed(1);
+                auditData.forEach(c => {
+                    const avgImpact = (Object.values(c.skills).reduce((a,b) => a+b, 0) / 6).toFixed(1);
+                    const cleanKey = c.course.replace(/\s+/g, '').toLowerCase();
+                    const description = descMap[cleanKey] || "Detailed course description unavailable in source file.";
+
                     const html = `
                         <div class="course-item">
                             <details>
                                 <summary>
                                     <span>${c.course.replace(/\\u00a0/g, ' ')}</span>
-                                    <span class="course-score-badge">Impact: ${avg}/5</span>
+                                    <span class="course-score-badge">Impact: ${avgImpact}/5</span>
                                 </summary>
                                 <div class="course-details">
+                                    <strong>Course Description:</strong><br> ${description}
                                     <div class="skill-matrix">
-                                        SCORES: DIG(${c.skills.Digital || 0}) QUA(${c.skills.Quant || 0}) STR(${c.skills.Strategy || c.skills.Strategic || 0}) MGT(${c.skills.Management || 0}) COM(${c.skills.Communication || 0}) REG(${c.skills.Regulation || 0})
+                                        <span>DIG: ${c.skills.Digital || 0}</span>
+                                        <span>QUA: ${c.skills.Quant || 0}</span>
+                                        <span>STR: ${c.skills.Strategy || c.skills.Strategic || 0}</span>
+                                        <span>MGT: ${c.skills.Management || 0}</span>
+                                        <span>COM: ${c.skills.Communication || 0}</span>
+                                        <span>REG: ${c.skills.Regulation || 0}</span>
                                     </div>
                                 </div>
                             </details>
@@ -161,11 +193,10 @@
                 });
 
             } catch (err) {
-                document.getElementById('courseList').innerHTML = `<p style="color:red">Audit file for this school not found yet. Please ensure '${fileName}' is uploaded.</p>`;
+                document.getElementById('courseList').innerHTML = `<p style="color:red">Audit failure: Ensure '${auditFileName}' and 'iit_courses.json' are in the same folder.</p>`;
             }
         }
 
-        // Auto-load Stuart on startup
         loadSchoolData();
     </script>
 </body>
