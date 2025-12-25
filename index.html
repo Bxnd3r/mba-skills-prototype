@@ -7,77 +7,72 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 900px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 10px; }
-        h2 { text-align: center; color: #1a1a1a; margin-top: 0; }
+        .container { width: 100%; max-width: 1100px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 10px; }
+        h2 { text-align: center; color: #1a1a1a; margin-top: 0; margin-bottom: 5px; }
         .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
         .controls { display: flex; justify-content: center; margin-bottom: 20px; }
-        select { padding: 12px 20px; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer; background-color: #fff; }
-        .chart-wrapper { position: relative; height: 450px; width: 100%; }
-        .insight-section { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { padding: 15px; border-radius: 12px; border: 1px solid #eee; }
-        .strength { background-color: #e6f4ea; border-left: 5px solid #34a853; }
-        .gap { background-color: #fce8e6; border-left: 5px solid #ea4335; }
-        h3 { margin-top: 0; font-size: 16px; }
-        ul { padding-left: 18px; margin-bottom: 0; }
-        li { margin-bottom: 6px; font-size: 13px; }
+        select { padding: 12px 20px; font-size: 16px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer; background-color: #fff; width: 100%; max-width: 600px; }
+        
+        .main-visual { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
+        .chart-wrapper { position: relative; height: 450px; flex: 2; min-width: 350px; }
+        .info-panel { flex: 1; min-width: 280px; background: #fcfcfc; padding: 20px; border-radius: 12px; border: 1px solid #eee; font-size: 13px; color: #444; }
+        
+        .info-panel h4 { margin-top: 0; color: #007bff; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .pillar-desc { margin-bottom: 12px; }
+        .pillar-desc strong { color: #333; }
+
+        .inventory-section { margin-top: 10px; border-top: 2px solid #eee; padding-top: 20px; width: 100%; }
+        .course-item { background: #fafafa; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; padding: 12px; }
+        summary { cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; list-style: none; outline: none; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        .course-score-badge { background: #007bff; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; }
+        .course-details { margin-top: 15px; font-size: 14px; color: #555; line-height: 1.6; padding-left: 15px; border-left: 4px solid #007bff; }
+        .skill-matrix { margin-top: 10px; font-family: monospace; font-size: 12px; color: #333; background: #eee; padding: 5px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h2>MBA Skills Gap Analyzer</h2>
-        <p class="subtitle">Boshkoska Framework: Curriculum vs. 2025 Market Significance</p>
+        <p class="subtitle">Curriculum Alignment vs. Market Demand (Boshkoska Framework 2025)</p>
         
         <div class="controls">
-            <select id="schoolSelect" onchange="updateChart()">
-                <option value="stuart">Illinois Institute of Technology: Stuart School of Business</option>
-                <option value="booth">University of Chicago: Booth School of Business</option>
-                <option value="kellogg">Northwestern University: Kellogg School of Management</option>
+            <select id="schoolSelect" onchange="loadSchoolData()">
+                <option value="final_skills_audit.json">Illinois Institute of Technology: Stuart School of Business</option>
+                <option value="booth_audit.json">University of Chicago: Booth School of Business</option>
+                <option value="kellogg_audit.json">Northwestern University: Kellogg School of Management</option>
             </select>
         </div>
 
-        <div class="chart-wrapper">
-            <canvas id="myRadarChart"></canvas>
+        <div class="main-visual">
+            <div class="chart-wrapper">
+                <canvas id="myRadarChart"></canvas>
+            </div>
+            
+            <div class="info-panel">
+                <h4>Methodology</h4>
+                <p><strong>Boshkoska Framework:</strong> Analyzes 6,400 LinkedIn job postings across 53 O*NET MBA occupations[cite: 23, 118, 120]. It identifies "Relative Significance" of skills using TF-IDF weighted importance[cite: 58, 134].</p>
+                
+                <h4>Skill Pillars</h4>
+                <div class="pillar-desc"><strong>Digital:</strong> AI, Big Data, and tech literacy[cite: 42, 79].</div>
+                <div class="pillar-desc"><strong>Quant:</strong> Financial modeling and data analysis[cite: 77, 433].</div>
+                <div class="pillar-desc"><strong>Strategy:</strong> Strategic planning and decision-making[cite: 77, 435].</div>
+                <div class="pillar-desc"><strong>Management:</strong> Human capital and resource allocation[cite: 25, 77, 435].</div>
+                <div class="pillar-desc"><strong>Communication:</strong> Stakeholder presence and persuasion[cite: 42, 337].</div>
+                <div class="pillar-desc"><strong>Regulation:</strong> Compliance and ethical frameworks.</div>
+            </div>
         </div>
 
-        <div class="insight-section">
-            <div class="card strength">
-                <h3>Competitive Strengths</h3>
-                <ul id="strengthsList"></ul>
-            </div>
-            <div class="card gap">
-                <h3>Critical Skill Gaps</h3>
-                <ul id="gapsList"></ul>
-            </div>
+        <div class="inventory-section">
+            <h3>Course Evidence & Audit Inventory</h3>
+            <div id="courseList">Select a school to view audit details...</div>
         </div>
     </div>
 
     <script>
         const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
-        
-        // Boshkoska Significance Scaling (Normalized to 1-5) [cite: 435, 436]
+        // Market baseline values derived from Boshkoska Significance scores [cite: 433, 435]
         const marketBaseline = [3.5, 4.8, 4.0, 5.0, 4.5, 4.2]; 
-
-        const dataLibrary = {
-            stuart: {
-                label: "Illinois Institute of Technology: Stuart School of Business",
-                data: [1.8, 2.3, 3.2, 2.2, 2.1, 1.9], 
-                color: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)'
-            },
-            booth: {
-                label: "University of Chicago: Booth School of Business",
-                data: [4, 5, 4, 3, 3, 3], 
-                color: 'rgba(255, 159, 64, 0.2)',
-                borderColor: 'rgba(255, 159, 64, 1)'
-            },
-            kellogg: {
-                label: "Northwestern University: Kellogg School of Management",
-                data: [3, 3, 5, 5, 5, 2], 
-                color: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)'
-            }
-        };
 
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         const myChart = new Chart(ctx, {
@@ -86,14 +81,13 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: dataLibrary.stuart.label,
-                        data: dataLibrary.stuart.data,
-                        backgroundColor: dataLibrary.stuart.color,
-                        borderColor: dataLibrary.stuart.borderColor,
-                        pointBackgroundColor: dataLibrary.stuart.borderColor,
-                        pointRadius: 5,
+                        label: 'Curriculum Scores',
+                        data: [0,0,0,0,0,0],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        pointRadius: 6,
                         pointHoverRadius: 12,
-                        pointHitRadius: 25, // INCREASED SENSITIVITY RADIUS
+                        pointHitRadius: 30,
                         fill: true
                     },
                     {
@@ -102,64 +96,77 @@
                         backgroundColor: 'rgba(255, 99, 132, 0.05)',
                         borderColor: 'rgba(255, 99, 132, 0.4)',
                         borderDash: [5, 5],
-                        pointRadius: 0,
+                        pointRadius: 6,
+                        pointHoverRadius: 10,
+                        pointHitRadius: 30,
                         fill: true
                     }
                 ]
             },
             options: {
-                maintainAspectRatio: false, // HELPS WITH VERTICAL ALIGNMENT
-                scales: { 
-                    r: { 
-                        suggestedMin: 0, 
-                        suggestedMax: 5, 
-                        ticks: { display: false },
-                        pointLabels: { font: { size: 13, weight: 'bold' } }
-                    } 
-                },
-                plugins: {
-                    legend: { position: 'top', labels: { boxWidth: 20 } }
-                }
+                maintainAspectRatio: false,
+                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { display: false }, pointLabels: { font: { size: 13, weight: 'bold' } } } },
+                plugins: { legend: { position: 'top' } }
             }
         });
 
-        function generateInsights() {
-            const schoolData = myChart.data.datasets[0].data;
-            const sList = document.getElementById('strengthsList');
-            const gList = document.getElementById('gapsList');
+        async function loadSchoolData() {
+            const fileName = document.getElementById('schoolSelect').value;
+            const schoolName = document.getElementById('schoolSelect').options[document.getElementById('schoolSelect').selectedIndex].text;
             
-            sList.innerHTML = "";
-            gList.innerHTML = "";
-
-            labels.forEach((label, i) => {
-                const diff = schoolData[i] - marketBaseline[i];
-                const li = document.createElement('li');
+            try {
+                const response = await fetch(fileName);
+                const data = await response.json();
                 
-                if (diff >= -0.5) {
-                    li.innerText = `${label}: Meeting/Exceeding Demand`;
-                    sList.appendChild(li);
-                } else {
-                    li.innerText = `${label}: Market Gap Detected (-${Math.abs(diff).toFixed(1)})`;
-                    gList.appendChild(li);
-                }
-            });
+                // 1. Calculate Averages for the Radar Chart
+                const pillars = ["Digital", "Quant", "Strategy", "Management", "Communication", "Regulation"];
+                const totals = { "Digital": 0, "Quant": 0, "Strategy": 0, "Management": 0, "Communication": 0, "Regulation": 0 };
+                
+                data.forEach(c => {
+                    pillars.forEach(p => {
+                        // Handle naming variations (Strategy vs Strategic)
+                        const score = c.skills[p] || c.skills["Strategic"] || 0;
+                        totals[p] += score;
+                    });
+                });
+
+                const averages = pillars.map(p => (totals[p] / data.length).toFixed(1));
+
+                // 2. Update Chart
+                myChart.data.datasets[0].label = schoolName;
+                myChart.data.datasets[0].data = averages;
+                myChart.update();
+
+                // 3. Populate Inventory List
+                const list = document.getElementById('courseList');
+                list.innerHTML = "";
+                data.forEach(c => {
+                    const avg = (Object.values(c.skills).reduce((a,b) => a+b, 0) / 6).toFixed(1);
+                    const html = `
+                        <div class="course-item">
+                            <details>
+                                <summary>
+                                    <span>${c.course.replace(/\\u00a0/g, ' ')}</span>
+                                    <span class="course-score-badge">Impact: ${avg}/5</span>
+                                </summary>
+                                <div class="course-details">
+                                    <div class="skill-matrix">
+                                        SCORES: DIG(${c.skills.Digital || 0}) QUA(${c.skills.Quant || 0}) STR(${c.skills.Strategy || c.skills.Strategic || 0}) MGT(${c.skills.Management || 0}) COM(${c.skills.Communication || 0}) REG(${c.skills.Regulation || 0})
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    `;
+                    list.insertAdjacentHTML('beforeend', html);
+                });
+
+            } catch (err) {
+                document.getElementById('courseList').innerHTML = `<p style="color:red">Audit file for this school not found yet. Please ensure '${fileName}' is uploaded.</p>`;
+            }
         }
 
-        function updateChart() {
-            const selectedKey = document.getElementById('schoolSelect').value;
-            const newData = dataLibrary[selectedKey];
-
-            myChart.data.datasets[0].label = newData.label;
-            myChart.data.datasets[0].data = newData.data;
-            myChart.data.datasets[0].backgroundColor = newData.color;
-            myChart.data.datasets[0].borderColor = newData.borderColor;
-            myChart.data.datasets[0].pointBackgroundColor = newData.borderColor;
-
-            myChart.update();
-            generateInsights();
-        }
-
-        generateInsights();
+        // Auto-load Stuart on startup
+        loadSchoolData();
     </script>
 </body>
 </html>
