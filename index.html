@@ -19,18 +19,20 @@
         .results-list div { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #f8f9fa; font-size: 14px; }
         .results-list div:hover { background-color: #f0f7ff; }
 
-        /* School Tags Legend */
-        .school-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .school-tag { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .school-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; height: 40px; }
+        .school-tag { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
-        /* The Square Box with Hover X */
-        .color-box { width: 18px; height: 18px; border-radius: 4px; margin-right: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: 0.2s; }
-        .color-box::after { content: '×'; color: white; font-size: 16px; font-weight: bold; opacity: 0; transition: 0.2s; position: relative; }
+        .color-box { width: 20px; height: 20px; border-radius: 4px; margin-right: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+        .color-box::after { content: '×'; color: white; font-size: 16px; font-weight: bold; opacity: 0; position: absolute; }
         .color-box:hover::after { opacity: 1; }
-        .color-box:hover { filter: brightness(0.8); }
+
+        /* Market Pulse Toggles */
+        .market-pulse { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .pulse-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid #ddd; background: #fff; cursor: pointer; font-size: 12px; font-weight: bold; transition: 0.2s; }
+        .pulse-btn.active { background: #333; color: white; border-color: #333; }
 
         .main-visual { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
-        .chart-wrapper { position: relative; height: 480px; flex: 2; min-width: 400px; }
+        .chart-wrapper { position: relative; height: 450px; flex: 2; min-width: 400px; }
         .info-panel { flex: 1; min-width: 280px; background: #fcfcfc; padding: 20px; border-radius: 12px; border: 1px solid #eee; font-size: 13px; }
         
         .info-panel h4 { margin-top: 0; color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-bottom: 15px; }
@@ -51,10 +53,16 @@
     <div class="container">
         <div class="search-area">
             <div class="search-box">
-                <input type="text" id="schoolSearch" placeholder="Search for a school" oninput="showResults()" onkeydown="handleEnter(event)">
+                <input type="text" id="schoolSearch" placeholder="Search for a school" oninput="showResults()">
                 <div id="resultsList" class="results-list"></div>
             </div>
             <div id="schoolTags" class="school-tags"></div>
+        </div>
+
+        <div class="market-pulse">
+            <span style="font-size: 12px; align-self: center; font-weight: bold; margin-right: 10px;">MARKET PULSE:</span>
+            <button class="pulse-btn active" onclick="setBaseline('national', this)">National Baseline</button>
+            <button class="pulse-btn" onclick="setBaseline('chicago', this)">Chicago (Local) Pulse</button>
         </div>
 
         <div class="main-visual">
@@ -64,12 +72,12 @@
             
             <div class="info-panel">
                 <h4>Skill Pillars Explained</h4>
-                <div class="pillar-desc"><strong>Digital:</strong> Technical fluency in AI, data science (SQL/Python), and technology systems.</div>
-                <div class="pillar-desc"><strong>Quant:</strong> Analytical rigor, financial modeling, accounting, and capacity management.</div>
-                <div class="pillar-desc"><strong>Strategy:</strong> Business acumen, competitive positioning, and innovative planning.</div>
-                <div class="pillar-desc"><strong>Management:</strong> Managing human capital, resource allocation, and collaborative teamwork.</div>
-                <div class="pillar-desc"><strong>Communication:</strong> Negotiation, stakeholder persuasion, and interpersonal presence.</div>
-                <div class="pillar-desc"><strong>Regulation:</strong> Compliance, protecting standards, and ethical legal frameworks.</div>
+                <div class="pillar-desc"><strong>Digital:</strong> AI literacy, data tools (SQL/Python), and tech operations.</div>
+                <div class="pillar-desc"><strong>Quant:</strong> Financial modeling, risk, and analytical rigor.</div>
+                <div class="pillar-desc"><strong>Strategy:</strong> Strategic planning and competitive decision-making.</div>
+                <div class="pillar-desc"><strong>Management:</strong> Human capital and resource allocation.</div>
+                <div class="pillar-desc"><strong>Communication:</strong> Stakeholder presence and persuasion.</div>
+                <div class="pillar-desc"><strong>Regulation:</strong> Ethical compliance and legal standards.</div>
                 <p style="font-size:11px; color:#888; border-top:1px solid #eee; padding-top:10px;">
                     Baseline based on Boshkoska (2025) market significance analysis of 6,400 job postings.
                 </p>
@@ -84,10 +92,15 @@
 
     <script>
         const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
-        const marketBaseline = [3.5, 4.8, 4.0, 5.0, 4.5, 4.2]; 
         
+        // Boshkoska Significance scores
+        const baselines = {
+            national: [3.5, 4.8, 4.0, 5.0, 4.5, 4.2],
+            chicago: [4.2, 4.9, 4.5, 4.8, 4.7, 3.8] // Local Chicago Pulse (Example)
+        };
+
         const schoolsDB = [
-            { id: 'stuart', name: "Illinois Institute of Technology: Stuart School of Business", audit: "final_skills_audit.json", color: 'rgba(54, 162, 235, 1)' },
+            { id: 'stuart', name: "Illinois Institute of Technology: Stuart School of Business", audit: "output_IIT.json", color: 'rgba(54, 162, 235, 1)' },
             { id: 'booth', name: "University of Chicago: Booth School of Business", data: [4.2, 5.0, 4.5, 3.8, 3.5, 3.2], color: 'rgba(255, 99, 132, 1)' },
             { id: 'kellogg', name: "Northwestern University: Kellogg School of Management", data: [3.5, 3.8, 5.0, 4.8, 5.0, 2.5], color: 'rgba(75, 192, 192, 1)' }
         ];
@@ -100,12 +113,12 @@
             data: {
                 labels: labels,
                 datasets: [
-                    { label: 'Market Demand Baseline', data: marketBaseline, backgroundColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.2)', borderDash: [5, 5], pointRadius: 5, fill: true }
+                    { label: 'Market Demand Baseline', data: baselines.national, backgroundColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.2)', borderDash: [5, 5], pointRadius: 5, pointHoverRadius: 8, fill: true }
                 ]
             },
             options: { 
                 maintainAspectRatio: false, 
-                plugins: { legend: { display: false } },
+                plugins: { legend: { display: false }, tooltip: { enabled: true } },
                 scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { display: false }, pointLabels: { font: { size: 13, weight: 'bold' } } } } 
             }
         });
@@ -115,7 +128,6 @@
             const list = document.getElementById('resultsList');
             list.innerHTML = "";
             if (!query) { list.style.display = "none"; return; }
-            
             const filtered = schoolsDB.filter(s => s.name.toLowerCase().includes(query) && !selectedSchools.find(sel => sel.id === s.id));
             filtered.forEach(s => {
                 const div = document.createElement('div');
@@ -126,21 +138,11 @@
             list.style.display = filtered.length ? "block" : "none";
         }
 
-        function handleEnter(e) {
-            if (e.key === "Enter") {
-                const query = document.getElementById('schoolSearch').value.toLowerCase();
-                const match = schoolsDB.find(s => s.name.toLowerCase().includes(query) && !selectedSchools.find(sel => sel.id === s.id));
-                if (match) selectSchool(match);
-            }
-        }
-
         async function selectSchool(school) {
             if (selectedSchools.length >= 2) return;
-            
             selectedSchools.push(school);
             document.getElementById('schoolSearch').value = "";
             document.getElementById('resultsList').style.display = "none";
-            
             updateUI();
             
             let dataArr;
@@ -153,7 +155,7 @@
                     labels.forEach(l => totals[l] += (c.skills[l] || c.skills["Strategic"] || 0));
                 });
                 dataArr = labels.map(l => (totals[l] / auditData.length).toFixed(1));
-                if (selectedSchools.length === 1) populateInventory(auditData, descData);
+                if (selectedSchools.indexOf(school) === 0) populateInventory(auditData, descData);
             } else {
                 dataArr = school.data;
             }
@@ -165,6 +167,7 @@
                 backgroundColor: school.color.replace('1)', '0.2)'),
                 borderColor: school.color,
                 pointRadius: 5,
+                pointHoverRadius: 10,
                 fill: true
             });
             myChart.update();
@@ -182,17 +185,21 @@
             const container = document.getElementById('schoolTags');
             const search = document.getElementById('schoolSearch');
             container.innerHTML = "";
-            
             selectedSchools.forEach(s => {
                 const tag = document.createElement('div');
                 tag.className = "school-tag";
                 tag.innerHTML = `<div class="color-box" style="background:${s.color}" onclick="removeSchool('${s.id}')"></div> ${s.name}`;
                 container.appendChild(tag);
             });
+            search.placeholder = selectedSchools.length === 0 ? "Search for a school" : (selectedSchools.length === 1 ? "Search for a school to compare" : "Maximum schools selected");
+        }
 
-            if (selectedSchools.length === 0) search.placeholder = "Search for a school";
-            else if (selectedSchools.length === 1) search.placeholder = "Search for a school to compare";
-            else search.placeholder = "Maximum schools selected";
+        function setBaseline(type, btn) {
+            document.querySelectorAll('.pulse-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            myChart.data.datasets[0].data = baselines[type];
+            myChart.data.datasets[0].label = type === 'national' ? 'Market Demand Baseline' : 'Chicago (Local) Pulse';
+            myChart.update();
         }
 
         function populateInventory(auditData, descData) {
