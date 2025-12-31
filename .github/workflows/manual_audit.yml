@@ -1,0 +1,50 @@
+name: Audit New School
+
+on:
+  workflow_dispatch: # This creates the "Run Workflow" button
+    inputs:
+      school_url:
+        description: 'School Catalog URL (e.g., https://catalog.yale.edu...)'
+        required: true
+      school_name:
+        description: 'School Display Name (e.g., Yale School of Management)'
+        required: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Important: Allows the robot to save the new JSON file
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install playwright google-generativeai requests beautifulsoup4
+          playwright install chromium
+
+      - name: Run Master Audit
+        env:
+          # You need to add your API Key to GitHub Secrets!
+          # Go to Settings -> Secrets and variables -> Actions -> New Repository Secret
+          # Name: GEMINI_API_KEY
+          # Value: [Paste your actual API key here]
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
+        run: |
+          # We pass the inputs from the form into the python script
+          python master_audit.py "${{ inputs.school_url }}" "${{ inputs.school_name }}"
+
+      - name: Save & Commit Results
+        run: |
+          git config --global user.name "Audit Bot"
+          git config --global user.email "bot@github.com"
+          git add registry.json *_audit.json
+          git commit -m "Added ${{ inputs.school_name }} via Cloud Audit" || echo "No changes"
+          git push
