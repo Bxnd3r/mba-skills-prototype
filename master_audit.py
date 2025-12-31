@@ -13,22 +13,42 @@ if api_key: genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-pro')
 
 def parse_text_dump(text):
-    """Parses text where lines follow: Title   Description"""
+    """
+    Smart Parser:
+    1. Tries to find strict course codes (e.g. BUS 101, CS-400).
+    2. If none found, falls back to splitting by large gaps (3+ spaces).
+    """
     parsed = []
-    # Split the massive text blob into individual lines
+    
+    # --- STRATEGY 1: STRICT CODES ---
+    # Looks for patterns like "BUS 101", "CS-405", "MKT.500"
+    code_pattern = re.compile(r"([A-Z]{2,4}[-\s\.][A-Z]{0,2}\d{3,4}.+)")
+    matches = code_pattern.split(text)
+    
+    # If we found more than 5 matches, assume this file uses Course Codes
+    if len(matches) > 5:
+        print("DEBUG: Detected Course Codes format.")
+        for i in range(1, len(matches), 2):
+            title = matches[i].strip()
+            desc = matches[i+1].strip() if i+1 < len(matches) else ""
+            if len(desc) > 20:
+                parsed.append({"course": title, "text": desc})
+        return parsed
+
+    # --- STRATEGY 2: FALLBACK (SPACES) ---
+    print("DEBUG: No codes found. Switching to visual-spacing format.")
     lines = text.split('\n')
     
     for line in lines:
         line = line.strip()
-        if not line: continue  # Skip empty lines
+        if not line: continue
         
-        # Split by 3 spaces (or more)
+        # Split line where there are 3 or more spaces
         parts = re.split(r'\s{3,}', line, maxsplit=1)
         
         if len(parts) >= 2:
             title = parts[0].strip()
             desc = parts[1].strip()
-            # Only save if description looks real
             if len(desc) > 10:
                 parsed.append({"course": title, "text": desc})
                 
@@ -90,4 +110,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
