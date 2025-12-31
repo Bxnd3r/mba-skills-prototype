@@ -4,112 +4,131 @@ import os
 import random
 import time
 from datetime import datetime
+import google.generativeai as genai
 from playwright.async_api import async_playwright
 
 # --- CONFIG ---
-SEARCH_TERMS = ["MBA Intern", "Product Manager MBA", "Strategy Intern"]
-LOCATIONS = ["Chicago, IL", "United States"]
-# Reduced sleep to preventing "hanging" appearances, randomized for safety
-SLEEP_MIN = 10 
-SLEEP_MAX = 20
+# PASTE YOUR API KEY HERE OR USE ENV VAR
+api_key = os.environ.get("GOOGLE_API_KEY") 
+if api_key: genai.configure(api_key=api_key)
+model = genai.GenerativeModel('gemini-pro')
+
+SEARCH_TERMS = ["MBA Intern", "Product Manager"] # Keep list short for safety
+LOCATIONS = ["Chicago, IL"]
+SLEEP_MIN = 5
+SLEEP_MAX = 15
 
 async def run_pulse():
-    print(f"🚀 Starting Daily Job Pulse at {datetime.now()}...")
+    print(f"🚀 Starting Deep Job Pulse at {datetime.now()}...")
     
     jobs = []
     
     async with async_playwright() as p:
-        # Launch browser (Headless=True for GitHub Actions)
+        # headless=True is safer for GitHub Actions
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         
-        # Spoof User Agent to look less like a robot
+        # Spoof User Agent (Look like a real laptop)
         await page.set_extra_http_headers({
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
         })
 
         for term in SEARCH_TERMS:
-            for loc in LOCATIONS:
-                try:
-                    print(f"🔎 Searching: '{term}' in '{loc}'...")
-                    
-                    # Construct URL (LinkedIn Guest Search - no login needed)
-                    # We use "people" or "jobs" guest search URL
-                    url = f"https://www.linkedin.com/jobs/search?keywords={term}&location={loc}&f_TP=1,2"
-                    
-                    await page.goto(url, wait_until="domcontentloaded")
-                    await asyncio.sleep(5) # Wait for initial load
-                    
-                    # CHECK FOR CAPTCHA / SECURITY WALL
-                    title = await page.title()
-                    print(f"   📄 Page Title: {title}")
-                    
-                    if "Security" in title or "Auth" in title or "Challenge" in title:
-                        print("   ⚠️ BLOCKED: LinkedIn detected the robot.")
-                        await page.screenshot(path="captcha_block.png")
-                        continue # Skip this search
+            try:
+                # 1. Go to Search Page
+                url = f"https://www.linkedin.com/jobs/search?keywords={term}&location=United%20States&f_TP=1,2"
+                print(f"🔎 Searching: '{term}'...")
+                await page.goto(url, wait_until="domcontentloaded")
+                await asyncio.sleep(5)
 
-                    # Scrape Job Cards
-                    # We look for the standard job card class
-                    job_cards = await page.locator(".base-card__full-link").all()
-                    
-                    print(f"   found {len(job_cards)} job cards.")
-                    
-                    # Limit to top 5 per search to stay safe
-                    for i, card in enumerate(job_cards[:5]):
-                        try:
-                            title_text = await card.text_content()
-                            link = await card.get_attribute("href")
-                            
-                            if title_text and link:
-                                clean_title = title_text.strip()
-                                print(f"      👉 Found: {clean_title[:40]}...")
-                                
-                                jobs.append({
-                                    "title": clean_title,
-                                    "location": loc,
-                                    "date": datetime.now().strftime("%Y-%m-%d"),
-                                    "link": link
-                                })
-                        except Exception as e:
-                            print(f"      ⚠️ Card error: {e}")
+                # 2. Find Job Cards
+                # LinkedIn changes class names often, so we try a few
+                cards = await page.locator(".base-card, .job-search-card").all()
+                print(f"   Found {len(cards)} cards. Scraping top 3...")
 
-                    # Random Sleep between searches (not 45s, just 10-20s)
-                    sleep_time = random.randint(SLEEP_MIN, SLEEP_MAX)
-                    print(f"   💤 Sleeping {sleep_time}s...")
-                    time.sleep(sleep_time)
-                    
-                except Exception as e:
-                    print(f"   ❌ Search Error: {e}")
-                    # Take a screenshot so we can debug later
-                    await page.screenshot(path="error_state.png")
+                # 3. CLICK AND SCRAPE (The "Deep" Part)
+                for i, card in enumerate(cards[:3]): # Limit to 3 per term to avoid ban
+                    try:
+                        # Get Title first
+                        title_el = card.locator(".base-card__full-link")
+                        if await title_el.count() == 0: continue
+                        
+                        title = await title_el.text_content()
+                        link = await title_el.get_attribute("href")
+                        
+                        print(f"   👉 [{i+1}] Clicking: {title.strip()[:30]}...")
+                        
+                        # Click to open details (this might open a new page or modal)
+                        await title_el.click()
+                        await asyncio.sleep(3) # Wait for load
+                        
+                        # Try to find the description on the new page/modal
+                        # LinkedIn guest view usually puts it in ".show-more-less-html__markup"
+                        desc_el = page.locator(".show-more-less-html__markup, .description__text")
+                        
+                        if await desc_el.count() > 0:
+                            description = await desc_el.first.text_content()
+                            clean_desc = description.strip()
+                        else:
+                            clean_desc = "Description hidden by login wall."
+
+                        # 4. AUDIT WITH AI (Get the Stars!)
+                        skills = {}
+                        if len(clean_desc) > 50:
+                            skills = audit_job(title, clean_desc)
+
+                        jobs.append({
+                            "title": title.strip(),
+                            "link": link,
+                            "description": clean_desc[:200] + "...", # Preview only
+                            "full_text": clean_desc,
+                            "skills": skills,
+                            "date": datetime.now().strftime("%Y-%m-%d")
+                        })
+                        
+                        # Sleep to act human
+                        time.sleep(random.randint(SLEEP_MIN, SLEEP_MAX))
+
+                    except Exception as e:
+                        print(f"   ⚠️ Error on card {i}: {e}")
+
+            except Exception as e:
+                print(f"   ❌ Search Error: {e}")
 
         await browser.close()
 
-    print(f"✅ Pulse Complete. Collected {len(jobs)} jobs.")
+    # 5. Save Data
+    save_data(jobs)
+
+def audit_job(title, desc):
+    # Ask Gemini to rate the job
+    try:
+        prompt = f"""
+        Role: {title}
+        Desc: {desc[:1000]}
+        Rate 1-5 (1=Low, 5=High demand) on: Digital, Quant, Strategy, Management, Communication, Regulation.
+        Return ONLY JSON: {{"Digital":X, "Quant":X...}}
+        """
+        res = model.generate_content(prompt)
+        clean = res.text.strip().replace("```json","").replace("```","")
+        return json.loads(clean)
+    except:
+        return {"Digital":1, "Quant":1, "Strategy":1, "Management":1, "Communication":1, "Regulation":1}
+
+def save_data(new_jobs):
+    filename = "market_data_corpus.json"
+    data = []
+    if os.path.exists(filename):
+        try:
+            with open(filename, "r") as f: data = json.load(f)
+        except: pass
     
-    # Save Data
-    if jobs:
-        output_file = "market_data_corpus.json"
-        # Load existing if available
-        existing_data = []
-        if os.path.exists(output_file):
-            try:
-                with open(output_file, "r") as f:
-                    existing_data = json.load(f)
-            except: pass
-        
-        # Append new (avoid duplicates)
-        existing_links = {j['link'] for j in existing_data}
-        new_jobs = [j for j in jobs if j['link'] not in existing_links]
-        
-        final_data = existing_data + new_jobs
-        
-        with open(output_file, "w") as f:
-            json.dump(final_data, f, indent=2)
-        print(f"💾 Saved {len(new_jobs)} new jobs to {output_file}")
-    else:
-        print("⚠️ No jobs found to save.")
+    # Add new jobs
+    data.extend(new_jobs)
+    
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"💾 Saved {len(new_jobs)} jobs with skills to {filename}")
 
 if __name__ == "__main__":
     asyncio.run(run_pulse())
