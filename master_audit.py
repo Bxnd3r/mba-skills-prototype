@@ -3,7 +3,7 @@ import json
 import os
 import random
 import time
-import sys  # <--- CRITICAL IMPORT FOR GITHUB ACTIONS
+import sys
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import requests
@@ -11,66 +11,93 @@ from playwright.async_api import async_playwright
 import google.generativeai as genai
 
 # --- 1. CONFIGURATION ---
-# We check if the key exists to avoid crashing locally if you forget it
-api_key = os.environ.get("AIzaSyC_fQtJV9MD4RFikgQGga4CRWZJrAkaFEg")
+api_key = os.environ.get("GOOGLE_API_KEY")
 if api_key:
     genai.configure(api_key=api_key)
 
-model = genai.GenerativeModel('gemini-pro')
+# Use Flash model for speed/cost
+model = genai.GenerativeModel('gemini-1.5-flash')
 
-"chicagobooth": {
-        # 1. The Container for each course row
-        "block": "tr.course-row, div.course-listing", 
-        
-        # 2. The Title (usually bold or in the first cell)
-        "title": "td.course-title, h4",
-        
-        # 3. The Description (The tricky part)
-        # We look for the hidden div that appears after clicking
-        "desc": "div.course-description, td.description-cell, .expanded-details",
-        
-        # 4. NEW: The "Click" Target
-        # This tells Playwright: "Click this thing to verify the text"
-        "click_selector": "button.view-details, a.expand-row, td.course-title" 
+# --- 2. SCHOOL RECIPES (The Dictionary) ---
+SCHOOL_RECIPES = {
+    "default": {
+        "block": ".courseblock, .course-item, div[class*='course'], li[class*='course']", 
+        "title": "strong, .courseblocktitle, h3, .course-title", 
+        "desc": ".courseblockdesc, .description, .course-desc"
+    },
+    # BOOTH SPECIFIC RECIPE (Now properly inside the dictionary)
+    "chicagobooth": {
+        "block": "tr, div.course-listing, li.course-item", 
+        "title": "td:nth-child(1), h4, strong.course-title, .course-name",
+        "desc": "td:nth-child(2), div.description, p, .course-description"
     }
+}
 
-# --- 2. SCRAPER ---
+# --- 3. SCRAPER ENGINE ---
 async def universal_scrape(url):
     headers = {"User-Agent": "Mozilla/5.0"}
-    print(f"🕵️ Scraping {url}...")
+    
+    # 1. Detect School from URL to pick the right Recipe
+    domain = urlparse(url).netloc
+    recipe_key = "default"
+    for key in SCHOOL_RECIPES:
+        if key in domain:
+            recipe_key = key
+            break
+            
+    print(f"🕵️ Scraping {url} using recipe: {recipe_key.upper()}...")
+    recipe = SCHOOL_RECIPES[recipe_key]
+
+    # 2. Try Static Scrape First
     try:
         res = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
-        courses = parse_html(soup)
+        courses = parse_html(soup, recipe)
     except:
         courses = []
 
+    # 3. Failover to Dynamic (Playwright) if static failed
     if not courses:
         print("⚠️ Static failed. Launching Playwright...")
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=True)
             page = await browser.new_page()
-            await page.goto(url, wait_until="networkidle")
-            await asyncio.sleep(5)
-            content = await page.content()
-            courses = parse_html(BeautifulSoup(content, "html.parser"))
+            try:
+                await page.goto(url, wait_until="networkidle", timeout=60000)
+                await asyncio.sleep(5) # Wait for JS to load
+                content = await page.content()
+                courses = parse_html(BeautifulSoup(content, "html.parser"), recipe)
+            except Exception as e:
+                print(f"❌ Playwright Error: {e}")
             await browser.close()
+            
     return courses
 
-def parse_html(soup):
+def parse_html(soup, recipe):
     results = []
-    blocks = soup.select(DEFAULT_RECIPE["block"])
+    blocks = soup.select(recipe["block"])
+    print(f"🔎 Found {len(blocks)} potential course blocks...")
+    
     for b in blocks:
-        t = b.select_one(DEFAULT_RECIPE["title"])
-        d = b.select_one(DEFAULT_RECIPE["desc"])
-        if t and d:
+        t = b.select_one(recipe["title"])
+        d = b.select_one(recipe["desc"])
+        
+        # If we found a title but no description, try getting all text in the block
+        if t:
             title = t.get_text(strip=True).replace('\u00a0', ' ')
-            desc = d.get_text(strip=True)
-            if len(desc) > 30:
+            if d:
+                desc = d.get_text(strip=True)
+            else:
+                # Fallback: Use the whole block text minus the title
+                desc = b.get_text(strip=True).replace(title, "")
+            
+            # Clean up noise
+            if len(desc) > 20: 
                 results.append({"course": title, "text": desc})
+                
     return results
 
-# --- 3. AUDITOR ---
+# --- 4. AUDITOR ENGINE ---
 async def audit_with_gemini(course_list):
     print(f"🧠 Auditing {len(course_list)} courses...")
     audited = []
@@ -102,7 +129,7 @@ async def audit_with_gemini(course_list):
                     break
     return audited
 
-# --- 4. REGISTRY ---
+# --- 5. REGISTRY UPDATER ---
 def update_registry(school_id, name, filename):
     reg_path = "registry.json"
     registry = []
@@ -113,44 +140,3 @@ def update_registry(school_id, name, filename):
 
     # Update or Add
     existing = next((item for item in registry if item["id"] == school_id), None)
-    if existing:
-        existing["audit"] = filename # Update existing entry
-    else:
-        registry.append({
-            "id": school_id, 
-            "name": name, 
-            "audit": filename, 
-            "color": f"rgba({random.randint(50,200)},{random.randint(50,200)},255,1)"
-        })
-    
-    with open(reg_path, "w") as f: json.dump(registry, f, indent=2)
-    print(f"📖 Registry saved.")
-
-# --- 5. EXECUTION ---
-async def run_pipeline(url, name):
-    domain = urlparse(url).netloc.split('.')
-    school_id = domain[1] if domain[0] in ['www', 'catalog'] else domain[0]
-    
-    courses = await universal_scrape(url)
-    
-    # CRITICAL FIX: Fail loudly if no courses found
-    if not courses: 
-        print(f"❌ ERROR: No courses found at {url}")
-        sys.exit(1) # This stops the workflow immediately so you see the error
-
-    audited = await audit_with_gemini(courses)
-    
-    filename = f"{school_id}_audit.json"
-    with open(filename, "w", encoding="utf-8") as f:
-        json.dump(audited, f, indent=2)
-    
-    update_registry(school_id, name, filename)
-    print(f"✅ SUCCESS! Created {filename}")
-
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        asyncio.run(run_pipeline(sys.argv[1], sys.argv[2]))
-    else:
-        # Local test mode
-        asyncio.run(run_pipeline("[https://catalog.iit.edu/courses/mba/](https://catalog.iit.edu/courses/mba/)", "IIT Stuart School of Business"))
-
