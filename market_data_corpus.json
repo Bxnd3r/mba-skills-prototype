@@ -1,1 +1,49 @@
-[]
+[
+  {
+    "title": "Product Manager",
+    "link": "https://www.linkedin.com/jobs/view/product-manager-at-meta-4199411308?position=1&pageNum=0&refId=A7eMC89huLEfW%2FV55%2FZojA%3D%3D&trackingId=V9V9d50gkpAUwpuBGerh%2Bw%3D%3D",
+    "description": "Description hidden (Login Wall)",
+    "skills": {
+      "Product_Manager_Demand_Ratings": {
+        "Digital": 5,
+        "Quant": 4,
+        "Strategy": 5,
+        "Management": 4,
+        "Communication": 5,
+        "Regulation": 2
+      }
+    },
+    "date": "2025-12-31"
+  },
+  {
+    "title": "Product Manager",
+    "link": "https://www.linkedin.com/jobs/view/product-manager-at-meta-4199410450?position=2&pageNum=0&refId=A7eMC89huLEfW%2FV55%2FZojA%3D%3D&trackingId=YyVj0TQFEb6%2B%2F7I4ClduQg%3D%3D",
+    "description": "Description hidden (Login Wall)",
+    "skills": {
+      "Digital": 5,
+      "Quant": 4,
+      "Strategy": 5,
+      "Management": 4,
+      "Communication": 5,
+      "Regulation": 3
+    },
+    "date": "2025-12-31"
+  },
+  {
+    "title": "Product Manager",
+    "link": "https://www.linkedin.com/jobs/view/product-manager-at-meta-4199412186?position=3&pageNum=0&refId=A7eMC89huLEfW%2FV55%2FZojA%3D%3D&trackingId=JE8tbZ07uONbILuO61z55A%3D%3D",
+    "description": "Description hidden (Login Wall)",
+    "skills": {
+      "role": "Product Manager",
+      "skill_demand_ratings": {
+        "Digital": 5,
+        "Quant": 4,
+        "Strategy": 5,
+        "Management": 4,
+        "Communication": 5,
+        "Regulation": 3
+      }
+    },
+    "date": "2025-12-31"
+  }
+]
