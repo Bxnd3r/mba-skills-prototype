@@ -27,10 +27,13 @@ jobs:
         run: |
           git config --global user.name "Text Bot"
           git config --global user.email "bot@github.com"
-          git pull --rebase origin main
-          git add registry.json *_audit.json pending_audit.txt
-          git commit -m "Text Audit: ${{ inputs.school_name }}" || echo "No changes"
-          git push origin main
           
-          git commit -m "Text Audit: ${{ inputs.school_name }}" || echo "No changes"
+          # 1. Stage and Commit the changes FIRST
+          git add registry.json *_audit.json pending_audit.txt
+          git commit -m "Text Audit: ${{ inputs.school_name }}" || echo "No changes to commit"
+          
+          # 2. THEN Pull (Rebase) updates from the server
+          git pull --rebase origin main
+          
+          # 3. Finally Push back to the server
           git push origin main
