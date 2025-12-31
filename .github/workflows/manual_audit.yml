@@ -1,20 +1,20 @@
 name: Audit New School
 
 on:
-  workflow_dispatch: # This creates the "Run Workflow" button
+  workflow_dispatch:
     inputs:
       school_url:
-        description: 'School Catalog URL (e.g., https://catalog.yale.edu...)'
+        description: 'School Catalog URL'
         required: true
       school_name:
-        description: 'School Display Name (e.g., Yale School of Management)'
+        description: 'School Display Name'
         required: true
 
 jobs:
   audit:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Important: Allows the robot to save the new JSON file
+      contents: write 
     
     steps:
       - name: Checkout Code
@@ -27,24 +27,23 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          # We include google-generativeai to fix the module error
           pip install playwright google-generativeai requests beautifulsoup4
           playwright install chromium
 
       - name: Run Master Audit
         env:
-          # You need to add your API Key to GitHub Secrets!
-          # Go to Settings -> Secrets and variables -> Actions -> New Repository Secret
-          # Name: GEMINI_API_KEY
-          # Value: [Paste your actual API key here]
           GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
+        # Added -u for unbuffered logs so you see progress instantly
         run: |
-          # We pass the inputs from the form into the python script
-          python master_audit.py "${{ inputs.school_url }}" "${{ inputs.school_name }}"
+          python -u master_audit.py "${{ inputs.school_url }}" "${{ inputs.school_name }}"
 
       - name: Save & Commit Results
+        # Added logic to create registry.json if missing to prevent 'pathspec' error
         run: |
           git config --global user.name "Audit Bot"
           git config --global user.email "bot@github.com"
+          touch registry.json
           git add registry.json *_audit.json
-          git commit -m "Added ${{ inputs.school_name }} via Cloud Audit" || echo "No changes"
+          git commit -m "Added ${{ inputs.school_name }} via Super Auditor" || echo "No changes to commit"
           git push
