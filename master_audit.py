@@ -141,4 +141,5 @@ async def run_pipeline(url, school_display_name):
 # --- EXECUTE ---
 # Uncomment the line below to run it!
 # GOOD LINE (Clean URL string)
-asyncio.run(run_pipeline("https://catalog.iit.edu/courses/mba/", "IIT Stuart School of Business"))
+
+asyncio.run(run_pipeline("https://www.chicagobooth.edu/mba/executive/curriculum", "The University of Chicago Booth School of Business"))
