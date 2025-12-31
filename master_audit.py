@@ -11,10 +11,10 @@ import google.generativeai as genai
 
 # --- 1. SETUP & CONFIG ---
 # PASTE YOUR KEY HERE
-genai.configure(api_key="YOUR_GEMINI_API_KEY") 
+genai.configure(api_key="AIzaSyC_fQtJV9MD4RFikgQGga4CRWZJrAkaFEg") 
 
 # UPDATED: Use the faster, stable Flash model
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 
 DEFAULT_RECIPE = {
     "block": ".courseblock, .course-item, div[class*='course']", 
