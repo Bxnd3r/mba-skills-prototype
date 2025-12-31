@@ -23,7 +23,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install playwright
+          pip install playwright google-generativeai
           playwright install chromium
 
       # Use the -u flag to see logs instantly!
