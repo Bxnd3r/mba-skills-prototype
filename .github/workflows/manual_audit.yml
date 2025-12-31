@@ -13,12 +13,15 @@ on:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    # CRITICAL: Give the robot permission to write files!
     permissions:
-      contents: write # Important: Allows the robot to save the new JSON file
+      contents: write 
     
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Use the official token
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -32,23 +35,15 @@ jobs:
 
       - name: Run Master Audit
         env:
-          # You need to add your API Key to GitHub Secrets!
-          # Go to Settings -> Secrets and variables -> Actions -> New Repository Secret
-          # Name: GEMINI_API_KEY
-          # Value: [Paste your actual API key here]
           GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
         run: |
-          # We pass the inputs from the form into the python script
           python master_audit.py "${{ inputs.school_url }}" "${{ inputs.school_name }}"
 
-      - name: Save & Commit Results
+      - name: Commit and Push
         run: |
           git config --global user.name "Audit Bot"
           git config --global user.email "bot@github.com"
-          
-          # Add all JSON files that changed (safer than naming them specifically)
           git add .
-          
-          # Only commit if there are actually changes
-          git commit -m "Added ${{ inputs.school_name }} via Cloud Audit" || echo "No changes to commit"
-          git push
+          # The commit might fail if there are no changes, so we add "|| echo..."
+          git commit -m "Added ${{ inputs.school_name }} [skip ci]" || echo "No changes to commit"
+          git push origin HEAD:main
