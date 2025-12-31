@@ -14,18 +14,40 @@ model = genai.GenerativeModel('gemini-pro')
 
 def parse_text_dump(text):
     """
-    Smart Parser:
-    1. Tries to find strict course codes (e.g. BUS 101, CS-400).
-    2. If none found, falls back to splitting by large gaps (3+ spaces).
+    Smart Parser V2:
+    Prioritizes "Visual Gaps" (your current file format) because it is distinct.
+    Falls back to "Course Codes" only if no gaps are found.
     """
     parsed = []
+    lines = text.split('\n')
     
-    # --- STRATEGY 1: STRICT CODES ---
-    # Looks for patterns like "BUS 101", "CS-405", "MKT.500"
+    # --- CHECK 1: GAP DETECTION (High Priority) ---
+    # Count how many lines have a "triple space" gap
+    gap_lines = [line for line in lines if re.search(r'\s{3,}', line.strip())]
+    
+    # If we see more than 5 lines with big gaps, use the "Space Split" method
+    if len(gap_lines) > 5:
+        print("DEBUG: Detected Visual Gap format (Title   Description).")
+        for line in lines:
+            line = line.strip()
+            if not line: continue
+            
+            # Split by 3+ spaces
+            parts = re.split(r'\s{3,}', line, maxsplit=1)
+            
+            if len(parts) >= 2:
+                title = parts[0].strip()
+                desc = parts[1].strip()
+                # strict length check to avoid noise
+                if len(desc) > 20: 
+                    parsed.append({"course": title, "text": desc})
+        return parsed
+
+    # --- CHECK 2: CODE PATTERN (Fallback) ---
+    print("DEBUG: No gaps found. Checking for Course Codes (e.g. BUS 101).")
     code_pattern = re.compile(r"([A-Z]{2,4}[-\s\.][A-Z]{0,2}\d{3,4}.+)")
     matches = code_pattern.split(text)
     
-    # If we found more than 5 matches, assume this file uses Course Codes
     if len(matches) > 5:
         print("DEBUG: Detected Course Codes format.")
         for i in range(1, len(matches), 2):
@@ -35,6 +57,8 @@ def parse_text_dump(text):
                 parsed.append({"course": title, "text": desc})
         return parsed
 
+    print("❌ Error: Could not determine file format.")
+    return []
     # --- STRATEGY 2: FALLBACK (SPACES) ---
     print("DEBUG: No codes found. Switching to visual-spacing format.")
     lines = text.split('\n')
@@ -110,5 +134,6 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
 
