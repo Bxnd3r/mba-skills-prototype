@@ -13,15 +13,25 @@ if api_key: genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-pro')
 
 def parse_text_dump(text):
-    """Parses raw text based on standard course patterns."""
-    pattern = re.compile(r"([A-Z]{2,4}[-\s\.][A-Z]{0,2}\d{3,4}.+)")
-    matches = pattern.split(text)
+    """Parses text where lines follow: Title   Description"""
     parsed = []
-    for i in range(1, len(matches), 2):
-        title = matches[i].strip()
-        desc = matches[i+1].strip() if i+1 < len(matches) else ""
-        if len(desc) > 20:
-            parsed.append({"course": title, "text": desc})
+    # Split the massive text blob into individual lines
+    lines = text.split('\n')
+    
+    for line in lines:
+        line = line.strip()
+        if not line: continue  # Skip empty lines
+        
+        # Split by 3 spaces (or more)
+        parts = re.split(r'\s{3,}', line, maxsplit=1)
+        
+        if len(parts) >= 2:
+            title = parts[0].strip()
+            desc = parts[1].strip()
+            # Only save if description looks real
+            if len(desc) > 10:
+                parsed.append({"course": title, "text": desc})
+                
     return parsed
 
 async def scrape_browser(url):
@@ -80,3 +90,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
