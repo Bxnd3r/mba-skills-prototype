@@ -3,11 +3,8 @@ name: Audit New School
 on:
   workflow_dispatch:
     inputs:
-      school_url:
-        description: 'School Catalog URL'
-        required: true
       school_name:
-        description: 'School Display Name'
+        description: 'School Display Name (e.g., NYU Stern)'
         required: true
 
 jobs:
@@ -15,35 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write 
-    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-
       - name: Install Dependencies
-        run: |
-          # We include google-generativeai to fix the module error
-          pip install playwright google-generativeai requests beautifulsoup4
-          playwright install chromium
-
+        run: pip install google-generativeai
       - name: Run Master Audit
         env:
           GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
-        # Added -u for unbuffered logs so you see progress instantly
-        run: |
-          python -u master_audit.py "${{ inputs.school_url }}" "${{ inputs.school_name }}"
-
+        run: python -u master_audit.py "${{ inputs.school_name }}"
       - name: Save & Commit Results
-        # Added logic to create registry.json if missing to prevent 'pathspec' error
         run: |
           git config --global user.name "Audit Bot"
           git config --global user.email "bot@github.com"
-          touch registry.json
+          git pull --rebase origin main
           git add registry.json *_audit.json
-          git commit -m "Added ${{ inputs.school_name }} via Super Auditor" || echo "No changes to commit"
-          git push
+          git commit -m "Audit complete for ${{ inputs.school_name }}" || echo "No changes"
+          git push origin main
