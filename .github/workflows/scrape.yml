@@ -32,8 +32,10 @@ jobs:
           playwright install chromium
 
       # STEP 5: RUN THE SCRIPT
+      # Inside scrape.yml
       - name: Run Scraper
-        run: python job_pulse.py
+        # The -u flag forces Python to print logs immediately
+        run: python -u job_pulse.py
       
       # STEP 6: SAVE RESULTS
       - name: Commit and Push Data
