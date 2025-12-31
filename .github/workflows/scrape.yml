@@ -28,6 +28,8 @@ jobs:
 
       # Use the -u flag to see logs instantly!
       - name: Run Scraper
+        env: 
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }} # <--- THIS MUST BE HERE
         run: python -u job_pulse.py
 
       - name: Commit and Push Data
