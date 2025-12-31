@@ -31,7 +31,7 @@ except Exception as e:
 
 # FIX: Trying 'gemini-1.5-flash-latest' which is often more stable for API keys
 # If this fails, check the logs to see what names appeared in the list above!
-model = genai.GenerativeModel('gemini-1.5-flash-latest')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 SEARCH_TERMS = ["MBA Intern", "Product Manager"] 
 LOCATIONS = ["Chicago, IL"]
@@ -144,3 +144,4 @@ def save_data(new_jobs):
 
 if __name__ == "__main__":
     asyncio.run(run_pulse())
+
