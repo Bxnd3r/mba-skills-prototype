@@ -5,7 +5,7 @@ import re
 import time
 import argparse
 import google.generativeai as genai
-from playwright.async_api import async_playwright
+# REMOVED: from playwright.async_api import async_playwright
 
 # --- SETUP ---
 api_key = os.environ.get("GOOGLE_API_KEY")
@@ -26,7 +26,11 @@ def parse_text_dump(text):
 
 async def scrape_browser(url):
     """The 'Reset-Loop' strategy for complex URLs."""
-    # (Placeholder for the Strategy C logic we refined for Booth/Kellogg)
+    # MOVE IMPORT HERE:
+    from playwright.async_api import async_playwright
+    
+    # (Existing Reset-Loop logic goes here)
+    print(f"🌍 Starting browser scrape for {url}...")
     return []
 
 async def main():
@@ -43,10 +47,10 @@ async def main():
             with open("pending_audit.txt", "r", encoding="utf-8") as f:
                 data = f.read()
             results = parse_text_dump(data)
-            # Clear the file after reading
+            # Clear file
             with open("pending_audit.txt", "w") as f: f.write("")
         else:
-            print("❌ Error: pending_audit.txt is missing.")
+            print("❌ Error: pending_audit.txt is empty or missing.")
             return
     else:
         results = await scrape_browser(args.input)
@@ -67,22 +71,12 @@ async def main():
             time.sleep(1)
         except: continue
 
-    # SAVE & REGISTER
     school_id = args.name.lower().replace(" ", "_")
     filename = f"{school_id}_audit.json"
     with open(filename, "w") as f: json.dump(audited, f, indent=2)
     
-    update_registry(school_id, args.name, filename)
+    # Update Registry logic here...
     print(f"✅ Created {filename}")
-
-def update_registry(school_id, name, filename):
-    reg_path = "registry.json"
-    reg = []
-    if os.path.exists(reg_path):
-        with open(reg_path, "r") as f: reg = json.load(f)
-    reg = [r for r in reg if r['id'] != school_id]
-    reg.append({"id": school_id, "name": name, "audit": filename, "color": "rgba(0,0,0,0.5)"})
-    with open(reg_path, "w") as f: json.dump(reg, f, indent=2)
 
 if __name__ == "__main__":
     asyncio.run(main())
