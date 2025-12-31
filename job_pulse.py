@@ -11,8 +11,27 @@ from playwright.async_api import async_playwright
 api_key = os.environ.get("GOOGLE_API_KEY") 
 if api_key: genai.configure(api_key=api_key)
 
-# FIX: Switch to the active model
-model = genai.GenerativeModel('gemini-1.5-flash')
+# ==========================================
+# 🔍 DIAGNOSTIC BLOCK (STARTS HERE)
+# This will print every available model to your GitHub logs
+# ==========================================
+print("------------------------------------------------")
+print("🔍 CHECKING AVAILABLE GOOGLE MODELS...")
+try:
+    available_models = []
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            print(f"   - Found: {m.name}")
+            available_models.append(m.name)
+    print("------------------------------------------------")
+except Exception as e:
+    print(f"❌ DIAGNOSTIC FAILED: {e}")
+# ==========================================
+
+
+# FIX: Trying 'gemini-1.5-flash-latest' which is often more stable for API keys
+# If this fails, check the logs to see what names appeared in the list above!
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 SEARCH_TERMS = ["MBA Intern", "Product Manager"] 
 LOCATIONS = ["Chicago, IL"]
@@ -27,7 +46,6 @@ async def run_pulse():
     async with async_playwright() as p:
         # Launch browser (Headless=True is required for Actions)
         browser = await p.chromium.launch(headless=True)
-        # Create a context with a real user agent to avoid blocking
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
         )
@@ -42,7 +60,6 @@ async def run_pulse():
                 await asyncio.sleep(5)
 
                 # 2. Find Job Cards
-                # Added more selectors to catch different LinkedIn layouts
                 cards = await page.locator(".base-card, .job-search-card, .result-card").all()
                 print(f"   Found {len(cards)} cards. Scraping top 3...")
 
@@ -60,10 +77,8 @@ async def run_pulse():
                         
                         print(f"   👉 [{i+1}] Clicking: {title.strip()[:30]}...")
                         
-                        # Click usually works, but sometimes we just need the link
-                        # We will skip the click to save time/risk if we can't see the description anyway without login
-                        # LinkedIn blocks guest descriptions often. We will try to read the card snippet if full text fails.
-                        
+                        # We skip clicking for safety and use a placeholder description
+                        # This keeps the bot faster and less likely to crash
                         description = "Description hidden (Login Wall)"
                         
                         # 4. AUDIT WITH AI
@@ -92,7 +107,7 @@ async def run_pulse():
 
 def audit_job(title, desc):
     try:
-        # Short prompt for the Flash model
+        # Short prompt 
         prompt = f"""
         Role: {title}
         Rate 1-5 (1=Low, 5=High demand) on: Digital, Quant, Strategy, Management, Communication, Regulation.
