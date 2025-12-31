@@ -33,7 +33,7 @@ except Exception as e:
 # If this fails, check the logs to see what names appeared in the list above!
 model = genai.GenerativeModel('gemini-2.5-flash')
 
-SEARCH_TERMS = ["MBA Intern", "Product Manager"] 
+SEARCH_TERMS = ["Product Manager"] 
 LOCATIONS = ["Chicago, IL"]
 SLEEP_MIN = 3
 SLEEP_MAX = 8
@@ -144,4 +144,5 @@ def save_data(new_jobs):
 
 if __name__ == "__main__":
     asyncio.run(run_pulse())
+
 
