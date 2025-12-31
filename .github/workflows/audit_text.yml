@@ -1,0 +1,33 @@
+name: AUDIT NEW SCHOOL TEXT
+
+on:
+  workflow_dispatch:
+    inputs:
+      school_name:
+        description: 'School Name'
+        required: true
+
+jobs:
+  text_audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install
+        run: pip install google-generativeai
+      - name: Run
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -u master_audit.py --mode text --name "${{ inputs.school_name }}"
+      - name: Save
+        run: |
+          git config --global user.name "Text Bot"
+          git config --global user.email "bot@github.com"
+          git pull --rebase origin main
+          git add registry.json *_audit.json pending_audit.txt
+          git commit -m "Text Audit: ${{ inputs.school_name }}" || echo "No changes"
+          git push origin main
