@@ -28,6 +28,14 @@ jobs:
           git config --global user.name "Text Bot"
           git config --global user.email "bot@github.com"
           git pull --rebase origin main
-          git add registry.json *_audit.json pending_audit.txt
+          
+          # Add registry and any new audits
+          git add registry.json *_audit.json
+          
+          # Only add pending_audit.txt if it actually exists
+          if [ -f "pending_audit.txt" ]; then
+            git add pending_audit.txt
+          fi
+          
           git commit -m "Text Audit: ${{ inputs.school_name }}" || echo "No changes"
           git push origin main
