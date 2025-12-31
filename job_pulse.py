@@ -1,86 +1,115 @@
 import asyncio
-from playwright.async_api import async_playwright
 import json
-import random
-from datetime import datetime
 import os
+import random
+import time
+from datetime import datetime
+from playwright.async_api import async_playwright
 
-# Curated Boshkoska-aligned Roles
-MBA_OCCUPATIONS = [
-    "Management Analyst / Strategy Consultant", "Project Management Specialist", "Business Continuity Planner", "Chief Executive / Chief Operating Officer", "Chief Sustainability Officer", "Marketing Manager", "Market Research Analyst & Marketing Specialist", "Sales Manager", "Public Relations Manager", "Fundraising Manager", "Financial Manager", "Treasurer & Controller", "Investment Fund Manager", "Financial & Investment Analyst", "Financial Quantitative Analyst", "Personal Financial Advisor", "Credit Analyst", "Budget Analyst", "Loan Officer", "Insurance Underwriter", "Risk Management Specialist", "Supply‑chain Manager", "Transportation, Storage & Distribution Manager", "Purchasing Manager", "Cost Estimator / Cost Analyst", "Industrial Production Manager", "Operations Research Analyst", "General & Operations Manager", "Human Resources Manager", "Compensation & Benefits Manager", "Training & Development Manager", "Business Intelligence Analyst", "Computer & Information Systems Manager", "Information‑Technology Project Manager", "Medical & Health Services Manager", "Sustainability Specialist / Corporate Sustainability Manager"
-
-]
-
+# --- CONFIG ---
+SEARCH_TERMS = ["MBA Intern", "Product Manager MBA", "Strategy Intern"]
 LOCATIONS = ["Chicago, IL", "United States"]
+# Reduced sleep to preventing "hanging" appearances, randomized for safety
+SLEEP_MIN = 10 
+SLEEP_MAX = 20
 
-async def scrape_full_data(keyword, location, limit=5):
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        # Randomizing User Agent to look human
-        context = await browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-        page = await context.new_page()
-        
-        url = f"https://www.linkedin.com/jobs/search?keywords={keyword}&location={location}"
-        await page.goto(url)
-        await asyncio.sleep(random.uniform(4, 7))
-
-        jobs = []
-        # Find the job card links
-        cards = await page.locator('.base-card__full-link').all()
-        
-        for i in range(min(len(cards), limit)):
-            try:
-                await cards[i].click()
-                await asyncio.sleep(random.uniform(3, 5))
-                
-                # Extracting specific data points
-                title = await page.locator('.topcard__title').inner_text()
-                # LinkedIn often has a "Show More" button for descriptions
-                try:
-                    await page.click('button.show-more-less-html__button--more', timeout=2000)
-                except:
-                    pass
-                
-                raw_desc = await page.locator('.description__text').inner_text()
-                
-                # CLEANING: Remove typical fluff/company headers
-                # We split by common headers and take the core
-                clean_desc = raw_desc.split("About the company")[0].strip()
-
-                jobs.append({
-                    "query": keyword,
-                    "location": location,
-                    "title": title.strip(),
-                    "description": clean_desc,
-                    "date": datetime.now().strftime("%Y-%m-%d")
-                })
-                print(f"✅ Logged: {title[:25]} in {location}")
-            except:
-                continue
-                
-        await browser.close()
-        return jobs
-
-async def main():
-    master_file = "market_data_corpus.json"
+async def run_pulse():
+    print(f"🚀 Starting Daily Job Pulse at {datetime.now()}...")
     
-    # Load existing data to append to the same file
-    if os.path.exists(master_file):
-        with open(master_file, "r") as f:
-            all_data = json.load(f)
+    jobs = []
+    
+    async with async_playwright() as p:
+        # Launch browser (Headless=True for GitHub Actions)
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page()
+        
+        # Spoof User Agent to look less like a robot
+        await page.set_extra_http_headers({
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+        })
+
+        for term in SEARCH_TERMS:
+            for loc in LOCATIONS:
+                try:
+                    print(f"🔎 Searching: '{term}' in '{loc}'...")
+                    
+                    # Construct URL (LinkedIn Guest Search - no login needed)
+                    # We use "people" or "jobs" guest search URL
+                    url = f"https://www.linkedin.com/jobs/search?keywords={term}&location={loc}&f_TP=1,2"
+                    
+                    await page.goto(url, wait_until="domcontentloaded")
+                    await asyncio.sleep(5) # Wait for initial load
+                    
+                    # CHECK FOR CAPTCHA / SECURITY WALL
+                    title = await page.title()
+                    print(f"   📄 Page Title: {title}")
+                    
+                    if "Security" in title or "Auth" in title or "Challenge" in title:
+                        print("   ⚠️ BLOCKED: LinkedIn detected the robot.")
+                        await page.screenshot(path="captcha_block.png")
+                        continue # Skip this search
+
+                    # Scrape Job Cards
+                    # We look for the standard job card class
+                    job_cards = await page.locator(".base-card__full-link").all()
+                    
+                    print(f"   found {len(job_cards)} job cards.")
+                    
+                    # Limit to top 5 per search to stay safe
+                    for i, card in enumerate(job_cards[:5]):
+                        try:
+                            title_text = await card.text_content()
+                            link = await card.get_attribute("href")
+                            
+                            if title_text and link:
+                                clean_title = title_text.strip()
+                                print(f"      👉 Found: {clean_title[:40]}...")
+                                
+                                jobs.append({
+                                    "title": clean_title,
+                                    "location": loc,
+                                    "date": datetime.now().strftime("%Y-%m-%d"),
+                                    "link": link
+                                })
+                        except Exception as e:
+                            print(f"      ⚠️ Card error: {e}")
+
+                    # Random Sleep between searches (not 45s, just 10-20s)
+                    sleep_time = random.randint(SLEEP_MIN, SLEEP_MAX)
+                    print(f"   💤 Sleeping {sleep_time}s...")
+                    time.sleep(sleep_time)
+                    
+                except Exception as e:
+                    print(f"   ❌ Search Error: {e}")
+                    # Take a screenshot so we can debug later
+                    await page.screenshot(path="error_state.png")
+
+        await browser.close()
+
+    print(f"✅ Pulse Complete. Collected {len(jobs)} jobs.")
+    
+    # Save Data
+    if jobs:
+        output_file = "market_data_corpus.json"
+        # Load existing if available
+        existing_data = []
+        if os.path.exists(output_file):
+            try:
+                with open(output_file, "r") as f:
+                    existing_data = json.load(f)
+            except: pass
+        
+        # Append new (avoid duplicates)
+        existing_links = {j['link'] for j in existing_data}
+        new_jobs = [j for j in jobs if j['link'] not in existing_links]
+        
+        final_data = existing_data + new_jobs
+        
+        with open(output_file, "w") as f:
+            json.dump(final_data, f, indent=2)
+        print(f"💾 Saved {len(new_jobs)} new jobs to {output_file}")
     else:
-        all_data = []
-
-    for loc in LOCATIONS:
-        for job in MBA_OCCUPATIONS:
-            results = await scrape_full_data(job, loc)
-            all_data.extend(results)
-            # EXTENDED DELAY: To stay under the radar for 30 days
-            print(f"⏳ Sleeping 45s between queries...")
-            await asyncio.sleep(45) 
-
-    with open(master_file, "w") as f:
-        json.dump(all_data, f, indent=2)
+        print("⚠️ No jobs found to save.")
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(run_pulse())
