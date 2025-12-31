@@ -11,12 +11,12 @@ from playwright.async_api import async_playwright
 import google.generativeai as genai
 
 # --- 1. CONFIGURATION ---
-api_key = os.environ.get("GOOGLE_API_KEY")
+api_key = os.environ.get("AIzaSyC_fQtJV9MD4RFikgQGga4CRWZJrAkaFEg")
 if api_key:
     genai.configure(api_key=api_key)
 
 # Use Flash model for speed/cost
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 
 # --- 2. SCHOOL RECIPES (The Dictionary) ---
 SCHOOL_RECIPES = {
@@ -140,3 +140,4 @@ def update_registry(school_id, name, filename):
 
     # Update or Add
     existing = next((item for item in registry if item["id"] == school_id), None)
+
