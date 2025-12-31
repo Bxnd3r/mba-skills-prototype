@@ -1,7 +1,7 @@
 import asyncio
 import json
 import os
-import random
+import re
 import time
 import sys
 from urllib.parse import urlparse
@@ -10,134 +10,139 @@ import requests
 from playwright.async_api import async_playwright
 import google.generativeai as genai
 
-# --- 1. CONFIGURATION ---
-api_key = os.environ.get("AIzaSyC_fQtJV9MD4RFikgQGga4CRWZJrAkaFEg")
-if api_key:
-    genai.configure(api_key=api_key)
-
-# Use Flash model for speed/cost
+# --- 1. SETUP ---
+genai.configure(api_key=os.environ.get("AIzaSyC_fQtJV9MD4RFikgQGga4CRWZJrAkaFEg"))
 model = genai.GenerativeModel('gemini-pro')
 
-# --- 2. SCHOOL RECIPES (The Dictionary) ---
-SCHOOL_RECIPES = {
-    "default": {
-        "block": ".courseblock, .course-item, div[class*='course'], li[class*='course']", 
-        "title": "strong, .courseblocktitle, h3, .course-title", 
-        "desc": ".courseblockdesc, .description, .course-desc"
-    },
-    # BOOTH SPECIFIC RECIPE (Now properly inside the dictionary)
-    "chicagobooth": {
-        "block": "tr, div.course-listing, li.course-item", 
-        "title": "td:nth-child(1), h4, strong.course-title, .course-name",
-        "desc": "td:nth-child(2), div.description, p, .course-description"
-    }
-}
+# --- 2. THE STRATEGIES ---
 
-# --- 3. SCRAPER ENGINE ---
-async def universal_scrape(url):
-    headers = {"User-Agent": "Mozilla/5.0"}
-    
-    # 1. Detect School from URL to pick the right Recipe
-    domain = urlparse(url).netloc
-    recipe_key = "default"
-    for key in SCHOOL_RECIPES:
-        if key in domain:
-            recipe_key = key
-            break
-            
-    print(f"🕵️ Scraping {url} using recipe: {recipe_key.upper()}...")
-    recipe = SCHOOL_RECIPES[recipe_key]
-
-    # 2. Try Static Scrape First
+async def strategy_a_static(url):
+    """Fastest: Simple HTML pull for sites like IIT."""
+    print("🚀 Strategy A: Trying Static Scrape...")
     try:
+        headers = {"User-Agent": "Mozilla/5.0"}
         res = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
-        courses = parse_html(soup, recipe)
-    except:
-        courses = []
+        # Standard selectors
+        blocks = soup.select(".courseblock, .course-item, tr, li")
+        results = []
+        for b in blocks:
+            text = b.get_text(strip=True)
+            if len(text) > 100 and ("BUS" in text or re.search(r"\d{5}", text)):
+                results.append({"course": text[:60], "text": text})
+        return results
+    except: return []
 
-    # 3. Failover to Dynamic (Playwright) if static failed
-    if not courses:
-        print("⚠️ Static failed. Launching Playwright...")
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
-            page = await browser.new_page()
-            try:
-                await page.goto(url, wait_until="networkidle", timeout=60000)
-                await asyncio.sleep(5) # Wait for JS to load
-                content = await page.content()
-                courses = parse_html(BeautifulSoup(content, "html.parser"), recipe)
-            except Exception as e:
-                print(f"❌ Playwright Error: {e}")
-            await browser.close()
-            
-    return courses
-
-def parse_html(soup, recipe):
+async def strategy_b_dynamic(page):
+    """Middle: Wait for JS to render, then scrape everything visible."""
+    print("🚀 Strategy B: Trying Dynamic Page Render...")
+    await asyncio.sleep(5) # Wait for JS
+    content = await page.content()
+    soup = BeautifulSoup(content, "html.parser")
+    blocks = soup.select("tr, li, .course-listing, div[class*='course']")
     results = []
-    blocks = soup.select(recipe["block"])
-    print(f"🔎 Found {len(blocks)} potential course blocks...")
-    
     for b in blocks:
-        t = b.select_one(recipe["title"])
-        d = b.select_one(recipe["desc"])
-        
-        # If we found a title but no description, try getting all text in the block
-        if t:
-            title = t.get_text(strip=True).replace('\u00a0', ' ')
-            if d:
-                desc = d.get_text(strip=True)
-            else:
-                # Fallback: Use the whole block text minus the title
-                desc = b.get_text(strip=True).replace(title, "")
-            
-            # Clean up noise
-            if len(desc) > 20: 
-                results.append({"course": title, "text": desc})
-                
+        text = b.get_text(strip=True)
+        if len(text) > 100:
+            results.append({"course": text[:60], "text": text})
     return results
 
-# --- 4. AUDITOR ENGINE ---
-async def audit_with_gemini(course_list):
-    print(f"🧠 Auditing {len(course_list)} courses...")
-    audited = []
-    prompt = """
-    Score this MBA course 1-5 on: Digital, Quant, Strategy, Management, Communication, Regulation.
-    Rubric: 1=Awareness (Brief mention), 3=Application (Labs/Case Studies), 5=Mastery (Capstone/Client Project).
-    Course: {name} | Desc: {desc}
-    Return ONLY JSON: {{"Digital":X, "Quant":X, "Strategy":X, "Management":X, "Communication":X, "Regulation":X}}
-    """
-    
-    for i, c in enumerate(course_list):
-        print(f"📝 [{i+1}/{len(course_list)}] {c['course'][:30]}...")
-        retries = 0
-        while retries < 3:
-            try:
-                response = model.generate_content(prompt.format(name=c['course'], desc=c['text']))
-                raw = response.text.strip()
-                if "```json" in raw: raw = raw.split("```json")[1].split("```")[0].strip()
-                audited.append({"course": c['course'], "skills": json.loads(raw), "text": c['text']})
-                time.sleep(2)
-                break
-            except Exception as e:
-                if "429" in str(e):
-                    print(f"⏳ Rate Limit! Sleeping 60s...")
-                    time.sleep(60)
-                    retries += 1
-                else:
-                    print(f"⚠️ Error: {e}")
-                    break
-    return audited
-
-# --- 5. REGISTRY UPDATER ---
-def update_registry(school_id, name, filename):
-    reg_path = "registry.json"
-    registry = []
-    if os.path.exists(reg_path):
+async def strategy_c_reset_loop(page, url):
+    """Slowest/Deepest: The 'Booth-Style' Reset Loop with Tab Catcher."""
+    print("🚀 Strategy C: Starting Reset-Loop with Tab Catcher...")
+    results = []
+    for i in range(30): # Limit to 30 for the 'Super Auditor'
         try:
-            with open(reg_path, "r") as f: registry = json.load(f)
-        except: registry = []
+            await page.goto(url)
+            await asyncio.sleep(5)
+            # Find elements that look like courses but aren't 'Sections'
+            # This covers the '30000 - ' pattern we found at Booth
+            potential = await page.get_by_text(re.compile(r"\d{4,5}")).all()
+            valid = []
+            for p in potential:
+                t = await p.text_content()
+                if "Section:" not in t and len(t) < 100:
+                    valid.append(p)
 
-    # Update or Add
-    existing = next((item for item in registry if item["id"] == school_id), None)
+            if i >= len(valid): break
+            
+            target = valid[i]
+            title = await target.text_content()
+            await target.scroll_into_view_if_needed()
+            
+            # Use Tab Catcher for sites like Kellogg or NYU
+            async with page.expect_popup(timeout=5000) as popup_info:
+                await target.click()
+            
+            new_tab = await popup_info.value
+            await new_tab.wait_for_load_state()
+            clean_text = await new_tab.inner_text("body")
+            if len(clean_text) > 100:
+                results.append({"course": title.strip(), "text": clean_text})
+            await new_tab.close()
+        except: continue
+    return results
+
+# --- 3. THE MASTER CONTROLLER ---
+
+async def run_audit(url, school_name):
+    school_id = urlparse(url).netloc.split('.')[-2]
+    final_courses = []
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page()
+
+        # Try Tier 1: Static
+        final_courses = await strategy_a_static(url)
+        
+        # Try Tier 2: Dynamic
+        if len(final_courses) < 5:
+            await page.goto(url)
+            final_courses = await strategy_b_dynamic(page)
+
+        # Try Tier 3: Reset-Loop (The Booth/NYU method)
+        if len(final_courses) < 5:
+            final_courses = await strategy_c_reset_loop(page, url)
+
+        await browser.close()
+
+    if not final_courses:
+        print(f"❌ ALL STRATEGIES FAILED for {url}")
+        # Create an empty registry to stop the Git error
+        ensure_registry_exists()
+        sys.exit(0) # Exit cleanly so GitHub doesn't scream
+
+    # --- 4. AUDIT WITH GEMINI-PRO ---
+    print(f"🧠 Auditing {len(final_courses)} courses with gemini-pro...")
+    audited = []
+    for item in final_courses[:40]: # Safety limit
+        try:
+            prompt = f"Analyze course: {item['course']}\nText: {item['text'][:1500]}\nScore 1-5 on Digital, Quant, Strategy, Management, Communication, Regulation. Return ONLY JSON."
+            res = model.generate_content(prompt)
+            clean = res.text.strip().replace("```json","").replace("```","")
+            audited.append({"course": item['course'], "skills": json.loads(clean), "text": item['text'][:300]})
+            time.sleep(1)
+        except: continue
+
+    # --- 5. SAVE & REGISTER ---
+    filename = f"{school_id}_audit.json"
+    with open(filename, "w") as f: json.dump(audited, f, indent=2)
+    update_registry(school_id, school_name, filename)
+    print(f"✅ SUCCESS! Created {filename}")
+
+def ensure_registry_exists():
+    if not os.path.exists("registry.json"):
+        with open("registry.json", "w") as f: json.dump([], f)
+
+def update_registry(school_id, name, filename):
+    ensure_registry_exists()
+    with open("registry.json", "r") as f: reg = json.load(f)
+    reg = [r for r in reg if r['id'] != school_id]
+    reg.append({"id": school_id, "name": name, "audit": filename, "color": "rgba(0,0,0,0.5)"})
+    with open("registry.json", "w") as f: json.dump(reg, f, indent=2)
+
+if __name__ == "__main__":
+    if len(sys.argv) > 2:
+        asyncio.run(run_audit(sys.argv[1], sys.argv[2]))
 
