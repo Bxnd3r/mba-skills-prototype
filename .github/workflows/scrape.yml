@@ -36,7 +36,14 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git pull --rebase origin main  # <--- GOOD PRACTICE to prevent conflicts
+          
+          # 1. Stage and Commit the new data FIRST
           git add market_data_corpus.json
           git commit -m "Automated Market Data Update" || echo "No changes to commit"
-          git push
+          
+          # 2. THEN Pull updates (Rebase)
+          # Now that changes are committed, rebase will work
+          git pull --rebase origin main
+          
+          # 3. Finally Push
+          git push origin main
