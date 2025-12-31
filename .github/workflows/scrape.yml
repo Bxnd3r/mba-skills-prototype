@@ -8,40 +8,34 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    # 👇 THIS IS THE MISSING KEY PERMISSION
+    permissions:
+      contents: write 
+    
     steps:
-      # STEP 1: DOWNLOAD YOUR CODE (Crucial!)
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # STEP 2: DEBUG (Verify file exists)
-      - name: List Files (Debug)
-        run: ls -R
-        # This will print all files in the logs. 
-        # If job_pulse.py isn't here, the checkout failed.
-
-      # STEP 3: INSTALL PYTHON
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      # STEP 4: INSTALL TOOLS
       - name: Install Dependencies
         run: |
           pip install playwright
           playwright install chromium
 
-      # STEP 5: RUN THE SCRIPT
-      # Inside scrape.yml
+      # Use the -u flag to see logs instantly!
       - name: Run Scraper
-        # The -u flag forces Python to print logs immediately
         run: python -u job_pulse.py
-      
-      # STEP 6: SAVE RESULTS
+
       - name: Commit and Push Data
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add market_data_corpus.json
+          # We add all json files
+          git add *.json
+          # The '|| echo' part prevents it from crashing if there are no new jobs
           git commit -m "Automated Market Data Update" || echo "No changes to commit"
           git push
