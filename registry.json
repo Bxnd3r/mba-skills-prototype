@@ -1,0 +1,8 @@
+[
+  {
+    "id": "nyu",
+    "name": "New York University Stern School of Business",
+    "audit": "nyu_audit.json",
+    "color": "rgba(0,0,0,0.5)"
+  }
+]
