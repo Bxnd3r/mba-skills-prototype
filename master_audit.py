@@ -18,11 +18,21 @@ if api_key:
 
 model = genai.GenerativeModel('gemini-pro')
 
-DEFAULT_RECIPE = {
-    "block": ".courseblock, .course-item, div[class*='course']", 
-    "title": "strong, .courseblocktitle, h3", 
-    "desc": ".courseblockdesc, .description"
-}
+"chicagobooth": {
+        # 1. The Container for each course row
+        "block": "tr.course-row, div.course-listing", 
+        
+        # 2. The Title (usually bold or in the first cell)
+        "title": "td.course-title, h4",
+        
+        # 3. The Description (The tricky part)
+        # We look for the hidden div that appears after clicking
+        "desc": "div.course-description, td.description-cell, .expanded-details",
+        
+        # 4. NEW: The "Click" Target
+        # This tells Playwright: "Click this thing to verify the text"
+        "click_selector": "button.view-details, a.expand-row, td.course-title" 
+    }
 
 # --- 2. SCRAPER ---
 async def universal_scrape(url):
@@ -143,3 +153,4 @@ if __name__ == "__main__":
     else:
         # Local test mode
         asyncio.run(run_pipeline("[https://catalog.iit.edu/courses/mba/](https://catalog.iit.edu/courses/mba/)", "IIT Stuart School of Business"))
+
