@@ -2,33 +2,44 @@ name: Daily MBA Market Scrape
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Runs at 2:00 AM every night
-  workflow_dispatch: # Allows you to run it manually for testing
+    - cron: '0 2 * * *' # Runs at 2:00 AM UTC
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
+      # STEP 1: DOWNLOAD YOUR CODE (Crucial!)
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # STEP 2: DEBUG (Verify file exists)
+      - name: List Files (Debug)
+        run: ls -R
+        # This will print all files in the logs. 
+        # If job_pulse.py isn't here, the checkout failed.
+
+      # STEP 3: INSTALL PYTHON
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # STEP 4: INSTALL TOOLS
       - name: Install Dependencies
         run: |
           pip install playwright
           playwright install chromium
 
+      # STEP 5: RUN THE SCRIPT
       - name: Run Scraper
         run: python job_pulse.py
-
+      
+      # STEP 6: SAVE RESULTS
       - name: Commit and Push Data
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add market_data_corpus.json
-          git commit -m "Automated Market Data Update: $(date)"
+          git commit -m "Automated Market Data Update" || echo "No changes to commit"
           git push
