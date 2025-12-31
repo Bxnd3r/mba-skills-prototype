@@ -36,8 +36,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          # We add all json files
-          git add *.json
-          # The '|| echo' part prevents it from crashing if there are no new jobs
+          git pull --rebase origin main  # <--- GOOD PRACTICE to prevent conflicts
+          git add market_data_corpus.json
           git commit -m "Automated Market Data Update" || echo "No changes to commit"
           git push
