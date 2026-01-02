@@ -93,5 +93,49 @@
       "Regulation": 3
     },
     "date": "2026-01-01"
+  },
+  {
+    "title": "Product Manager",
+    "link": "https://www.linkedin.com/jobs/view/product-manager-at-meta-4199411308?position=1&pageNum=0&refId=S0Bicfobjq2uPrWnY8gxmA%3D%3D&trackingId=2hPqigWmGp1BQQ8ziitGgg%3D%3D",
+    "description": "Description hidden (Login Wall)",
+    "skills": {
+      "Digital": 5,
+      "Quant": 5,
+      "Strategy": 5,
+      "Management": 5,
+      "Communication": 5,
+      "Regulation": 4
+    },
+    "date": "2026-01-02"
+  },
+  {
+    "title": "Product Manager",
+    "link": "https://www.linkedin.com/jobs/view/product-manager-at-meta-4199410450?position=2&pageNum=0&refId=S0Bicfobjq2uPrWnY8gxmA%3D%3D&trackingId=eC3RvLXmqGmrwXLWFiiKsQ%3D%3D",
+    "description": "Description hidden (Login Wall)",
+    "skills": {
+      "Product Manager": {
+        "Digital": 5,
+        "Quant": 4,
+        "Strategy": 5,
+        "Management": 4,
+        "Communication": 5,
+        "Regulation": 3
+      }
+    },
+    "date": "2026-01-02"
+  },
+  {
+    "title": "Product Manager",
+    "link": "https://www.linkedin.com/jobs/view/product-manager-at-meta-4199414033?position=3&pageNum=0&refId=S0Bicfobjq2uPrWnY8gxmA%3D%3D&trackingId=XcdPgAEyzoAy3FtSqxsXkg%3D%3D",
+    "description": "Description hidden (Login Wall)",
+    "skills": {
+      "Digital": 5,
+      "Quant": 4,
+      "Strategy": 5,
+      "Management": 4,
+      "Communication": 5,
+      "Regulation": 3
+    },
+    "date": "2026-01-02"
   }
 ]
