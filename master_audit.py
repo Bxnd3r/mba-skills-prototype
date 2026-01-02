@@ -12,7 +12,7 @@ if api_key:
     genai.configure(api_key=api_key)
 
 # FIX 1: Updated Model Name (gemini-pro is deprecated)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 def parse_text_dump(text):
     """
@@ -127,6 +127,7 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
 
 
