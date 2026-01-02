@@ -2,73 +2,133 @@
   {
     "course": "Accounting and the Blockchain",
     "skills": {
-      "Digital": 5,
-      "Quant": 4,
-      "Strategy": 4,
-      "Management": 4,
-      "Communication": 1,
-      "Regulation": 5
-    },
-    "text": "This course will cover the many dimensions of the accounting industry that will be impacted by the blockchain technology. We will begin with the history of the existing financial reporting framework, exploring why and how it is open to disruption and improvement from the blockchain. We will then spe"
+      "Decision_Making": 0,
+      "Human_Capital": 0,
+      "Strategy_Innovation": 1,
+      "Task_Environment": 1,
+      "Admin_Control": 1,
+      "Logistics_Tech": 1
+    }
   },
   {
     "course": "Accounting for Sustainability",
     "skills": {
-      "Digital": 1,
-      "Quant": 4,
-      "Strategy": 5,
-      "Management": 4,
-      "Communication": 3,
-      "Regulation": 3
-    },
-    "text": "The main objective of the course is to equip you with the knowledge of how to measure, evaluate and disclose Environmental, Social and Governance (ESG) performance. The course will emphasize on the interplay between strategy, organizational architecture and company performance. We will examine how f"
+      "Decision_Making": 3,
+      "Human_Capital": 3,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 3,
+      "Admin_Control": 3,
+      "Logistics_Tech": 0
+    }
   },
   {
     "course": "Accounting-Based Valuation",
     "skills": {
-      "Digital": 1,
-      "Quant": 5,
-      "Strategy": 4,
-      "Management": 1,
-      "Communication": 2,
-      "Regulation": 1
-    },
-    "text": "This course integrates financial statement analysis, corporate finance, and equity valuation to clarify how accounting information and financial metrics are reflected in stock prices and investment decisions. It provides a structured framework for inferring future company performance from today's st"
+      "Decision_Making": 3,
+      "Human_Capital": 0,
+      "Strategy_Innovation": 0,
+      "Task_Environment": 0,
+      "Admin_Control": 3,
+      "Logistics_Tech": 0
+    }
   },
   {
     "course": "Activist Investing",
     "skills": {
-      "Digital": 1,
-      "Quant": 2,
-      "Strategy": 5,
-      "Management": 4,
-      "Communication": 4,
-      "Regulation": 2
-    },
-    "text": "This course will explore the world of activist investing. The first half will explore significant historical cases and the second half will have you working on live campaigns, each of which contains a unique set of circumstances and lessons to be learned. We will look through the lens of the investo"
+      "Decision_Making": 5,
+      "Human_Capital": 5,
+      "Strategy_Innovation": 5,
+      "Task_Environment": 3,
+      "Admin_Control": 5,
+      "Logistics_Tech": 0
+    }
   },
   {
     "course": "Advanced Corporate Strategy",
     "skills": {
-      "Digital": 1,
-      "Quant": 3,
-      "Strategy": 5,
-      "Management": 4,
-      "Communication": 3,
-      "Regulation": 2
-    },
-    "text": "This course will tackle advanced corporate strategy, and in particular the execution of corporation strategy (e.g., negotiating prices in acquisitions, integration, etc.). This course will pick up where Strategy 2 leaves off and prepare students for the complex task of actually implementing corporat"
+      "Decision_Making": 3,
+      "Human_Capital": 3,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 0,
+      "Admin_Control": 3,
+      "Logistics_Tech": 0
+    }
   },
   {
     "course": "Advanced Managerial Accounting",
     "skills": {
-      "Digital": 1,
-      "Quant": 5,
-      "Strategy": 5,
-      "Management": 5,
-      "Communication": 1,
-      "Regulation": 1
-    },
-    "text": "This course complements courses addressing operational management, marketing and strategy. Cost management plays a key-supporting role in the creation of more value to the consumer of a firm's products and services, thus enhancing its competitiveness. Any organization can benefit from cost managemen"
+      "Decision_Making": 3,
+      "Human_Capital": 0,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 3,
+      "Admin_Control": 3,
+      "Logistics_Tech": 3
+    }
+  },
+  {
+    "course": "Advanced Strategy",
+    "skills": {
+      "Decision_Making": 3,
+      "Human_Capital": 0,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 3,
+      "Admin_Control": 3,
+      "Logistics_Tech": 3
+    }
+  },
+  {
+    "course": "Advanced Strategy Analysis",
+    "skills": {
+      "Decision_Making": 5,
+      "Human_Capital": 0,
+      "Strategy_Innovation": 5,
+      "Task_Environment": 5,
+      "Admin_Control": 5,
+      "Logistics_Tech": 5
+    }
+  },
+  {
+    "course": "Advanced Strategy: Applications",
+    "skills": {
+      "Decision_Making": 0,
+      "Human_Capital": 3,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 0,
+      "Admin_Control": 0,
+      "Logistics_Tech": 0
+    }
+  },
+  {
+    "course": "Advanced Strategy: Tools",
+    "skills": {
+      "Decision_Making": 1,
+      "Human_Capital": 3,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 3,
+      "Admin_Control": 3,
+      "Logistics_Tech": 3
+    }
+  },
+  {
+    "course": "Advanced Topics in Management Communication",
+    "skills": {
+      "Decision_Making": 0,
+      "Human_Capital": 3,
+      "Strategy_Innovation": 0,
+      "Task_Environment": 0,
+      "Admin_Control": 0,
+      "Logistics_Tech": 0
+    }
+  },
+  {
+    "course": "Advanced Topics in Negotiation",
+    "skills": {
+      "Decision_Making": 0,
+      "Human_Capital": 3,
+      "Strategy_Innovation": 3,
+      "Task_Environment": 3,
+      "Admin_Control": 0,
+      "Logistics_Tech": 0
+    }
   }
 ]
