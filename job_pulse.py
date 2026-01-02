@@ -10,91 +10,89 @@ from playwright.async_api import async_playwright
 # --- CONFIG ---
 api_key = os.environ.get("GOOGLE_API_KEY") 
 if api_key: genai.configure(api_key=api_key)
-
-# Using the high-tier model you confirmed you have access to
 model = genai.GenerativeModel('gemini-2.5-flash')
 
-# Terms optimized for Indeed (URL friendly)
 SEARCH_TERMS = ["MBA Intern", "Product Manager"] 
 LOCATION = "Chicago, IL" 
 SLEEP_MIN = 4
 SLEEP_MAX = 10
 
 async def run_pulse():
-    print(f"🚀 Starting INDEED Job Pulse at {datetime.now()}...")
+    print(f"🚀 Starting INDEED (Stealth Mode) at {datetime.now()}...")
     
     jobs = []
     
     async with async_playwright() as p:
-        # Launch browser with stealth arguments
-        browser = await p.chromium.launch(headless=True)
-        context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            viewport={"width": 1280, "height": 720},
-            locale="en-US"
+        # --- THE STEALTH FIX ---
+        # We add arguments to hide the "Automation" flag
+        browser = await p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-setuid-sandbox"
+            ]
         )
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            viewport={"width": 1920, "height": 1080}
+        )
+        
+        # Extra script to delete the "I am a robot" property from the browser
+        await context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        
         page = await context.new_page()
         
         for term in SEARCH_TERMS:
             try:
-                # 1. Construct Indeed URL
-                # q = query, l = location
                 url = f"https://www.indeed.com/jobs?q={term}&l={LOCATION}"
-                print(f"🔎 Searching Indeed for: '{term}'...")
+                print(f"🔎 Searching: '{term}'...")
                 
                 await page.goto(url, wait_until="domcontentloaded")
-                # Indeed sometimes does a "Verify you are human" check.
-                # We wait a bit to let any redirects happen.
                 await asyncio.sleep(8) 
 
-                # 2. Find Job Cards (Indeed uses 'job_seen_beacon' or 'resultContent')
-                # We look for the main card container
+                # Debug: Print page title to see if we were blocked
+                title = await page.title()
+                print(f"   (Page Title: {title})")
+
+                # Try finding cards
                 cards = await page.locator(".job_seen_beacon, .resultContent").all()
-                print(f"   Found {len(cards)} cards. Scraping top 3...")
+                print(f"   Found {len(cards)} cards...")
 
                 for i, card in enumerate(cards[:3]): 
                     try:
-                        # 3. Extract Details
-                        # Title is usually inside a span with id starting with 'jobTitle' or class 'jcs-JobTitle'
                         title_el = card.locator("h2.jobTitle span, .jcs-JobTitle")
-                        
-                        if await title_el.count() == 0: 
-                            print(f"   ⚠️ Skipping card {i}: No title found.")
-                            continue
+                        if await title_el.count() == 0: continue
                         
                         title = await title_el.first.text_content()
                         
-                        # Indeed links are often complex; we try to grab the anchor tag parent
+                        # Snippet logic
+                        snippet_el = card.locator(".job-snippet, .underShelfFooter")
+                        if await snippet_el.count() > 0:
+                            desc = await snippet_el.first.text_content()
+                            desc = desc.strip().replace("\n", " ")
+                        else:
+                            desc = "No preview available."
+
+                        # Link logic
                         link_el = card.locator("a.jcs-JobTitle, a.jobtitle")
                         if await link_el.count() > 0:
                             raw_link = await link_el.first.get_attribute("href")
                             link = f"https://www.indeed.com{raw_link}" if raw_link.startswith("/") else raw_link
                         else:
-                            link = url # Fallback to search page if link fails
+                            link = url
 
-                        # 4. THE SNIPPET HACK (Indeed's version)
-                        # Indeed puts the summary in '.css-...' classes or '.job-snippet'
-                        snippet_el = card.locator(".job-snippet, .underShelfFooter")
-                        if await snippet_el.count() > 0:
-                            raw_text = await snippet_el.first.text_content()
-                            description = raw_text.strip().replace("\n", " ")
-                        else:
-                            description = "No description preview available."
+                        print(f"   👉 [{i+1}] Scraped: {title.strip()[:30]}...")
 
-                        print(f"   👉 [{i+1}] Scraped: {title.strip()[:30]}... | Snippet: {description[:30]}...")
-                        
-                        # 5. AUDIT WITH AI
-                        skills = audit_job(title, description)
-
+                        skills = audit_job(title, desc)
                         jobs.append({
                             "source": "Indeed",
                             "title": title.strip(),
                             "link": link,
-                            "description": description, 
+                            "description": desc, 
                             "skills": skills,
                             "date": datetime.now().strftime("%Y-%m-%d")
                         })
-                        
                         time.sleep(random.randint(SLEEP_MIN, SLEEP_MAX))
 
                     except Exception as e:
@@ -109,7 +107,6 @@ async def run_pulse():
 
 def audit_job(title, desc):
     try:
-        # Prompt explicitly asking for a flat structure
         prompt = f"""
         Role: {title}
         Snippet: {desc}
@@ -119,11 +116,8 @@ def audit_job(title, desc):
         res = model.generate_content(prompt)
         clean = res.text.strip().replace("```json","").replace("```","")
         data = json.loads(clean)
-        
-        # Flatten if nested
         if data and isinstance(list(data.values())[0], dict):
             data = list(data.values())[0]
-            
         return data
     except:
         return {"Digital":1, "Quant":1, "Strategy":1, "Management":1, "Communication":1, "Regulation":1}
@@ -138,12 +132,10 @@ def save_data(new_jobs):
     
     if new_jobs:
         data.extend(new_jobs)
-        print(f"💾 Saving {len(new_jobs)} new jobs from Indeed...")
+        print(f"💾 Saving {len(new_jobs)} new jobs...")
     
     with open(filename, "w") as f:
         json.dump(data, f, indent=2)
 
 if __name__ == "__main__":
     asyncio.run(run_pulse())
-
-
