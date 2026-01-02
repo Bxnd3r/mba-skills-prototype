@@ -12,7 +12,7 @@ if api_key:
     genai.configure(api_key=api_key)
 
 # Use the 2.5 model (or 1.5-flash if 2.5 hits limits)
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 def parse_text_dump(text):
     """
@@ -130,5 +130,6 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
 
