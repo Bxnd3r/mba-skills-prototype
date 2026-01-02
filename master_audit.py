@@ -11,28 +11,24 @@ api_key = os.environ.get("GOOGLE_API_KEY")
 if api_key: 
     genai.configure(api_key=api_key)
 
-# Using the powerful 2.5 model
+# Use the 2.5 model (or 1.5-flash if 2.5 hits limits)
 model = genai.GenerativeModel('gemini-2.5-flash')
 
 def parse_text_dump(text):
     """
-    Smart Parser V4:
-    Handles Tabs (\t) AND Spaces.
+    Smart Parser V4: Handles Tabs/Spaces or Course Codes.
     """
     parsed = []
     lines = text.split('\n')
     
-    # --- CHECK 1: VISUAL GAP (Tabs or 2+ Spaces) ---
+    # 1. Visual Gap Check
     gap_lines = [line for line in lines if re.search(r'(\t|\s{2,})', line.strip())]
-    
     if len(gap_lines) > 5:
-        print("DEBUG: Detected Visual Gap format (Tabs or Spaces).")
+        print("DEBUG: Detected Visual Gap format.")
         for line in lines:
             line = line.strip()
             if not line: continue
-            
             parts = re.split(r'(\t|\s{2,})', line, maxsplit=1)
-            
             if len(parts) >= 3:
                 title = parts[0].strip()
                 desc = parts[2].strip()
@@ -40,11 +36,10 @@ def parse_text_dump(text):
                     parsed.append({"course": title, "text": desc})
         return parsed
 
-    # --- CHECK 2: CODE PATTERN (Fallback) ---
-    print("DEBUG: No gaps found. Checking for Course Codes.")
+    # 2. Code Pattern Check (Fallback)
+    print("DEBUG: Checking for Course Codes.")
     code_pattern = re.compile(r"([A-Z]{2,4}[-\s\.][A-Z]{0,2}\d{3,4}.+)")
     matches = code_pattern.split(text)
-    
     if len(matches) > 5:
         print("DEBUG: Detected Course Codes format.")
         for i in range(1, len(matches), 2):
@@ -54,11 +49,6 @@ def parse_text_dump(text):
                 parsed.append({"course": title, "text": desc})
         return parsed
 
-    print("❌ Error: Could not determine file format.")
-    return []
-
-async def scrape_browser(url):
-    print(f"🌍 Starting browser scrape for {url}...")
     return []
 
 async def main():
@@ -69,7 +59,6 @@ async def main():
     args = parser.parse_args()
 
     results = []
-    
     if args.mode == "text":
         if os.path.exists("pending_audit.txt"):
             with open("pending_audit.txt", "r", encoding="utf-8") as f:
@@ -77,56 +66,67 @@ async def main():
             results = parse_text_dump(data)
             with open("pending_audit.txt", "w") as f: f.write("")
         else:
-            print("❌ Error: pending_audit.txt is empty or missing.")
+            print("❌ Error: pending_audit.txt is empty.")
             return
-    else:
-        results = await scrape_browser(args.input)
 
     if not results:
-        print("❌ No courses found. (Check file format)")
+        print("❌ No courses found.")
         return
 
-    # --- GEMINI AUDIT ---
-    print(f"🧠 Auditing {len(results)} courses...")
-    print("⏳ Slowing down to 4 requests/min to respect Free Tier limits...")
+    print(f"🧠 Auditing {len(results)} courses using Rubin & Dierdorff Framework...")
+    print("⏳ Pacing requests for API safety...")
     
     audited = []
     
-    # LIMIT to 30 courses max per run to avoid timeout/quota issues
-    for item in results[:30]:
+    # Audit loop
+    for item in results[:40]: # Safety limit
         try:
-            prompt = f"Analyze course: {item['course']}\nText: {item['text'][:1500]}\nScore 1-5 on Digital, Quant, Strategy, Management, Communication, Regulation. Return ONLY JSON."
-            res = model.generate_content(prompt)
+            # --- THE NEW PROMPT ---
+            prompt = f"""
+            Role: Expert MBA Curriculum Auditor using the Rubin & Dierdorff Competency Model.
             
-            clean = res.text.strip()
-            if clean.startswith("```json"): clean = clean[7:]
-            if clean.startswith("```"): clean = clean[3:]
-            if clean.endswith("```"): clean = clean[:-3]
-                
+            Task: Score the following course based on its DESCRIPTION.
+            Course: {item['course']}
+            Description: {item['text'][:1500]}
+            
+            Scoring Framework (Depth of Learning):
+            0 = Not covered / Irrelevant.
+            1 = Theory (Lectures, readings, exams).
+            3 = Practice (Case studies, simulations, hypothetical exercises).
+            5 = Application (Real-world client projects, fieldwork, creating actual products/companies).
+            
+            Categories (Based on Rubin & Dierdorff):
+            1. Decision_Making: (Stats, Quant, Analytics, Decision Models).
+            2. Human_Capital: (OB, Leadership, Negotiation, HR, Teamwork).
+            3. Strategy_Innovation: (Corporate Strategy, Competitive Analysis, Entrepreneurship).
+            4. Task_Environment: (Marketing, Economics, Global Biz, Policy).
+            5. Admin_Control: (Accounting, Finance, Business Law, Compliance).
+            6. Logistics_Tech: (Ops Management, Supply Chain, MIS, Tech).
+
+            Return ONLY a flat JSON object:
+            {{"Decision_Making": X, "Human_Capital": X, "Strategy_Innovation": X, "Task_Environment": X, "Admin_Control": X, "Logistics_Tech": X}}
+            """
+            
+            res = model.generate_content(prompt)
+            clean = res.text.strip().replace("```json","").replace("```","")
             skills = json.loads(clean)
-            audited.append({"course": item['course'], "skills": skills, "text": item['text'][:300]})
+            
+            audited.append({"course": item['course'], "skills": skills})
             print(f"   OK: {item['course'][:30]}...")
             
-            # --- CRITICAL FIX: SAFETY SLEEP ---
-            # 15 seconds sleep = 4 requests per minute (Limit is 5)
-            time.sleep(15) 
+            time.sleep(15) # Maintain safety buffer for 2.5-flash
             
         except Exception as e:
-            print(f"   FAIL: {item['course'][:30]}... Error: {e}")
-            # If we hit a rate limit error, wait even longer
-            if "429" in str(e) or "quota" in str(e).lower():
-                print("   ⚠️ Quota hit. Cooling down for 60 seconds...")
-                time.sleep(60)
+            print(f"   FAIL: {item['course'][:30]}... {e}")
+            time.sleep(10)
             continue
 
-    school_id = args.name.lower().replace(" ", "_")
-    filename = f"{school_id}_audit.json"
-    
+    filename = f"{args.name.lower().replace(' ', '_')}_audit.json"
     if audited:
         with open(filename, "w") as f: json.dump(audited, f, indent=2)
         print(f"✅ Created {filename}")
     else:
-        print("❌ Audit finished but produced 0 results.")
+        print("❌ Audit finished with 0 results.")
 
 if __name__ == "__main__":
     asyncio.run(main())
