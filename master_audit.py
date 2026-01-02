@@ -114,7 +114,7 @@ async def main():
             audited.append({"course": item['course'], "skills": skills})
             print(f"   OK: {item['course'][:30]}...")
             
-            time.sleep(15) # Maintain safety buffer for 2.5-flash
+            time.sleep(5) # Maintain safety buffer for 2.5-flash
             
         except Exception as e:
             print(f"   FAIL: {item['course'][:30]}... {e}")
@@ -130,4 +130,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
