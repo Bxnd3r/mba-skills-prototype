@@ -124,7 +124,7 @@ async def fetch_course_data(url):
             tasks = []
             
             # Limit to 80 courses to prevent timeouts, but do them in parallel
-            for link_url in valid_urls[:80]:
+            for link_url in valid_urls[:500]:
                 tasks.append(scrape_single_course(context, link_url, sem))
             
             # Run all tasks concurrently
@@ -187,3 +187,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
