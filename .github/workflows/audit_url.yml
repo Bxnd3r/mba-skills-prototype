@@ -23,33 +23,29 @@ jobs:
           python-version: '3.10'
           
       - name: Install Scraper Tools
-        # We only need Playwright now. No AI.
         run: |
           pip install playwright
           playwright install chromium
 
       - name: Run Collector
-        # Runs the new school_collector.py in URL mode
+        # Runs the school_collector.py in URL mode
         run: python -u school_collector.py --mode url --input "${{ inputs.school_url }}" --name "${{ inputs.school_name }}"
+
+      - name: Update Registry
+        # Rebuilds registry.json to include the new school
+        run: python update_registry.py
 
       - name: Save to Repo
         run: |
           git config --global user.name "URL Collector Bot"
           git config --global user.email "bot@github.com"
           
-      - name: Update Registry
-        run: python update_registry.py
-
-      - name: Save
-        run: |
-          git add registry.json *_audit.json
-          git commit -m "Updated registry"
-          ...
-          # Pull latest changes to avoid conflicts
+          # Pull latest to avoid conflicts
           git pull --rebase origin main
           
-          # Add the new data folder
-          git add raw_school_data/*.json
+          # Add the new data folder AND the updated registry
+          git add raw_school_data/*.json registry.json
           
-          git commit -m "Collected URL: ${{ inputs.school_name }}" || echo "No changes"
+          # Commit safely
+          git commit -m "Collected URL: ${{ inputs.school_name }}" || echo "No changes to commit"
           git push origin main
