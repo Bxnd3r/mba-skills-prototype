@@ -5,7 +5,7 @@ import re
 import argparse
 from datetime import datetime
 
-# --- NOTE: This function is now only a fallback for Text Mode ---
+# --- NOTE: This function is only a fallback for Text Mode ---
 def parse_raw_text(text):
     parsed = []
     lines = text.split('\n')
@@ -25,12 +25,10 @@ def parse_raw_text(text):
 
 async def fetch_course_data(url):
     """
-    The "Iterator" Scraper:
-    1. Finds the rows.
-    2. Clicks 'View Description' for a row.
-    3. Scrapes that specific row immediately.
-    4. Moves to the next.
-    Returns: A structured LIST of dicts (bypassing regex parsing).
+    The "Tab Iterator" Scraper:
+    1. Loads the main list.
+    2. Harvests all Course Title Links.
+    3. Opens each link in a NEW TAB, scrapes text, and closes it.
     """
     from playwright.async_api import async_playwright
     
@@ -38,70 +36,96 @@ async def fetch_course_data(url):
     courses_found = []
     
     async with async_playwright() as p:
+        # Launch browser
         browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
+        # Create a "Context" (like a browser session) so cookies/login states are shared
+        context = await browser.new_context()
+        page = await context.new_page()
         
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             await asyncio.sleep(4) 
 
-            # 1. HANDLE SEARCH
+            # 1. HANDLE SEARCH (Kellogg/Booth often need this)
             search_btns = page.locator("button:has-text('Search'), input[type='submit']")
             if await search_btns.count() > 0:
-                print("   🖱️ Clicking Search...")
+                print("   🖱️ Clicking Search to load list...")
                 await search_btns.first.click()
-                await page.wait_for_timeout(5000) # Wait for table
+                await page.wait_for_timeout(5000) 
 
-            # 2. IDENTIFY ROWS via "View Description" buttons
-            # Each button lives inside a course row. We use the button as our anchor.
-            expanders = page.locator("text=View Description")
-            count = await expanders.count()
+            # 2. HARVEST LINKS
+            # We look for links inside the table. 
+            # Strategy: Find all <a> tags that are inside a table row (tr) or list item (li)
+            print("   👀 Harvesting course links...")
             
-            if count == 0:
-                print("   ⚠️ No 'View Description' buttons found. Trying generic 'tr' rows...")
-                # Fallback logic could go here, but for Kellogg this is key.
+            # This selector looks for links inside table cells (td a) OR list items (li a)
+            # We filter out generic links like "View Description" or "Add to Cart"
+            potential_links = await page.locator("tr td a, .course-list a, .result-item h3 a").all()
             
-            print(f"   found {count} courses. Scraping row-by-row (this ensures accuracy)...")
-            
-            # 3. ITERATE ROW-BY-ROW
-            # We limit to 60 for testing speed, but you can increase this.
-            for i in range(min(count, 80)): 
+            valid_urls = []
+            for link in potential_links:
                 try:
-                    button = expanders.nth(i)
+                    href = await link.get_attribute("href")
+                    text = await link.inner_text()
                     
-                    # A. CLICK
-                    if await button.is_visible():
-                        await button.click(force=True)
-                        await asyncio.sleep(0.5) # Wait for animation
+                    # Filter: Must be a real link, not a javascript:void(0)
+                    if href and len(href) > 5 and "javascript" not in href:
+                        # Filter: Text should look like a course code (e.g., "ACCT", "MKTG") or Title
+                        if len(text) > 3 and "View Description" not in text:
+                            
+                            # Fix Relative URLs
+                            if not href.startswith("http"):
+                                base = "/".join(url.split("/")[:3]) # https://site.com
+                                if href.startswith("/"):
+                                    href = base + href
+                                else:
+                                    # Fallback for complex relative paths
+                                    current_path = "/".join(url.split("/")[:-1])
+                                    href = current_path + "/" + href
+                            
+                            valid_urls.append(href)
+                except: pass
+            
+            # Deduplicate
+            valid_urls = list(set(valid_urls))
+            print(f"   ✅ Found {len(valid_urls)} unique course links.")
+            
+            if len(valid_urls) == 0:
+                print("   ⚠️ No links found. The site might be using JavaScript buttons instead of <a> tags.")
+                await browser.close()
+                return []
+
+            # 3. VISIT LOOP (Open New Tabs)
+            # Limit to 60 for safety/speed, you can increase this.
+            for i, link_url in enumerate(valid_urls[:60]):
+                try:
+                    # Open new page in same context
+                    new_page = await context.new_page()
+                    await new_page.goto(link_url, wait_until="domcontentloaded", timeout=15000)
                     
-                    # B. IDENTIFY PARENT CONTAINER
-                    # We go up 3-4 levels to find the 'tr' or main 'div' that holds both title and description
-                    # This uses XPath '..' to go up to parent
-                    row_handle = await button.locator("xpath=../../..").element_handle()
+                    # Scrape
+                    full_text = await new_page.inner_text("body")
                     
-                    # C. SCRAPE TEXT FROM THIS CONTAINER ONLY
-                    row_text = await row_handle.inner_text()
+                    # Clean up the text to find the description
+                    # We assume the whole page text is useful, but we try to find the "Title"
+                    title = await new_page.title()
                     
-                    # D. CLEANUP
-                    # Row text usually looks like: "ACCT 101 \n Intro to Accounting \n View Description \n This course covers..."
-                    lines = [line.strip() for line in row_text.split('\n') if line.strip()]
+                    # Save
+                    courses_found.append({
+                        "course": title.strip(),
+                        "description": full_text[:2000] # Save first 2000 chars (usually contains description)
+                    })
                     
-                    # Heuristic: 
-                    # Title is usually line 0 or 1.
-                    # Description is the longest line in the block.
-                    title = lines[0] + " " + lines[1] if len(lines) > 1 else lines[0]
-                    description = max(lines, key=len) # The longest chunk is likely the description
+                    print(f"      📄 [{i+1}] Scraped: {title[:30]}...")
                     
-                    if len(description) > 40 and "View Description" not in description:
-                        courses_found.append({
-                            "course": title[:50], # Keep title short
-                            "description": description
-                        })
-                        print(f"      ✅ [{i+1}] Scraped: {title[:20]}...")
+                    await new_page.close()
+                    # Sleep to be polite to the server
+                    await asyncio.sleep(0.5)
                     
                 except Exception as e:
-                    # print(f"Error on row {i}: {e}")
-                    pass
+                    print(f"      ❌ Error on link {i}: {e}")
+                    try: await new_page.close()
+                    except: pass
 
             await browser.close()
             return courses_found
@@ -120,21 +144,17 @@ async def main():
 
     final_courses = []
     
-    # --- URL MODE (Smart Iterator) ---
     if args.mode == "url":
         if not args.input:
             print("❌ Error: --input URL is required.")
             return
-        # This now returns a LIST, not text
         final_courses = await fetch_course_data(args.input)
 
-    # --- TEXT MODE (Legacy Fallback) ---
     elif args.mode == "text":
         if os.path.exists("pending_audit.txt"):
             with open("pending_audit.txt", "r", encoding="utf-8") as f:
                 raw_text = f.read()
             with open("pending_audit.txt", "w") as f: f.write("")
-            print(f"   Processing manual text...")
             final_courses = parse_raw_text(raw_text)
         else:
             print("❌ Error: pending_audit.txt is missing.")
@@ -144,7 +164,6 @@ async def main():
         print("❌ No courses captured.")
         return
 
-    # SAVE
     os.makedirs("raw_school_data", exist_ok=True)
     safe_name = args.name.lower().replace(' ', '_')
     filename = f"raw_school_data/{safe_name}_curriculum.json"
