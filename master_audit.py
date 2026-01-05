@@ -4,19 +4,25 @@ import os
 import re
 import time
 import argparse
-import google.generativeai as genai
+from openai import OpenAI
 
 # --- SETUP ---
-api_key = os.environ.get("GOOGLE_API_KEY")
-if api_key: 
-    genai.configure(api_key=api_key)
+# We now look for the OpenAI Key
+api_key = os.environ.get("OPENAI_API_KEY")
+client = None
 
-# Use the 2.5 model (or 1.5-flash if 2.5 hits limits)
-model = genai.GenerativeModel('gemini-2.5-flash')
+if api_key: 
+    client = OpenAI(api_key=api_key)
+else:
+    print("⚠️ WARNING: No OPENAI_API_KEY found. AI features will fail.")
+
+# The "Fast & Cheap" Model
+MODEL_NAME = "gpt-4o-mini"
 
 def parse_text_dump(text):
     """
     Smart Parser V4: Handles Tabs/Spaces or Course Codes.
+    (This logic remains unchanged from your original script)
     """
     parsed = []
     lines = text.split('\n')
@@ -51,6 +57,52 @@ def parse_text_dump(text):
 
     return []
 
+def audit_course_openai(course_title, course_desc):
+    """
+    Sends the course to GPT-4o-Mini for scoring.
+    """
+    if not client:
+        return None
+
+    prompt = f"""
+    Task: Score this MBA course using the Rubin & Dierdorff Competency Model.
+    
+    Course: {course_title}
+    Description: {course_desc}
+    
+    Scoring Scale (Depth of Learning):
+    0 = Irrelevant / Not covered.
+    1 = Theory (Lectures, readings, exams).
+    3 = Practice (Case studies, simulations).
+    5 = Application (Real-world projects, consulting, creation).
+    
+    Categories:
+    1. Decision_Making (Data, Analytics, Strategy)
+    2. Human_Capital (HR, Leadership, Teams)
+    3. Strategy_Innovation (Entrepreneurship, Comp Advantage)
+    4. Task_Environment (Marketing, Economics, Policy)
+    5. Admin_Control (Accounting, Finance, Law)
+    6. Logistics_Tech (Ops, Supply Chain, IT)
+
+    Return JSON ONLY: {{"Decision_Making": 1, "Human_Capital": 0, ...}}
+    """
+
+    try:
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": "You are a curriculum auditor. You output valid JSON only."},
+                {"role": "user", "content": prompt}
+            ],
+            response_format={"type": "json_object"}, # Forces clean JSON
+            temperature=0.2
+        )
+        content = response.choices[0].message.content
+        return json.loads(content)
+    except Exception as e:
+        print(f"    ⚠️ OpenAI Error: {e}")
+        return None
+
 async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["url", "text"], required=True)
@@ -59,68 +111,43 @@ async def main():
     args = parser.parse_args()
 
     results = []
+    
+    # Text Mode Logic
     if args.mode == "text":
         if os.path.exists("pending_audit.txt"):
             with open("pending_audit.txt", "r", encoding="utf-8") as f:
                 data = f.read()
             results = parse_text_dump(data)
+            # Clear file after reading
             with open("pending_audit.txt", "w") as f: f.write("")
         else:
             print("❌ Error: pending_audit.txt is empty.")
             return
 
     if not results:
-        print("❌ No courses found.")
+        print("❌ No courses found to audit.")
         return
 
-    print(f"🧠 Auditing {len(results)} courses using Rubin & Dierdorff Framework...")
-    print("⏳ Pacing requests for API safety...")
+    print(f"🧠 Auditing {len(results)} courses using OpenAI ({MODEL_NAME})...")
     
     audited = []
     
     # Audit loop
-    for item in results[:40]: # Safety limit
-        try:
-            # --- THE NEW PROMPT ---
-            prompt = f"""
-            Role: Expert MBA Curriculum Auditor using the Rubin & Dierdorff Competency Model.
-            
-            Task: Score the following course based on its DESCRIPTION.
-            Course: {item['course']}
-            Description: {item['text'][:1500]}
-            
-            Scoring Framework (Depth of Learning):
-            0 = Not covered / Irrelevant.
-            1 = Theory (Lectures, readings, exams).
-            3 = Practice (Case studies, simulations, hypothetical exercises).
-            5 = Application (Real-world client projects, fieldwork, creating actual products/companies).
-            
-            Categories (Based on Rubin & Dierdorff):
-            1. Decision_Making: (Stats, Quant, Analytics, Decision Models).
-            2. Human_Capital: (OB, Leadership, Negotiation, HR, Teamwork).
-            3. Strategy_Innovation: (Corporate Strategy, Competitive Analysis, Entrepreneurship).
-            4. Task_Environment: (Marketing, Economics, Global Biz, Policy).
-            5. Admin_Control: (Accounting, Finance, Business Law, Compliance).
-            6. Logistics_Tech: (Ops Management, Supply Chain, MIS, Tech).
-
-            Return ONLY a flat JSON object:
-            {{"Decision_Making": X, "Human_Capital": X, "Strategy_Innovation": X, "Task_Environment": X, "Admin_Control": X, "Logistics_Tech": X}}
-            """
-            
-            res = model.generate_content(prompt)
-            clean = res.text.strip().replace("```json","").replace("```","")
-            skills = json.loads(clean)
-            
+    for i, item in enumerate(results[:50]): # Safety limit raised to 50
+        print(f"   Processing [{i+1}/{len(results)}]: {item['course'][:30]}...")
+        
+        skills = audit_course_openai(item['course'], item['text'][:1500])
+        
+        if skills:
             audited.append({"course": item['course'], "skills": skills})
-            print(f"   OK: {item['course'][:30]}...")
-            
-            time.sleep(5) # Maintain safety buffer for 2.5-flash
-            
-        except Exception as e:
-            print(f"   FAIL: {item['course'][:30]}... {e}")
-            time.sleep(10)
-            continue
+            print(f"     ✅ Scored.")
+        else:
+            print(f"     ❌ Failed.")
 
+        # OpenAI is faster, 1 second sleep is usually enough
+        time.sleep(1)
+
+    # Save Results
     filename = f"{args.name.lower().replace(' ', '_')}_audit.json"
     if audited:
         with open(filename, "w") as f: json.dump(audited, f, indent=2)
@@ -130,7 +157,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-
-
