@@ -53,7 +53,7 @@
     <div class="container">
         <div class="search-area">
             <div class="search-box">
-                <input type="text" id="schoolSearch" placeholder="Search for a school" oninput="showResults()">
+                <input type="text" id="schoolSearch" placeholder="Loading schools..." disabled oninput="showResults()">
                 <div id="resultsList" class="results-list"></div>
             </div>
             <div id="schoolTags" class="school-tags"></div>
@@ -72,63 +72,95 @@
             
             <div class="info-panel">
                 <h4>Skill Pillars Explained</h4>
-                <div class="pillar-desc"><strong>Digital:</strong> AI literacy, data tools (SQL/Python), and tech operations.</div>
-                <div class="pillar-desc"><strong>Quant:</strong> Financial modeling, risk, and analytical rigor.</div>
-                <div class="pillar-desc"><strong>Strategy:</strong> Strategic planning and competitive decision-making.</div>
-                <div class="pillar-desc"><strong>Management:</strong> Human capital and resource allocation.</div>
-                <div class="pillar-desc"><strong>Communication:</strong> Stakeholder presence and persuasion.</div>
-                <div class="pillar-desc"><strong>Regulation:</strong> Ethical compliance and legal standards.</div>
+                <div class="pillar-desc"><strong>Decision_Making:</strong> Analytics, Stats, Data Models.</div>
+                <div class="pillar-desc"><strong>Human_Capital:</strong> Leadership, HR, Team Dynamics.</div>
+                <div class="pillar-desc"><strong>Strategy_Innovation:</strong> Corp Strategy, Entrepreneurship.</div>
+                <div class="pillar-desc"><strong>Task_Environment:</strong> Marketing, Econ, Policy.</div>
+                <div class="pillar-desc"><strong>Admin_Control:</strong> Finance, Accounting, Law.</div>
+                <div class="pillar-desc"><strong>Logistics_Tech:</strong> Ops, Supply Chain, IT.</div>
                 <p style="font-size:11px; color:#888; border-top:1px solid #eee; padding-top:10px;">
-                    Baseline based on Boshkoska (2025) market significance analysis of 6,400 job postings.
+                    Baseline based on Boshkoska (2025) market significance analysis.
                 </p>
             </div>
         </div>
 
         <div class="inventory-section">
             <h3 id="inventoryTitle">Course Evidence & Audit Inventory</h3>
-            <div id="courseList">Add a school to view audit evidence...</div>
+            <div id="courseList" style="color:#666; font-style:italic;">Add a school to view audit evidence...</div>
         </div>
     </div>
 
     <script>
-        const labels = ['Digital', 'Quant', 'Strategy', 'Management', 'Communication', 'Regulation'];
+        // Rubin & Dierdorff Labels
+        const labels = ['Decision_Making', 'Human_Capital', 'Strategy_Innovation', 'Task_Environment', 'Admin_Control', 'Logistics_Tech'];
         
-        // Boshkoska Significance scores
+        // Example Baselines (You can update these with your real job scraping data later)
         const baselines = {
             national: [3.5, 4.8, 4.0, 5.0, 4.5, 4.2],
-            chicago: [4.2, 4.9, 4.5, 4.8, 4.7, 3.8] // Local Chicago Pulse (Example)
+            chicago: [4.2, 4.9, 4.5, 4.8, 4.7, 3.8]
         };
 
-        const schoolsDB = [
-            { id: 'stuart', name: "Illinois Institute of Technology: Stuart School of Business", audit: "output_IIT.json", color: 'rgba(54, 162, 235, 1)' },
-            { id: 'booth', name: "University of Chicago: Booth School of Business", data: [4.2, 5.0, 4.5, 3.8, 3.5, 3.2], color: 'rgba(255, 99, 132, 1)' },
-            { id: 'kellogg', name: "Northwestern University: Kellogg School of Management", data: [3.5, 3.8, 5.0, 4.8, 5.0, 2.5], color: 'rgba(75, 192, 192, 1)' }
-        ];
-
+        let schoolsDB = []; // Will be populated from registry.json
         let selectedSchools = [];
 
+        // Initialize Chart
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'radar',
             data: {
                 labels: labels,
                 datasets: [
-                    { label: 'Market Demand Baseline', data: baselines.national, backgroundColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.2)', borderDash: [5, 5], pointRadius: 5, pointHoverRadius: 8, fill: true }
+                    { 
+                        label: 'Market Demand Baseline', 
+                        data: baselines.national, 
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)', 
+                        borderColor: 'rgba(0, 0, 0, 0.2)', 
+                        borderDash: [5, 5], 
+                        pointRadius: 5, 
+                        fill: true 
+                    }
                 ]
             },
             options: { 
                 maintainAspectRatio: false, 
-                plugins: { legend: { display: false }, tooltip: { enabled: true } },
-                scales: { r: { suggestedMin: 0, suggestedMax: 5, ticks: { display: false }, pointLabels: { font: { size: 13, weight: 'bold' } } } } 
+                plugins: { legend: { display: false } },
+                scales: { 
+                    r: { 
+                        suggestedMin: 0, 
+                        suggestedMax: 5, 
+                        ticks: { display: false }, 
+                        pointLabels: { font: { size: 11, weight: 'bold' } } 
+                    } 
+                } 
             }
         });
+
+        // --- DYNAMIC LOADER ---
+        window.onload = async function() {
+            try {
+                // Fetch the master registry created by Python
+                const res = await fetch('registry.json');
+                schoolsDB = await res.json();
+                
+                // Enable Search
+                const searchInput = document.getElementById('schoolSearch');
+                searchInput.disabled = false;
+                searchInput.placeholder = "Search for a school...";
+                console.log("Loaded " + schoolsDB.length + " schools.");
+            } catch (e) {
+                console.error("Could not load registry.json. Run update_registry.py first.");
+                document.getElementById('schoolSearch').placeholder = "Error loading school data.";
+            }
+        };
 
         function showResults() {
             const query = document.getElementById('schoolSearch').value.toLowerCase();
             const list = document.getElementById('resultsList');
             list.innerHTML = "";
             if (!query) { list.style.display = "none"; return; }
+            
             const filtered = schoolsDB.filter(s => s.name.toLowerCase().includes(query) && !selectedSchools.find(sel => sel.id === s.id));
+            
             filtered.forEach(s => {
                 const div = document.createElement('div');
                 div.innerText = s.name;
@@ -139,51 +171,68 @@
         }
 
         async function selectSchool(school) {
-            if (selectedSchools.length >= 2) return;
-            selectedSchools.push(school);
-            document.getElementById('schoolSearch').value = "";
-            document.getElementById('resultsList').style.display = "none";
-            updateUI();
+            if (selectedSchools.length >= 3) return; // Limit to 3 for readability
             
-            let dataArr;
-            if (school.audit) {
-                const [auditRes, descRes] = await Promise.all([fetch(school.audit), fetch('iit_courses.json')]);
-                const auditData = await auditRes.json();
-                const descData = await descRes.json();
-                const totals = { "Digital": 0, "Quant": 0, "Strategy": 0, "Management": 0, "Communication": 0, "Regulation": 0 };
+            // Fetch the specific Audit File
+            try {
+                const res = await fetch(school.audit_file);
+                const auditData = await res.json();
+                
+                // Calculate Average Scores
+                const totals = { "Decision_Making": 0, "Human_Capital": 0, "Strategy_Innovation": 0, "Task_Environment": 0, "Admin_Control": 0, "Logistics_Tech": 0 };
+                
                 auditData.forEach(c => {
-                    labels.forEach(l => totals[l] += (c.skills[l] || c.skills["Strategic"] || 0));
+                    if(c.skills) {
+                        labels.forEach(l => totals[l] += (c.skills[l] || 0));
+                    }
                 });
-                dataArr = labels.map(l => (totals[l] / auditData.length).toFixed(1));
-                if (selectedSchools.indexOf(school) === 0) populateInventory(auditData, descData);
-            } else {
-                dataArr = school.data;
-            }
 
-            myChart.data.datasets.push({
-                id: school.id,
-                label: school.name,
-                data: dataArr,
-                backgroundColor: school.color.replace('1)', '0.2)'),
-                borderColor: school.color,
-                pointRadius: 5,
-                pointHoverRadius: 10,
-                fill: true
-            });
-            myChart.update();
+                const dataArr = labels.map(l => (totals[l] / auditData.length).toFixed(1));
+                
+                // Add to Chart
+                school.data = dataArr; // Store calculated data
+                selectedSchools.push(school);
+                
+                myChart.data.datasets.push({
+                    id: school.id,
+                    label: school.name,
+                    data: dataArr,
+                    backgroundColor: school.color.replace('1)', '0.2)'),
+                    borderColor: school.color,
+                    pointRadius: 5,
+                    fill: true
+                });
+                myChart.update();
+                
+                // Update UI
+                document.getElementById('schoolSearch').value = "";
+                document.getElementById('resultsList').style.display = "none";
+                updateTags();
+                
+                // Show Inventory for the MOST RECENTLY added school
+                populateInventory(school.name, auditData);
+
+            } catch (e) {
+                console.error("Error loading audit file: " + school.audit_file);
+                alert("Could not load data for " + school.name);
+            }
         }
 
         function removeSchool(schoolId) {
             selectedSchools = selectedSchools.filter(s => s.id !== schoolId);
             myChart.data.datasets = myChart.data.datasets.filter(ds => ds.id !== schoolId);
-            if (selectedSchools.length === 0) document.getElementById('courseList').innerHTML = "Add a school to view audit evidence...";
-            updateUI();
+            
+            updateTags();
             myChart.update();
+            
+            // Clear inventory if empty
+            if (selectedSchools.length === 0) {
+                document.getElementById('courseList').innerHTML = "Add a school to view audit evidence...";
+            }
         }
 
-        function updateUI() {
+        function updateTags() {
             const container = document.getElementById('schoolTags');
-            const search = document.getElementById('schoolSearch');
             container.innerHTML = "";
             selectedSchools.forEach(s => {
                 const tag = document.createElement('div');
@@ -191,33 +240,45 @@
                 tag.innerHTML = `<div class="color-box" style="background:${s.color}" onclick="removeSchool('${s.id}')"></div> ${s.name}`;
                 container.appendChild(tag);
             });
-            search.placeholder = selectedSchools.length === 0 ? "Search for a school" : (selectedSchools.length === 1 ? "Search for a school to compare" : "Maximum schools selected");
+        }
+
+        function populateInventory(schoolName, auditData) {
+            const list = document.getElementById('courseList');
+            list.innerHTML = `<h4 style="margin-top:0; color:#333;">Audit Evidence: ${schoolName}</h4>`;
+            
+            auditData.forEach(c => {
+                // Calculate Impact Score (Average of 6 pillars)
+                let skillSum = 0;
+                if(c.skills) {
+                    skillSum = Object.values(c.skills).reduce((a,b)=>a+b, 0);
+                }
+                const avg = (skillSum / 6).toFixed(1);
+                
+                // Handle missing description
+                const desc = c.description || c.text || "Course description analyzed via AI.";
+
+                list.insertAdjacentHTML('beforeend', `
+                    <div class="course-item">
+                        <details>
+                            <summary>
+                                <span>${c.course}</span>
+                                <span class="course-score-badge">Impact: ${avg}/5</span>
+                            </summary>
+                            <div class="course-details">
+                                <strong>Description:</strong><br>${desc}
+                            </div>
+                        </details>
+                    </div>
+                `);
+            });
         }
 
         function setBaseline(type, btn) {
             document.querySelectorAll('.pulse-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             myChart.data.datasets[0].data = baselines[type];
-            myChart.data.datasets[0].label = type === 'national' ? 'Market Demand Baseline' : 'Chicago (Local) Pulse';
+            myChart.data.datasets[0].label = type === 'national' ? 'National Baseline' : 'Chicago Pulse';
             myChart.update();
-        }
-
-        function populateInventory(auditData, descData) {
-            const list = document.getElementById('courseList');
-            list.innerHTML = "";
-            const descMap = Object.fromEntries(descData.map(d => [d.course.replace(/\s+/g,'').toLowerCase(), d.text]));
-            auditData.forEach(c => {
-                const avg = (Object.values(c.skills).reduce((a,b)=>a+b,0)/6).toFixed(1);
-                const desc = descMap[c.course.replace(/\s+/g,'').toLowerCase()] || "Description not found.";
-                list.insertAdjacentHTML('beforeend', `
-                    <div class="course-item">
-                        <details>
-                            <summary><span>${c.course.replace(/\\u00a0/g,' ')}</span><span class="course-score-badge">Impact: ${avg}/5</span></summary>
-                            <div class="course-details"><strong>Description:</strong><br>${desc}</div>
-                        </details>
-                    </div>
-                `);
-            });
         }
     </script>
 </body>
