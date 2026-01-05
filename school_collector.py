@@ -5,8 +5,8 @@ import re
 import argparse
 from datetime import datetime
 
-# --- NOTE: Fallback for Text Mode ---
 def parse_raw_text(text):
+    # Fallback for text mode
     parsed = []
     lines = text.split('\n')
     gap_lines = [line for line in lines if re.search(r'(\t|\s{2,})', line.strip())]
@@ -23,16 +23,61 @@ def parse_raw_text(text):
         return parsed
     return []
 
+# --- WORKER FUNCTION (Scrapes one single tab) ---
+async def scrape_single_course(context, url, sem):
+    async with sem: # Wait for a free "slot" (limit 5 tabs at once)
+        page = await context.new_page()
+        try:
+            await page.goto(url, wait_until="domcontentloaded", timeout=20000)
+            
+            # A. GET REAL TITLE (H1)
+            real_title = "Unknown Course"
+            try:
+                h1 = page.locator("h1")
+                if await h1.count() > 0:
+                    real_title = await h1.first.text_content()
+                else:
+                    real_title = await page.locator("h2").first.text_content()
+            except: pass
+
+            # B. GET CLEAN DESCRIPTION
+            full_text = await page.inner_text("body")
+            clean_desc = ""
+            
+            if "DESCRIPTION" in full_text:
+                parts = full_text.split("DESCRIPTION")
+                if len(parts) > 1:
+                    clean_desc = parts[1].strip()[:1500]
+            elif "Overview" in full_text:
+                parts = full_text.split("Overview")
+                if len(parts) > 1:
+                    clean_desc = parts[1].strip()[:1500]
+            else:
+                clean_desc = full_text[:1500]
+
+            # Cleanup
+            real_title = real_title.strip().replace("\n", " ")
+            await page.close()
+
+            if len(clean_desc) > 20:
+                print(f"      ✅ Scraped: {real_title[:30]}...")
+                return {"course": real_title, "description": clean_desc}
+            else:
+                return None
+
+        except Exception:
+            # Silently fail on bad links to keep speed up
+            try: await page.close()
+            except: pass
+            return None
+
 async def fetch_course_data(url):
     """
-    The Surgical Scraper:
-    1. Opens New Tab.
-    2. Grabs H1 for Title (e.g. "Financial Accounting").
-    3. Splits text at "DESCRIPTION" to get the real content.
+    Turbo Scraper: Harvests links, then opens 5 tabs at once.
     """
     from playwright.async_api import async_playwright
     
-    print(f"   🌍 Visiting: {url}")
+    print(f"   🌍 Visiting Main Catalog: {url}")
     courses_found = []
     
     async with async_playwright() as p:
@@ -42,17 +87,17 @@ async def fetch_course_data(url):
         
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-            await asyncio.sleep(4) 
+            await asyncio.sleep(3) 
 
-            # 1. HANDLE SEARCH
+            # 1. CLICK SEARCH (If needed)
             search_btns = page.locator("button:has-text('Search'), input[type='submit']")
             if await search_btns.count() > 0:
-                print("   🖱️ Clicking Search to load list...")
+                print("   🖱️ Clicking Search...")
                 await search_btns.first.click()
                 await page.wait_for_timeout(5000) 
 
             # 2. HARVEST LINKS
-            print("   👀 Harvesting course links...")
+            print("   👀 Harvesting links...")
             potential_links = await page.locator("tr td a, .course-list a, .result-item h3 a").all()
             
             valid_urls = []
@@ -60,7 +105,6 @@ async def fetch_course_data(url):
                 try:
                     href = await link.get_attribute("href")
                     if href and len(href) > 5 and "javascript" not in href:
-                        # Fix Relative URLs
                         if not href.startswith("http"):
                             base = "/".join(url.split("/")[:3]) 
                             if href.startswith("/"):
@@ -72,75 +116,28 @@ async def fetch_course_data(url):
                 except: pass
             
             valid_urls = list(set(valid_urls))
-            print(f"   ✅ Found {len(valid_urls)} unique course links.")
-
-            # 3. VISIT LOOP (The Surgical Part)
-            for i, link_url in enumerate(valid_urls[:60]): # Limit to 60 for now
-                try:
-                    new_page = await context.new_page()
-                    await new_page.goto(link_url, wait_until="domcontentloaded", timeout=15000)
-                    
-                    # --- A. GET THE REAL TITLE ---
-                    # Don't use page.title() (it says "Course Catalog").
-                    # Use H1, which usually holds "Financial Accounting".
-                    real_title = "Unknown Course"
-                    try:
-                        h1_count = await new_page.locator("h1").count()
-                        if h1_count > 0:
-                            real_title = await new_page.locator("h1").first.text_content()
-                        else:
-                            # Fallback: First bold text or H2
-                            real_title = await new_page.locator("h2").first.text_content()
-                    except:
-                        real_title = "Course " + str(i)
-
-                    # --- B. GET THE CLEAN DESCRIPTION ---
-                    full_text = await new_page.inner_text("body")
-                    
-                    clean_desc = ""
-                    # The Magic Split: Look for "DESCRIPTION"
-                    if "DESCRIPTION" in full_text:
-                        # Split and take the part AFTER "DESCRIPTION"
-                        parts = full_text.split("DESCRIPTION")
-                        if len(parts) > 1:
-                            # Take the chunk immediately after. 
-                            # We limit to 1500 chars to cut off footer junk.
-                            clean_desc = parts[1].strip()[:1500]
-                    
-                    # Fallback: Look for "Overview"
-                    elif "Overview" in full_text:
-                        parts = full_text.split("Overview")
-                        if len(parts) > 1:
-                            clean_desc = parts[1].strip()[:1500]
-                    
-                    # Fallback: Just take the whole thing if we can't find keywords
-                    else:
-                        clean_desc = full_text[:1500]
-
-                    # Clean up Title (Remove newlines)
-                    real_title = real_title.strip().replace("\n", " ")
-
-                    # Valid Data Check
-                    if len(clean_desc) > 20:
-                        courses_found.append({
-                            "course": real_title,
-                            "description": clean_desc
-                        })
-                        print(f"      📄 [{i+1}] Scraped: {real_title[:30]}...")
-                    
-                    await new_page.close()
-                    await asyncio.sleep(0.5)
-                    
-                except Exception as e:
-                    # print(f"      ❌ Error on link {i}: {e}")
-                    try: await new_page.close()
-                    except: pass
+            print(f"   ✅ Found {len(valid_urls)} unique links. Starting Turbo Scrape (5x speed)...")
+            
+            # 3. PARALLEL EXECUTION
+            # This 'Semaphore' ensures we never open more than 5 tabs at once
+            sem = asyncio.Semaphore(5) 
+            tasks = []
+            
+            # Limit to 80 courses to prevent timeouts, but do them in parallel
+            for link_url in valid_urls[:80]:
+                tasks.append(scrape_single_course(context, link_url, sem))
+            
+            # Run all tasks concurrently
+            results = await asyncio.gather(*tasks)
+            
+            # Filter out failures (None)
+            courses_found = [r for r in results if r is not None]
 
             await browser.close()
             return courses_found
 
         except Exception as e:
-            print(f"   ❌ Browser Error: {e}")
+            print(f"   ❌ Main Browser Error: {e}")
             await browser.close()
             return []
 
@@ -190,4 +187,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
