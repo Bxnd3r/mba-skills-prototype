@@ -2,12 +2,8 @@
   "school": "Northwestern University Kellogg School of Management",
   "source_url": "https://www6.kellogg.northwestern.edu/CourseCatalog/coursecatalog/catalogsearchscreen",
   "date_collected": "2026-01-05",
-  "course_count": 413,
+  "course_count": 412,
   "curriculum": [
-    {
-      "course": "Course Name",
-      "description": "Course Title\t\tCredits"
-    },
     {
       "course": "ACCT-430-0",
       "description": "Financial Accounting\tView Description\t1.0"
