@@ -19,7 +19,8 @@ jobs:
         with:
           python-version: '3.10'
           
-      # No pip install needed! (Standard library only)
+      - name: Install Dependencies
+        run: pip install playwright
 
       - name: Run Collector
         run: python -u school_collector.py --mode text --name "${{ inputs.school_name }}"
