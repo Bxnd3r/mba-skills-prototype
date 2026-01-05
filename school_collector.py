@@ -25,48 +25,69 @@ def parse_raw_text(text):
 
 # --- WORKER FUNCTION (Scrapes one single tab) ---
 async def scrape_single_course(context, url, sem):
-    async with sem: # Wait for a free "slot" (limit 5 tabs at once)
+    async with sem: # Wait for a free "slot"
         page = await context.new_page()
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=20000)
             
-            # A. GET REAL TITLE (H1)
+            # --- A. SMART TITLE FINDER ---
             real_title = "Unknown Course"
-            try:
-                h1 = page.locator("h1")
-                if await h1.count() > 0:
-                    real_title = await h1.first.text_content()
-                else:
-                    real_title = await page.locator("h2").first.text_content()
-            except: pass
+            
+            # We explicitly ignore these generic page headers
+            ignore_list = ["COURSE CATALOG", "COURSE DETAILS", "SCHEDULE", "SEARCH RESULTS", "CATALOG"]
+            
+            # 1. Grab all headers (H1, H2, H3)
+            headers = await page.locator("h1, h2, h3, .course-title, strong").all_inner_texts()
+            
+            for h in headers:
+                clean_h = h.strip().upper()
+                # If the header is NOT generic and is decent length (3-100 chars), it's likely our Course Name
+                if len(clean_h) > 3 and len(clean_h) < 100:
+                    if not any(ignored in clean_h for ignored in ignore_list):
+                        real_title = h.strip()
+                        break # Found it! Stop looking.
+            
+            # Fallback: If headers failed, try the browser tab title but clean it
+            if real_title == "Unknown Course":
+                page_title = await page.title()
+                # Clean: "Financial Accounting - Kellogg" -> "Financial Accounting"
+                real_title = page_title.split("-")[0].split("|")[0].strip()
 
-            # B. GET CLEAN DESCRIPTION
+            # --- B. GET CLEAN DESCRIPTION ---
+            # We grab the whole text and slice it at "DESCRIPTION"
             full_text = await page.inner_text("body")
             clean_desc = ""
             
             if "DESCRIPTION" in full_text:
+                # Based on your screenshot, the text is immediately after the word "DESCRIPTION"
+                # We split and take the second part
                 parts = full_text.split("DESCRIPTION")
                 if len(parts) > 1:
+                    # Take the first 1500 chars to avoid grabbing the footer/schedule below
                     clean_desc = parts[1].strip()[:1500]
+            
             elif "Overview" in full_text:
                 parts = full_text.split("Overview")
                 if len(parts) > 1:
                     clean_desc = parts[1].strip()[:1500]
             else:
+                # Last resort fallback
                 clean_desc = full_text[:1500]
 
-            # Cleanup
-            real_title = real_title.strip().replace("\n", " ")
+            # Final Cleanup
+            real_title = real_title.replace("\n", " ").strip()
+            clean_desc = clean_desc.replace("\n", " ").strip()
+            
             await page.close()
 
-            if len(clean_desc) > 20:
+            # Only save if we found real data
+            if len(clean_desc) > 20 and real_title != "Unknown Course":
                 print(f"      ✅ Scraped: {real_title[:30]}...")
                 return {"course": real_title, "description": clean_desc}
             else:
                 return None
 
         except Exception:
-            # Silently fail on bad links to keep speed up
             try: await page.close()
             except: pass
             return None
@@ -116,7 +137,7 @@ async def fetch_course_data(url):
                 except: pass
             
             valid_urls = list(set(valid_urls))
-            print(f"   ✅ Found {len(valid_urls)} unique links. Starting Turbo Scrape (5x speed)...")
+            print(f"   ✅ Found {len(valid_urls)} unique links. Starting Turbo Scrape")
             
             # 3. PARALLEL EXECUTION
             # This 'Semaphore' ensures we never open more than 5 tabs at once
@@ -187,4 +208,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
