@@ -97,7 +97,7 @@ async def fetch_course_data(url):
 
             # 3. VISIT LOOP (Open New Tabs)
             # Limit to 60 for safety/speed, you can increase this.
-            for i, link_url in enumerate(valid_urls[:60]):
+            for i, link_url in enumerate(valid_urls[:500]):
                 try:
                     # Open new page in same context
                     new_page = await context.new_page()
@@ -181,3 +181,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
