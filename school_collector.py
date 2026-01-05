@@ -5,7 +5,7 @@ import re
 import argparse
 from datetime import datetime
 
-# --- NOTE: This function is only a fallback for Text Mode ---
+# --- NOTE: Fallback for Text Mode ---
 def parse_raw_text(text):
     parsed = []
     lines = text.split('\n')
@@ -25,10 +25,10 @@ def parse_raw_text(text):
 
 async def fetch_course_data(url):
     """
-    The "Tab Iterator" Scraper:
-    1. Loads the main list.
-    2. Harvests all Course Title Links.
-    3. Opens each link in a NEW TAB, scrapes text, and closes it.
+    The Surgical Scraper:
+    1. Opens New Tab.
+    2. Grabs H1 for Title (e.g. "Financial Accounting").
+    3. Splits text at "DESCRIPTION" to get the real content.
     """
     from playwright.async_api import async_playwright
     
@@ -36,9 +36,7 @@ async def fetch_course_data(url):
     courses_found = []
     
     async with async_playwright() as p:
-        # Launch browser
         browser = await p.chromium.launch(headless=True)
-        # Create a "Context" (like a browser session) so cookies/login states are shared
         context = await browser.new_context()
         page = await context.new_page()
         
@@ -46,7 +44,7 @@ async def fetch_course_data(url):
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             await asyncio.sleep(4) 
 
-            # 1. HANDLE SEARCH (Kellogg/Booth often need this)
+            # 1. HANDLE SEARCH
             search_btns = page.locator("button:has-text('Search'), input[type='submit']")
             if await search_btns.count() > 0:
                 print("   🖱️ Clicking Search to load list...")
@@ -54,76 +52,87 @@ async def fetch_course_data(url):
                 await page.wait_for_timeout(5000) 
 
             # 2. HARVEST LINKS
-            # We look for links inside the table. 
-            # Strategy: Find all <a> tags that are inside a table row (tr) or list item (li)
             print("   👀 Harvesting course links...")
-            
-            # This selector looks for links inside table cells (td a) OR list items (li a)
-            # We filter out generic links like "View Description" or "Add to Cart"
             potential_links = await page.locator("tr td a, .course-list a, .result-item h3 a").all()
             
             valid_urls = []
             for link in potential_links:
                 try:
                     href = await link.get_attribute("href")
-                    text = await link.inner_text()
-                    
-                    # Filter: Must be a real link, not a javascript:void(0)
                     if href and len(href) > 5 and "javascript" not in href:
-                        # Filter: Text should look like a course code (e.g., "ACCT", "MKTG") or Title
-                        if len(text) > 3 and "View Description" not in text:
-                            
-                            # Fix Relative URLs
-                            if not href.startswith("http"):
-                                base = "/".join(url.split("/")[:3]) # https://site.com
-                                if href.startswith("/"):
-                                    href = base + href
-                                else:
-                                    # Fallback for complex relative paths
-                                    current_path = "/".join(url.split("/")[:-1])
-                                    href = current_path + "/" + href
-                            
-                            valid_urls.append(href)
+                        # Fix Relative URLs
+                        if not href.startswith("http"):
+                            base = "/".join(url.split("/")[:3]) 
+                            if href.startswith("/"):
+                                href = base + href
+                            else:
+                                current_path = "/".join(url.split("/")[:-1])
+                                href = current_path + "/" + href
+                        valid_urls.append(href)
                 except: pass
             
-            # Deduplicate
             valid_urls = list(set(valid_urls))
             print(f"   ✅ Found {len(valid_urls)} unique course links.")
-            
-            if len(valid_urls) == 0:
-                print("   ⚠️ No links found. The site might be using JavaScript buttons instead of <a> tags.")
-                await browser.close()
-                return []
 
-            # 3. VISIT LOOP (Open New Tabs)
-            # Limit to 60 for safety/speed, you can increase this.
-            for i, link_url in enumerate(valid_urls[:500]):
+            # 3. VISIT LOOP (The Surgical Part)
+            for i, link_url in enumerate(valid_urls[:60]): # Limit to 60 for now
                 try:
-                    # Open new page in same context
                     new_page = await context.new_page()
                     await new_page.goto(link_url, wait_until="domcontentloaded", timeout=15000)
                     
-                    # Scrape
+                    # --- A. GET THE REAL TITLE ---
+                    # Don't use page.title() (it says "Course Catalog").
+                    # Use H1, which usually holds "Financial Accounting".
+                    real_title = "Unknown Course"
+                    try:
+                        h1_count = await new_page.locator("h1").count()
+                        if h1_count > 0:
+                            real_title = await new_page.locator("h1").first.text_content()
+                        else:
+                            # Fallback: First bold text or H2
+                            real_title = await new_page.locator("h2").first.text_content()
+                    except:
+                        real_title = "Course " + str(i)
+
+                    # --- B. GET THE CLEAN DESCRIPTION ---
                     full_text = await new_page.inner_text("body")
                     
-                    # Clean up the text to find the description
-                    # We assume the whole page text is useful, but we try to find the "Title"
-                    title = await new_page.title()
+                    clean_desc = ""
+                    # The Magic Split: Look for "DESCRIPTION"
+                    if "DESCRIPTION" in full_text:
+                        # Split and take the part AFTER "DESCRIPTION"
+                        parts = full_text.split("DESCRIPTION")
+                        if len(parts) > 1:
+                            # Take the chunk immediately after. 
+                            # We limit to 1500 chars to cut off footer junk.
+                            clean_desc = parts[1].strip()[:1500]
                     
-                    # Save
-                    courses_found.append({
-                        "course": title.strip(),
-                        "description": full_text[:2000] # Save first 2000 chars (usually contains description)
-                    })
+                    # Fallback: Look for "Overview"
+                    elif "Overview" in full_text:
+                        parts = full_text.split("Overview")
+                        if len(parts) > 1:
+                            clean_desc = parts[1].strip()[:1500]
                     
-                    print(f"      📄 [{i+1}] Scraped: {title[:30]}...")
+                    # Fallback: Just take the whole thing if we can't find keywords
+                    else:
+                        clean_desc = full_text[:1500]
+
+                    # Clean up Title (Remove newlines)
+                    real_title = real_title.strip().replace("\n", " ")
+
+                    # Valid Data Check
+                    if len(clean_desc) > 20:
+                        courses_found.append({
+                            "course": real_title,
+                            "description": clean_desc
+                        })
+                        print(f"      📄 [{i+1}] Scraped: {real_title[:30]}...")
                     
                     await new_page.close()
-                    # Sleep to be polite to the server
                     await asyncio.sleep(0.5)
                     
                 except Exception as e:
-                    print(f"      ❌ Error on link {i}: {e}")
+                    # print(f"      ❌ Error on link {i}: {e}")
                     try: await new_page.close()
                     except: pass
 
