@@ -37,6 +37,14 @@ jobs:
           git config --global user.name "URL Collector Bot"
           git config --global user.email "bot@github.com"
           
+      - name: Update Registry
+        run: python update_registry.py
+
+      - name: Save
+        run: |
+          git add registry.json *_audit.json
+          git commit -m "Updated registry"
+          ...
           # Pull latest changes to avoid conflicts
           git pull --rebase origin main
           
