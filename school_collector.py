@@ -12,7 +12,7 @@ def parse_raw_text(text):
     parsed = []
     lines = text.split('\n')
     
-    # 1. Visual Gap (Tab Separated)
+    # 1. Visual Gap
     gap_lines = [line for line in lines if re.search(r'(\t|\s{2,})', line.strip())]
     if len(gap_lines) > 5:
         print("   🔍 Detected 'Visual Gap' format.")
@@ -23,7 +23,8 @@ def parse_raw_text(text):
             if len(parts) >= 3:
                 title = parts[0].strip()
                 desc = parts[2].strip()
-                if len(desc) > 10: 
+                # Only save if description looks real (longer than a generic word)
+                if len(desc) > 25: 
                     parsed.append({"course": title, "description": desc})
         if parsed: return parsed
 
@@ -36,7 +37,7 @@ def parse_raw_text(text):
         for i in range(1, len(matches), 2):
             title = matches[i].strip()
             desc = matches[i+1].strip() if i+1 < len(matches) else ""
-            if len(desc) > 20:
+            if len(desc) > 25:
                 parsed.append({"course": title, "description": desc})
         return parsed
 
@@ -44,7 +45,7 @@ def parse_raw_text(text):
 
 async def fetch_url_text(url):
     """
-    Advanced Scraper V2: Handles Search Buttons + Detail Page Crawling.
+    Advanced Scraper V3: Aggressive Deep Crawling.
     """
     from playwright.async_api import async_playwright
     
@@ -54,7 +55,6 @@ async def fetch_url_text(url):
     
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        # Create a context so we can open multiple tabs if needed
         context = await browser.new_context()
         page = await context.new_page()
         
@@ -62,78 +62,86 @@ async def fetch_url_text(url):
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             await asyncio.sleep(4) 
 
-            # --- 1. HANDLE SEARCH/LOAD BUTTONS ---
+            # --- 1. HANDLE SEARCH BUTTONS ---
             search_btns = page.locator("button:has-text('Search'), input[type='submit']")
             if await search_btns.count() > 0:
                 print("   🖱️ Found Search button. Clicking...")
                 try:
                     await search_btns.first.click()
-                    await asyncio.sleep(5)
+                    await asyncio.sleep(6) # Give it time to load the table
                 except: pass
 
-            # --- 2. CHECK FOR EXPANDERS (The easy case) ---
-            expand_buttons = page.locator("text=View Description, text=More Info, .expand-icon")
+            # --- 2. CHECK FOR EXPANDERS ---
+            expanders_clicked = 0
+            expand_buttons = page.locator("text=View Description, text=More Info, .expand-icon, .kellogg-expand")
             if await expand_buttons.count() > 0:
                 print(f"   🖱️ Found expanders. Clicking...")
                 count = await expand_buttons.count()
-                for i in range(min(count, 50)): # Limit to 50 for speed
-                    try: await expand_buttons.nth(i).click()
+                for i in range(min(count, 100)): 
+                    try: 
+                        await expand_buttons.nth(i).click()
+                        expanders_clicked += 1
                     except: pass
                 await asyncio.sleep(2)
 
-            # --- 3. MASTER-DETAIL STRATEGY (The Chicago Booth Fix) ---
-            # If the page text is short, assume the content is hidden in links.
+            # --- 3. DECISION TIME: DO WE HAVE DATA? ---
             page_text = await page.inner_text("body")
+            print(f"   📏 Current Page Text Length: {len(page_text)} chars")
             
-            if len(page_text) < 5000: # Heuristic: Page is too empty, must be a link list
-                print("   ⚠️ Page content is sparse. Activating 'Deep Crawler' for course links...")
+            # AGGRESSIVE CHECK: If text is < 100k OR we didn't click expanders, we assume we missed the details.
+            if len(page_text) < 100000 and expanders_clicked == 0:
+                print("   ⚠️ Text is too short (Descriptions likely hidden). Activating 'Deep Crawler'...")
                 
-                # Find all links inside table cells or list items
-                # We specifically look for links that might be courses
-                links = await page.locator("td a, .course-list a, .result-list a, div.course-title a").all()
+                # Targeted Selectors for Course Links (Kellogg, Booth, etc.)
+                # We look for links inside tables or lists
+                possible_links = await page.locator("td a, .course-list a, .result-list a, h3 a, h4 a").all()
                 
-                # Extract hrefs (URLs) so we don't have to click-and-back
                 urls_to_visit = []
-                for link in links:
+                for link in possible_links:
                     try:
                         href = await link.get_attribute("href")
-                        if href and len(href) > 5 and "javascript" not in href:
-                            # Construct full URL if relative
+                        # Filter out garbage links
+                        if href and len(href) > 5 and "javascript" not in href and "mailto" not in href:
+                            # Filter out nav links (Home, About, etc)
+                            if any(x in href.lower() for x in ["login", "privacy", "contact", "home"]): continue
+                            
+                            # Fix Relative URLs
                             if not href.startswith("http"):
-                                # Basic join (can be improved with urljoin)
-                                base = "/".join(url.split("/")[:3]) 
+                                base = "/".join(url.split("/")[:3]) # https://site.com
                                 if href.startswith("/"):
                                     href = base + href
                                 else:
-                                    href = base + "/PublicApps/CourseSearch/" + href # Heuristic for Booth
+                                    # Fallback for relative paths
+                                    current_dir = "/".join(url.split("/")[:-1])
+                                    href = current_dir + "/" + href
+                            
                             urls_to_visit.append(href)
                     except: pass
 
                 # Deduplicate
                 urls_to_visit = list(set(urls_to_visit))
-                print(f"   🔍 Found {len(urls_to_visit)} potential course links. Visiting top 30...")
+                print(f"   🔍 Found {len(urls_to_visit)} potential course links. Visiting top 60...")
 
-                # VISIT THE LINKS (Limit to 30-50 to prevent timeouts)
-                for i, link_url in enumerate(urls_to_visit[:200]):
+                # VISIT LINKS (Limit 60 to prevent timeout)
+                for i, link_url in enumerate(urls_to_visit[:60]):
                     try:
-                        # Open a new tab (page) for each course to keep the main list safe
                         new_page = await context.new_page()
-                        await new_page.goto(link_url, wait_until="domcontentloaded", timeout=15000)
+                        await new_page.goto(link_url, wait_until="domcontentloaded", timeout=10000)
                         
-                        # Grab the text
-                        course_text = await new_page.evaluate("document.body.innerText")
-                        full_corpus_text += f"\n\n--- COURSE {i} ---\n{course_text}"
+                        # Grab title and body
+                        sub_text = await new_page.inner_text("body")
+                        
+                        # Only keep if it looks like a course page (has "Description" or "Credits")
+                        if "Description" in sub_text or "Overview" in sub_text:
+                            full_corpus_text += f"\n\n--- COURSE ENTRY {i} ---\n{sub_text}"
+                            print(f"      📄 Scraped link {i+1}: {len(sub_text)} chars")
                         
                         await new_page.close()
-                        print(f"      📄 Scraped link {i+1}")
                         await asyncio.sleep(0.5) 
-                    except Exception as e:
-                        print(f"      ❌ Error visiting link: {e}")
+                    except: 
                         try: await new_page.close()
                         except: pass
-
             else:
-                # If page was full of text, just grab it
                 full_corpus_text = page_text
 
             await browser.close()
@@ -175,11 +183,12 @@ async def main():
     print(f"   Processing {len(raw_text)} chars of text...")
     courses = parse_raw_text(raw_text)
 
-    # Fallback if parsing fails but we scraped a lot of text (common with Deep Crawl)
+    # If Regex failed but we have data (Deep Crawl mode often produces text that regex misses)
+    # We save the raw dump as a fallback so we don't lose the scrape
     if not courses and len(raw_text) > 1000:
         print("⚠️ Warning: Standard regex failed, but we captured text.")
-        print("   Saving raw dump for later analysis.")
-        courses = [{"course": "Raw Dump", "description": raw_text}]
+        print("   Saving raw dump as 'Manual_Review' course.")
+        courses = [{"course": "Raw Data Dump", "description": raw_text}]
 
     os.makedirs("raw_school_data", exist_ok=True)
     safe_name = args.name.lower().replace(' ', '_')
