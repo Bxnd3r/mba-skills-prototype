@@ -44,7 +44,7 @@ def parse_raw_text(text):
 
 async def fetch_url_text(url):
     """
-    Kellogg-Optimized Scraper: Search -> Expand All -> Scrape.
+    Kellogg-Optimized Scraper: Search -> Force Expand -> Scrape.
     """
     from playwright.async_api import async_playwright
     
@@ -58,51 +58,45 @@ async def fetch_url_text(url):
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             await asyncio.sleep(4) 
 
-            # --- 1. HANDLE SEARCH BUTTON (Required for Kellogg) ---
-            # We look for the "Search" button to load the initial list
-            search_btns = page.locator("button:has-text('Search'), input[type='submit'], a.btn-search")
+            # --- 1. HANDLE SEARCH BUTTON ---
+            # Kellogg requires this click to show the table
+            search_btns = page.locator("button:has-text('Search'), input[type='submit']")
             if await search_btns.count() > 0:
-                print("   🖱️ Found Search button. Clicking to load courses...")
-                try:
-                    await search_btns.first.click()
-                    # Wait for the spinner to go away / table to load
-                    await asyncio.sleep(6) 
-                    await page.wait_for_load_state("networkidle") 
-                except: pass
+                print("   🖱️ Found Search button. Clicking...")
+                await search_btns.first.click()
+                await page.wait_for_timeout(6000) # Force wait for table load
 
-            # --- 2. THE "EXPANDER" STRATEGY ---
-            # Instead of opening links, we click "View Description"
+            # --- 2. THE "EXPANDER" STRATEGY (Improved) ---
+            # We look for ANY element that looks like a description toggle
+            # We use a broad CSS selector to catch <a>, <span>, or <button>
+            print("   👀 Hunting for 'View Description' buttons...")
             
-            # Find all potential expanders
-            # Kellogg uses "View Description", others use "More" or arrow icons
-            expanders = page.locator("text=View Description, text=More Info, a[id*='Description']")
+            # Selector strategies for Kellogg + others
+            expanders = page.locator("text=View Description")
+            if await expanders.count() == 0:
+                # Fallback: Try looking for "More Info" or just "Description"
+                expanders = page.locator("text=Description")
+            
             count = await expanders.count()
 
             if count > 0:
-                print(f"   🖱️ Found {count} 'View Description' toggles.")
-                print("      Clicking them one by one to reveal text (this ensures we capture it)...")
+                print(f"   🖱️ Found {count} expanders. Clicking top 150...")
                 
-                # We loop through them. Limit to 150 to prevent timeouts.
-                # If there are 400 courses, we'll get the top 150 which is plenty for analysis.
                 for i in range(min(count, 150)):
                     try:
-                        # We re-query the element to avoid "Stale Element" errors
-                        btn = expanders.nth(i)
-                        if await btn.is_visible():
-                            await btn.click()
-                            # Tiny sleep to let the text render
-                            if i % 10 == 0: await asyncio.sleep(0.5) 
-                    except Exception as e:
-                        # Sometimes one click fails, just keep going
-                        pass
+                        # Force click even if Playwright thinks it's hidden
+                        if await expanders.nth(i).is_visible():
+                            await expanders.nth(i).click(force=True)
+                            if i % 20 == 0: await asyncio.sleep(0.5)
+                    except: pass
                 
-                print("      ✅ Finished expanding. Waiting for text to settle...")
+                print("      ✅ Finished expanding. Waiting for text to render...")
                 await asyncio.sleep(3)
+            else:
+                print("      ⚠️ No 'View Description' buttons found. (Scraping titles only)")
 
-            # --- 3. SCRAPE THE FULL PAGE ---
-            # Now that everything is expanded, we grab the Body Text
+            # --- 3. SCRAPE ---
             full_text = await page.inner_text("body")
-            
             print(f"   📏 Captured {len(full_text)} chars of text.")
             
             await browser.close()
@@ -144,7 +138,7 @@ async def main():
     print(f"   Processing {len(raw_text)} chars of text...")
     courses = parse_raw_text(raw_text)
 
-    # Fallback: If Regex fails but we have text, save the raw dump
+    # Fallback: Save Raw Dump if Regex fails but we have text
     if not courses and len(raw_text) > 5000:
         print("⚠️ Warning: Auto-parser couldn't split courses perfectly.")
         print("   Saving raw text dump for AI Analysis later.")
