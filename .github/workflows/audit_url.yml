@@ -40,12 +40,12 @@ jobs:
           git config --global user.name "URL Collector Bot"
           git config --global user.email "bot@github.com"
           
-          # Pull latest to avoid conflicts
+          # 1. Stage and Commit FIRST (Lock in your new files)
+          git add raw_school_data/*.json registry.json
+          git commit -m "Collected URL: ${{ inputs.school_name }}" || echo "No changes to commit"
+          
+          # 2. NOW it is safe to Pull updates from the server
           git pull --rebase origin main
           
-          # Add the new data folder AND the updated registry
-          git add raw_school_data/*.json registry.json
-          
-          # Commit safely
-          git commit -m "Collected URL: ${{ inputs.school_name }}" || echo "No changes to commit"
+          # 3. Push
           git push origin main
