@@ -10,44 +10,30 @@ from playwright.async_api import async_playwright
 # VALIDATION HELPER
 # ==========================================
 def is_successful_scrape(courses):
-    """
-    Decides if a strategy worked based on data quality.
-    Criteria:
-    1. Found at least 5 courses.
-    2. At least 50% of descriptions are non-empty (> 30 chars).
-    """
     if not courses or len(courses) < 5:
         return False
-    
     valid_descriptions = sum(1 for c in courses if len(c.get('description', '')) > 30)
     success_rate = valid_descriptions / len(courses)
-    
-    if success_rate > 0.5:
-        return True
-    return False
+    return success_rate > 0.5
 
 # ==========================================
 # STRATEGY 1: STANDARD PARALLEL (Fastest)
-# Good for: Standard catalogs with <a> links to new pages.
 # ==========================================
 async def strategy_standard_parallel(context, url):
     print(f"   🚀 STRATEGY 1: Parallel Tabs (Standard)...")
     page = await context.new_page()
-    courses_found = []
-    
     try:
         await page.goto(url, wait_until="domcontentloaded", timeout=45000)
         await asyncio.sleep(3)
 
-        # Search Clicker
         search_btns = page.locator("button:has-text('Search'), input[type='submit']")
         if await search_btns.count() > 0:
             print("      🖱️ Clicking Search...")
             await search_btns.first.click()
             await page.wait_for_timeout(4000)
 
-        # Harvest Links
         print("      👀 Harvesting links...")
+        # Broad selector for anything that looks like a course link
         potential_links = await page.locator("tr td a, .course-list a, .result-item h3 a, .result-title a").all()
         valid_urls = []
         for link in potential_links:
@@ -64,7 +50,8 @@ async def strategy_standard_parallel(context, url):
         valid_urls = list(set(valid_urls))
         print(f"      ✅ Found {len(valid_urls)} unique links.")
 
-        # Execute Parallel
+        if len(valid_urls) < 5: return [] # Fail fast if no links
+
         sem = asyncio.Semaphore(5) 
         tasks = []
         
@@ -74,10 +61,9 @@ async def strategy_standard_parallel(context, url):
                 try:
                     await p.goto(link_url, wait_until="domcontentloaded", timeout=15000)
                     
-                    # Title Finding
                     real_title = "Unknown"
                     headers = await p.locator("h1, h2, h3").all_inner_texts()
-                    ignore = ["CATALOG", "DETAILS", "SCHEDULE", "SEARCH"]
+                    ignore = ["CATALOG", "DETAILS", "SCHEDULE", "SEARCH", "RESULTS"]
                     for h in headers:
                         if len(h) > 5 and not any(x in h.upper() for x in ignore):
                             real_title = h.strip()
@@ -86,7 +72,6 @@ async def strategy_standard_parallel(context, url):
                         t = await p.title()
                         real_title = t.split("-")[0].strip()
 
-                    # Description Finding
                     text = await p.inner_text("body")
                     desc = ""
                     if "DESCRIPTION" in text: desc = text.split("DESCRIPTION")[1][:1500]
@@ -101,21 +86,16 @@ async def strategy_standard_parallel(context, url):
                     except: pass
                 return None
 
-        # Run limited batch
         for link_url in valid_urls[:80]: 
             tasks.append(scrape_one(link_url, sem))
         
         results = await asyncio.gather(*tasks)
-        courses_found = [r for r in results if r is not None]
-        
-        await page.close()
-        return courses_found
+        return [r for r in results if r is not None]
     except Exception:
         return []
 
 # ==========================================
-# STRATEGY 2: POPUP CLICKER (Medium)
-# Good for: Single Page Apps like IIT (Modals/Popups).
+# STRATEGY 2: POPUP CLICKER (SPA Mode)
 # ==========================================
 async def strategy_popup_clicker(context, url):
     print(f"   🚀 STRATEGY 2: Popup Clicker (SPA Mode)...")
@@ -126,7 +106,6 @@ async def strategy_popup_clicker(context, url):
         await page.goto(url, wait_until="domcontentloaded", timeout=45000)
         await asyncio.sleep(3)
 
-        # Look for course-like links (e.g. "MBA 500")
         links = page.locator("a")
         count = await links.count()
         print(f"      ✅ Scanning {count} links for popups...")
@@ -135,29 +114,20 @@ async def strategy_popup_clicker(context, url):
             try:
                 link = links.nth(i)
                 txt = await link.inner_text()
-                
-                # Heuristic: Course codes usually have 3 digits (MBA 101, CS 400)
-                if not re.search(r'\d{3}', txt): 
-                    continue
+                if not re.search(r'\d{3}', txt): continue
 
-                # Click
                 await link.click()
-                await asyncio.sleep(1) # Wait for popup
+                await asyncio.sleep(1) 
                 
-                # Grab content from any visible popup/modal container
-                # We try common class names for modals
-                popup_text = await page.locator(".courseblock, .modal, .bubble, .tooltip, #course-details").first.inner_text()
+                popup_text = await page.locator(".courseblock, .modal, .bubble, .tooltip").first.inner_text()
                 
                 if len(popup_text) > 50:
                     lines = [l.strip() for l in popup_text.split('\n') if l.strip()]
                     title = lines[0]
                     desc = max(lines, key=len)
-                    
                     if len(desc) > 30:
                         courses_found.append({"course": title, "description": desc})
-                        print(f"         📄 Captured: {title[:20]}...")
 
-                # Dismiss popup (Click body 0,0)
                 await page.mouse.click(0, 0)
             except: pass
 
@@ -167,8 +137,7 @@ async def strategy_popup_clicker(context, url):
         return []
 
 # ==========================================
-# STRATEGY 3: SESSION DRILL-DOWN (Slowest)
-# Good for: Chicago Booth / Legacy sites (Click -> Back -> Click).
+# STRATEGY 3: SESSION DRILL-DOWN (Smart Hunter)
 # ==========================================
 async def strategy_session_drilldown(context, url):
     print(f"   🚀 STRATEGY 3: Session Drill-Down (Linear)...")
@@ -177,24 +146,45 @@ async def strategy_session_drilldown(context, url):
     
     try:
         await page.goto(url, wait_until="domcontentloaded", timeout=45000)
-        await asyncio.sleep(3)
+        await asyncio.sleep(4)
 
-        # Identify rows that look clickable (starting with digits or course codes)
-        # Regex: Start with 3+ digits or 2-4 letters followed by numbers
-        row_locator = page.locator("text=/^\\d{3}/") 
-        if await row_locator.count() == 0:
-             row_locator = page.locator("text=/^[A-Z]{2,4}\\s?\\d{3}/")
+        # 1. SMART ROW HUNTER
+        # We try multiple regex patterns to find the course list
+        patterns = [
+            r"^\d{5}\s",          # Booth (5 digits): "30000 - Title"
+            r"^\d{5}$",           # Just 5 digits
+            r"^[A-Z]{2,4}\s\d{3}", # Standard: "MBA 501"
+            r"^\d{3}\s"           # Generic 3 digit
+        ]
+        
+        best_locator = None
+        best_count = 0
+        
+        print("      👀 Testing row patterns...")
+        for pattern in patterns:
+            loc = page.locator(f"text=/{pattern}/")
+            count = await loc.count()
+            if count > 3: # If we find more than 3, we assume this is the right pattern
+                print(f"         ✅ Match found for pattern '{pattern}': {count} rows")
+                best_locator = loc
+                best_count = count
+                break
+        
+        if not best_locator:
+            print("         ⚠️ No recognizeable rows found.")
+            await page.close()
+            return []
 
-        count = await row_locator.count()
-        print(f"      ✅ Found {count} potential rows.")
-
-        for i in range(min(count, 40)): # Limit 40 due to slowness
+        # 2. ITERATE
+        for i in range(min(best_count, 40)):
             try:
-                # Refresh locator
-                rows = page.locator("text=/^\\d{3}/") 
-                if await rows.count() == 0: rows = page.locator("text=/^[A-Z]{2,4}\\s?\\d{3}/")
-                
+                # Refresh locator (Page DOM changes on back navigation)
+                # We re-use the pattern that worked
+                rows = page.locator(f"text=/{pattern}/")
                 if await rows.count() <= i: break
+                
+                # Capture title before clicking
+                title_preview = await rows.nth(i).inner_text()
                 
                 # Click
                 await rows.nth(i).click()
@@ -204,31 +194,40 @@ async def strategy_session_drilldown(context, url):
                 # Scrape
                 full_text = await page.inner_text("body")
                 h1 = "Unknown"
-                try: h1 = await page.locator("h1").inner_text()
+                try: 
+                    # Try to find a header that isn't the page title
+                    headers = await page.locator("h1").all_inner_texts()
+                    for h in headers:
+                         if len(h) > 5 and "CATALOG" not in h.upper():
+                             h1 = h
+                             break
                 except: pass
+                
+                if h1 == "Unknown": h1 = title_preview # Fallback to list title
 
                 desc = ""
                 if "DESCRIPTION" in full_text: desc = full_text.split("DESCRIPTION")[1]
                 elif "CONTENT" in full_text: desc = full_text.split("CONTENT")[1]
                 else: desc = full_text[:1000]
 
-                clean_desc = desc.split("PREREQUISITES")[0].strip()[:1500]
+                clean_desc = desc.split("PREREQUISITES")[0].split("MATERIALS")[0].strip()[:1500]
                 
                 if len(clean_desc) > 30:
                     courses_found.append({"course": h1, "description": clean_desc})
-                    print(f"         📄 Captured: {h1[:20]}...")
+                    print(f"         📄 Captured: {h1[:30]}...")
 
                 # Go Back
                 await page.go_back()
                 await asyncio.sleep(1)
 
             except:
-                try: await page.goto(url) # Reset
+                try: await page.goto(url)
                 except: pass
 
         await page.close()
         return courses_found
-    except Exception:
+    except Exception as e:
+        print(f"      ❌ Error: {e}")
         return []
 
 # ==========================================
@@ -244,9 +243,12 @@ async def main():
     final_courses = []
 
     if args.mode == "text":
-        # ... (Text Mode code remains same as before) ...
-        pass
-
+        if os.path.exists("pending_audit.txt"):
+            with open("pending_audit.txt", "r", encoding="utf-8") as f:
+                # Simple parser for copy-pasted text
+                for line in f:
+                    if len(line) > 20: final_courses.append({"course": "Manual", "description": line.strip()})
+    
     elif args.mode == "url":
         if not args.input:
             print("❌ Error: URL required")
@@ -256,23 +258,21 @@ async def main():
             browser = await p.chromium.launch(headless=True)
             context = await browser.new_context()
 
-            # --- THE STRATEGY LOOP ---
             strategies = [
-                strategy_standard_parallel, # 1. Try Fast
-                strategy_popup_clicker,     # 2. Try Popup
-                strategy_session_drilldown  # 3. Try Drill-Down
+                strategy_standard_parallel,
+                strategy_session_drilldown, # Moved Drill-Down to 2nd priority for Booth
+                strategy_popup_clicker
             ]
             
             for strategy in strategies:
                 try:
                     results = await strategy(context, args.input)
-                    
                     if is_successful_scrape(results):
                         print(f"   🎉 SUCCESS! {strategy.__name__} captured {len(results)} valid courses.")
                         final_courses = results
-                        break # Stop trying other strategies
+                        break 
                     else:
-                        print(f"   ⚠️ {strategy.__name__} failed validation (found {len(results)}). Retrying...")
+                        print(f"   ⚠️ {strategy.__name__} found {len(results)} items (insufficient). Retrying...")
                 except Exception as e:
                     print(f"   ❌ Strategy Error: {e}")
 
@@ -282,7 +282,6 @@ async def main():
         print("❌ ALL STRATEGIES FAILED. No valid courses found.")
         return
 
-    # SAVE
     os.makedirs("raw_school_data", exist_ok=True)
     safe_name = args.name.lower().replace(' ', '_')
     filename = f"raw_school_data/{safe_name}_curriculum.json"
