@@ -87,7 +87,8 @@ async def fetch_url_text(url):
                         # Force click even if Playwright thinks it's hidden
                         if await expanders.nth(i).is_visible():
                             await expanders.nth(i).click(force=True)
-                            if i % 20 == 0: await asyncio.sleep(0.5)
+                            # Wait 100ms between clicks to let the DOM update
+                            await asyncio.sleep(0.1)
                     except: pass
                 
                 print("      ✅ Finished expanding. Waiting for text to render...")
@@ -161,3 +162,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
