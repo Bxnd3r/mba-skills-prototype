@@ -1,0 +1,1660 @@
+{
+  "school": "Northwestern University Kellogg School of Management",
+  "source_url": "https://www6.kellogg.northwestern.edu/CourseCatalog/coursecatalog/catalogsearchscreen",
+  "date_collected": "2026-01-05",
+  "course_count": 413,
+  "curriculum": [
+    {
+      "course": "Course Name",
+      "description": "Course Title\t\tCredits"
+    },
+    {
+      "course": "ACCT-430-0",
+      "description": "Financial Accounting\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-431-0",
+      "description": "Managerial Accounting\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-434-0",
+      "description": "Turbo Accounting\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-435-0",
+      "description": "MBAi Financial Accounting\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-444-5",
+      "description": "Financial Planning for Mergers & Acquisitions\tView Description\t0.5"
+    },
+    {
+      "course": "ACCT-451-0",
+      "description": "Financial Reporting and Analysis\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-452-0",
+      "description": "Issues in Financial Reporting\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-457-5",
+      "description": "Global Financial Management and Reporting\tView Description\t0.5"
+    },
+    {
+      "course": "ACCT-459-0",
+      "description": "ESG Investing and Sustainability Reporting\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "ACCT-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "ACCT-530-0",
+      "description": "Special Topics in Empirical Accounting Research\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-540-1",
+      "description": "Empirical Research in Accounting I\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-540-2",
+      "description": "Empirical Research in Accounting II\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-540-3",
+      "description": "Empirical Research in Accounting III\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-550-1",
+      "description": "Research in Accounting Theory I\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-550-2",
+      "description": "Research in Accounting Theory II\tView Description\t1.0"
+    },
+    {
+      "course": "ACCT-590-0",
+      "description": "Research\tView Description\t3.0"
+    },
+    {
+      "course": "ACCT-5XX",
+      "description": "Accounting General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "ACCT-922-0",
+      "description": "Financial Statements Analysis\tView Description\t1.0"
+    },
+    {
+      "course": "AIML-451-0",
+      "description": "Data Science with Generative AI\tView Description\t1.0"
+    },
+    {
+      "course": "AIML-901FI-5",
+      "description": "AI Foundations for Managers - Finance\tView Description\t0.5"
+    },
+    {
+      "course": "AIML-901MK-5",
+      "description": "AI Foundations for Managers - Marketing\tView Description\t0.5"
+    },
+    {
+      "course": "AIML-901MO-5",
+      "description": "AI Foundations for Managers - MORS\tView Description\t0.5"
+    },
+    {
+      "course": "AIML-901OP-5",
+      "description": "AI Foundations for Managers - AgentOps\tView Description\t0.5"
+    },
+    {
+      "course": "AIML-901ST-5",
+      "description": "AI Foundations for Managers - Strategy\tView Description\t0.5"
+    },
+    {
+      "course": "AIML-944-0",
+      "description": "Artificial Intelligence and the Future of Work\tView Description\t1.0"
+    },
+    {
+      "course": "AIML-950-5",
+      "description": "Human and Machine Intelligence\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-435-0",
+      "description": "Business Law\tView Description\t1.0"
+    },
+    {
+      "course": "BLAW-437-0",
+      "description": "Regulation of Competitive Strategies\tView Description\t1.0"
+    },
+    {
+      "course": "BLAW-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "BLAW-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "BLAW-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-5XX",
+      "description": "Business Law General Credit\tView Description\t0.0"
+    },
+    {
+      "course": "BLAW-980-5",
+      "description": "Business and Law of Venture Capital\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-982-5",
+      "description": "Private Equity Transactions\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-983-5",
+      "description": "Social Entrepreneurship\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-984-5",
+      "description": "Information Privacy\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-985-5",
+      "description": "Intellectual Property Strategies and Implications for Companies\tView Description\t0.5"
+    },
+    {
+      "course": "BLAW-986-0",
+      "description": "The Business, Law, and Technology of Space Commerce\tView Description\t1.0"
+    },
+    {
+      "course": "BLAW-987-5",
+      "description": "The Business, Law, and Technology of Blockchain and Cryptocurrencies\tView Description\t0.5"
+    },
+    {
+      "course": "DECS-430-5",
+      "description": "Business Analytics I\tView Description\t0.5"
+    },
+    {
+      "course": "DECS-431-0",
+      "description": "Business Analytics II\tView Description\t1.0"
+    },
+    {
+      "course": "DECS-435-0",
+      "description": "MBAi Business Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "DECS-440-0",
+      "description": "Business Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "DECS-461-0",
+      "description": "Data Exploration\tView Description\t1.0"
+    },
+    {
+      "course": "DECS-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "DECS-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "DECS-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "DECS-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "DECS-5XX",
+      "description": "Decision Sciences General Credit\tView Description\t0.0"
+    },
+    {
+      "course": "ENTR-451-0",
+      "description": "Introduction to Software Development\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-454-0",
+      "description": "Entrepreneurial Selling\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-462-0",
+      "description": "New Venture Discovery\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-464-0",
+      "description": "New Venture Development\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-466-0",
+      "description": "New Venture Launch\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-470-0",
+      "description": "Launching and Scaling Startups\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "ENTR-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "ENTR-903-0",
+      "description": "Corporate Innovation and New Ventures\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-905-5",
+      "description": "Entrepreneurship Through Acquisition\tView Description\t0.5"
+    },
+    {
+      "course": "ENTR-906-5",
+      "description": "Entrepreneurship and Market Creation in Emerging Markets\tView Description\t0.5"
+    },
+    {
+      "course": "ENTR-910-0",
+      "description": "Acquisition & Management of a Small Business\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-922-5",
+      "description": "Building Intelligent Products\tView Description\t0.5"
+    },
+    {
+      "course": "ENTR-935-5",
+      "description": "Intellectual Property for Entrepreneurs\tView Description\t0.5"
+    },
+    {
+      "course": "ENTR-958-0",
+      "description": "Commercializing Innovations\tView Description\t1.0"
+    },
+    {
+      "course": "ENTR-973-5",
+      "description": "Startup Branding\tView Description\t0.5"
+    },
+    {
+      "course": "EXAM-REQ",
+      "description": "Exam is Required as Course Prerequisite\tView Description\t0.0"
+    },
+    {
+      "course": "FINC-430-0",
+      "description": "Finance I\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-431-0",
+      "description": "Finance II\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-440-0",
+      "description": "Accelerated Corporate Finance\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-442-0",
+      "description": "Financial Decisions\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-444-0",
+      "description": "Value Investing\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-445-0",
+      "description": "Entrepreneurial Finance and Venture Capital\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-447-0",
+      "description": "Financial Strategy and Tax\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-448-0",
+      "description": "Mergers and Acquisitions, LBOs and Corporate Restructuring\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-450-0",
+      "description": "Capital Markets\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-454-0",
+      "description": "Real Estate Finance and Investments\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-455-0",
+      "description": "Applied Real Estate Finance and Investments\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-456-0",
+      "description": "Asset Management Practicum I\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-457-0",
+      "description": "Asset Management Practicum II\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-458-0",
+      "description": "Asset Management Practicum III\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-465-0",
+      "description": "Derivatives Markets\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-470-0",
+      "description": "International Finance\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-472-0",
+      "description": "Wall Street, Hedge Funds and Private Equity\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-473-0",
+      "description": "Macroeconomic Policy and Global Capital Markets\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-477-0",
+      "description": "Global Entrepreneurial Finance\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-478-5",
+      "description": "Financial Modeling for Private Equity Transactions\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-484-5",
+      "description": "Managing Firms for Shareholders and Society: Thought Leadership Seminar\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-520-1",
+      "description": "Time Series Analysis\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-584-0",
+      "description": "Introduction to Econometrics\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-585-1",
+      "description": "Asset Pricing I\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-585-2",
+      "description": "Asset Pricing II\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-585-3",
+      "description": "Asset Pricing III\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-586-1",
+      "description": "Corporate Finance I\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-586-2",
+      "description": "Corporate Finance II\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-586-3",
+      "description": "Corporate Finance III\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-590-0",
+      "description": "Research\tView Description\t3.0"
+    },
+    {
+      "course": "FINC-5XX",
+      "description": "Finance General Credit\tView Description\t0.0"
+    },
+    {
+      "course": "FINC-615-0",
+      "description": "Venture Lab\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-616-0",
+      "description": "Venture Lab - SF Immersion\tView Description\t2.0"
+    },
+    {
+      "course": "FINC-639-0",
+      "description": "Private Equity Lab\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-910-0",
+      "description": "Asset Management Lab\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-944-N",
+      "description": "Investment Banking Recruiting Prep\tView Description\t0.0"
+    },
+    {
+      "course": "FINC-946-5",
+      "description": "Impact Investing and Sustainable Finance\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-947-0",
+      "description": "Private Equity Deep Dive\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-948-0",
+      "description": "Keeping it all in the Family: Growing, Financing, and Managing Family Firms\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-949-5",
+      "description": "Family Office Deep Dive\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-951-5",
+      "description": "Private Equity and Distressed Investing\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-955-0",
+      "description": "Inefficient Markets\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-957-0",
+      "description": "Strategic Financial Planning and Wealth Management\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-966-0",
+      "description": "FinTech and Society\tView Description\t1.0"
+    },
+    {
+      "course": "FINC-968-5",
+      "description": "Corporate Credit Markets\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-980-5",
+      "description": "Venture Investing\tView Description\t0.5"
+    },
+    {
+      "course": "FINC-982-5",
+      "description": "Advanced Topics in Venture Investing\tView Description\t0.5"
+    },
+    {
+      "course": "GEN_CRED-5XX",
+      "description": "General Elective Credit\tView Description\t0.0"
+    },
+    {
+      "course": "HCAK-470-0",
+      "description": "Biomedical Marketing\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-611-0",
+      "description": "Medtech Entrepreneurship\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-616-0",
+      "description": "NUVention: Medical Innovation\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-627-0",
+      "description": "Forging and Funding Healthcare Startups\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-924-5",
+      "description": "Leadership in Today's U.S. Health Systems\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-928-25",
+      "description": "Understanding Healthcare's Global Marketplace (.25 Credit)\tView Description\t0.25"
+    },
+    {
+      "course": "HCAK-928-5",
+      "description": "Understanding Healthcare's Global Marketplace\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-931-0",
+      "description": "Pharmaceutical Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-935-5",
+      "description": "Strategy and Execution for a Successful Healthcare Delivery System\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-937-0",
+      "description": "Healthcare Entrepreneurship Lab\tView Description\t1.0"
+    },
+    {
+      "course": "HCAK-940-5",
+      "description": "Health Analytics\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-941-5",
+      "description": "Using Analytics to Create and Capture Value in Healthcare\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-951-5",
+      "description": "Managing Health Care Services in a Value Based Setting\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-957-5",
+      "description": "Health Systems Management: A Practicum with Northwestern Medicine\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-960-5",
+      "description": "Value Creation and Capture in Biopharmaceuticals\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-970-5",
+      "description": "Digital Health\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-973-5",
+      "description": "Create & Capture Value in the Chinese Healthcare Market\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-975-5",
+      "description": "Digital Health for the Entrepreneur\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-980-5",
+      "description": "Value Creation & Capture in an Evolving Healthcare Market\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-985-5",
+      "description": "Growing & Sustaining Success in Biopharmaceutical Firms\tView Description\t0.5"
+    },
+    {
+      "course": "HCAK-988-5",
+      "description": "Scaling Innovation in Healthcare Services\tView Description\t0.5"
+    },
+    {
+      "course": "INTL-473-0",
+      "description": "Global Initiatives in Management (GIM)\tView Description\t1.0"
+    },
+    {
+      "course": "INTL-490-EX1",
+      "description": "Foreign Study\tView Description\t0.0"
+    },
+    {
+      "course": "INTL-490-EX2",
+      "description": "Foreign Study\tView Description\t0.0"
+    },
+    {
+      "course": "INTL-490-EX3",
+      "description": "Foreign Study\tView Description\t0.0"
+    },
+    {
+      "course": "INTL-490-EX4",
+      "description": "Foreign Study\tView Description\t0.0"
+    },
+    {
+      "course": "INTL-490-EX5",
+      "description": "Foreign Study\tView Description\t0.0"
+    },
+    {
+      "course": "INTL-490-EX6",
+      "description": "Foreign Study\tView Description\t0.0"
+    },
+    {
+      "course": "INTL-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "INTL-5XX",
+      "description": "International Study General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "INTL-615-0",
+      "description": "Global Lab\tView Description\t1.0"
+    },
+    {
+      "course": "INTL-615-5",
+      "description": "Global Lab\tView Description\t0.5"
+    },
+    {
+      "course": "KIEI-5XX",
+      "description": "Innovation and Entrepreneurship General Credit\tView Description\t0.0"
+    },
+    {
+      "course": "KPHD-520-0",
+      "description": "Workshop on Research Development\tView Description\t0.5"
+    },
+    {
+      "course": "KPHD-525-0",
+      "description": "Data-Driven Theory\tView Description\t1.0"
+    },
+    {
+      "course": "KPHD-530-0",
+      "description": "Idea Incubator for Behavioral Science\tView Description\t1.0"
+    },
+    {
+      "course": "KPHD-540-0",
+      "description": "Computational Social Science: Methods and Applications\tView Description\t1.0"
+    },
+    {
+      "course": "KPPI-5XX",
+      "description": "Public/Private Interface General Credit\tView Description\t0.0"
+    },
+    {
+      "course": "LDEV-452-5",
+      "description": "Executive Presentations\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-456-0",
+      "description": "Strategic Communication for Organizations\tView Description\t1.0"
+    },
+    {
+      "course": "LDEV-456-5",
+      "description": "Strategic Communication for Organizations\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-458-5",
+      "description": "Influencing Decisions through Decks & Dashboards\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-460-0",
+      "description": "Moral Complexity in Leadership: An Exploration through Literature\tView Description\t1.0"
+    },
+    {
+      "course": "LDEV-460-5",
+      "description": "Moral Complexity in Leadership: An Exploration through Literature\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-461-5",
+      "description": "Personal Leadership Insights\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-462-5",
+      "description": "Leader as Coach\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-468-0",
+      "description": "Managerial Leadership\tView Description\t1.0"
+    },
+    {
+      "course": "LDEV-477-0",
+      "description": "Selling Yourself and Your Ideas\tView Description\t1.0"
+    },
+    {
+      "course": "LDEV-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "LDEV-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "LDEV-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "LDEV-965-5",
+      "description": "Leading with Empathy: Enhancing Your Emotional Intelligence to Lead in Today's Workplace\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-430-5",
+      "description": "Human Computer Interaction & Design Thinking\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-449-0",
+      "description": "Industry Applications of Artificial Intelligence\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-458-0",
+      "description": "Practicum in Engineering for AI\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-460-0",
+      "description": "Modern Software Architectures\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-490-0",
+      "description": "Industry AI Capstone Project\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-495-0",
+      "description": "Special Topics in MBAi: Health Tech\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-910-25",
+      "description": "MBAi Seminar Series\tView Description\t0.25"
+    },
+    {
+      "course": "MBAI-920-5",
+      "description": "MBAi AI Leaders\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-925-5",
+      "description": "Data Visualization (MBAi)\tView Description\t0.5"
+    },
+    {
+      "course": "MBAI-930-0",
+      "description": "MBAi Organizational Design and Ethics\tView Description\t1.0"
+    },
+    {
+      "course": "MBAI-940-0",
+      "description": "MBAi Immersion Internship\tView Description\t3.0"
+    },
+    {
+      "course": "MECN-430-0",
+      "description": "Microeconomic Analysis\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-441-0",
+      "description": "Competitive Strategy and Industrial Structure\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-446-0",
+      "description": "Pricing Strategies\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-451-0",
+      "description": "Solving Leadership Dilemmas with Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-452-0",
+      "description": "Game Theory and Strategic Decisions\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "MECN-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "MECN-5XX",
+      "description": "Managerial Economics General Credit\tView Description\t0.0"
+    },
+    {
+      "course": "MECN-615-0",
+      "description": "Analytical and AI Consulting Lab\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-925-5",
+      "description": "Geo-economics\tView Description\t0.5"
+    },
+    {
+      "course": "MECN-926-5",
+      "description": "Antitrust Economics\tView Description\t0.5"
+    },
+    {
+      "course": "MECN-935-0",
+      "description": "Big Data Advanced Analytics Workshop\tView Description\t1.0"
+    },
+    {
+      "course": "MECN-938-5",
+      "description": "Making Data Work\tView Description\t0.5"
+    },
+    {
+      "course": "MECN-943-0",
+      "description": "Behavioral Economics and Competitive Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-530-0",
+      "description": "Platforms and Two-Sided Markets\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-540-1",
+      "description": "Political Economy I: Introduction to Political Economy\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-540-2",
+      "description": "Political Economy II: Conflict and Cooperation\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-540-3",
+      "description": "Political Economy III: Social Choice and Voting Models\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-540-4",
+      "description": "Political Economy IV: Topics in Development Economics\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-548-0",
+      "description": "Innovation Economics and the Science of Science\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-549-1",
+      "description": "Technology and Innovation Economics\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-549-2",
+      "description": "Technology and Innovation ll\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-550-1",
+      "description": "Economic Theory I: Decision Theory\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-550-2",
+      "description": "Economic Theory II: Production Networks\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-550-3",
+      "description": "Economic Theory III: Doing Research in Economic Theory and Related Areas\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-551-1",
+      "description": "Health Economics I\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-551-2",
+      "description": "Health Economics II\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-560-1",
+      "description": "Static Optimization in Economics\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-560-2",
+      "description": "Dynamic Optimization in Economics\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-560-3",
+      "description": "Research in Economics\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-570-1",
+      "description": "Economics of Organizations I: Organizations and Markets\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-570-2",
+      "description": "Economics of Organizations II: Organizational Dynamics\tView Description\t1.0"
+    },
+    {
+      "course": "MECS-590-0",
+      "description": "Research\tView Description\t3.0"
+    },
+    {
+      "course": "MECS-5XX",
+      "description": "Managerial Economics General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "MEDM-5XX",
+      "description": "Media Management General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-430-0",
+      "description": "Marketing Management\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-430-5",
+      "description": "Marketing Management (.5 Credit)\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-435-0",
+      "description": "MBAi Marketing Management\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-450-0",
+      "description": "Marketing Research and Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-451-0",
+      "description": "Omnichannel Experience Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-454-0",
+      "description": "Advertising Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-454-5",
+      "description": "Advertising Strategy (.5 Credit Version)\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-458-0",
+      "description": "Product Management for Technology Companies: An Entrepreneurial Perspective\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-462-0",
+      "description": "Retail Analytics and Pricing\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-465-0",
+      "description": "Launching New Products and Services\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-466-0",
+      "description": "Marketing Strategy for Growth and Defense\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-468-0",
+      "description": "Technology Marketing\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-473-0",
+      "description": "Strategic Brand Management\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-478-0",
+      "description": "C Suite and Boardroom Dynamics\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-479-0",
+      "description": "Critical Thinking in Digital and Social Media Marketing\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-482-0",
+      "description": "Customer Analytics and AI\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-531-1",
+      "description": "Theory Building in Consumer Behavior Research\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-531-2",
+      "description": "Methods and Data in Consumer Research\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-531-3",
+      "description": "Developing Impactful Consumer Behavior Research\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-540-0",
+      "description": "Special Topics in Consumer Research\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-550-0",
+      "description": "Quantitative Marketing: Analytic Modeling\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-551-1",
+      "description": "Quantitative Marketing: Introduction to Theory and Empirical Methods\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-551-2",
+      "description": "Quantitative Marketing: Statistical Modeling\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-551-3",
+      "description": "Quantitative Marketing: Structural Modeling\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-552-0",
+      "description": "Topics in Quantitative Marketing\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-560-0",
+      "description": "Marketing Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-565-0",
+      "description": "Marketing Topics: Behavioral and Quantitative Perspectives\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-590-0",
+      "description": "Research\tView Description\t3.0"
+    },
+    {
+      "course": "MKTG-5XX",
+      "description": "Marketing General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-650-0",
+      "description": "Marketing Consulting Laboratory\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-924-5",
+      "description": "Leading Product Organizations\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-939-5",
+      "description": "Influencer Marketing\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-948-0",
+      "description": "Loyalty Co.: The Business of Customer Loyalty\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-949-0",
+      "description": "Ethnographic Customer Insights\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-949-5",
+      "description": "Ethnographic Customer Insights\tView Description\t0.5"
+    },
+    {
+      "course": "MKTG-959-0",
+      "description": "Behavioral Marketing Science\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-963-0",
+      "description": "Luxury Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "MKTG-965-0",
+      "description": "Marketing in Emerging Markets\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-430-0",
+      "description": "Leadership in Organizations\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-452-0",
+      "description": "Leading the Strategic Change Process\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-453-0",
+      "description": "Leading at Scale: Power, Design, and Influence in Organizations\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-455-5",
+      "description": "Strategy Implementation\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-457-0",
+      "description": "Winning with Networks\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-460-0",
+      "description": "Leading and Managing Teams\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-460-5",
+      "description": "Leading and Managing Teams\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-462-5",
+      "description": "Beyond Diversity: Leading Multicultural Meritocracy\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-470-0",
+      "description": "Negotiations\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-471-5",
+      "description": "Negotiating in a Virtual World\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-472-5",
+      "description": "Negotiations Fundamentals\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-521-1",
+      "description": "Special Topics in Management & Organizations: Micro\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-521-2",
+      "description": "Special Topics in Management and Organizations: Macro\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-521-3",
+      "description": "Special Topics in Management & Organizations: Emerging Topics in Computational Social Science\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-524-1",
+      "description": "The Individual and the Organization\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-524-2",
+      "description": "Social Processes in Organizations\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-525-1",
+      "description": "Behavior in Organizational Systems\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-525-2",
+      "description": "Organizations in Their Environments\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-526-1",
+      "description": "Micro-Organizational Research Methods\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-526-2",
+      "description": "Macro-Organizational Research Methods\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-590-0",
+      "description": "Research\tView Description\t3.0"
+    },
+    {
+      "course": "MORS-5XX",
+      "description": "Management and Organizations General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-928-0",
+      "description": "Corporate Entrepreneurship: Organization Design for Disruption\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-951-0",
+      "description": "Think Like a Behavioral Scientist: Improving Thinking, Motivation, and Action at Work\tView Description\t1.0"
+    },
+    {
+      "course": "MORS-952-5",
+      "description": "Entrepreneurship: Building Innovation, Teams, and Cultures\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-964-5",
+      "description": "The Science and Strategy of Bias Reduction\tView Description\t0.5"
+    },
+    {
+      "course": "MORS-975-5",
+      "description": "Advanced Negotiations\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-430-0",
+      "description": "Operations Management\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-435-0",
+      "description": "MBAi Operations Management\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-438-5",
+      "description": "Operations Management (Turbo)\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-440-0",
+      "description": "Designing and Managing Business Processes\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-441-0",
+      "description": "Applied Advanced Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-450-0",
+      "description": "Decision Models & Prescriptive Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-454-0",
+      "description": "Strategic Decisions in Operations\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-455-0",
+      "description": "Supply Chain Management\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-510-0",
+      "description": "Stochastic Calculus and Control\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-516-0",
+      "description": "Stochastic Foundations\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-516-1",
+      "description": "Stochastic Processes I\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-521-0",
+      "description": "Foundations of Operations Management\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-522-0",
+      "description": "Queueing Networks: Models, Algorithms and Emerging Applications\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-523-0",
+      "description": "Estimation of Dynamic Programs\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-524-0",
+      "description": "Empirical Methods in Operations Management\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-525-0",
+      "description": "Emerging Areas in Operations Managements\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-590-0",
+      "description": "Research\tView Description\t3.0"
+    },
+    {
+      "course": "OPNS-599-0",
+      "description": "Independent Study - PhD\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-5XX",
+      "description": "Operations General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-912-0",
+      "description": "Service Management and Analytics\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-925-0",
+      "description": "The Rookie General Manager - Black Diamond\tView Description\t1.0"
+    },
+    {
+      "course": "OPNS-925-5",
+      "description": "The Rookie General Manager\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-941-5",
+      "description": "Sustainable and Responsible Supply Chain Strategy Execution\tView Description\t0.5"
+    },
+    {
+      "course": "OPNS-951-0",
+      "description": "Operations for Social Impact\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-440-5",
+      "description": "Leadership and Crisis Management\tView Description\t0.5"
+    },
+    {
+      "course": "PACT-441-0",
+      "description": "Strategy Beyond Markets\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-454-5",
+      "description": "The Education Industry\tView Description\t0.5"
+    },
+    {
+      "course": "PACT-460-0",
+      "description": "Ethics and Leadership\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-460-5",
+      "description": "Ethics and Leadership\tView Description\t0.5"
+    },
+    {
+      "course": "PACT-470-0",
+      "description": "Public Economics for Business Leaders: Federal Policy\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-480-0",
+      "description": "Public Economics for Business Leaders: State and Local Policy\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "PACT-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "PACT-618-0",
+      "description": "Education Consulting Lab\tView Description\t1.0"
+    },
+    {
+      "course": "PACT-699-0",
+      "description": "Mayoral Internship\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-443-5",
+      "description": "Urban Economic Development and Real Estate Market Analysis\tView Description\t0.5"
+    },
+    {
+      "course": "REAL-444-0",
+      "description": "Real Estate Development\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-447-0",
+      "description": "Legal Issues In Real Estate\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-455-5",
+      "description": "International Real Estate\tView Description\t0.5"
+    },
+    {
+      "course": "REAL-465-0",
+      "description": "Real Estate Entrepreneurship\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "REAL-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "REAL-5XX",
+      "description": "Real Estate General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "REAL-616-0",
+      "description": "Real Estate Lab\tView Description\t1.0"
+    },
+    {
+      "course": "REAL-930-5",
+      "description": "Real Estate Technology\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-452-0",
+      "description": "Social Innovation Practicum\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-453-5",
+      "description": "Board Governance of Nonprofit Organizations (GCBF)\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-455-5",
+      "description": "Board Governance of Non-Profit Organizations\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-471-5",
+      "description": "Advanced Board Governance (GCBF)\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-621-0",
+      "description": "Abrams Climate Academy - Fall\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-622-0",
+      "description": "Abrams Climate Academy - Winter\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-623-0",
+      "description": "Abrams Climate Academy - Spring\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-636-0",
+      "description": "Sustainability Lab\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-673-5",
+      "description": "Medical Technologies in Global Public Health\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-917-5",
+      "description": "Corporate Social Innovation\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-933-0",
+      "description": "Health and Human Rights\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-938-0",
+      "description": "Creating Value Through Sustainability: Managing the Corporate Transformation\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-940-0",
+      "description": "Early Stage Impact Investing\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-945-0",
+      "description": "Investing for Community Impact\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-947-5",
+      "description": "Decision-Making for Sustainable Business\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-948-0",
+      "description": "Quantifying Social Return: Tools for Impact, Corporate and Nonprofit Investments\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-950-0",
+      "description": "Strategic Leadership in the Nonprofit Sector\tView Description\t1.0"
+    },
+    {
+      "course": "SSIM-957-5",
+      "description": "Social Change Essentials: Methods, Money, and Partnerships\tView Description\t0.5"
+    },
+    {
+      "course": "SSIM-960-5",
+      "description": "Climate Impacts\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-431-0",
+      "description": "Business Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-440-0",
+      "description": "People Analytics and Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-441-0",
+      "description": "Intellectual Capital Management\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-443-0",
+      "description": "Healthcare Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-444-0",
+      "description": "Healthcare Economics\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-447-0",
+      "description": "Family Enterprises: Issues and Solutions\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-452-0",
+      "description": "Strategy and Organization\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-458-0",
+      "description": "The Economics of Energy Markets and the Environment\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-460-0",
+      "description": "International Business Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-461-5",
+      "description": "FinTech Strategy\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-463-0",
+      "description": "Technology and Innovation Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-466-0",
+      "description": "Strategic Challenges in Emerging Markets\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-469-0",
+      "description": "Analytics for Strategy\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-475-5",
+      "description": "Strategies for Growth\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-498-0",
+      "description": "Field Study\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-498-5",
+      "description": "Field Study\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-499-0",
+      "description": "Independent Study\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-499-5",
+      "description": "Independent Study\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-512-5",
+      "description": "Intl Practicum/Cross-Cultural Management Practice\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-513-N",
+      "description": "Kellogg Internship\tView Description\t0.0"
+    },
+    {
+      "course": "STRT-514-N",
+      "description": "Kellogg Internship Half-Time\tView Description\t0.0"
+    },
+    {
+      "course": "STRT-5XX",
+      "description": "Management General Credit\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-615-0",
+      "description": "Growth Strategy Practicum\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-920-5",
+      "description": "Strategy Lab\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-931-5",
+      "description": "Strategy and Renewal in Established Nonprofits\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-947-0",
+      "description": "Healthcare Strategy Consulting Lab\tView Description\t1.0"
+    },
+    {
+      "course": "STRT-959-5",
+      "description": "What Every MBA Should Know About Climate Change\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-960-5",
+      "description": "Strategic Decisions: A Guide to Making Winning Choices\tView Description\t0.5"
+    },
+    {
+      "course": "STRT-969-5",
+      "description": "Organizational Growth and Transformation\tView Description\t0.5"
+    }
+  ]
+}
