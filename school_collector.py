@@ -12,7 +12,7 @@ def parse_raw_text(text):
     parsed = []
     lines = text.split('\n')
     
-    # 1. Visual Gap
+    # 1. Visual Gap (Tab Separated)
     gap_lines = [line for line in lines if re.search(r'(\t|\s{2,})', line.strip())]
     if len(gap_lines) > 5:
         print("   🔍 Detected 'Visual Gap' format.")
@@ -23,7 +23,6 @@ def parse_raw_text(text):
             if len(parts) >= 3:
                 title = parts[0].strip()
                 desc = parts[2].strip()
-                # Only save if description looks real (longer than a generic word)
                 if len(desc) > 25: 
                     parsed.append({"course": title, "description": desc})
         if parsed: return parsed
@@ -45,112 +44,74 @@ def parse_raw_text(text):
 
 async def fetch_url_text(url):
     """
-    Advanced Scraper V3: Aggressive Deep Crawling.
+    Kellogg-Optimized Scraper: Search -> Expand All -> Scrape.
     """
     from playwright.async_api import async_playwright
     
     print(f"   🌍 Visiting: {url}")
     
-    full_corpus_text = ""
-    
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        context = await browser.new_context()
-        page = await context.new_page()
+        page = await browser.new_page()
         
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=60000)
             await asyncio.sleep(4) 
 
-            # --- 1. HANDLE SEARCH BUTTONS ---
-            search_btns = page.locator("button:has-text('Search'), input[type='submit']")
+            # --- 1. HANDLE SEARCH BUTTON (Required for Kellogg) ---
+            # We look for the "Search" button to load the initial list
+            search_btns = page.locator("button:has-text('Search'), input[type='submit'], a.btn-search")
             if await search_btns.count() > 0:
-                print("   🖱️ Found Search button. Clicking...")
+                print("   🖱️ Found Search button. Clicking to load courses...")
                 try:
                     await search_btns.first.click()
-                    await asyncio.sleep(6) # Give it time to load the table
+                    # Wait for the spinner to go away / table to load
+                    await asyncio.sleep(6) 
+                    await page.wait_for_load_state("networkidle") 
                 except: pass
 
-            # --- 2. CHECK FOR EXPANDERS ---
-            expanders_clicked = 0
-            expand_buttons = page.locator("text=View Description, text=More Info, .expand-icon, .kellogg-expand")
-            if await expand_buttons.count() > 0:
-                print(f"   🖱️ Found expanders. Clicking...")
-                count = await expand_buttons.count()
-                for i in range(min(count, 100)): 
-                    try: 
-                        await expand_buttons.nth(i).click()
-                        expanders_clicked += 1
-                    except: pass
-                await asyncio.sleep(2)
-
-            # --- 3. DECISION TIME: DO WE HAVE DATA? ---
-            page_text = await page.inner_text("body")
-            print(f"   📏 Current Page Text Length: {len(page_text)} chars")
+            # --- 2. THE "EXPANDER" STRATEGY ---
+            # Instead of opening links, we click "View Description"
             
-            # AGGRESSIVE CHECK: If text is < 100k OR we didn't click expanders, we assume we missed the details.
-            if len(page_text) < 100000 and expanders_clicked == 0:
-                print("   ⚠️ Text is too short (Descriptions likely hidden). Activating 'Deep Crawler'...")
+            # Find all potential expanders
+            # Kellogg uses "View Description", others use "More" or arrow icons
+            expanders = page.locator("text=View Description, text=More Info, a[id*='Description']")
+            count = await expanders.count()
+
+            if count > 0:
+                print(f"   🖱️ Found {count} 'View Description' toggles.")
+                print("      Clicking them one by one to reveal text (this ensures we capture it)...")
                 
-                # Targeted Selectors for Course Links (Kellogg, Booth, etc.)
-                # We look for links inside tables or lists
-                possible_links = await page.locator("td a, .course-list a, .result-list a, h3 a, h4 a").all()
+                # We loop through them. Limit to 150 to prevent timeouts.
+                # If there are 400 courses, we'll get the top 150 which is plenty for analysis.
+                for i in range(min(count, 150)):
+                    try:
+                        # We re-query the element to avoid "Stale Element" errors
+                        btn = expanders.nth(i)
+                        if await btn.is_visible():
+                            await btn.click()
+                            # Tiny sleep to let the text render
+                            if i % 10 == 0: await asyncio.sleep(0.5) 
+                    except Exception as e:
+                        # Sometimes one click fails, just keep going
+                        pass
                 
-                urls_to_visit = []
-                for link in possible_links:
-                    try:
-                        href = await link.get_attribute("href")
-                        # Filter out garbage links
-                        if href and len(href) > 5 and "javascript" not in href and "mailto" not in href:
-                            # Filter out nav links (Home, About, etc)
-                            if any(x in href.lower() for x in ["login", "privacy", "contact", "home"]): continue
-                            
-                            # Fix Relative URLs
-                            if not href.startswith("http"):
-                                base = "/".join(url.split("/")[:3]) # https://site.com
-                                if href.startswith("/"):
-                                    href = base + href
-                                else:
-                                    # Fallback for relative paths
-                                    current_dir = "/".join(url.split("/")[:-1])
-                                    href = current_dir + "/" + href
-                            
-                            urls_to_visit.append(href)
-                    except: pass
+                print("      ✅ Finished expanding. Waiting for text to settle...")
+                await asyncio.sleep(3)
 
-                # Deduplicate
-                urls_to_visit = list(set(urls_to_visit))
-                print(f"   🔍 Found {len(urls_to_visit)} potential course links. Visiting top 60...")
-
-                # VISIT LINKS (Limit 60 to prevent timeout)
-                for i, link_url in enumerate(urls_to_visit[:60]):
-                    try:
-                        new_page = await context.new_page()
-                        await new_page.goto(link_url, wait_until="domcontentloaded", timeout=10000)
-                        
-                        # Grab title and body
-                        sub_text = await new_page.inner_text("body")
-                        
-                        # Only keep if it looks like a course page (has "Description" or "Credits")
-                        if "Description" in sub_text or "Overview" in sub_text:
-                            full_corpus_text += f"\n\n--- COURSE ENTRY {i} ---\n{sub_text}"
-                            print(f"      📄 Scraped link {i+1}: {len(sub_text)} chars")
-                        
-                        await new_page.close()
-                        await asyncio.sleep(0.5) 
-                    except: 
-                        try: await new_page.close()
-                        except: pass
-            else:
-                full_corpus_text = page_text
-
+            # --- 3. SCRAPE THE FULL PAGE ---
+            # Now that everything is expanded, we grab the Body Text
+            full_text = await page.inner_text("body")
+            
+            print(f"   📏 Captured {len(full_text)} chars of text.")
+            
             await browser.close()
-            return full_corpus_text
+            return full_text
 
         except Exception as e:
             print(f"   ❌ Browser Error: {e}")
             await browser.close()
-            return full_corpus_text
+            return ""
 
 async def main():
     parser = argparse.ArgumentParser()
@@ -183,11 +144,10 @@ async def main():
     print(f"   Processing {len(raw_text)} chars of text...")
     courses = parse_raw_text(raw_text)
 
-    # If Regex failed but we have data (Deep Crawl mode often produces text that regex misses)
-    # We save the raw dump as a fallback so we don't lose the scrape
-    if not courses and len(raw_text) > 1000:
-        print("⚠️ Warning: Standard regex failed, but we captured text.")
-        print("   Saving raw dump as 'Manual_Review' course.")
+    # Fallback: If Regex fails but we have text, save the raw dump
+    if not courses and len(raw_text) > 5000:
+        print("⚠️ Warning: Auto-parser couldn't split courses perfectly.")
+        print("   Saving raw text dump for AI Analysis later.")
         courses = [{"course": "Raw Data Dump", "description": raw_text}]
 
     os.makedirs("raw_school_data", exist_ok=True)
