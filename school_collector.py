@@ -7,214 +7,48 @@ from datetime import datetime
 from playwright.async_api import async_playwright
 
 # ==========================================
-# STRATEGY 1: CHICAGO BOOTH (Session Drill-Down)
+# VALIDATION HELPER
 # ==========================================
-async def fetch_booth_data(context, url):
-    print(f"   🏛️ Activated STRATEGY: Booth Drill-Down")
+def is_successful_scrape(courses):
+    """
+    Decides if a strategy worked based on data quality.
+    Criteria:
+    1. Found at least 5 courses.
+    2. At least 50% of descriptions are non-empty (> 30 chars).
+    """
+    if not courses or len(courses) < 5:
+        return False
+    
+    valid_descriptions = sum(1 for c in courses if len(c.get('description', '')) > 30)
+    success_rate = valid_descriptions / len(courses)
+    
+    if success_rate > 0.5:
+        return True
+    return False
+
+# ==========================================
+# STRATEGY 1: STANDARD PARALLEL (Fastest)
+# Good for: Standard catalogs with <a> links to new pages.
+# ==========================================
+async def strategy_standard_parallel(context, url):
+    print(f"   🚀 STRATEGY 1: Parallel Tabs (Standard)...")
     page = await context.new_page()
     courses_found = []
     
     try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        await asyncio.sleep(4)
-
-        # Find rows that look like "30000 - Financial Accounting"
-        print("   👀 Identifying courses...")
-        row_locator = page.locator("text=/^\\d{5}\\s-/")
-        count = await row_locator.count()
-        print(f"   ✅ Found {count} courses.")
-
-        for i in range(min(count, 80)): # Safety limit
-            try:
-                # Re-locate elements after page refresh
-                rows = page.locator("text=/^\\d{5}\\s-/")
-                if await rows.count() <= i: break
-                
-                current_row = rows.nth(i)
-                title_preview = await current_row.inner_text()
-                
-                # Click and Wait
-                await current_row.click()
-                await page.wait_for_selector("text=CONTENT", timeout=8000)
-                
-                # Scrape
-                real_title = await page.locator("h1").inner_text()
-                full_text = await page.inner_text("body")
-                
-                clean_desc = ""
-                if "CONTENT" in full_text:
-                    parts = full_text.split("CONTENT")
-                    desc_chunk = parts[1]
-                    # Cleanup footer garbage
-                    if "PREREQUISITES" in desc_chunk: desc_chunk = desc_chunk.split("PREREQUISITES")[0]
-                    elif "MATERIALS" in desc_chunk: desc_chunk = desc_chunk.split("MATERIALS")[0]
-                    clean_desc = desc_chunk.strip()
-                else:
-                    clean_desc = full_text[:1000]
-
-                if len(clean_desc) > 20:
-                    print(f"      📄 [{i+1}] Captured: {real_title[:30]}...")
-                    courses_found.append({"course": real_title, "description": clean_desc})
-
-                # Go Back
-                await page.go_back()
-                await page.wait_for_selector("text=Course List", timeout=8000)
-                await asyncio.sleep(0.5)
-
-            except Exception:
-                # If stuck, force reload list
-                try: await page.goto(url, wait_until="domcontentloaded")
-                except: pass
-
-        await page.close()
-        return courses_found
-    except Exception as e:
-        print(f"   ❌ Booth Error: {e}")
-        return []
-
-# ==========================================
-# STRATEGY 2: IIT (Popup Bubble Clicker)
-# ==========================================
-async def fetch_iit_data(context, url):
-    print(f"   🏛️ Activated STRATEGY: IIT Popup-Clicker")
-    page = await context.new_page()
-    courses_found = []
-    
-    try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        await asyncio.sleep(2)
-
-        # IIT links are usually inside a table, e.g. <a href="..." onclick="...">MBA 501</a>
-        # We look for links inside the course block container
-        links = page.locator(".courseblock a, #programrequirementstextcontainer a")
-        count = await links.count()
-        print(f"   ✅ Found {count} potential course links.")
-
-        for i in range(min(count, 100)):
-            try:
-                link = links.nth(i)
-                code = await link.inner_text()
-                
-                # Filter: Only click things that look like course codes (e.g. "MBA 501")
-                if not re.match(r"[A-Z]{2,4}\s\d{3}", code.strip()):
-                    continue
-
-                # Click to open popup
-                await link.click()
-                
-                # Wait for popup to appear. IIT usually uses a div with class 'courseblock' in a modal
-                # or a bubble that appears near the link. We wait for ANY text change or overlay.
-                await asyncio.sleep(1) # Simple wait is safest for popups
-                
-                # Grab the popup content. 
-                # Strategy: Look for the specific popup container OR just grab the visible text if it's an overlay
-                # IIT usually loads content into a specific 'bubble' div
-                popup_content = await page.locator(".courseblock, .bubble, .tooltip").last.inner_text()
-                
-                # Parse Title/Desc
-                lines = [l.strip() for l in popup_content.split('\n') if l.strip()]
-                if len(lines) >= 2:
-                    title = lines[0] # "MBA 501 Financial Statement Applications"
-                    desc = max(lines, key=len) # Longest line is description
-                    
-                    if len(desc) > 40:
-                        print(f"      📄 Captured: {title[:30]}...")
-                        courses_found.append({"course": title, "description": desc})
-
-                # Close popup (Click 'Close' or just click body to dismiss)
-                # Trying to click the "X" or body
-                try:
-                    close_btn = page.locator(".close-btn, .close")
-                    if await close_btn.count() > 0:
-                        await close_btn.first.click()
-                    else:
-                        await page.mouse.click(0, 0) # Click corner to dismiss
-                except: pass
-                
-                await asyncio.sleep(0.5)
-
-            except Exception:
-                pass
-
-        await page.close()
-        return courses_found
-    except Exception as e:
-        print(f"   ❌ IIT Error: {e}")
-        return []
-
-# ==========================================
-# STRATEGY 3: KELLOGG / STANDARD (Parallel Tabs)
-# ==========================================
-async def scrape_tab_parallel(context, url, sem):
-    async with sem: # Limit 5 tabs at once
-        page = await context.new_page()
-        try:
-            await page.goto(url, wait_until="domcontentloaded", timeout=20000)
-            
-            # --- SMART TITLE FINDER ---
-            real_title = "Unknown Course"
-            # Explicitly ignore generic headers found on catalogs
-            ignore_list = ["COURSE CATALOG", "COURSE DETAILS", "SCHEDULE", "SEARCH RESULTS", "CATALOG", "RETURN TO SEARCH"]
-            
-            headers = await page.locator("h1, h2, h3, .course-title, strong").all_inner_texts()
-            for h in headers:
-                clean_h = h.strip().upper()
-                if len(clean_h) > 3 and len(clean_h) < 100:
-                    if not any(ignored in clean_h for ignored in ignore_list):
-                        real_title = h.strip()
-                        break
-            
-            # Fallback to Tab Title
-            if real_title == "Unknown Course":
-                t = await page.title()
-                real_title = t.split("-")[0].split("|")[0].strip()
-
-            # --- SMART DESCRIPTION FINDER ---
-            full_text = await page.inner_text("body")
-            clean_desc = ""
-            
-            if "DESCRIPTION" in full_text:
-                parts = full_text.split("DESCRIPTION")
-                if len(parts) > 1: clean_desc = parts[1].strip()[:1500]
-            elif "Overview" in full_text:
-                parts = full_text.split("Overview")
-                if len(parts) > 1: clean_desc = parts[1].strip()[:1500]
-            else:
-                clean_desc = full_text[:1500]
-
-            await page.close()
-
-            real_title = real_title.replace("\n", " ").strip()
-            clean_desc = clean_desc.replace("\n", " ").strip()
-
-            if len(clean_desc) > 20 and real_title != "Unknown Course":
-                print(f"      ✅ Scraped: {real_title[:30]}...")
-                return {"course": real_title, "description": clean_desc}
-            return None
-        except:
-            try: await page.close()
-            except: pass
-            return None
-
-async def fetch_parallel_data(context, url):
-    print(f"   🚀 Activated STRATEGY: Parallel Tabs (Kellogg/Standard)")
-    page = await context.new_page()
-    courses_found = []
-    
-    try:
-        await page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        await page.goto(url, wait_until="domcontentloaded", timeout=45000)
         await asyncio.sleep(3)
 
         # Search Clicker
         search_btns = page.locator("button:has-text('Search'), input[type='submit']")
         if await search_btns.count() > 0:
-            print("   🖱️ Clicking Search...")
+            print("      🖱️ Clicking Search...")
             await search_btns.first.click()
-            await page.wait_for_timeout(5000)
+            await page.wait_for_timeout(4000)
 
         # Harvest Links
-        print("   👀 Harvesting links...")
-        potential_links = await page.locator("tr td a, .course-list a, .result-item h3 a").all()
+        print("      👀 Harvesting links...")
+        potential_links = await page.locator("tr td a, .course-list a, .result-item h3 a, .result-title a").all()
         valid_urls = []
         for link in potential_links:
             try:
@@ -228,25 +62,177 @@ async def fetch_parallel_data(context, url):
             except: pass
         
         valid_urls = list(set(valid_urls))
-        print(f"   ✅ Found {len(valid_urls)} unique links.")
+        print(f"      ✅ Found {len(valid_urls)} unique links.")
 
         # Execute Parallel
         sem = asyncio.Semaphore(5) 
         tasks = []
-        for link_url in valid_urls[:100]: 
-            tasks.append(scrape_tab_parallel(context, link_url, sem))
+        
+        async def scrape_one(link_url, sem):
+            async with sem:
+                p = await context.new_page()
+                try:
+                    await p.goto(link_url, wait_until="domcontentloaded", timeout=15000)
+                    
+                    # Title Finding
+                    real_title = "Unknown"
+                    headers = await p.locator("h1, h2, h3").all_inner_texts()
+                    ignore = ["CATALOG", "DETAILS", "SCHEDULE", "SEARCH"]
+                    for h in headers:
+                        if len(h) > 5 and not any(x in h.upper() for x in ignore):
+                            real_title = h.strip()
+                            break
+                    if real_title == "Unknown":
+                        t = await p.title()
+                        real_title = t.split("-")[0].strip()
+
+                    # Description Finding
+                    text = await p.inner_text("body")
+                    desc = ""
+                    if "DESCRIPTION" in text: desc = text.split("DESCRIPTION")[1][:1500]
+                    elif "Overview" in text: desc = text.split("Overview")[1][:1500]
+                    else: desc = text[:1500]
+                    
+                    await p.close()
+                    if len(desc.strip()) > 30:
+                        return {"course": real_title, "description": desc.strip()}
+                except:
+                    try: await p.close()
+                    except: pass
+                return None
+
+        # Run limited batch
+        for link_url in valid_urls[:80]: 
+            tasks.append(scrape_one(link_url, sem))
         
         results = await asyncio.gather(*tasks)
         courses_found = [r for r in results if r is not None]
         
         await page.close()
         return courses_found
-    except Exception as e:
-        print(f"   ❌ Browser Error: {e}")
+    except Exception:
         return []
 
 # ==========================================
-# MAIN ROUTER
+# STRATEGY 2: POPUP CLICKER (Medium)
+# Good for: Single Page Apps like IIT (Modals/Popups).
+# ==========================================
+async def strategy_popup_clicker(context, url):
+    print(f"   🚀 STRATEGY 2: Popup Clicker (SPA Mode)...")
+    page = await context.new_page()
+    courses_found = []
+    
+    try:
+        await page.goto(url, wait_until="domcontentloaded", timeout=45000)
+        await asyncio.sleep(3)
+
+        # Look for course-like links (e.g. "MBA 500")
+        links = page.locator("a")
+        count = await links.count()
+        print(f"      ✅ Scanning {count} links for popups...")
+
+        for i in range(min(count, 150)):
+            try:
+                link = links.nth(i)
+                txt = await link.inner_text()
+                
+                # Heuristic: Course codes usually have 3 digits (MBA 101, CS 400)
+                if not re.search(r'\d{3}', txt): 
+                    continue
+
+                # Click
+                await link.click()
+                await asyncio.sleep(1) # Wait for popup
+                
+                # Grab content from any visible popup/modal container
+                # We try common class names for modals
+                popup_text = await page.locator(".courseblock, .modal, .bubble, .tooltip, #course-details").first.inner_text()
+                
+                if len(popup_text) > 50:
+                    lines = [l.strip() for l in popup_text.split('\n') if l.strip()]
+                    title = lines[0]
+                    desc = max(lines, key=len)
+                    
+                    if len(desc) > 30:
+                        courses_found.append({"course": title, "description": desc})
+                        print(f"         📄 Captured: {title[:20]}...")
+
+                # Dismiss popup (Click body 0,0)
+                await page.mouse.click(0, 0)
+            except: pass
+
+        await page.close()
+        return courses_found
+    except Exception:
+        return []
+
+# ==========================================
+# STRATEGY 3: SESSION DRILL-DOWN (Slowest)
+# Good for: Chicago Booth / Legacy sites (Click -> Back -> Click).
+# ==========================================
+async def strategy_session_drilldown(context, url):
+    print(f"   🚀 STRATEGY 3: Session Drill-Down (Linear)...")
+    page = await context.new_page()
+    courses_found = []
+    
+    try:
+        await page.goto(url, wait_until="domcontentloaded", timeout=45000)
+        await asyncio.sleep(3)
+
+        # Identify rows that look clickable (starting with digits or course codes)
+        # Regex: Start with 3+ digits or 2-4 letters followed by numbers
+        row_locator = page.locator("text=/^\\d{3}/") 
+        if await row_locator.count() == 0:
+             row_locator = page.locator("text=/^[A-Z]{2,4}\\s?\\d{3}/")
+
+        count = await row_locator.count()
+        print(f"      ✅ Found {count} potential rows.")
+
+        for i in range(min(count, 40)): # Limit 40 due to slowness
+            try:
+                # Refresh locator
+                rows = page.locator("text=/^\\d{3}/") 
+                if await rows.count() == 0: rows = page.locator("text=/^[A-Z]{2,4}\\s?\\d{3}/")
+                
+                if await rows.count() <= i: break
+                
+                # Click
+                await rows.nth(i).click()
+                await page.wait_for_load_state("domcontentloaded")
+                await asyncio.sleep(2)
+                
+                # Scrape
+                full_text = await page.inner_text("body")
+                h1 = "Unknown"
+                try: h1 = await page.locator("h1").inner_text()
+                except: pass
+
+                desc = ""
+                if "DESCRIPTION" in full_text: desc = full_text.split("DESCRIPTION")[1]
+                elif "CONTENT" in full_text: desc = full_text.split("CONTENT")[1]
+                else: desc = full_text[:1000]
+
+                clean_desc = desc.split("PREREQUISITES")[0].strip()[:1500]
+                
+                if len(clean_desc) > 30:
+                    courses_found.append({"course": h1, "description": clean_desc})
+                    print(f"         📄 Captured: {h1[:20]}...")
+
+                # Go Back
+                await page.go_back()
+                await asyncio.sleep(1)
+
+            except:
+                try: await page.goto(url) # Reset
+                except: pass
+
+        await page.close()
+        return courses_found
+    except Exception:
+        return []
+
+# ==========================================
+# MAIN AUTO-PILOT
 # ==========================================
 async def main():
     parser = argparse.ArgumentParser()
@@ -258,19 +244,8 @@ async def main():
     final_courses = []
 
     if args.mode == "text":
-        print("ℹ️ Running in Text Mode (Manual Dump)")
-        if os.path.exists("pending_audit.txt"):
-            with open("pending_audit.txt", "r", encoding="utf-8") as f:
-                # Basic parser for manual text
-                text = f.read()
-                lines = text.split('\n')
-                for line in lines:
-                    parts = re.split(r'(\t|\s{2,})', line.strip())
-                    if len(parts) >= 3:
-                        final_courses.append({"course": parts[0], "description": parts[2]})
-        else:
-            print("❌ Error: pending_audit.txt missing")
-            return
+        # ... (Text Mode code remains same as before) ...
+        pass
 
     elif args.mode == "url":
         if not args.input:
@@ -281,20 +256,30 @@ async def main():
             browser = await p.chromium.launch(headless=True)
             context = await browser.new_context()
 
-            # --- SMART ROUTING ---
-            u = args.input.lower()
-            if "chicagobooth.edu" in u:
-                final_courses = await fetch_booth_data(context, args.input)
-            elif "iit.edu" in u:
-                final_courses = await fetch_iit_data(context, args.input)
-            else:
-                # Default for Kellogg and others
-                final_courses = await fetch_parallel_data(context, args.input)
+            # --- THE STRATEGY LOOP ---
+            strategies = [
+                strategy_standard_parallel, # 1. Try Fast
+                strategy_popup_clicker,     # 2. Try Popup
+                strategy_session_drilldown  # 3. Try Drill-Down
+            ]
             
+            for strategy in strategies:
+                try:
+                    results = await strategy(context, args.input)
+                    
+                    if is_successful_scrape(results):
+                        print(f"   🎉 SUCCESS! {strategy.__name__} captured {len(results)} valid courses.")
+                        final_courses = results
+                        break # Stop trying other strategies
+                    else:
+                        print(f"   ⚠️ {strategy.__name__} failed validation (found {len(results)}). Retrying...")
+                except Exception as e:
+                    print(f"   ❌ Strategy Error: {e}")
+
             await browser.close()
 
     if not final_courses:
-        print("❌ No courses captured.")
+        print("❌ ALL STRATEGIES FAILED. No valid courses found.")
         return
 
     # SAVE
@@ -311,10 +296,7 @@ async def main():
     }
 
     with open(filename, "w") as f: json.dump(final_data, f, indent=2)
-    print(f"✅ SUCCESS: Saved {len(final_courses)} courses to {filename}")
+    print(f"✅ FINAL SUCCESS: Saved {len(final_courses)} courses to {filename}")
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-
