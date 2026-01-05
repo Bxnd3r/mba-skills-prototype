@@ -1,39 +1,36 @@
-name: AUDIT NEW SCHOOL TEXT
+name: COLLECT SCHOOL TEXT
 
 on:
   workflow_dispatch:
     inputs:
       school_name:
-        description: 'School Name'
+        description: 'School Name (e.g. Chicago Booth)'
         required: true
 
 jobs:
-  text_audit:
+  collect_text:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Install
-        run: pip install google-generativeai
-      - name: Run
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python -u master_audit.py --mode text --name "${{ inputs.school_name }}"
-      - name: Save
+          
+      # No pip install needed! (Standard library only)
+
+      - name: Run Collector
+        run: python -u school_collector.py --mode text --name "${{ inputs.school_name }}"
+
+      - name: Save to Repo
         run: |
-          git config --global user.name "Text Bot"
+          git config --global user.name "Collector Bot"
           git config --global user.email "bot@github.com"
           
-          # 1. Stage and Commit the changes FIRST
-          git add registry.json *_audit.json pending_audit.txt
-          git commit -m "Text Audit: ${{ inputs.school_name }}" || echo "No changes to commit"
-          
-          # 2. THEN Pull (Rebase) updates from the server
+          # We add the new folder "raw_school_data"
+          git add raw_school_data/*.json pending_audit.txt
+          git commit -m "Collected: ${{ inputs.school_name }}" || echo "No changes to commit"
           git pull --rebase origin main
-          
-          # 3. Finally Push back to the server
           git push origin main
