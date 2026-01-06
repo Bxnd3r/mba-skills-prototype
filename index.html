@@ -10,21 +10,44 @@
         .container { width: 100%; max-width: 1150px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 5px; }
         
         /* Search UI */
-        .search-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; gap: 15px; width: 100%; }
+        .search-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; gap: 15px; width: 100%; position: relative; z-index: 50; }
         .search-box { position: relative; width: 100%; max-width: 600px; }
         input { width: 100%; padding: 14px 20px; font-size: 16px; border-radius: 12px; border: 2px solid #eee; transition: 0.2s; outline: none; }
         input:focus { border-color: #007bff; }
-        .results-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; z-index: 1000; max-height: 200px; overflow-y: auto; display: none; border-radius: 0 0 12px 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .results-list div { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #f8f9fa; font-size: 14px; }
-        .results-list div:hover { background-color: #f0f7ff; }
+        
+        /* The Dropdown Window */
+        .results-list { 
+            position: absolute; 
+            top: 110%; /* Slight gap below input */
+            left: 0; 
+            right: 0; 
+            background: white; 
+            border: 1px solid #ddd; 
+            border-radius: 12px; 
+            z-index: 1000; 
+            max-height: 300px; /* Taller window for scrolling */
+            overflow-y: auto; 
+            display: none; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+        }
+        
+        /* Scrollbar styling */
+        .results-list::-webkit-scrollbar { width: 8px; }
+        .results-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 8px; }
+        .results-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 8px; }
+        .results-list::-webkit-scrollbar-thumb:hover { background: #bbb; }
 
-        .school-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; height: 40px; }
+        .results-list div { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #f8f9fa; font-size: 15px; color: #333; }
+        .results-list div:hover { background-color: #f0f7ff; color: #007bff; }
+        .results-list div:last-child { border-bottom: none; }
+
+        .school-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; height: 40px; margin-top: 5px; }
         .school-tag { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .color-box { width: 20px; height: 20px; border-radius: 4px; margin-right: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
         .color-box::after { content: '×'; color: white; font-size: 16px; font-weight: bold; opacity: 0; position: absolute; }
         .color-box:hover::after { opacity: 1; }
 
-        .main-visual { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
+        .main-visual { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; z-index: 1; }
         .chart-wrapper { position: relative; height: 450px; flex: 2; min-width: 400px; }
         .info-panel { flex: 1; min-width: 280px; background: #fcfcfc; padding: 20px; border-radius: 12px; border: 1px solid #eee; font-size: 13px; }
         
@@ -42,7 +65,7 @@
     <div class="container">
         <div class="search-area">
             <div class="search-box">
-                <input type="text" id="schoolSearch" placeholder="Loading schools..." disabled oninput="showResults()">
+                <input type="text" id="schoolSearch" placeholder="Click to select a school..." disabled oninput="showResults()" onfocus="showResults()">
                 <div id="resultsList" class="results-list"></div>
             </div>
             <div id="schoolTags" class="school-tags"></div>
@@ -88,42 +111,62 @@
             try {
                 const res = await fetch('registry.json');
                 schoolsDB = await res.json();
+                
+                // SORT ALPHABETICALLY
+                schoolsDB.sort((a, b) => a.name.localeCompare(b.name));
+
                 document.getElementById('schoolSearch').disabled = false;
-                document.getElementById('schoolSearch').placeholder = "Search for a school...";
             } catch (e) { console.error("Registry error", e); }
         };
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchBox = document.querySelector('.search-box');
+            const list = document.getElementById('resultsList');
+            if (!searchBox.contains(event.target)) {
+                list.style.display = 'none';
+            }
+        });
 
         function showResults() {
             const query = document.getElementById('schoolSearch').value.toLowerCase();
             const list = document.getElementById('resultsList');
             list.innerHTML = "";
-            if (!query) { list.style.display = "none"; return; }
             
-            const filtered = schoolsDB.filter(s => s.name.toLowerCase().includes(query) && !selectedSchools.find(sel => sel.id === s.id));
+            // LOGIC CHANGE: Filter if typing, otherwise show ALL
+            let filtered = schoolsDB;
+            if (query) {
+                filtered = schoolsDB.filter(s => s.name.toLowerCase().includes(query));
+            }
+            
+            // Remove already selected schools from the dropdown
+            filtered = filtered.filter(s => !selectedSchools.find(sel => sel.id === s.id));
+
+            if (filtered.length === 0) {
+                list.style.display = "none";
+                return;
+            }
+
             filtered.forEach(s => {
                 const div = document.createElement('div');
                 div.innerText = s.name;
                 div.onclick = () => selectSchool(s);
                 list.appendChild(div);
             });
-            list.style.display = filtered.length ? "block" : "none";
+            list.style.display = "block";
         }
 
         async function selectSchool(school) {
             if (selectedSchools.length >= 3) return;
             
             try {
-                // Determine path: Check if full path is in registry, else fallback
                 const path = school.audit_file.startsWith('raw_school_data') ? school.audit_file : `raw_school_data/${school.audit_file}`;
                 const res = await fetch(path);
                 const data = await res.json();
-                const courses = data.curriculum || data; // Handle both formats
+                const courses = data.curriculum || data; 
 
-                // CHECK: Is this raw data or audited data?
                 let isAudited = false;
                 let scores = [0,0,0,0,0,0];
-                
-                // Try to calculate scores if they exist
                 let scoredCount = 0;
                 let totals = { "Decision_Making": 0, "Human_Capital": 0, "Strategy_Innovation": 0, "Task_Environment": 0, "Admin_Control": 0, "Logistics_Tech": 0 };
                 
@@ -158,6 +201,8 @@
                 
                 populateInventory(school.name, courses);
                 updateTags();
+                
+                // Clear search and hide list
                 document.getElementById('schoolSearch').value = "";
                 document.getElementById('resultsList').style.display = "none";
 
@@ -171,7 +216,6 @@
             const list = document.getElementById('courseList');
             list.innerHTML = `<h4>Inventory: ${schoolName}</h4>`;
             courses.forEach(c => {
-                // Check if we have a score
                 let badge = "Pending Analysis";
                 if (c.skills) {
                     const avg = (Object.values(c.skills).reduce((a,b)=>a+b,0)/6).toFixed(1);
