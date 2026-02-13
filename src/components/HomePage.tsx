@@ -5,11 +5,11 @@ import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Responsi
 // --- IMPORTS ---
 
 // 1. Job Data
-// CRITICAL: Your file must be named "jobs.json" inside src/data/
+// Ensure your file is named "jobs.json" in src/data/
 import realJobsData from '../data/jobs.json';
 
-// 2. School Curriculum Data (Dynamic Import)
-// CRITICAL: Your school files must be inside src/data/schools/
+// 2. School Curriculum Data
+// This imports all .json files from src/data/schools/
 const schoolFiles = import.meta.glob('../data/schools/*.json', { eager: true });
 const allSchoolsData = Object.values(schoolFiles).map((file: any) => file.default);
 
@@ -32,7 +32,7 @@ const mockSchools = [
   'Stanford Graduate School of Business',
   'MIT Sloan School of Management',
   'Wharton School (UPenn)',
-].filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
+].filter((value, index, self) => self.indexOf(value) === index);
 
 const mockSchoolRankings = [
   { rank: 1, school: 'MIT Sloan School of Management', nationalScore: 94, logistics: 98, strategy: 92, decision: 90 },
@@ -163,6 +163,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <div className={visibleSections.has('radar') ? 'animate-slide-in-left' : 'opacity-0'}>
+                {/* Search Bar */}
                 <div className="mb-8">
                   <form onSubmit={handleSearch} className="relative">
                     <div className="bg-white border-2 border-black p-6 shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
@@ -188,6 +189,7 @@ export default function HomePage() {
                   </form>
                 </div>
 
+                {/* Radar Chart */}
                 <div className="bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] overflow-hidden animate-breathe">
                   <div className="border-b-2 border-black p-6 bg-gray-50">
                     <div className="flex items-center justify-between mb-4">
@@ -220,6 +222,7 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Sidebar Stats */}
             <div className="lg:col-span-1">
               <div className={`sticky top-24 ${visibleSections.has('radar') ? 'animate-slide-in-right' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
                 <div className="bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
