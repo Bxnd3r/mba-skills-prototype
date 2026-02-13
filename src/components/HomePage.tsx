@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, TrendingUp, BookOpen, Award, ArrowRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Search, TrendingUp, BookOpen, Award, ArrowRight, ChevronRight, X } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
 // --- IMPORTS ---
@@ -19,6 +19,12 @@ const skillsData = [
   { skill: 'Logistics & Tech', school: 38, comparison: 92 },
 ];
 
+// Helper to clean names (Issue #5: Remove Underscores)
+const cleanName = (name: string) => {
+  if (!name) return "";
+  return name.replace(/_/g, ' ');
+};
+
 // Combine scraped schools with mock schools
 const scrapedSchoolNames = allSchoolsData.map((s: any) => s.school_name);
 const allSchoolNames = [
@@ -30,34 +36,22 @@ const allSchoolNames = [
   'Wharton School (UPenn)',
 ].filter((value, index, self) => self.indexOf(value) === index);
 
-const mockSchoolRankings = [
-  { rank: 1, school: 'MIT Sloan School of Management', nationalScore: 94, logistics: 98, strategy: 92 },
-  { rank: 2, school: 'Stanford Graduate School of Business', nationalScore: 92, logistics: 89, strategy: 96 },
-  { rank: 3, school: 'Northwestern University Kellogg', nationalScore: 89, logistics: 85, strategy: 94 },
-  { rank: 4, school: 'Harvard Business School', nationalScore: 88, logistics: 82, strategy: 93 },
-  { rank: 5, school: 'Wharton School (UPenn)', nationalScore: 87, logistics: 84, strategy: 90 },
-];
-
 export default function HomePage() {
-  // State
-  const [selectedSchool, setSelectedSchool] = useState(allSchoolNames[0] || 'No Data');
+  // State: Default to NULL (Issue #1: Site rests on blank state)
+  const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
-  // View State
-  const [currentSchoolIndex, setCurrentSchoolIndex] = useState(0);
-  const [sortBy, setSortBy] = useState<string>('highest-national');
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   
   const radarRef = useRef<HTMLDivElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
   // Derived Data
-  const currentSchoolData = allSchoolsData.find((s: any) => s.school_name === selectedSchool) || {
-    school_name: selectedSchool,
-    curriculum: []
-  };
+  const currentSchoolData = selectedSchool 
+    ? allSchoolsData.find((s: any) => s.school_name === selectedSchool) || { school_name: selectedSchool, curriculum: [] }
+    : null;
 
   // Click Outside Handler for Search
   useEffect(() => {
@@ -70,7 +64,7 @@ export default function HomePage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Intersection Observer for Animations
+  // Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -79,7 +73,7 @@ export default function HomePage() {
           if (id) setVisibleSections((prev) => new Set([...prev, id]));
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('[data-section]').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
@@ -92,7 +86,7 @@ export default function HomePage() {
     
     if (query.length > 0) {
       const filtered = allSchoolNames.filter(school => 
-        school.toLowerCase().includes(query.toLowerCase())
+        cleanName(school).toLowerCase().includes(cleanName(query).toLowerCase())
       );
       setSuggestions(filtered);
       setShowSuggestions(true);
@@ -103,13 +97,13 @@ export default function HomePage() {
 
   const selectSchool = (schoolName: string) => {
     setSelectedSchool(schoolName);
-    setSearchQuery('');
+    setSearchQuery(cleanName(schoolName)); // Show clean name in box
     setShowSuggestions(false);
-    scrollToRadar();
-  };
-
-  const scrollToRadar = () => {
-    radarRef.current?.scrollIntoView({ behavior: 'smooth' });
+    
+    // Smooth scroll to data after selection
+    setTimeout(() => {
+        radarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   const parseCourse = (courseString: string) => {
@@ -121,18 +115,21 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-sans text-slate-900">
+      
       {/* HERO SECTION */}
-      <section className="border-b-2 border-black min-h-[60vh] flex items-center justify-center py-20" data-section="hero">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className={`mb-6 ${visibleSections.has('hero') ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 bg-black text-white px-3 py-1 text-xs font-bold tracking-widest uppercase rounded-full">
+      <section className="border-b-2 border-black min-h-[70vh] flex flex-col items-center justify-center py-20 bg-white relative" data-section="hero">
+        <div className="max-w-4xl w-full px-6 text-center z-10">
+          
+          {/* Status Badge */}
+          <div className={`mb-8 flex justify-center ${visibleSections.has('hero') ? 'animate-fade-in-up' : 'opacity-0'}`}>
+            <div className="inline-flex items-center gap-3 bg-black text-white px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-full shadow-lg">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               System Online — {realJobsData.length} Jobs Tracked
             </div>
           </div>
 
-          <h1 className={`text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 ${
+          <h1 className={`text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9] mb-8 ${
             visibleSections.has('hero') ? 'animate-fade-in-scale' : 'opacity-0'
           }`} style={{ animationDelay: '0.2s' }}>
             COMPARE A<br/>
@@ -140,193 +137,195 @@ export default function HomePage() {
             TO THE MARKET
           </h1>
 
-          <p className={`text-lg text-gray-600 mb-10 max-w-xl mx-auto leading-relaxed ${
+          <p className={`text-xl text-gray-600 mb-12 max-w-xl mx-auto leading-relaxed font-medium ${
             visibleSections.has('hero') ? 'animate-fade-in-up' : 'opacity-0'
           }`} style={{ animationDelay: '0.4s' }}>
             Real-time alignment analysis between MBA curricula and market demand.
           </p>
 
-          <button
-            onClick={scrollToRadar}
-            className={`group inline-flex items-center gap-2 bg-black text-white px-8 py-4 text-sm font-bold tracking-wider uppercase hover:bg-gray-800 transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 ${
-              visibleSections.has('hero') ? 'animate-fade-in-scale' : 'opacity-0'
-            }`}
-            style={{ animationDelay: '0.6s' }}
-          >
-            Start Analysis
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-      </section>
-
-      {/* RADAR CHART SECTION */}
-      <section ref={radarRef} className="border-b-2 border-black bg-gray-50 py-16" data-section="radar">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-3 gap-8">
-            
-            {/* Main Chart Area */}
-            <div className="lg:col-span-2">
-              <div className={visibleSections.has('radar') ? 'animate-slide-in-left' : 'opacity-0'}>
-                
-                {/* SEARCH BAR WITH DROPDOWN */}
-                <div className="mb-6 relative z-20" ref={searchContainerRef}>
-                  <div className="bg-white border-2 border-black p-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
-                    <label className="block text-xs font-bold tracking-wider uppercase mb-2 text-gray-500">
-                      Search Institution
-                    </label>
-                    <div className="flex gap-2">
-                      <div className="relative flex-1">
-                        <input
-                          type="text"
-                          value={searchQuery}
-                          onChange={handleSearchChange}
-                          onFocus={() => searchQuery && setShowSuggestions(true)}
-                          placeholder="Type a school name (e.g. Harvard)..."
-                          className="w-full border-2 border-gray-200 px-4 py-2 text-sm bg-gray-50 focus:outline-none focus:border-black transition-colors font-medium"
-                        />
-                        {/* SUGGESTIONS DROPDOWN */}
-                        {showSuggestions && (
-                          <div className="absolute top-full left-0 right-0 bg-white border-2 border-black border-t-0 max-h-60 overflow-y-auto shadow-lg mt-1">
-                            {suggestions.length > 0 ? (
-                              suggestions.map((school, idx) => (
-                                <button
-                                  key={idx}
-                                  onClick={() => selectSchool(school)}
-                                  className="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 border-b border-gray-100 last:border-0 font-medium"
-                                >
-                                  {school}
-                                </button>
-                              ))
-                            ) : (
-                              <div className="px-4 py-3 text-sm text-gray-400 italic">No schools found</div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                      <button className="bg-black text-white px-4 py-2 hover:bg-gray-800 transition-colors">
-                        <Search className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
+          {/* MAIN SEARCH BAR (Always Visible) */}
+          <div className={`max-w-xl mx-auto relative ${visibleSections.has('hero') ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }} ref={searchContainerRef}>
+            <div className="relative group">
+                <div className="absolute inset-0 bg-black translate-x-1 translate-y-1 rounded-lg transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                <div className="relative bg-white border-2 border-black rounded-lg flex items-center p-2">
+                    <Search className="w-6 h-6 ml-3 text-gray-400" />
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        onFocus={() => searchQuery && setShowSuggestions(true)}
+                        placeholder="Search for a university..."
+                        className="w-full h-12 px-4 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
+                    />
+                    {selectedSchool && (
+                        <button onClick={() => {setSelectedSchool(null); setSearchQuery('');}} className="p-2 hover:bg-gray-100 rounded-full">
+                            <X className="w-5 h-5 text-gray-500"/>
+                        </button>
+                    )}
                 </div>
-
-                {/* Radar Chart */}
-                <div className="bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] overflow-hidden">
-                  <div className="border-b-2 border-black p-4 bg-gray-50 flex justify-between items-center">
-                    <h2 className="text-xl font-black tracking-tight">{selectedSchool}</h2>
-                  </div>
-                  <div className="p-4 h-[400px] bg-white">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <RadarChart cx="50%" cy="50%" outerRadius="70%" data={skillsData}>
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="skill" tick={{ fontSize: 10, fontWeight: 'bold' }} />
-                        <PolarRadiusAxis angle={30} domain={[0, 100]} />
-                        <Radar name="School Score" dataKey="school" stroke="#000000" fill="#000000" fillOpacity={0.1} />
-                        <Radar name="Market Demand" dataKey="comparison" stroke="#ff0000" fill="#ff0000" fillOpacity={0.1} />
-                        <Legend />
-                        <Tooltip />
-                      </RadarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* Sidebar Stats */}
-            <div className="lg:col-span-1">
-              <div className={`bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] ${visibleSections.has('radar') ? 'animate-slide-in-right' : 'opacity-0'}`}>
-                <div className="border-b-2 border-black p-4 bg-gray-50">
-                  <h3 className="text-sm font-black tracking-tight uppercase">Analysis Controls</h3>
-                </div>
-                <div className="p-4 space-y-2">
-                  {['Local Job Market', 'National Job Market', 'Peer Comparison'].map((label, idx) => (
-                    <button key={idx} className="w-full text-left px-4 py-3 border-2 border-gray-200 text-xs font-bold uppercase hover:border-black hover:bg-gray-50 transition-all">
-                      {label}
+            {/* Suggestions Dropdown */}
+            {showSuggestions && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-black rounded-lg shadow-xl max-h-80 overflow-y-auto z-50 divide-y divide-gray-100">
+                {suggestions.length > 0 ? (
+                    suggestions.map((school, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => selectSchool(school)}
+                        className="w-full text-left px-6 py-4 text-sm font-bold hover:bg-blue-50 transition-colors flex justify-between items-center group"
+                    >
+                        {cleanName(school)}
+                        <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-blue-600" />
                     </button>
-                  ))}
+                    ))
+                ) : (
+                    <div className="px-6 py-4 text-sm text-gray-400 italic">No schools found</div>
+                )}
                 </div>
-              </div>
-            </div>
+            )}
           </div>
+
         </div>
       </section>
 
-      {/* COURSE CATALOG */}
-      <section className="border-b-2 border-black bg-white py-16" data-section="courses">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-black tracking-tight mb-2">CURRICULUM</h2>
-            <p className="text-gray-500 text-sm">
-              {currentSchoolData.school_name} — {currentSchoolData.curriculum?.length || 0} Courses Found
-            </p>
-          </div>
+      {/* CONDITIONAL CONTENT: Only show if a school is selected */}
+      {selectedSchool ? (
+        <div ref={radarRef}>
+            
+            {/* SCHOOL HEADER */}
+            <div className="bg-black text-white py-12">
+                <div className="max-w-[1400px] mx-auto px-6 text-center">
+                    <h2 className="text-3xl font-bold tracking-widest uppercase text-gray-400 mb-2">Analysis Report</h2>
+                    <h3 className="text-4xl sm:text-6xl font-black tracking-tighter">{cleanName(selectedSchool)}</h3>
+                </div>
+            </div>
 
-          <div className="bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
-            <div className="max-h-[500px] overflow-y-auto divide-y-2 divide-gray-100">
-              {currentSchoolData.curriculum && currentSchoolData.curriculum.length > 0 ? (
-                currentSchoolData.curriculum.map((course: any, idx: number) => {
-                  const { code, name } = parseCourse(course.course);
-                  return (
-                    <div key={idx} className="p-4 hover:bg-gray-50 grid grid-cols-12 gap-4">
-                      <div className="col-span-3 sm:col-span-2 text-xs font-bold text-gray-400">{code}</div>
-                      <div className="col-span-9 sm:col-span-7 text-sm font-bold text-blue-900">{name}</div>
-                      <div className="col-span-12 sm:col-span-3 text-xs text-gray-500 line-clamp-1">{course.description}</div>
+            <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-16 grid lg:grid-cols-12 gap-8">
+                
+                {/* LEFT COL: RADAR CHART (Fixed) */}
+                <div className="lg:col-span-4 space-y-8" data-section="radar">
+                    <div className="bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] p-6">
+                        <div className="mb-6 flex items-center justify-between">
+                            <h3 className="font-black text-xl uppercase">Skill Gap Analysis</h3>
+                            <Award className="w-6 h-6" />
+                        </div>
+                        <div className="h-[350px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <RadarChart cx="50%" cy="50%" outerRadius="70%" data={skillsData}>
+                                <PolarGrid />
+                                <PolarAngleAxis dataKey="skill" tick={{ fontSize: 10, fontWeight: 'bold' }} />
+                                <PolarRadiusAxis angle={30} domain={[0, 100]} />
+                                <Radar name={cleanName(selectedSchool)} dataKey="school" stroke="#000000" fill="#000000" fillOpacity={0.1} />
+                                <Radar name="Market Demand" dataKey="comparison" stroke="#ff0000" fill="#ff0000" fillOpacity={0.1} />
+                                <Legend />
+                                <Tooltip />
+                                </RadarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
-                  );
-                })
-              ) : (
-                <div className="p-8 text-center text-gray-400 text-sm">
-                  No curriculum data available. Use the scraper to add data for this school.
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* LIVE JOB FEED */}
-      <section id="data" className="border-b-2 border-black bg-gray-50 py-16" data-section="jobs">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-black tracking-tight mb-2">LIVE MARKET FEED</h2>
-            <p className="text-gray-500 text-sm">Real-time data from {realJobsData.length} active listings</p>
-          </div>
-
-          <div className="bg-white border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
-            <div className="border-b-2 border-black p-4 bg-gray-50 flex items-center gap-2">
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">Recent Postings</span>
-            </div>
-
-            <div className="max-h-[600px] overflow-y-auto divide-y-2 divide-black">
-              {realJobsData && realJobsData.length > 0 ? (
-                realJobsData.slice(0, 100).map((job, idx) => (
-                  <div key={idx} className="p-6 hover:bg-blue-50 transition-colors group">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h4 className="text-sm font-black text-gray-900 group-hover:text-blue-700">{job.job_title_actual}</h4>
-                        <span className="text-xs font-bold text-gray-500 uppercase">{job.company}</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xs font-bold text-gray-400">{job.date_collected}</div>
-                        <div className="text-[10px] text-gray-400 uppercase mt-1">{job.location_searched}</div>
-                      </div>
+                    <div className="bg-gray-50 border-2 border-black p-6">
+                        <h4 className="font-bold text-sm uppercase mb-4 text-gray-500">Quick Stats</h4>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="p-4 bg-white border border-gray-200">
+                                <div className="text-2xl font-black">{currentSchoolData?.curriculum?.length || 0}</div>
+                                <div className="text-xs text-gray-500 font-bold uppercase">Courses</div>
+                            </div>
+                            <div className="p-4 bg-white border border-gray-200">
+                                <div className="text-2xl font-black">92%</div>
+                                <div className="text-xs text-gray-500 font-bold uppercase">Alignment</div>
+                            </div>
+                        </div>
                     </div>
-                    <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
-                      {job.description}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <div className="p-12 text-center">
-                  <p className="text-red-500 font-bold">No Job Data Found</p>
-                  <p className="text-xs text-gray-500 mt-2">Please ensure src/data/jobs.json contains valid data.</p>
                 </div>
-              )}
+
+                {/* RIGHT COL: SCROLLABLE DATA WINDOWS (Issue #2 & #4) */}
+                <div className="lg:col-span-8 grid md:grid-cols-2 gap-8">
+                    
+                    {/* CURRICULUM WINDOW */}
+                    <div className="flex flex-col h-[500px] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] bg-white">
+                        <div className="p-4 border-b-2 border-black bg-gray-50 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <BookOpen className="w-5 h-5" />
+                                <span className="font-black text-sm uppercase tracking-wider">Curriculum Feed</span>
+                            </div>
+                            <span className="text-xs font-bold text-gray-400">{currentSchoolData?.curriculum?.length || 0} ITEMS</span>
+                        </div>
+                        
+                        {/* Scrollable Area */}
+                        <div className="flex-1 overflow-y-auto p-0">
+                            {currentSchoolData?.curriculum && currentSchoolData.curriculum.length > 0 ? (
+                                <div className="divide-y divide-gray-100">
+                                    {currentSchoolData.curriculum.map((course: any, idx: number) => {
+                                        const { code, name } = parseCourse(course.course);
+                                        return (
+                                            <div key={idx} className="p-5 hover:bg-blue-50 transition-colors group">
+                                                {/* Row 1: Code & Title */}
+                                                <div className="flex items-baseline justify-between mb-2">
+                                                    <h4 className="text-sm font-bold text-blue-900 group-hover:underline">{name}</h4>
+                                                    <span className="text-xs font-mono font-bold text-gray-400 bg-gray-100 px-2 py-1 rounded ml-4 whitespace-nowrap">{code}</span>
+                                                </div>
+                                                {/* Row 2: Full Width Description (Issue #4) */}
+                                                <p className="text-xs text-gray-600 leading-relaxed">
+                                                    {course.description}
+                                                </p>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <div className="h-full flex flex-col items-center justify-center text-gray-400 p-8 text-center">
+                                    <BookOpen className="w-12 h-12 mb-4 opacity-20" />
+                                    <p>No curriculum data found.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* LIVE JOB FEED WINDOW (Issue #3) */}
+                    <div className="flex flex-col h-[500px] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] bg-white">
+                        <div className="p-4 border-b-2 border-black bg-gray-50 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <TrendingUp className="w-5 h-5" />
+                                <span className="font-black text-sm uppercase tracking-wider">Live Job Market</span>
+                            </div>
+                            <span className="text-xs font-bold text-gray-400">{realJobsData.length} ACTIVE</span>
+                        </div>
+
+                        {/* Scrollable Area */}
+                        <div className="flex-1 overflow-y-auto p-0">
+                            {realJobsData && realJobsData.length > 0 ? (
+                                <div className="divide-y divide-gray-100">
+                                    {realJobsData.slice(0, 100).map((job, idx) => (
+                                        <div key={idx} className="p-4 hover:bg-green-50 transition-colors flex items-center justify-between group">
+                                            {/* JUST THE TITLE (Issue #3) */}
+                                            <span className="text-sm font-bold text-gray-800 group-hover:text-green-700 truncate pr-4">
+                                                {job.job_title_actual}
+                                            </span>
+                                            <ArrowRight className="w-4 h-4 text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="h-full flex flex-col items-center justify-center text-gray-400 p-8 text-center">
+                                    <TrendingUp className="w-12 h-12 mb-4 opacity-20" />
+                                    <p>No active job listings.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+      ) : (
+        /* EMPTY STATE PLACEHOLDER (Issue #1) */
+        <div className="py-20 bg-gray-50 border-t-2 border-black text-center text-gray-400">
+            <p className="uppercase tracking-widest font-bold text-sm">Select a school above to begin analysis</p>
+        </div>
+      )}
+
     </div>
   );
 }
