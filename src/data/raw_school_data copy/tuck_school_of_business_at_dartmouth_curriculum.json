@@ -1,0 +1,646 @@
+{
+  "school_name": "Tuck_School_of_Business_at_Dartmouth",
+  "location": "New Hampshire",
+  "majors": [],
+  "specializations": [],
+  "certifications": [],
+  "date_parsed": "2026-01-22",
+  "course_count": 113,
+  "curriculum": [
+    {
+      "course": "Analytics I",
+      "department": "Analytics I",
+      "description": "This two-course sequence introduces analytic methods for modeling decision problems, understanding data, and using models and data to make wise decisions. Analytics 1 begins by studying probability and decision-making under uncertainty. We then discuss spreadsheet modeling and optimization. We conclude with an introduction to data visualization. We illustrate these analytic methods in a variety of managerial settings (including marketing, operations, and finance) and in a variety of industries. The course will emphasize hands-on experience with Excel, with Excel add-ins, and will introduce Tableau for data visualization."
+    },
+    {
+      "course": "Analytics II",
+      "department": "Analytics II",
+      "description": "The objective of Analytics 2 is to provide you with a strong background in predictive analytics. We will emphasize learning how to be an intelligent \"consumer\" of analytics. This, in turn, will help you make effective decisions as a manager using predictive analytics. We will use sophisticated statistical and predictive analytics methods to understand and anticipate the effects of our actions. These methods include confidence intervals, hypothesis testing, A/B testing, multiple regression, and supervised and unsupervised machine learning models such as neural networks and cluster analysis. We will apply these methods to problems from all organizational functions including management & strategy, operations, economics, marketing, finance & accounting, and to a variety of industries. In addition, you will become skilled in performing various analyses via hands-on experience using the R statistical programming language."
+    },
+    {
+      "course": "Capital Markets",
+      "department": "Capital Markets",
+      "description": "This course provides a detailed overview of the world\u2019s debt, equity, and derivatives markets. We start with the fundamentals of how the markets function and then move on to more advanced topics such as the determinants of interest rates, the trade-off between risk and return, the behavior of stock prices, and the pricing and use of futures and options contracts. We illustrate how and why capital markets are important to investors and managers using real-world problems."
+    },
+    {
+      "course": "Corporate Finance",
+      "department": "Corporate Finance",
+      "description": "This course discusses basic principles of corporate finance and provides practical tools for financial decisions and valuation. The course consists of five sections. The first, Capital Budgeting Decisions, shows optimal project acceptance criteria consistent with the objective of maximizing the market value of the firm. The second section, Estimating the Cost of Capital, extends the analysis from the Capital Markets course to the practice of estimating a project\u2019s expected return, using factor models. The third part of the course, Valuation Techniques, develops several valuation methods used in practice, including WACC, APV, multiples, and real options. Part four, Capital Structure and Dividend Policies, involves a discussion of how capital structure and dividend decisions affect firm value and survey industry practice. Finally, part five of the course, Investment Banking, develops key principles and practices for raising capital, mergers and acquisitions, and modern restructuring techniques."
+    },
+    {
+      "course": "Strategy",
+      "department": "Strategy",
+      "description": "This course offers the \u201cessential\u201d toolkit of the executive involved in the strategy process\u2014the key ideas, concepts, and tools that are necessary to properly exercise strategic leadership. The course is divided into two parts. The first focuses on the strategy problem at the business unit level. It is at the business unit level that many key strategic choices and actions are formulated and undertaken. This part of the course starts by proposing a vocabulary and an analytical structure that help define competitive advantage precisely. It then tackles the question of how a strategic leader can locate opportunities to achieve sustained competitive advantage. This part of the course concludes with a discussion of why strategic leaders should be not only competent \u201cpractitioner economists\u201d\u2013\u2013the ability to read market forces is the traditional focus of competitive strategy analysis and tools\u2013\u2013but also competent \u201cpractitioner psychologists,\u201d and what developing such competence entails. The second part of the course focuses on the challenge of managing multiple business units. In particular, it focuses on how a strategic leader can determine the ideal horizontal and vertical scope for her firm and what that implies for mergers, acquisitions, and various typologies of alliances."
+    },
+    {
+      "course": "Financial Accounting",
+      "department": "Financial Accounting",
+      "description": "This course develops the basic concepts and procedures underlying corporate financial statements and introduces tools for analyzing profitability and risk. We explore the impact of the alternative policies and procedures available within generally accepted accounting principles on financial statements, especially in terms of management's financial reporting strategy."
+    },
+    {
+      "course": "First-Year Project",
+      "department": "First-Year Project",
+      "description": "The First-Year Project (FYP) course challenges students, working on teams of five, to apply classroom learning, and utilize skills from their prior work experience, to solve complex business challenges for real clients, or for their own entrepreneurial endeavor. This experiential learning class is unique in that it allows individual students the opportunity to tailor the curriculum to their own interests and career goals. Under the guidelines of the course, students can source their own project or select a project from the project portfolio, and join a team of their choice. Projects come from all industries; are local, national and global; are for non- and for-profit organizations; are with companies at all levels of business development, from early-stage to Fortune 100. Past project teams have analyzed new businesses, created launch strategies for new product or service offerings from an existing company, developed marketing strategies and implementation plans, and assessed the market potential for expansion into entirely new markets."
+    },
+    {
+      "course": "Global Economics for Managers",
+      "department": "Global Economics for Managers",
+      "description": "Global Economics for Managers will expand students' knowledge of economics in two directions. First, we expand the scope of inquiry to cover the economics of the nation in a global economy. This portion of the course will cover international economics and macroeconomics. We will study the larger economic forces that shape production, trade flows, capital flows, interest rates, exchange rates, and other variables that create the global economic landscape. The second direction is international microeconomics, which will apply the tools of microeconomics and international economics to illustrate how globalization influences performance, strategy, and policy within firms. Our ultimate objective is to help students develop a framework for analyzing both opportunities and risks in a global economic environment."
+    },
+    {
+      "course": "Management Communication",
+      "department": "Management Communication",
+      "description": "This course is designed to provide Tuck students with immediately applicable skills for professional communication. You will complete the course with an understanding of and demonstrated improvements in overall communication, delivery and presentation skills. In addition, you will learn and practice effective techniques for delivering feedback. This mini-course runs during Summer term to allow you to immediately apply your ManComm skills\u2014in your other classes, during recruiting, your FYP and summer internship."
+    },
+    {
+      "course": "Managerial Economics",
+      "department": "Managerial Economics",
+      "description": "This course applies the ideas and methodology of economics to analysis of the firm, key decisions within the firm, and the industry. Topics covered include costs, pricing, competition, economic efficiency, and industry equilibrium and change. Particular attention is paid to the behavior of the firm and industries when uncertainty and transaction costs exist. The course combines lectures/discussions of principles, with cases covering both current and classic firm and industry dilemmas. Issues of public policy, especially regarding pollution, are also covered."
+    },
+    {
+      "course": "Managing Organizations",
+      "department": "Managing Organizations",
+      "description": "Managing Organizations is the final installment of the core organizational behavior curriculum. Building on ideas developed in Tuck Launch and Managing People, and applying principles developed in Strategy, MO will focus on how organizations get things done. Organizations are complex social systems that bring together tasks and structures, people and culture. The role of leadership is to manage this system, keeping it well-aligned, in service of achieving strategic goals and in a way that harnesses the benefits of diversity, equity and inclusion (DEI). We address these topics by engaging in case studies and experiential approaches, such as simulations and role plays, as well as by discussing contemporary organizational challenges."
+    },
+    {
+      "course": "Managing People",
+      "department": "Managing People",
+      "description": "This course will provide students with conceptual frameworks for improving their management of people and teams with a focus on developing a deeper understanding of interpersonal dynamics. Topics include: motivation, diversity, conformity, conflict, performance feedback, decision-making, negotiations, and fairness."
+    },
+    {
+      "course": "Marketing",
+      "department": "Marketing",
+      "description": "The marketing course prepares general managers and brand managers to understand the strategic role of marketing and how to apply it in their organizations. The course teaches how to grow a business by thoroughly understanding its current and prospective customers, the only source of a firm's revenue. Companies with high or increasing market capitalizations know how to create, communicate and deliver value to their customers. Students will learn how to create such value by applying a set of frameworks and analytical tools in three areas: identifying market opportunities, setting a marketing strategy, and formulating the marketing mix. Case studies and a competitive simulation exercise are used to develop experience in implementing these frameworks and analytical tools in order to grow a business. Specific course topics include market research, consumer decision making, market segmentation, targeting, positioning, product development, advertising, pricing, and distribution."
+    },
+    {
+      "course": "Operations Management",
+      "department": "Operations Management",
+      "description": "Operations Management is the systematic design, management and control of the resources and processes that transform inputs into finished goods or services. This course provides an introduction to the concepts and analytic methods that are useful in understanding the management of a firm's operations; both in service and manufacturing settings. The level of analysis varies considerably, from operations strategy through to daily execution, and from single locations through to global supply chains."
+    },
+    {
+      "course": "AMC: Advanced Management Communication",
+      "department": "AMC",
+      "description": "As part of the Core at Tuck, Management Communication (ManComm) was designed to provide Tuck students with immediately applicable skills for professional communication. For students seeking to deepen their communication skills, Advanced Management Communication (AMC) expands beyond ManComm, shifting from a passive audience to an active one. In this minicourse, we\u2019ll ask you to not only anticipate audience needs, but to actively manage questions from them. You\u2019ll practice leading a dynamic discussion to reach a common set of objectives: soliciting audience input, asking for and answering questions and managing dissent. Similar to ManComm, we\u2019ll follow the same prepare \u2013 present \u2013 reflect pedagogy and in-class time will be dedicated to presentations and feedback."
+    },
+    {
+      "course": "SP029: Building and Managing Growth-Stage Ventures Sprint",
+      "department": "SP",
+      "description": "This course is designed for students who aspire to lead or invest in high-growth technology companies. It focuses on the critical organizational, strategic, and go-to-market decisions that shape a company\u2019s trajectory after early fundraising. Through case discussions and guest lectures from leading technology executives, students will gain practical insights into how ventures transition from startup to scale."
+    },
+    {
+      "course": "CCCGE: Cooperation and Competition in the 21st Century Global Economy",
+      "department": "CCCGE",
+      "description": "The 21st century global economy will be defined by how government and business leaders respond to today\u2019s complex policy challenges.   This mini-course centers on a handful of critical economic policy issues, organized around the central theme of cooperation and competition.   Topics include the rise of global value chains, national security, and the innovation race; rising market power and international data security; the deterioration of global governance rules and norms; and the challenges of sustainable and inclusive globalization, including the coming battles over carbon taxes.   The course will leverage economic tools and data to inform and refine  our understanding of market outcomes, market failures, and the scope for policy.  These economic principles will be balanced with an emphasis on the interplay between firms, governments, and international institutions and agreements in practice."
+    },
+    {
+      "course": "SP010: Crisis Management",
+      "department": "SP",
+      "description": "During an emergency, the demand on an organization\u2019s management team is tremendous. Crises and disaster situations require you to be high functioning despite time constraints, stress, inadequate information, and the requirement to complete vital tasks far beyond normal day-to-day duties. In a world that is increasingly volatile, uncertain, complex, and ambiguous (VUCA); traditional planning and strategic decision making may no longer be effective on its own. This sprint course draws on frameworks developed for use in both the public and private sector and will help students build skills needed to thrive instead of survive during a crisis."
+    },
+    {
+      "course": "ESG: Investment Practicum (PR",
+      "department": "ESG",
+      "description": "This practicum was developed to \u2018formalize\u2019 academic work around Tuck\u2019s ESG Fund (TESGF). This is a co-curricular activity that provides students with a hands-on experience in managing and executing real world ESG-oriented investments, by exposing students to incorporating non-financial factors related to ESG into investment analysis. Student Directors of the fund are responsible for developing the Fund\u2019s investment thesis, evaluating investment opportunities, presenting proposals to committee, executing investments, and actively managing the fund\u2019s existing portfolio."
+    },
+    {
+      "course": "PRVCW: Early Stage Venture Capital Workshop Practicum",
+      "department": "PRVCW",
+      "description": "The goal of the Early Stage Venture Capital Workshop Practicum is to engage students in an in-depth, hands-on, team-oriented exploration of real-world early stage venture capital (VC) deal making, first by giving students an intensive grounding in the core elements of early stage venture capital\u2014venture capital fund portfolio construction, deal sourcing, deal screening and selection, due diligence, valuation of early stage companies, convertible notes, capitalization tables, term sheets, the elements of an investment memorandum and negotiations with entrepreneurs\u2014then by engaging students in a series of \u201cdeal workshops\u201d whereby students will work on analyzing and conducting \u201cdue diligence\u201d on nine \u201clive\u201d venture capital deals, three at a time, meeting with the founders or CEOs of companies that are then active in the marketplace raising Seed, Series A and Series B rounds of venture capital to hear their pitches and ask due diligence questions, and selecting three of those deals (one per set of three) to recommend to their \u201cpartnership\u201d, consisting of practicing venture capitalists from around the US, by writing a full investment memorandum for each of the three deals and presenting and defending the investment thesis for the deal in a meeting with the venture capital partners.  Unlike interns or associates in venture capital firms, who support the partners in their work, in this workshop, students will take on the role of the partners in a venture capital firm who are leading deals for their firms.  In the final week, the deals phase of the workshop concludes with mock negotiation sessions where the teams will negotiate an investment term sheet with three of the nine entrepreneurs, one per team."
+    },
+    {
+      "course": "ES: Ecosystem Strategy",
+      "department": "ES",
+      "description": "We will explore these questions using a set of analytic lenses that will help us assess the potential of new opportunities and to strategize about how to best exploit them.  We will apply these tools using a combination of cases, exercises, and reflection essays."
+    },
+    {
+      "course": "RTPEF: Empirical Evidence in Finance: Asset Pricing and Factor Investing",
+      "department": "RTPEF",
+      "description": "I\u2019m passionate about doing empirical research and teaching finance. This course allows me to do both. My goal is to help you make better financial decisions by improving your empirical skills, both your ability to produce and analyze your own research and perhaps more important, your ability to analyze evidence produced by others. We will spend much of the course considering the empirical procedures and evidence in academic papers. We will typically focus on the decisions the researchers make, why they make them, and how their decisions affect the conclusions. But we will also talk about the finance \u2013 what we learn from a paper, how the information fits in a broader framework, how it is useful, and where it might be wrong. I helped write many of the papers we will read, some long ago and some more recently. In fact, one or two may not be finished yet. The papers we will consider are in the general area of asset pricing."
+    },
+    {
+      "course": "EECON: Energy Economics",
+      "department": "EECON",
+      "description": "This course explores a managerial perspective on the economics of energy markets, including crude oil, refined products, natural gas, and electricity. The class will study drivers of supply and demand, imperfect competition, economic regulation, environmental regulation, and various other public policy issues. Students will compete in competitive strategy games by making decisions for countries in OPEC and for firms in the California electricity market."
+    },
+    {
+      "course": "FWP: Fundamentals of Web Programming",
+      "department": "FWP",
+      "description": "This hands-on minicourse will teach the basics of web programming (Javascript, HTML, and CSS). During the course, you will build a web-based e-commerce site from scratch. By the end of the course you will be able to reason effectively about designs for and potential capabilities of web applications. There are no prerequisites for the course."
+    },
+    {
+      "course": "GIX: Global Insight Expedition",
+      "department": "GIX",
+      "description": "Global Insight Expeditions (GIXs) bring together students and faculty in experiential courses that take place around the world. The aim of GIXs is to help prepare students to lead across cultures by immersing them in a new country. Each begins with classroom sessions on Tuck\u2019s campus. Students then spend March break traveling with a faculty member in a country outside the U.S. During travel, students interact with corporations, entrepreneurial ventures, non-profits, governments, and local people from different walks of life. After the travel period, students complete a course project. Students enrolled in GIX earn credit equivalent to a minicourse."
+    },
+    {
+      "course": "PREXP: How to Become an Expert: Practicum",
+      "department": "PREXP",
+      "description": "The main goal of this course is to help students deepen their understanding of how they can achieve excellence in their professional domain. There are three ways in which the course helps students accomplish this goal. First, it helps them develop a more nuanced understanding of what deliberate practice means in their professional context. While this is a central topic of EXPRT, moving from reasoning about the concrete implications of deliberate practice to actually applying it will reveal challenges and opportunities that would be hard to foresee otherwise. Second, the application effort, properly guided, helps sharpen students\u2019 understanding of the components of deliberate practice and the relationships among them. Third and most importantly, it helps students deepen their internalization of the modus operandi associated with deliberate practice, ideally to the point where it becomes second nature in guiding their pursuit of excellence going forward."
+    },
+    {
+      "course": "SP020: Introduction to B2B Marketing / Customer Growth Strategies and Tactics",
+      "department": "SP",
+      "description": "The class is ideal for aspiring marketers as well as students who will go into finance, consulting or product leadership in an enterprise. Students planning on entering consumer marketing should know the basics (and differences) between consumer and enterprise marketing. The course will also serve the needs of future leaders in consulting, banking, private equity and technology by showcasing innovative growth strategies, internal team management and alignment, and M&A strategies to support growth. The ability to build and orchestrate customer driven growth is a core skill in all fields.  Assignments will simulate real life issues and be based on actual tasks required in leadership roles."
+    },
+    {
+      "course": "PRTSV: Investing in Early Stage Social Ventures",
+      "department": "PRTSV",
+      "description": "Please note: While 1.5 credits are earned in the spring term, this practicum spans the full academic year. Enrollment is selected based on an application process; students may apply in the spring of their first year."
+    },
+    {
+      "course": "LOB: Leadership Out of the Box",
+      "department": "LOB",
+      "description": "Exceeding performance expectations is not enough in today's business climate if an executive is to succeed. Executives must find ways for developing their employees in order to get the very best productivity. Wise leaders recognize that people are a source of corporate wealth. A potent leader co-creates with his or her people to push the company ahead of the competition. But before a leader can assume this role and responsibility, they must be willing to engage in their own developmental journey. In this course, we take leadership out of the box by studying the lives of extraordinary leaders while engaging in our own self-exploration. Our intent is to appreciate the strengths and frailties all leaders possess, and to understand the learning edges we all experience. This course creates the space to study, reflect on and discuss principles of leadership, such as self-awareness, identity, faith, vision, courage, passion, mindfulness, and commitment. By studying the lives of others, we learn how the context shapes the experiences and choices of leaders over the course of their lives. We also recognize the power of the historical moment that enables certain men and women to come to the forefront at critical times."
+    },
+    {
+      "course": "LGE: Leadership in the Global Economy: Contemporary Economics and Business",
+      "department": "LGE",
+      "description": "The fusion of digital, global, and social forces continues to create immense business and economic opportunities\u2014and yet serious pressures and anxieties as well. Perhaps most prominent among these anxieties is the fading belief among many people in many countries in the dynamic forces of globalization and innovation. Much of this ambivalence and related anxiety stems from workers and their families not seeing sufficient growth in their income, wealth, and sense of opportunity: sufficient relative to earlier decades, relative to those at the top, and relative to their hopes and expectations. We live in a time where many nations are fractious and less trusting, with far less consensus about the proper balance among for-profit businesses, sovereign governments, and civil society."
+    },
+    {
+      "course": "LDO: Leading Diverse Organizations",
+      "department": "LDO",
+      "description": "Using insights from cutting-edge behavioral science and psychological research, this course provides students with skills to identify and address issues related to diversity, equity, and inclusion (DEI) within organizations. In the first half of the course, students will develop an understanding of the barriers to DEI, such as systems of inequality, denial of privilege, biases that hinder support for DEI, and the many biases facing marginalized groups. Through lectures, in-class role-play exercises, and case discussions, students will also learn about how organizational characteristics (e.g., power and status hierarchies, workplace cultures) impact the efficacy of DEI interventions. In the second half of the course, students will learn how to improve organizational DEI at the individual level (e.g., addressing bias, recruiting allies, creating psychological safety, advocating for oneself in the face of bias) and at the organizational level (e.g., hiring practices and workplace policies that measurably improve DEI). By the end of this course, students will be adept at identifying and addressing sources of inequity, having difficult conversations, mitigating problems associated with stereotypes, and managing diverse, equitable, and inclusive environments. Importantly, this class teaches students how to advocate for DEI issues in organizational settings, equipping them with the necessary research, persuasion tactics, and analytical skills needed to be advocates, even in the face of resistance."
+    },
+    {
+      "course": "MSDE: Marketing Strategy in the Digital Economy",
+      "department": "MSDE",
+      "description": "See Source URL"
+    },
+    {
+      "course": "MCC: Medical Care & the Corporation",
+      "department": "MCC",
+      "description": "Medical Care and the Corporation (MCC) will examine the critical issues facing business leaders today related to health care. It will build an understanding of the structure, economics, and dynamics of the employer-based healthcare system from the perspective of corporate leaders. Students will learn how changes in disruptive technologies, new players, and government policy, have fundamentally changed the strategic landscape for businesses. Through this course you will understand the alternative approaches being considered by businesses including large corporations, small businesses, and start-up companies. Students will learn how consulting firms and health insurance companies are analyzing the current market and advising their corporate clients. Finally, MCC will examine new disruptive approaches offered to businesses to help them cope with these strategic issues. The course features cases and guest speakers who will demonstrate a diversity of ideas for meeting the business challenges facing employers."
+    },
+    {
+      "course": "MRTMM: Multichannel Route-to-Market Strategy Mini",
+      "department": "MRTMM",
+      "description": "The distribution channel is the route through which suppliers\u2019 products reach end-customers. Channel members provide many essential services to end-customers without which the supplier would fail, and which the supplier often cannot efficiently provide itself.  But, channel members are customers in their own right, with their own needs.  Further, they usually market not only the supplier\u2019s products but also competitors\u2019 products and their own private label products.  Their motivations and objectives are typically not aligned with those of the supplier, hence the challenge of \u201ccoordinating the channel\u201d.  Managing the distribution channel or route-to-market was never easy but it has never been more challenging than it is today. At the same time as suppliers of products ranging from packaged goods and sporting goods to hotels and cars are bypassing retailers to go directly to end customers, other middlemen are inserting themselves to perform narrow functions and take slices from an-often shrinking profit pie."
+    },
+    {
+      "course": "NLP: , Machine Learning, and AI in Finance (RTPNL",
+      "department": "NLP",
+      "description": "We will study finance applications of new big data textual methods including Natural Language Processing (NLP)/ Machine Learning (ML), and Textual Artificial Intelligence (AI).  We will examine how this broad area has applications in finance with tools that include simple text processing to more advanced tools such as machine learning and predictive AI.   Areas that we will study that are using NLP include merger prediction and performance, profitability prediction, stock return prediction, evaluation of venture capital business plans, innovation and patenting, banking and other finance topics.  Our study materials will be academic articles in finance and economics, not computer science.  Students will be responsible for reading and presenting the materials in these articles as well as doing a final research project that would involve analysis of textual data using some of the methods covered in this course.   There will be active learning in this course as students will help lead the discussion of various topic areas and we will have some Python exercises that have been developed with accompanying videos.  Knowledge of Python is not required as we will guide students through some basic exercises in textual analysis applied to financial documents including 10Ks, earnings calls, and patent text."
+    },
+    {
+      "course": "NEGO: Negotiations",
+      "department": "NEGO",
+      "description": "Negotiation is the art and science of securing agreements between two or more interdependent parties.  This course focuses on the theory and processes of negotiation as it is practiced in a variety of settings.  It is designed to complement the technical and diagnostic skills learned in other Tuck courses.  A basic premise of the course is that while wise, decisive leaders need strong analytical skills to better the world through business, negotiation skills are essential for today\u2019s business leader to ensure adoption and implementation of proposals.  This course will highlight the components of an effective negotiation and teach you to analyze your own behavior in negotiations.  The course will be largely experiential, providing you with an opportunity to develop your skills by participating in role-play simulations and integrating your experiences with the principles presented in the lectures, course discussions, and assigned readings."
+    },
+    {
+      "course": "SP026: Niche Strategies in Culture Industries: The Case of Wine",
+      "department": "SP",
+      "description": "Wine connoisseurship\u2014knowing about, enjoying, and collecting wine\u2014has long been seen as a marker of good taste and a sound investment practice. But the qualities that make wine valuable culturally and those that make it a valuable asset are rarely the same. More than this, they are often in contradiction: wine\u2019s scarcity, longevity, and brand equity are often seen as the three key strategic drivers of financial performance, yet it is the ephemerality, variability, and conviviality derived from its consumption that make wine culturally compelling. This Sprint will examine what accounts for this unique product's deep cultural significance in communities around the world against the means by which it is appraised commercially, and interrogate how those two systems intersect in an effort to identify the contours of an asset class whose performance is profoundly influenced by the intangible."
+    },
+    {
+      "course": "SP018: Personal Strategies for Achieving Wellbeing in Your Career",
+      "department": "SP",
+      "description": "Much of your studies at Tuck are focused on content -- strategy, operations, finance, people management, and more. And while these topics are critically important,  a lot of your success in careers and life is actually driven by other things. Over the past decade or so, there has been an explosion in understanding these success factors and this Sprint is an MBA oriented version of a highly successful course being taught at the Harvard Kennedy School. The Sprint is structured into three themes: knowing yourself and what drives wellbeing (e.g., aspirations, motivations, values, purpose, happiness, grit, role of money); where are you going and how are you getting there (e.g., career satisfaction, career optionality, working across boundaries, networks, sponsorship); and building resilience (e.g., wellness, stress, mental health, work and family.)  Because of the shortness of this Sprint, we mostly focus on the science and academics around these themes. Having said that, the course has a practical bent, and some self-reflection is required. Plus, students will be asked to experiment with some form of a wellbeing exercise."
+    },
+    {
+      "course": "SESHP: Social Entrepreneurship",
+      "department": "SESHP",
+      "description": "This course takes a hands-on, experiential approach to tackling these challenges. Working in teams, students will identify a social or environmental opportunity and develop a plan for a new venture that seeks to create both financial and social value. The course emphasizes the distinct challenges of building social impact business models, including how to articulate and validate a compelling value proposition for investors, customers, and other key stakeholders."
+    },
+    {
+      "course": "SSM: Strategic Sales Management",
+      "department": "SSM",
+      "description": "It will benefit those who will work in Business Development (either in direct sales or managing salespeople roles), Product Management, Brand Management, Product Marketing, and roles in the Professional Services sector (management consulting and most finance-related positions).  Next, the course will be beneficial to students who see themselves running a business or managing an organization at some point in their career (General Manager).  Finally, in a broad sense, being able to \u201csell your idea\u201d is a critical skill component of all successful leaders."
+    },
+    {
+      "course": "SBD: Sustainable Business Dynamics",
+      "department": "SBD",
+      "description": "Advances in technology, emergent social issues and pressing environment challenges are elevating the importance of corporate sustainability.  Independent of the chosen designation (CSR, corporate responsibility, ESG\u2026) an array of stakeholders (including NGOs, employees, consumers, communities, investors, and the planet) are pushing the boundaries of responsibility and elevating expectations for corporations. This course is designed to provide students with an understanding of the nomenclature, frameworks, and analytical tools needed to effectively integrate sustainability and responsibility into the management of a corporation."
+    },
+    {
+      "course": "TBS: Taxes and Business Strategy",
+      "department": "TBS",
+      "description": "First, you will gain exposure to key areas where taxes play a role in implementing business strategy. Business strategy broadly refers to a firm\u2019s working plan for achieving its vision, prioritizing objectives, competing successfully, and optimizing financial performance. Taxes affect many strategic business decisions such as forming a new business and raising capital, investment strategies, financing projects, compensating employees, making shareholder distributions, expanding through acquisition, divesting lines of business, or expanding internationally. There are trade-offs in meeting organizational objectives at the lowest tax cost."
+    },
+    {
+      "course": "SP023: The Art Market",
+      "department": "SP",
+      "description": "This Sprint course analyzes the commercial, social, and legal mechanisms of the global art market, encompassing auction houses, private galleries, art fairs, and art advisors. We study how commercial value is produced and negotiated in these spheres, exploring the processes through which artworks are priced, authenticated, and marketed. Through case studies, critical readings, and guest speakers, the course examines key factors influencing the art market, including historical precedents, cultural trends, and the role of collectors, institutions, and investors. Special attention is given to the intersections of art, law, and business, addressing issues such as provenance, copyright, contracts, tax considerations, and the regulation of cross-border transactions."
+    },
+    {
+      "course": "FOC: The Future of Capitalism",
+      "department": "FOC",
+      "description": "Things look different now. Many today look at growing inequality, environmental catastrophes, and political polarization, and are more likely to say they do not endorse democracy or free markets. For many, the promise of socialism is more satisfying than the reality of capitalism. Even capitalism\u2019s strongest proponents often feel that it is due for an overhaul. Meanwhile, the world is experiencing the most significant backlash against trade and globalization since the 1930s. This course aims to give you a sense for the current debate over capitalism and its alternatives, weighing the advantages and disadvantages of different approaches."
+    },
+    {
+      "course": "SP028: The Lions of Africa: Where Are the Next Emerging Markets",
+      "department": "SP",
+      "description": "Managing development and investments in sub-Saharan Africa requires leaders to understand the opportunities, the risks, and the competition as they analyze and make decisions.  This sprint class will acquaint students with an overview of the opportunities, risks and great power competition surrounding economic development and investments in sub-Saharan Africa.  It will assist students in understanding policies that may increase or decrease risk and opportunities and provide students the opportunity to explore how global challenges such as shifting demographics, growing inequality, climate change, and emerging technology will affect Africa and its investment environment in the decade to come."
+    },
+    {
+      "course": "PRCOP: The Private Sector in International Climate Negotiations Practicum",
+      "department": "PRCOP",
+      "description": "This practicum seeks to deepen understanding of how non-party stakeholders like businesses, banks, and investors engage on climate change under the Paris Agreement. It provides applied learning for Tuck students as they work with external project partners on the climate change Conference of Parties (COP) negotiations each year. The practicum explores how private sector voluntary pledges toward the Paris Agreement's 1.5C temperature goal complement the mandatory international commitments made by countries. These pledges began when the Paris Agreement was adopted in 2015 and have grown to more than 30,000 \u2013 with almost half from the private sector. As future business leaders, this practicum gives Tuck students an experiential learning opportunity in private sector climate action at the international level."
+    },
+    {
+      "course": "TFIO: Tools for Improving Operations",
+      "department": "TFIO",
+      "description": "This minicourse covers frameworks and tools designed to enhance operations performance. (The definition of operations used in this course is very broad: operations is fundamentally about execution in all types of contexts, from launching a new product to managing an evolving emergency situation.) The objectives are to equip future general managers, consultants, and operations managers with the perspectives and skills to effectively use operations as a competitive weapon and to develop facility with simple technical tools and frameworks which apply directly to operational decisions and can be useful in adding value to manufacturing and service organizations."
+    },
+    {
+      "course": "INTEL: Tuck Integrative Experiential Learning",
+      "department": "INTEL",
+      "description": "Tuck-INTEL stands for Tuck\u2019s Integrative Experiential Learning. It is a customized, immersive, integrative, and competitive exercise. The purpose of this minicourse is to help students integrate the key insights of Tuck\u2019s first-year core curriculum. The idea here is to add integrative experiences in our MBA program that will help our students connect the dots across our core curriculum. This intensive, four-day course incorporates key elements of finance & accounting, marketing, communications, analytics-1, economics, analytics-2, strategy and management, and operations. During the course, teams of five students each run a start-up company in a next generation wind turbine market for a multi-year timeframe in a real-time competitive environment. Each period constitutes a year of decision making about such areas as strategy, operations, finance, marketing, communication, timely production, economic analysis, cash requirements and funding, presentations to the board, team excellence, and personal leadership building. The results in each period are a function of each firm\u2019s decisions as well as those of its competitors."
+    },
+    {
+      "course": "VCPEA: Venture Capital and Private Equity Advanced",
+      "department": "VCPEA",
+      "description": "In-depth study of venture capital and private equity for those with either investment banking, consulting (including summer internship experience), or previous finance and PE experience, and those first-year students who have placed out of the finance core fall class. The course will explore more advanced topics in the VC/PE landscape through the lens of general partners, limited partners, and portfolio companies. Specific topics will include portfolio management, deal origination, in-depth due diligence and financial modeling, transaction structuring and financing, value creation, and performance measurement. As compared to the basics version of the course (VCPEB), we will go over more detailed models used in private equity and have several more in-depth cases.  Some sessions will have common cases across the two sections.   Guest speakers will be an integral part of the course when we have cases."
+    },
+    {
+      "course": "VCPEB: Venture Capital and Private Equity Basics",
+      "department": "VCPEB",
+      "description": "The course covers the entire private equity sector (including venture capital, growth equity, and buyouts as well as institutional investors in the sector) of the economy. The course is still quantitative with multiple cases, but is geared for students with less experience in finance and/or investing. The course will study VC/PE industry participants and explore their various perspectives, models, strategies, objectives, and challenges. Through cases and quantitative exercises, we will introduce the basic analysis and quantitative and qualitative factors involved in venture capital investing, growth equity financing, and leveraged buyout (LBO) transactions. The class will incorporate quantitative exercises, cases, and models; however, there will be fewer cases than in the regular session of VCPE, and we will examine them in greater depth over multiple class periods. We will also have more in-class exercises. Guest speakers will be an integral part of the course when we have cases."
+    },
+    {
+      "course": "RTPAS: AI-Driven Analytics and Society",
+      "department": "RTPAS",
+      "description": "This seminar dives headfirst into these challenges. We\u2019ll grapple with how firms can make sense of machine-learning predictions and act on them responsibly, what it really takes to keep data fair and unbiased, and how generative AI and large language models are transforming how organizations create value and compete. We\u2019ll unpack why misinformation races ahead of truth on social media, driven by algorithms built to maximize engagement and amplify outrage. We\u2019ll also examine the societal tradeoffs of automation, the human-technology interface, the emerging governance challenges around compute regulation and global AI supply chains, and the use of AI in the public sphere (policing, courts, and government services), where algorithms can shape civic life as powerfully as they shape markets."
+    },
+    {
+      "course": "PRAEC: Advancing Entrepreneurship Collaboration Practicum",
+      "department": "PRAEC",
+      "description": "To apply the learnings from the readings and class discussions to the matched entrepreneurs and articulate recommendations to address their business challenge/opportunity."
+    },
+    {
+      "course": "CPM: Client Project Management",
+      "department": "CPM",
+      "description": "Course methodology will include discussions, in-class exercises, outside guests, and a single case (based on an actual client engagement) that spans the length of the course. All homework and the final client discussion will be completed in self-selected pairs. This course draws on frameworks and skills that have been developed by top-tier firms in the business of delivering practical solutions to complex issues. Developing these skills to analyze and resolve business problems is a valuable leadership capability."
+    },
+    {
+      "course": "CWP: Communicating with Presence",
+      "department": "CWP",
+      "description": "This minicourse will be an active examination of what it is that comprises \u201cpresence\u201d in communication.  It will utilize a practice of certain actor-skills and behaviors to facilitate an ability to walk on the \u201cstage\u201d of everyday academic or business life with a strong communication capacity that projects energy, confidence, clarity of thought, and physical and vocal expressiveness.    Each session will build on a progression of physical and vocal techniques incorporated in weekly spoken exercises intended to establish and reinforce the qualities of the leader as an energetic, active communicator."
+    },
+    {
+      "course": "CLDSH: Comparative Models of Leadership",
+      "department": "CLDSH",
+      "description": "The first three class sessions will be devoted to a review of the history of leadership theory. Through case studies examining actual leaders, students will learn about the progression from Trait, Skill and Style Theories to Situational and Contingency Theory, to the more current theories that define leadership as a relationship. Two classes will be devoted to the study and discussion of leaders in the military and athletic arena. By reading about and discussing such leaders, students will gain an appreciation for the lessons they can learn that can be applied to leadership in a business or professional organization. Three classes will then cover a set of leadership tasks frequently encountered by all leaders. We will examine and discuss cases where individuals have to lead change efforts, manage employee performance, and deal with conflict. Students will analyze the actions of leaders in these situations, and pose and defend possible solutions."
+    },
+    {
+      "course": "CC: Corporate Communication",
+      "department": "CC",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CRSA: Corporate Restructuring and Shareholder Activism",
+      "department": "CRSA",
+      "description": "This course was formerly titled Corporate Finance and Shareholder Activism (CRSA) and Advanced Corporate Finance and Governance (ACFG)."
+    },
+    {
+      "course": "CT: Corporate Takeovers",
+      "department": "CT",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CACIE: Countries and Companies in the International Economy",
+      "department": "CACIE",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CWNPS: Creating Winning New Products and Services",
+      "department": "CWNPS",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CIGFS: Current Issues in the Global Food System",
+      "department": "CIGFS",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CA: Customer Analytics",
+      "department": "CA",
+      "description": "See Source URL"
+    },
+    {
+      "course": "DOP: Digital Operations",
+      "department": "DOP",
+      "description": "Note: This course was formerly titled \u201cData-Driven Analytics for Innovative Operating Models (DDA).\u201d Students who have already completed that course should not enroll in Digital Operations, as there is considerable overlap in content."
+    },
+    {
+      "course": "SP030: Disruption Through History",
+      "department": "SP",
+      "description": "The concept resonated, connecting with emerging developments around the commercialization of the Internet. A 1999 Forbes magazine cover story featuring Christensen and then Intel CEO Andy Grove (\u201cIntel\u2019s Big Thinker\u201d) further fanned disruptive fervor. The concept attracted dissenters. In early 2006, The Journal of Product Innovation Management featured five scholarly criticisms of the work. In 2014, Harvard historian Jill LePore penned a scathing 6,000-word criticism of Christensen\u2019s research and his acolytes in The New Yorker. Nonetheless, in 2022, Harvard Business Review named disruption one of four business concepts that had transformed the world."
+    },
+    {
+      "course": "ENTFN: Entrepreneurial Finance",
+      "department": "ENTFN",
+      "description": "See Source URL"
+    },
+    {
+      "course": "ETHNK: Entrepreneurial Thinking",
+      "department": "ETHNK",
+      "description": "See Source URL"
+    },
+    {
+      "course": "ETA: Entrepreneurship Through Acquisition",
+      "department": "ETA",
+      "description": "This course provides an introduction to the various pathways to ETA, as well as a detailed exploration of the various phases of an entrepreneur\u2019s journey. The first half of the course covers background about different ETA models, raising investor capital, conducting a search for a suitable company and closing a private equity buyout transaction. The second half addresses relevant topics pertinent to being a first-time CEO and considerations related to operating a microcap company. Industry participants will join the majority of sessions to bolster the content and add unique personal perspective to the discussion. Background reading will often include case studies wherein these practitioners are the case protagonists."
+    },
+    {
+      "course": "FRSA: Financial Reporting and Statement Analysis",
+      "department": "FRSA",
+      "description": "See Source URL"
+    },
+    {
+      "course": "FCEE: Financing the Clean Energy Economy",
+      "department": "FCEE",
+      "description": "Understand the financial mechanisms that support the development, deployment, and long-term viability of clean energy initiatives across a range of countries and regions."
+    },
+    {
+      "course": "HCAS: Health Care Analytics & Society",
+      "department": "HCAS",
+      "description": "See Source URL"
+    },
+    {
+      "course": "IMC: Integrated Marketing Communications",
+      "department": "IMC",
+      "description": "See Source URL"
+    },
+    {
+      "course": "SP032: International Development and Public Finance",
+      "department": "SP",
+      "description": "A key objective of this course is to give students the skills and tools to analyze the major challenges which developing countries face in getting access to public finance and the steps which international agencies, business, government and civil society can take to help developing countries grow their economies. The past year has brought unprecedented questioning of the role of international public institutions by countries like the United States, including in peacekeeping, trade, health and human welfare and in financing development which may affect the ability of developing countries to access needed finance. Skills and knowledge acquired in the course will assist students to develop strategies for dealing with or investing in developing markets in a turbulent global economy where growth is a prerequisite to poverty reduction and business activity."
+    },
+    {
+      "course": "INV: Investments",
+      "department": "INV",
+      "description": "See Source URL"
+    },
+    {
+      "course": "LDC: Leading Disruptive Change",
+      "department": "LDC",
+      "description": "Resting at the unique intersection of the disciplines of strategy, innovation, leadership, behavioral psychology, and systems psychodynamics, Leading Disruptive Change integrates academic research and practitioner-oriented tools and frameworks to give students practical ways to act wisely and decisively through the fog of disruptive change. We will go through seven core tenets:"
+    },
+    {
+      "course": "SOPS: Management of Service Operations",
+      "department": "SOPS",
+      "description": "See Source URL"
+    },
+    {
+      "course": "MA: Managerial Accounting",
+      "department": "MA",
+      "description": "Students may not take Managerial Accounting (MA) and Managerial Accounting Mini (MAM), or Managerial Accounting (MA) and Cost and Control (CNC) for credit."
+    },
+    {
+      "course": "SP031: Mentorship in a Changing World: Human Connections & AI Collaborations",
+      "department": "SP",
+      "description": "Building on these explorations, students will reimagine career support systems with an emphasis on flexibility, cultural intelligence, and innovation. They will evaluate hybrid mentoring frameworks, consider conditions that promote inclusive and psychologically safe environments, and navigate the ethical dimensions of AI in leadership development. Ultimately, students will leave with actionable strategies and conceptual tools to integrate mentoring principles into their own professional contexts\u2014ready to influence the future of workplace learning and support."
+    },
+    {
+      "course": "MORE: Moral Reasoning: From Machiavelli to The Bomb to AI",
+      "department": "MORE",
+      "description": "MORE is a humanities course designed for a business school.  In addition to the business-oriented objectives noted above it is designed to provide tools for critical thinking, for finding the right questions, and for challenging assumptions and conventional wisdom \u2013 all required to grapple with complex problems.  It is not a course in what to know \u2013 more an exercise in ways to think.  While success in business requires both hard skills and soft skills, over a 30+ year career in venture capital and private equity I found that this third type of skills, which the study of humanities can provide so effectively, was often more valuable."
+    },
+    {
+      "course": "OMPA: Optimization Modeling for Prescriptive Analytics",
+      "department": "OMPA",
+      "description": "Every class will be entirely \u201chands on,\u201d with an emphasis on active problem solving and case-based learning. Each of the first three weeks will center on a core optimization technique, with the first session devoted to modeling skills and the second applying those skills to a data-driven case. We begin with linear programming, expanding from the types of problems introduced in core Analytics to richer models of strategic planning and control. From there, we turn to optimization with logical and binary constraints, emphasizing applications like investment planning, ride-hailing services, and compute scheduling. We then conclude with non-linear models and heuristic solution methods, which allow us to analyze problems in revenue management, election analytics, and system design. Throughout, we will balance classical management settings with contemporary challenges. Cases and examples will draw from diverse areas such as cloud resource allocation, prescriptive policing, data mining, personalized advertising, and product design in consumer markets."
+    },
+    {
+      "course": "PPB: Policy, Politics, and Business",
+      "department": "PPB",
+      "description": "The class will explain why many contemporary public policy problems cannot be addressed by the private sector alone. At the same time, we will discuss how private firms can play a more creative and robust role in addressing social challenges. One throughline of the course will be an exploration of the interplay between business, policy, and politics. Much of the focus will be on the American system, though the concepts are broadly applicable and students will be urged to apply lessons to other countries."
+    },
+    {
+      "course": "PSA: Pricing Strategy and Analytics",
+      "department": "PSA",
+      "description": "We will build a toolkit of analytical methods to manage pricing decisions in B2B and B2C environments. You will learn how to: 1.) Estimate and apply relevant costs for pricing decisions; 2.) Measure, structure and communicate value for customers; and 3.) Assess and manage competitor behavior in a way that supports stable and profitable industry pricing. The tools are intended for use by marketing managers in the field, addressing realistic business pressures, such as discounts by front-line salespeople and gaps in information about true market selling prices."
+    },
+    {
+      "course": "PM: Product Management in Technology",
+      "department": "PM",
+      "description": "See Source URL"
+    },
+    {
+      "course": "QIP: Quantitative Investing with Python",
+      "department": "QIP",
+      "description": "Quantitative investing in the context of this course means making systematic investment decisions informed by data. That is, there is little or no room for subjective judgments. We will introduce the basic Python libraries (e.g., NumPy, Pandas, scikit-learn, and statsmodels) that we need for acquiring and analyzing data and for completing financial computations such as creating trading strategies and evaluating returns. We start from constructing academic factors (such as value and momentum) and briefly discuss the principles of machine learning and the use (and the associated caveats) of ML techniques for predicting returns. The objective of the course is to give an overview of the methods used in quantitative investing."
+    },
+    {
+      "course": "QICFO: Quantitative Investing: Cryptocurrencies, Futures, and Options",
+      "department": "QICFO",
+      "description": "The applications part of the course focuses on cryptocurrencies. Cryptocurrencies have emerged as a new asset class, with many large asset managers now recommending 1-5% allocations for diversification. Importantly, most institutional investors do not hold the assets directly, but rather gain exposure through ETFs, futures, or perpetual futures. This makes derivatives central to understanding how crypto markets function in practice. Stablecoins, which aim to maintain a fixed value, provide a clear, real-world example of the no-arbitrage principles that also underpin futures and options pricing."
+    },
+    {
+      "course": "RTPQP: Quantitative Private Equity",
+      "department": "RTPQP",
+      "description": "The course is technical. The material consists primarily of recent research papers, with a focus on the empirical and statistical analysis in these papers. There will not be much discussion of private equity deal structures and specific transactions. The material is mostly presented in student led presentations, which require substantial preparation and insight into the technical aspects of the papers. A substantial part of the course is two empirical projects where the students will do a statistical analysis of actual private equity data and present their findings to the class. Some familiarity with statistical software, such as R or Stata, is recommended, although it is also possible to do the analysis in Excel."
+    },
+    {
+      "course": "RE: Real Estate",
+      "department": "RE",
+      "description": "See Source URL"
+    },
+    {
+      "course": "PRPEP: Small Buyouts - Private Equity Practicum",
+      "department": "PRPEP",
+      "description": "The class is delivered through two curricular elements: a) the Deal Review Lab: the review, preparation, presentation and group discussion/evaluation of a series of current and/or recent, real small market buyout opportunity \u201ccases\u201d led by students and facilitated by the instructor to simulate a private equity buyout investment committee setting and b) the Investment Thesis: individual student research into an industry sub-segment or other theme to develop and deliver components of a potentially actionable private equity investment targeting thesis."
+    },
+    {
+      "course": "RTPSE: Strategy in Innovation Ecosystems",
+      "department": "RTPSE",
+      "description": "The course itself will be an exercise in joint value creation (with all the risks that that entails). The session formats will vary. Some sessions will be devoted to discussing academic articles. Others will focus on deep-dive analyses of selected topics and contexts.  Depending on student interest and speaker availability, we may also engage with external visitors (think of these more as interviews than presentations)."
+    },
+    {
+      "course": "SOE: Structure, Organization and Economics of the Healthcare Industry",
+      "department": "SOE",
+      "description": "This course is appropriate for students who are contemplating careers in companies serving the health care industry such as consulting, private equity, or banking, or who have an interest in careers in health care (pharma, medical devices, biotech, or health delivery), or who just have an interest in understanding the health care industry."
+    },
+    {
+      "course": "SP016: Technology-Enabled Disruption in Health Care Delivery",
+      "department": "SP",
+      "description": "This course will provide students with 1) a high-level understanding of how changing incentive systems and technology are forever altering the US health care system; (2) where the best opportunities are likely to be found, and 3) insights about evaluating professional opportunities in the sector, referred to as \u201copportunity narrowing\u201d in investing circles."
+    },
+    {
+      "course": "SP021: The Global Battle Over Regulating Digital Business",
+      "department": "SP",
+      "description": "See Source URL"
+    },
+    {
+      "course": "WGLNW: Women, Gender and Leadership in the New Workplace",
+      "department": "WGLNW",
+      "description": "This course meets the Ethics & Social Responsibility (ESR) requirement."
+    },
+    {
+      "course": "AIM: AI for Managers",
+      "department": "AIM",
+      "description": "This course provides broad exposure to how AI is used for different business tasks: marketing, product strategy, revenue management, operations, etc. We take the viewpoint of a manager or consultant who must understand and offer advice on a wide range of AI topics relevant to a variety of business needs. The course also describes the pitfalls and challenges firms face when attempting to introduce or scale AI technologies."
+    },
+    {
+      "course": "BSTRT: Brand Strategy",
+      "department": "BSTRT",
+      "description": "During this 5 week- mini elective we will discuss the core elements of brand strategy. We will pay special attention to the role of brands and brand managers in the new competitive and social context. Core learnings will focus on how brand strategy can be defined, crafted, developed, and managed in ways that create value for today\u2019s consumers and firms. While the main focus of the course is strategic, we will also discuss how brand strategy speaks to execution."
+    },
+    {
+      "course": "BMGSV: Building and Managing Growth-Stage Ventures",
+      "department": "BMGSV",
+      "description": "See Source URL"
+    },
+    {
+      "course": "NLP: Business Applications of Natural Language Processing",
+      "department": "NLP",
+      "description": "In this minicourse, students will gain knowledge of state-of-the-art NLP techniques, including large language models and associated tools. The course also describes how to apply those techniques to a range of marketing and other business problems. Students will become able to critically read the NLP literature, converse with NLP experts, and understand what new NLP capabilities are expected in the future. Students will also develop custom NLP software tools to solve concrete business problems, and will retain these tools to use after the course ends."
+    },
+    {
+      "course": "BCC: Business and Climate Change",
+      "department": "BCC",
+      "description": "This course meets the Ethics & Social Responsibility (ESR) requirement."
+    },
+    {
+      "course": "COMP: Competition and Market Power",
+      "department": "COMP",
+      "description": "The course is split into two sections. The first section (Foundations of Market Power) takes a price-theoretical approach to managerial decisions, where we hold competitors actions fixed to focus on the main tradeoffs managers face when exercising market power in order to maximize profits. Core topics include demand and supply fundamentals, equilibrium and market power, optimal pricing, demand estimation, differentiation, multi-product pricing, price discrimination, and merger analysis. The second section (Game Theory) extends these tools to a game-theoretical approach, where managers' actions depend on their competitors' actions, and vice versa. Topics include collusion, algorithmic pricing, entry deterrence, killer/serial acquisitions, and platform competition."
+    },
+    {
+      "course": "CI: Consumer Insights",
+      "department": "CI",
+      "description": "Within this structure, we will focus on both the internal (i.e., psychological) and external (i.e., social, cultural, environmental, situational) factors that influence consumer behavior and will examine consumer behavior insights generated by behavioral economics, cognitive science and social psychology. By using consumer psychology as a foundation and increasing familiarity with analytical and research tools used by marketers, students in this course will be able to predict what consumers might be expected to do versus what they will do in a variety of marketing settings. This course will involve a combination of case discussions, in-class exercises and assignments that will move students beyond using personal intuition about consumer behavior and equip them with concepts and tools to uncover, interpret, and apply consumer insights to drive strategic decision-making."
+    },
+    {
+      "course": "CIB: Contemporary Issues in Biotechnology",
+      "department": "CIB",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CRSP: Corporate Responsibility",
+      "department": "CRSP",
+      "description": "This course meets the Ethics & Social Responsibility (ESR) requirement."
+    },
+    {
+      "course": "CV: Corporate Valuation",
+      "department": "CV",
+      "description": "See Source URL"
+    },
+    {
+      "course": "CNC: Cost and Control",
+      "department": "CNC",
+      "description": "Students cannot take both Cost and Control (CNC) and Managerial Accounting (MA), or Cost and Control (CNC) and Managerial Accounting Mini (MAM) for credit."
+    },
+    {
+      "course": "DMD: Data, Models, and Decisions",
+      "department": "DMD",
+      "description": "See Source URL"
+    },
+    {
+      "course": "DSMM: Digital and Social Media Marketing",
+      "department": "DSMM",
+      "description": "Digital/social platforms present firms with enormous opportunities for creating and enhancing value for both themselves and customers. How these technologies can \u2013 and should \u2013 be used for strategic value-generating purposes, however, is not straightforward. This course grapples with this challenge, with the primary aim being to help students understand how to unlock the value in digital/social platforms across a variety of business contexts and for several markedly different marketing-related purposes. Thus, students should leave the course knowing the basics of digital marketing jargon and with the underlying knowledge to become proficient in digital marketing. Within this course, students will learn how to developing appropriate digital marketing strategies, additionally understanding the tools necessary to analyze and guide strategy (e.g., current and future AI). An ancillary goal of this course is to gain practical experience in fielding digital marketing campaigns."
+    },
+    {
+      "course": "FSVC: Field Studies in Venture Capital",
+      "department": "FSVC",
+      "description": "See Source URL"
+    },
+    {
+      "course": "GE: Growth Economics",
+      "department": "GE",
+      "description": "We will take a deep dive in this class to explore the fundamental drivers of countries\u2019 growth performance over the medium- to long-term. A solid understanding of these drivers of growth is invaluable. For policy makers and the consultants they hire, this will inform the recommendations that they make over strategies to promote growth. For the managers of firms, a keen appreciation of these forces can be vital for identifying opportunities and navigating business decisions."
+    },
+    {
+      "course": "HCEP: Health Care Economics and Policy",
+      "department": "HCEP",
+      "description": "The course will explore how different health systems, in the U.S. and around the world, attempt to manage these unique challenges. It will probe the tradeoffs associated with different systems and explore innovations in health care delivery. The class will enumerate the various stakeholders involved in American health care and explore options for reform."
+    },
+    {
+      "course": "HOUSE: Housing",
+      "department": "HOUSE",
+      "description": "See Source URL"
+    },
+    {
+      "course": "RTPHB: Human Behavior in Operations Management",
+      "department": "RTPHB",
+      "description": "Today, with the service sector accounting for 76% of GDP and 85% of employment, understanding the myriad ways that human psychology and behavior affects the efficiency and effectiveness of operating systems is more important than ever before. In this course, we will review papers that use experimental methods to investigate a topic in operations management. We will discuss the operational challenge, why understanding human behaviors are important to the efficiency or effectiveness goals, how the researchers approached the study and how business leaders might incorporate the research findings into managerial practice. In addition, students will have the opportunity to consider ways that they might design and test their own theories through experimentation in their future managerial practice."
+    },
+    {
+      "course": "IMPST: Implementing Strategy",
+      "department": "IMPST",
+      "description": "See Source URL"
+    },
+    {
+      "course": "INTST: International Strategy",
+      "department": "INTST",
+      "description": "See Source URL"
+    },
+    {
+      "course": "LDSAS: Leadership Development: Self-Awareness, Skills and Strategies",
+      "department": "LDSAS",
+      "description": "See Source URL"
+    },
+    {
+      "course": "MHCO: Management of Healthcare Organizations",
+      "department": "MHCO",
+      "description": "This course is focused on the health services sector of the health industry.  It will be relevant to those interested in health services leadership and management, and will be particularly valuable to anyone who will be working in companies serving health care service organizations including consulting, banking, and medical products.  Some basic knowledge of the healthcare industry will be helpful. Contact Professor Gardent with questions relating to the course and course topics."
+    },
+    {
+      "course": "ML: Managers and the Law",
+      "department": "ML",
+      "description": "See Source URL"
+    },
+    {
+      "course": "MSI: Managing for Social Impact",
+      "department": "MSI",
+      "description": "That said, every organization has a social impact (as does every individual), even if its decision makers choose not to acknowledge that, let alone manage for it. This is why we will also use our time together to consider where questions of social impact might appear in the context of business decisions or government policies, and what some of the key trade-offs in these contexts might involve. You will also have time and space to develop your own perspective on social impact and to reflect on how it might affect your decisions and choices going forward. Guests who have wrestled with these issues themselves will share their experiences and lessons learned, as will your professor."
+    },
+    {
+      "course": "PWINF: Power and Influence",
+      "department": "PWINF",
+      "description": "This course is designed so that students will learn concepts useful for understanding power and ways of analyzing power dynamics in organizations.  Even more importantly, the course encourages students to think about and develop their own personal path to power. In addition to case discussions and role-plays, students will learn about how power concepts apply to their personal development through self-reflections and sharing of experiences with other students attending the course."
+    },
+    {
+      "course": "START: Startup Strategizing",
+      "department": "START",
+      "description": "The course is organized around a single unifying idea\u2014the Problem of Value (PoV)\u2014which focuses attention on that core obstacle. It pushes beyond \u201cgetting the product right\u201d to examine how startups create a meaningful wedge between revenues and costs, become profitable, and endure competition. In each class, you step into the role of an entrepreneur and confront a central strategic question: What is the most important solvable problem I must address right now to make this venture succeed?"
+    },
+    {
+      "course": "SLEAD: Strategic Leadership",
+      "department": "SLEAD",
+      "description": "See Source URL"
+    },
+    {
+      "course": "SEM: Strategy in Emerging Markets",
+      "department": "SEM",
+      "description": "We will travel the world, studying companies in large emerging markets such as Brazil and India, as well as in countries that are currently drawing significant attention, like Venezuela. We will also examine emerging markets that serve as regional beachheads, such as Kenya, Uruguay, and the UAE. We will spend time on China, an economy that has clearly emerged in many ways, yet remains emerging in others. Finally, you will see that emerging markets are not confined to national borders: they also exist within highly developed economies like the U.S., as illustrated by our case on Miami, Florida."
+    },
+    {
+      "course": "SMA: Structuring Mergers and Acquisitions",
+      "department": "SMA",
+      "description": "See Source URL"
+    },
+    {
+      "course": "SCHM: Supply Chain Management",
+      "department": "SCHM",
+      "description": "With increasing competition around the globe, supply chain management is both a challenge and an opportunity for companies. Hence a strong understanding of supply chain management concepts and the ability to recommend improvements should be in the toolbox of all managers. The objective of this course is to introduce you to the key concepts and techniques that will allow you to analyze, manage and improve supply chain processes for different industries and markets. At completion of this course, you will have the skills to assess supply chain performance and make recommendations to increase supply chain competitiveness."
+    },
+    {
+      "course": "SUSMK: Sustainability and Marketing",
+      "department": "SUSMK",
+      "description": "This course aims to provide a broad range of tools and frameworks for understanding how business can interact with issues related to sustainability, taking a marketing perspective. In particular, we examine how traditional marketing strategies can be incorporated into and/or modified in domains in which sustainability is critical. We will also examine how sustainability can serve to augment, but not replace, the firm\u2019s value proposition. By necessity, it will be essential to not only account for the role of firms and customers, but of government, non-profit organizations, employees, and other stakeholders."
+    },
+    {
+      "course": "UCE: Understanding China's Economy",
+      "department": "UCE",
+      "description": "Topics include the roles of government and state-owned enterprises in the economy system and the implications for multinational corporations and entrepreneurial firms, the liberalization of the factor and output markets, the driving forces and the consequences of China\u2019s technology advancement, the environmental degradation and unprecedented regulatory changes in recent years, the protection of intellectual property rights, culture factors embedded in business practices, and China-US economic tension."
+    },
+    {
+      "course": "VBA: Programming (P",
+      "department": "VBA",
+      "description": "See Source URL"
+    },
+    {
+      "course": "WICKD: Wicked Societal Challenges",
+      "department": "WICKD",
+      "description": "In organizational studies, these issues are often described as complex, messy, grand challenges, or wicked problems. They are multifaceted, long term and deeply rooted in history, requiring systemic, multi-pronged, and interdisciplinary approaches to address effectively. I chose the word 'wicked' to describe this course because it reflects the harm these issues inflict on society and highlights their morally troubling nature. Wicked problems share several commonalities.  First, there is an interconnectedness between these problems -- they do not stand alone.  These issues cross borders, ethnicities, races, genders, historical periods, and organizational boundaries, thus impacting the well-being of humankind.  Second, there are no easy fixes for resolving wicked problems.  Such problems act as chameleons changing and evolving over time, taking on new characteristics while creating deeper obstacles. Indeed, when it comes to wicked problems, change is a slow and drawn-out process."
+    },
+    {
+      "course": "FSB: Field Study in Business",
+      "department": "FSB",
+      "description": "Your success as a future leader will depend on your ability to continually improve and refine your leadership skills as you work with others to solve problems and achieve goals. This course is designed to help position you for that success."
+    }
+  ]
+}
