@@ -1,0 +1,179 @@
+{
+  "school_name": "Emory Goizueta Business School",
+  "date_parsed": "2026-02-07",
+  "course_count": 43,
+  "curriculum": [
+    {
+      "course": "BUS 110: ",
+      "description": "Goizueta School Seminar"
+    },
+    {
+      "course": "BUS 290: ",
+      "description": "Tech Toolbox A: Excel"
+    },
+    {
+      "course": "BUS 299R: ",
+      "description": "This section is full"
+    },
+    {
+      "course": "BUS 300B: ",
+      "description": "BUS 300B\nBBA Boardroom B\nSection Number:\n1101\nMeets:\nDoes Not Meet\nInstructor:\nJ. Billetdeaux"
+    },
+    {
+      "course": "BUS 350: ",
+      "description": "Data and Decision Analytics"
+    },
+    {
+      "course": "BUS 365: ",
+      "description": "Business Communication Strategy"
+    },
+    {
+      "course": "BUS 380: ",
+      "description": "Professional Development"
+    },
+    {
+      "course": "BUS 381: ",
+      "description": "Personal Development"
+    },
+    {
+      "course": "BUS 383: ",
+      "description": "Experiential Team Dynamics and Leadership"
+    },
+    {
+      "course": "BUS 390A: ",
+      "description": "TechTool: Getting Started with Python"
+    },
+    {
+      "course": "BUS 390B: ",
+      "description": "TechTool: Introduction to R"
+    },
+    {
+      "course": "BUS 390C: ",
+      "description": "TechTool: Getting Started with SQL"
+    },
+    {
+      "course": "BUS 390D: ",
+      "description": "TechTool: Using Generative AI for Text & Images"
+    },
+    {
+      "course": "BUS 390E: ",
+      "description": "TechTool: Level-Up your Presentation Skills with Miro & Canva"
+    },
+    {
+      "course": "BUS 390F: ",
+      "description": "TechTool: Getting Started with Tableau"
+    },
+    {
+      "course": "BUS 390G: ",
+      "description": "TechTool: Getting Started with SPSS"
+    },
+    {
+      "course": "BUS 390H: ",
+      "description": "TechTool: Building AI Agents"
+    },
+    {
+      "course": "BUS 390I: ",
+      "description": "TechTool: AWS and Cloud Computing with AI"
+    },
+    {
+      "course": "BUS 400: ",
+      "description": "Study Abroad BUS Elective (Related Elective)"
+    },
+    {
+      "course": "BUS 401: ",
+      "description": "Study Abroad BUS Elective (Global Elective)"
+    },
+    {
+      "course": "BUS 480: ",
+      "description": "Senior Seminar: Applied Field Experience"
+    },
+    {
+      "course": "BUS 494: ",
+      "description": "BUS 494\nStudy Abroad\nSection Number:\n1109\nMeets:\nDoes Not Meet\nInstructor:\nD. Clear"
+    },
+    {
+      "course": "BUS 496: ",
+      "description": "This section is full"
+    },
+    {
+      "course": "BUS 496C: ",
+      "description": "This section is full"
+    },
+    {
+      "course": "BUS 510: ",
+      "description": "Structured Problem Solving"
+    },
+    {
+      "course": "BUS 536: ",
+      "description": "Washington Campus"
+    },
+    {
+      "course": "BUS 565M: ",
+      "description": "Management & Leadership Communication"
+    },
+    {
+      "course": "BUS 571R: ",
+      "description": "Global Experiential Module: Denmark"
+    },
+    {
+      "course": "BUS 580M: ",
+      "description": "Personal & Professional Development"
+    },
+    {
+      "course": "BUS 591: ",
+      "description": "BUS 591\nCornerstone\nSection Number:\n2101\nMeets:\nTh 6:30-7:30p\nInstructor:\nS. Sehgal"
+    },
+    {
+      "course": "BUS 593: ",
+      "description": "Tech Trends and Transformation"
+    },
+    {
+      "course": "BUS 594: ",
+      "description": "Professional Development"
+    },
+    {
+      "course": "BUS 671R: ",
+      "description": "Domestic Module: Using R in Data Analysis"
+    },
+    {
+      "course": "BUS 694: ",
+      "description": "Study Abroad: Warwick"
+    },
+    {
+      "course": "BUS 697: ",
+      "description": "Directed Study: Admin of Donor-Funded Programs"
+    },
+    {
+      "course": "BUS 701: ",
+      "description": "Survey of Business Research Methods"
+    },
+    {
+      "course": "BUS 704: ",
+      "description": "Teaching Business-TATTO"
+    },
+    {
+      "course": "BUS 797R: ",
+      "description": "BUS 797R\nDirected Study\nSection Number:\n5101\nMeets:\nDoes Not Meet\nInstructor:\nM. Williams"
+    },
+    {
+      "course": "BUS 798R: ",
+      "description": "Pre-Candidacy Dissertation Research"
+    },
+    {
+      "course": "BUS 990: ",
+      "description": "Non-Business Elective Abroad"
+    },
+    {
+      "course": "BUS 991: ",
+      "description": "Non-Business Elective Abroad-Global"
+    },
+    {
+      "course": "BUS 992: ",
+      "description": "Non-Business Elective Abroad-HAL"
+    },
+    {
+      "course": "BUS 993: ",
+      "description": "Non-Bus Elective Abroad-HAP"
+    }
+  ]
+}

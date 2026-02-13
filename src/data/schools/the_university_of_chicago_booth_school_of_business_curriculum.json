@@ -1,0 +1,1120 @@
+{
+  "school_name": "The_University_of_Chicago_Booth_School_of_Business",
+  "location": "Illinois",
+  "majors": [],
+  "specializations": ["Accounting", "Analytic Finance", "Applied AI", "Behavioral Science", "Business Analytics", "Business, Society, and Sustainability", "Econometrics and Statistics", "Economics", "Entrepreneurship", "Finance", "General Management", "Healthcare", "International Business", "Marketing Management", "Operations Management", "Strategic Management"],
+  "date_parsed": "2026-01-22",
+  "course_count": 222,
+  "curriculum": [
+    {
+      "course": "30000: Financial Accounting",
+      "department": "Booth",
+      "description": "This course provides an introduction to financial statements and the financial reporting process from a user's perspective. The focus of the course is on fundamental accounting concepts and principles. Students learn how the economic transactions of a firm are reported in the financial statements and related disclosures. The objective of the course is to provide students with basic skills necessary to read and analyze financial statements as well as to prepare students for more advanced financial statement analysis courses."
+    },
+    {
+      "course": "30005: Internal Information for Strategic Decisions",
+      "department": "Booth",
+      "description": "We develop your ability to analyze the economic costs of important decisions\u00a0within\u00a0a firm. These decisions include make vs. buy, abandon vs. continue, setting transfer prices, and evaluating employee performance, to name a few. When you leave the course, you will understand key costing concepts such as overhead allocation, activity-based costing, capacity costs, customer profitability, transfer pricing, performance evaluation, and internal controls. We apply a case-based approach to learning. Cases cover both the manufacturing and service sectors. The course is highly recommended for students intending to become management consultants, entrepreneurs, managers (e.g., CEOs, CFOs, product managers), and anyone with an interest in learning how firms make product and service decisions from a cost-analysis perspective"
+    },
+    {
+      "course": "30116: Accounting and Financial Analysis",
+      "department": "Booth",
+      "description": "This course is designed to improve students\u2019 understanding of financial information beyond an introductory accounting class. It will provide the knowledge of financial statements necessary to conduct a reasonably sophisticated financial statement analysis. The focus is on the use of financial statements, although this requires some understanding of the process by which financial statements are produced. It will benefit students that want to become bankers, investors, analysts, or any other job that requires more than a superficial understanding of financial reporting. The course is also a good replacement for B30000 for MBA students that have already taken an introductory accounting class (the online pre-MBA accounting class is a great preparation for the class)."
+    },
+    {
+      "course": "30118: Taxes and Business Strategy",
+      "department": "Booth",
+      "description": "This course provides students with a framework for thinking about tax planning. This framework has two principal advantages. First, it is designed to have value long after the recent and next tax law change. Second, the framework is portable, in that it can be applied to any set of tax laws - those of the United States or any other country. Although the course generally focuses on U.S. based transactions and planning examples, the underlying ideas are applicable in other jurisdictions. Once developed, the framework is applied to a variety of business settings. The applications integrate concepts from finance, economics, and accounting to achieve a more complete understanding of the role of taxes in business strategy. The course also includes periodic focus on the financial accounting ramifications of tax planning. Moreover, the course content has valuation related implications."
+    },
+    {
+      "course": "30121: Accounting for Entrepreneurship: From Start-Up through IPO",
+      "department": "Booth",
+      "description": "This course develops and illustrates a set of tools needed to provide accounting and related functions for private, entrepreneurial firms. The class follows the life-cycle of a business that originates as a start-up and will cover the accounting-related financial metrics, and the managerial, financial and tax accounting issues that are needed by an entrepreneur."
+    },
+    {
+      "course": "30122: Deal Structuring and Financial Reporting Implications",
+      "department": "Booth",
+      "description": "In previous accounting/financial analysis courses, you obtained skills important to understanding how a firm tracks its day-to-day operations, how its activities translate into periodic financial statements and how such financial statements may be used to assess the value of a firm. Outside of 'normal' business activities, firms periodically undergo dramatic transformations via acquisitions, divestitures, restructurings, or bankruptcy. This course builds on knowledge acquired from other Booth courses and equips you with tools to build financial models to better understand the financial reporting, tax, and legal implications of structuring complex deals."
+    },
+    {
+      "course": "30130: Financial Statement Analysis",
+      "department": "Booth",
+      "description": "Hello!\u00a0 I\u2019m delighted to teach you Financial Statement Analysis & Valuation (= FSAV) because I believe that strong FSAV skills will help you better understand firms\u2019 financial statements, disclosures, business strategies/decisions, and equity valuations. \u00a0FSAV is especially designed for students who are seeking an internship or full-time career in finance or consulting.\u00a0 But I believe it\u2019s also very helpful and invaluable to anyone planning a career in business!"
+    },
+    {
+      "course": "30131: Advanced Financial Analysis and Valuation for Global Firms",
+      "department": "Booth",
+      "description": "The course covers advanced financial analysis and valuation for global firms. It is designed for students that already have a basic familiarity with corporate valuation and DCF analysis (e.g., from corporate finance class or a prior job) as well as solid accounting knowledge. We cover financial analysis of different business models, specific situations (e.g., cyclicals, young growth companies, closely-held firms) as well as the analysis and valuation of foreign companies (e.g., emerging markets, reporting under IFRS). Capital markets have become increasingly global, providing more opportunities for corporate investments and M&A abroad. Evaluating these global investments, however, poses unique challenges for financial analysis (e.g., regarding information, accounting and governance) as well as valuation problems."
+    },
+    {
+      "course": "30135: AI and Financial Information",
+      "department": "Booth",
+      "description": "Are you interested in building an AI-first company? Managing an AI product? Evaluating investments in AI ventures? If so, this course will provide a foundation for achieving those goals."
+    },
+    {
+      "course": "30600: Workshop in Accounting Research",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "30900: Foundations of Accounting Research",
+      "department": "Booth",
+      "description": "The goal of this course is to provide you with the foundations of accounting research, with a primary focus on empirical research in financial accounting and disclosure. We will initially cover some foundational material in research methodology and design, but then move onto a selection of important applied papers in this area, beginning with Ball and Brown (1968). The goal is to consider and evaluate both substantive economic questions and the empirical methods employed in these papers. The ultimate goal is to prepare you to begin conducting your own research as well as being able to evaluate others\u2019 research (including as referees)."
+    },
+    {
+      "course": "30906: Contracting on Accounting Information",
+      "department": "Booth",
+      "description": "The course focuses on the role accounting information plays in facilitating the contracting process. Throughout the quarter, we will discuss contracting issues related to agency and information problems and the role accounting information plays to address these issues. Most classes will begin by discussing a foundational theory paper and will proceed with presentations and discussions of related empirical work. We will begin by covering main ideas from the Positive Accounting Theory. Subsequently, we will spend several weeks on compensation contracts. We will then move to debt contracting issues and will discuss the design of loan contracts with the focus on the use of control rights. We will consider contract design from both the classic agency and the incomplete contracting perspective. Throughout the class will be covering both classic papers and more recent topics. Towards the end of the course, you will present a research project idea in front of the class."
+    },
+    {
+      "course": "30907: Disclosure, Reporting and Transparency: Analysis of Markets and Regulation",
+      "department": "Booth",
+      "description": "The course is designed for Ph.D. students in accounting, finance, and related fields. Its primary objective is to advance your understanding of how to conduct and evaluate empirical research. The course is heavily focused on research design and design-based identification. The assigned studies and topics serve primarily to illustrate broader challenges of empirical research, e.g., our ability to draw causal inferences."
+    },
+    {
+      "course": "30908: Accounting for Private Entities & Non-Investor Stakeholders",
+      "department": "Booth",
+      "description": "The goal of this course is to provide an overview of accounting research in the area of unregulated entities and transactions. Specifically, the first half of the course will cover accounting choices and consequences by privately held firms. The second half of the course will cover the usefulness of accounting information for stakeholders of the firm that are not equity investors or lenders (non-investor stakeholders), with a focus on suppliers and customers as well as employees. The focus of the course will be to expose students to the existing literature in each of these areas, but we will also discuss the challenges of exploring unregulated transactions and entities, notably accessing data and settings. The course will also contrast the findings in the private-firm space to much larger body of work that uses public firms and investor transactions as a setting. Lastly, we will also discuss the appropriateness of different research designs and statistical methods in this space."
+    },
+    {
+      "course": "30930: Research Seminar in Accounting \u2784",
+      "department": "Booth",
+      "description": "The main goal of the research-seminar class is to help Ph.D. students transition from course work to research. The seminar is intended to support this transition by developing students\u2019 research questions and papers. The course is meant to provide students feedback from multiple faculty so they can further develop research ideas into a high-quality dissertation. In the process, Ph.D. students also learn how to present ideas and give feedback to classmates."
+    },
+    {
+      "course": "30931: Research Seminar in Accounting \u2784",
+      "department": "Booth",
+      "description": "The main goal of the research-seminar class is to help Ph.D. students transition from course work to research. The seminar is intended to support this transition by developing students\u2019 research questions and papers. The course is meant to provide students feedback from multiple faculty so they can further develop research ideas into a high-quality dissertation. In the process, Ph.D. students also learn how to present ideas and give feedback to classmates."
+    },
+    {
+      "course": "31401: Interpersonal Dynamics",
+      "department": "Booth",
+      "description": "Interpersonal Dynamics (31401-07) will be offered as an IN-PERSON class this Spring 2024, meeting at BL455 (NBC Tower), Thursdays 2-5 pm (Classes 1, 6, and 9, until 5:30 pm)"
+    },
+    {
+      "course": "31403: Leadership Studio",
+      "department": "Booth",
+      "description": "The Leadership Studio is designed around four guiding principles that we ask those who enroll to embrace and make them their own. Simply stated:"
+    },
+    {
+      "course": "31404: Leadership Lab",
+      "department": "Booth",
+      "description": "As a leader there are few things more vital to your success and fulfillment than the ability to grow as you encounter new challenges or become aware of outdated patterns of behaviors."
+    },
+    {
+      "course": "31405: Leading with Authenticity",
+      "department": "Booth",
+      "description": "Today\u2019s most effective leaders aren\u2019t just competent\u2014they\u2019re congruent."
+    },
+    {
+      "course": "31406: Exercising Leadership",
+      "department": "Booth",
+      "description": "Exercising Leadership helps you to become more impactful and strategic as a leader."
+    },
+    {
+      "course": "31425: Real Estate and Equity: Leveling the Playing Field",
+      "department": "Booth",
+      "description": "Real estate development and the title \u201cdeveloper\u201d have long been contentious terms, synonymous with networks of wealth and influence. Developers have no required course of study, no exam to enter the field, no oath to uphold and no continuing education. Our built environment is reflective of those who developed it: racially monolithic, affluent, and male-dominated. This fosters a lack of equity and the widening wealth gap in America's most vulnerable neighborhoods."
+    },
+    {
+      "course": "32120: Data Analysis with Python and SQL",
+      "department": "Booth",
+      "description": "This course requires/expects no background in coding. However, those with a coding background are welcome and can scale up the difficulty of all assignments"
+    },
+    {
+      "course": "32130: Data Visualization for Decision-Making",
+      "department": "Booth",
+      "description": "Learn how to turn outputs of data analysis into compelling visualizations"
+    },
+    {
+      "course": "32210: Generative Thinking",
+      "department": "Booth",
+      "description": "Generative AI is a pivotal advancement in the realm of artificial intelligence that has the potential to transform various industries, from entertainment and advertising to healthcare and education. A thorough"
+    },
+    {
+      "course": "33001: Microeconomics",
+      "department": "Booth",
+      "description": "This course teaches the core principles of modern microeconomics and illustrates their application to understanding business decisions and the broader world. The course covers the following topics: supply and demand; consumer choice; firm behavior, including pricing and production under different market structures; and the effects of uncertainty."
+    },
+    {
+      "course": "33002: Accelerated Microeconomics",
+      "department": "Booth",
+      "description": "This course is an accelerated alternative to Microeconomics 33001, intended for students with some prior exposure to economics or simply the ambition to engage more intensely with the tools of economics in the spirit of Chicago price theory. We will cover the core topics of Microeconomics 33001 at a faster pace, with deeper exploration of the concepts and their applications to important real-world problems. The core topics include consumer behavior, supply and demand, production and pricing, and choice under uncertainty. Given the faster pace, we will have time to apply these tools to additional topics not typically covered in Microeconomics 33001, including labor markets, compensating differentials, discrimination, inequality, redistribution, education, signaling, human capital, and intergenerational mobility."
+    },
+    {
+      "course": "33032: Managing the Workplace",
+      "department": "Booth",
+      "description": "This course examines foundational topics in human resource management with a focus on coordinating human resource practices and business strategy. Topics covered include employee selection and retention, training and development, performance evaluation, compensation, job design and communications within the firm. Classes will combine case discussions with lectures, blending theory and application."
+    },
+    {
+      "course": "33050: Macroeconomics and the Business Environment",
+      "department": "Booth",
+      "description": "This MBA course will introduce students to macroeconomics with an analysis of the aggregate outcomes of the decisions made by households, firms and policymakers."
+    },
+    {
+      "course": "33112: Business in Historical Perspective",
+      "department": "Booth",
+      "description": "This course develops an historical perspective on the modern business environment, with the goal of preparing for seemingly unprecedented business opportunities or challenges. The course explores how businesses have succeeded and failed in diverse contexts throughout history. Topics include: how firms have adapted to the absence of formal legal institutions; the causes and consequences of periods of technological revolution; similarities and differences between the Great Depression and more recent economic turmoil; and exploring determinants of income inequality and who benefits from productivity growth. This course fulfills the Business Environment \"Economy\" requirement."
+    },
+    {
+      "course": "33230: The Economics of Companies",
+      "department": "Booth",
+      "description": "This course focuses on topics in industrial organization, the field of economics that studies companies and their behavior. Topics covered include production and productivity, pricing, demand estimation, oligopolies, equilibrium market structure, antitrust and regulation, vertical integration and contracting, strategic behavior, search and advertising, and two-sided markets. The course is aimed at students who are comfortable with at least intermediate-level microeconomics, and ideally have already taken 33001 (Microeconomics) or equivalent. The course material combines both theoretical and empirical elements, and you should be prepared for both abstract and practical treatments of issues. The course can also serve as a complement to, but not replacement for, 42001 (Competitive Strategy)."
+    },
+    {
+      "course": "33250: Perspectives on Capitalism",
+      "department": "Booth",
+      "description": "The University of Chicago is home to scholars of diverse and nuanced perspectives on the accomplishments, limitations, and future of capitalism. The goal of this course is to take advantage of that diverse expertise to equip Chicago Booth students with tools and perspectives that help them engage thoughtfully in these debates and extend them into application in their own roles as corporate, non-profit, or entrepreneurial leaders. The course will provide students with an unbiased survey of the economic, social, and intellectual history of capitalism, sparking active discussion of the challenges and opportunities facing capitalist economies today and what \"capitalism\" can and should mean going forward."
+    },
+    {
+      "course": "33251: Perspectives on Capitalism Seminar",
+      "department": "Booth",
+      "description": "The University of Chicago is home to scholars of diverse and nuanced perspectives on the accomplishments, limitations, and future of capitalism. The goal of this course is to take advantage of that diverse expertise to equip Chicago Booth students with tools and perspectives that help them engage thoughtfully in these debates and extend them into application in their own roles as corporate, non-profit, or entrepreneurial leaders. The course will provide students with an unbiased survey of the economic, social, and intellectual history of capitalism, sparking active discussion of the challenges and opportunities facing capitalist economies today and what \"capitalism\" can and should mean going forward."
+    },
+    {
+      "course": "33305: The Firm and the Non-Market Environment",
+      "department": "Booth",
+      "description": "The business environment has both a market and a non-market component. Most courses in the MBA curriculum focus on the market component: they study firms\u2019 interactions with customers, suppliers, and alliance partners in the form of mutually beneficial exchanges transacted in markets. In contrast, this course focuses on the non-market component. For example, businesses need to cope with laws and regulations, lobby for favorable legislation, ensure access to foreign markets, and deal with media coverage and activist pressures, to name just a few. Successful managers need to formulate strategies for their firms that take into account not only the market but also the regulatory, legal, political and social (e.g. non-market) environments in which they operate."
+    },
+    {
+      "course": "33320: Financing the Grid: Valuing Transmission & Storage Capacity",
+      "department": "Booth",
+      "description": "This course will provide a\u00a0general introductory overview to fundamental instruments, and to foundational concepts and practice principles from industrial economics, statistics and engineering applicable to financing and valuation of grid-scale electricity storage and transmission capacity."
+    },
+    {
+      "course": "33350: Health Economics",
+      "department": "Booth",
+      "description": "This course applies theoretical and empirical tools of microeconomics to the study of health insurance and the healthcare sector. This course will cover a broad range of topics including the demand for healthcare, the design and financing of health insurance, the behavior of non-profit and for-profit hospitals, the role of competition in the healthcare market, the determinants of healthcare spending, the sources of technological change in the healthcare sector, and the effects of government regulations on the healthcare market. We will also study in depth the role of adverse selection and moral hazard in healthcare markets, both theoretically and empirically. The course will briefly discuss healthcare systems around the world and describe socioeconomic disparities in health outcomes in both the United States and around the world. The course will conclude with applications of all of these concepts to recent health care policy debates in the United States."
+    },
+    {
+      "course": "33351: The Business of Pharmaceuticals",
+      "department": "Booth",
+      "description": "This course introduces key contemporary and emerging issues in the US healthcare and pharmaceutical industry. Part I provides (a) a grounding in the industry\u2019s institutional features, in particular the role played by the Food and Drug Administration (FDA) in regulating the sector, (b) an overview of key stakeholders involved in drug launch and commercialization, and (c) each stakeholders economic incentives in this competitive market. Once students understand the landscape, stakeholders, and incentives, Part II will turn to (a) the interplay between the stakeholders, (b) \u00a0the current and anticipated changes to this highly dynamic industry, and (c) focus on recent Policy updates, emerging product categories, and a critical consideration of the future of healthcare delivery and payment in the US."
+    },
+    {
+      "course": "33353: Pharmaceutical Launch & Lifecycle Strategy",
+      "department": "Booth",
+      "description": "The course is for students who plan to work with or in the Bio-Pharma industry - as a manager, entrepreneur, investor, or consultant. \u00a0The course will focus on applying the concepts learned as part of Booth\u2019s introductory marketing and strategy courses to the unique challenges faced by professionals and entrepreneurs in the life sciences industry in bringing products to market and in revenue expansion. The challenges arise due to the high costs and failure rates in developing new products as well as from the need to navigate a complex regulatory and market environment with multiple stakeholders and partners."
+    },
+    {
+      "course": "33401: Money and Banking",
+      "department": "Booth",
+      "description": "This course is about money, central banks, and financial institutions. We focus on how they affect businesses, how they help companies grow, and what can go wrong."
+    },
+    {
+      "course": "33450: Real Estate Investments I",
+      "department": "Booth",
+      "description": "This course is designed to familiarize students with real estate equity investments - primarily from the perspective of institutional investors (e.g., pension funds, investment advisors, private equity, REITs, life insurance companies, etc.) with allocations to \"core\" property types. Accordingly, much of the course's emphasis will be placed on various types of financial modeling used by these investors to evaluate their real estate investments. The course will also emphasize the multi-disciplinary setting (e.g., accounting, business law, economics, finance, mathematics and statistics) in which real estate operates. Given the dynamic nature of the real estate markets, the course notes, the pace of the class, the nature of exams, etc. should be expected to be somewhat fluid."
+    },
+    {
+      "course": "33451: Real Estate Investments II",
+      "department": "Booth",
+      "description": "This class is intended to be an extension of Real Estate Investments I (Business 33450) and, therefore, is designed to examine more complex real estate issues and problems. More specifically, this course in intended to: a) provide you with a perspective on the \"structuring\" issues related to real estate equity investments, b) invoke the multi-disciplinary setting in which complex real estate transactions take place, and c) move beyond the \"core\" property types. Given the dynamic nature of the real estate markets, the course notes, the pace of the class, the nature of exams, etc. should be expected to be somewhat fluid."
+    },
+    {
+      "course": "33471: Business, Politics, and Ethics",
+      "department": "Booth",
+      "description": "The business environment creates ethical choices that can be hard to think through clearly. It can also subject companies to negative publicity or political pressure, which affects both how they are regulated and how well they attract employees, customers and partners. So business leaders are often called upon to make credible and persuasive arguments defending their products, their firms, their industries, or the capitalist system in which they operate."
+    },
+    {
+      "course": "33501: International Commercial Policy",
+      "department": "Booth",
+      "description": "International trade has always been economically controversial and politically contentious. This course demystifies some of the complex issues that surround discussions of globalization. It asks such questions as: Why do countries engage in trade? Are countries in competition with one another, making one a winner and another a loser, or is trade mutually beneficial? Who gains and who loses from international trade within any given country? How is the burden of import tariffs divided in the economy? What is the impact of a trade war on the global economy? This course examines these questions and much more."
+    },
+    {
+      "course": "33502: International Financial Policy",
+      "department": "Booth",
+      "description": "This course will help students develop an understanding of issues in international macroeconomics that are important for investors and managers operating in the global marketplace. It will cover theories of the determination of exchange rates and interest rates, the management of foreign exchange risk, international capital flows, debt and currency crises, international monetary and exchange rate regimes, the roles of the international financial institutions in developing countries, and other key topics in international financial policy."
+    },
+    {
+      "course": "33520: The Wealth of Nations",
+      "department": "Booth",
+      "description": "Why is the United States the wealthiest country in the world? How can we understand the emergence of China and India in the last two decades? What explains growth disasters of countries such as Venezuela?\u00a0 This class will develop quantitative analytical frameworks and use case studies to examine the role of resource allocation and technological innovation\u00a0in understanding the performance of firms in emerging markets vs wealthy countries.\u00a0 We will examine the elements of successful and disastrous growth strategies in selected emerging markets."
+    },
+    {
+      "course": "33610: Applied Economics Workshop",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "33630: Workshop: Money and Banking",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "33650: Workshop in Macro and International Economics",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "33903: Microeconomics Reading and Research Seminar \u2784",
+      "department": "Booth",
+      "description": "Intensive year-long research and writing seminar for Booth Economics PhD students in the 3rd year and up."
+    },
+    {
+      "course": "33904: Microeconomics Reading and Research Seminar \u2784",
+      "department": "Booth",
+      "description": "Intensive year-long research and writing seminar for Booth Economics PhD students in the 3rd year and up."
+    },
+    {
+      "course": "33905: Microeconomics Reading and Research Seminar \u2784",
+      "department": "Booth",
+      "description": "Intensive year-long research and writing seminar for Booth Economics PhD students in the 3rd year and up"
+    },
+    {
+      "course": "33914: Topics in Information Economics",
+      "department": "Booth",
+      "description": "The course will provide an overview of formal models of information and explore ways these models have been used to analyze topics in economics. Emphasis will be placed on recent developments in the field."
+    },
+    {
+      "course": "33915: Market Design",
+      "department": "Booth",
+      "description": "This topics course explores the theory and practice of matching and auction market design, drawing on examples from entry-level labor markets, school choice procedures, kidney exchanges, course allocation procedures, Internet advertising, spectrum auctions, cryptocurrencies, and financial exchanges."
+    },
+    {
+      "course": "33918: Topics in Labor Economics",
+      "department": "Booth",
+      "description": "This course studies topics in labor economics, surveying both recent theoretical and empirical work in the field. The topics will build on core topics in labor economics and will survey recent work on gender discrimination, racial discrimination, gender and racial gaps in labor market outcomes, applied econometric tools in the economics of education, inequality, organizational economics, and minimum wages."
+    },
+    {
+      "course": "33920: Health Economics Literature Seminar \u2784",
+      "department": "Booth",
+      "description": "This is a literature seminar in which students present recent papers in health economics.\u00a0 The goal is for students to understand the literature at the frontier of the field, its limitations, and opportunities to improve it.\u00a0 Topics vary by year as the field progresses."
+    },
+    {
+      "course": "33921: Advanced Industrial Organization I",
+      "department": "Booth",
+      "description": "This is the first course in a Chicago Booth sequence with one or more IO topics courses in the Department of Economics. The class is for PhD students. The sequence covers recent theoretical and empirical approaches in several topics. This course focuses on productivity and industry evolution, advertising and search, product differentiation, vertical relationships, and strategic behavior."
+    },
+    {
+      "course": "33922: Advanced Industrial Organization II",
+      "department": "Booth",
+      "description": "This two-quarter sequence is part of the Industrial Organization Specialized Field taught jointly at the Ph.D. level in the Department of Economics and the Booth School of Business. Topics include modeling consumer demand, production function estimation, static and dynamic models of imperfect competition, pricing strategies, theory of the firm, auctions and market design. Recent theoretical and empirical approaches are emphasized. PQ: Solid background in first year Ph.D. level microeconomics and econometrics, e.g., ECON 30100, 30200, or 30300 and ECON 31000, 31100, or 31200."
+    },
+    {
+      "course": "33930: Economics of Education",
+      "department": "Booth",
+      "description": "This course is designed for graduate students interested in conducting rigorous research in the economics of education and related fields, including labor economics, public economics, and industrial organization. We will cover foundations and recent innovations across a range of topics spanning early childhood to postsecondary education, including students, teachers, and schools in the educational production function; school choice, information, and competition; human capital versus signaling; college admissions; and the pecuniary and non-pecuniary returns to colleges and majors."
+    },
+    {
+      "course": "33931: The Economics of Contracts",
+      "department": "Booth",
+      "description": "The objective of this course is to introduce students to the theory of optimal contracting in economics. This course will jump around to cover a variety of loosely connected topics, going through seminal results and then presenting a quick tour of more recent work. Possible topics include incentive contracts under moral hazard and adverse selection, the theory of the firm, relational contracts, robustness, delegation, price discrimination, and others to be determined."
+    },
+    {
+      "course": "33942: Applied Macroeconomics: Micro Data for Macro Models",
+      "department": "Booth",
+      "description": "This course considers the use of data on households, workers and producers in research on consumption behavior, labor market fluctuations, business dynamics and other areas of macroeconomics. A key goal is to help students develop the ability to identify interesting research questions and devise promising research strategies. Topics include life cycle consumption behavior, home production and time use, housing market dynamics, wage rigidities and their consequences, unemployment fluctuations, employer behavior on the hiring margin, entrepreneurship, and business productivity dynamics. Lectures treat a mix of important, well-established research contributions and new, often rough, papers that seek to advance the frontier. Homework assignments aim to build proficiency in the use of micro data to address macroeconomic issues, expose students to a variety of useful data sources, and give them first-hand experience in identifying and evaluating research questions and strategies."
+    },
+    {
+      "course": "33946: International Macroeconomics and Trade",
+      "department": "Booth",
+      "description": "This is a graduate course in international trade. It introduces the fundamental concepts and tools of international trade and economic geography to prepare students to tackle research questions in these areas."
+    },
+    {
+      "course": "34101: Entrepreneurial Finance and Private Equity",
+      "department": "Booth",
+      "description": "This course uses the case method to study entrepreneurial and private equity finance.\u00a0 Private equity in all its forms has become a meaningful and growing component of the global economy.\u00a0 On the supply side, the amount of private equity under management - by partnerships investing in venture capital, growth equity, leveraged buyouts, distressed companies, etc. - has increased substantially in the last two decades. On the demand side, a large number of MBAs and others are interested in becoming investors in various private equity funds as well as starting and managing their own businesses."
+    },
+    {
+      "course": "34102: New Venture Strategy",
+      "department": "Booth",
+      "description": "New Venture Strategy: How to Judge Ideas and Build Great Companies"
+    },
+    {
+      "course": "34103: Building the New Venture",
+      "department": "Booth",
+      "description": "This course is intended for students who are interested in starting new entrepreneurial businesses. It is a tactical and hands-on class that covers the nuts and bolts of starting a company. Course material is organized around the milestones and phases that entrepreneurs must complete in pursuit of building their business. Students will learn how to raise seed funding, compensate for limited human and financial resources, secure a strong niche position, determine appropriate sourcing and sales channels, and develop execution plans in sales, marketing, and product development. The course also covers the human side of startups including, cofounder dynamics, how to think about equity splits, entrepreneurial resilience, and the entrepreneurial mindset. The emphasis is managerial and entrepreneurial, essentially a working model for starting a business."
+    },
+    {
+      "course": "34104: Special Topics in Entrepreneurship: Developing a New Venture (New Venture Challenge)",
+      "department": "Booth",
+      "description": "This course is designed to allow students who have advanced to the second round of the New Venture Challenge to develop their ideas into businesses. Student teams will work largely on their own to develop their businesses."
+    },
+    {
+      "course": "34106: Commercializing Innovation: Tools to Research and Analyze Private Enterprises",
+      "department": "Booth",
+      "description": "Commercializing Innovation delivers useful \u201ccross-training\u201d to students interested in starting, leading or investing in entrepreneurial enterprises. Throughout the quarter, students learn how to effectively evaluate and communicate the fundamentals of novel business opportunities. More than a collection of tools and frameworks, this course teaches a comprehensive approach that can be efficiently applied across a broad range of businesses. This approach is built (and tested) incrementally over time using a mixture of case discussions, guest lectures, and hands-on assignments."
+    },
+    {
+      "course": "34108: Innovation Leadership",
+      "department": "Booth",
+      "description": "Business leaders must contend with the rise of AI, geopolitical turbulence, and fast-shifting buyer expectations that require them to create new offerings and adapt faster than traditional business frameworks can adjust."
+    },
+    {
+      "course": "34111: Entrepreneurial Selling",
+      "department": "Booth",
+      "description": "Selling is a life skill. At the core, this is a course in persuasion which is just a fancier word for selling. Persuasion is a skill you need to be good at in anything you do in life\u2026.which is why many students without near term plans to start a business have found the course to be immediately useful and impactful in their careers, recruiting, and in all aspects of life."
+    },
+    {
+      "course": "34113: Impact Investing",
+      "department": "Booth",
+      "description": "Impact investing plays an expanding role in deploying financial resources to address social problems through market-based interventions. Impact investing includes both \u201cnon-concessionary\u201d or \u201cmarket-rate\u201d investments that target risk-adjusted market-rate returns and \u201cconcessionary\u201d or \u201ccatalytic\u201d investments that anticipate lower than market returns."
+    },
+    {
+      "course": "34115: New Social Ventures",
+      "department": "Booth",
+      "description": "This course is for students participating in The John Edwardson \u201972 Social New Venture Challenge. Teams of students will develop an idea for an innovative, startup social organization. They will conduct research to create a detailed plan for its creation and growth and pitch the plan to faculty, social entrepreneurs, domain experts, foundation officers, and philanthropists."
+    },
+    {
+      "course": "34117: Social Entrepreneurship and Innovation",
+      "department": "Booth",
+      "description": "The objective of this course is for students to develop and refine an idea for an innovative social venture that they plan to pursue."
+    },
+    {
+      "course": "34206: Women As CEOs, Entrepreneurs, Investors, Executives & Directors",
+      "department": "Booth",
+      "description": "This course will examine the world of entrepreneurship, venture capital, and private equity from the fresh and contemporary lens and perspective of women. The goal of the course is to provide candid insight and purview into the personal and professional lives of leading women entrepreneurs, venture capitalists, and private equity executives, what has helped catapult or has hampered their ability to lead organizations worldwide."
+    },
+    {
+      "course": "34208: Outperform & Outlast: Operating and Investing in Closely Held Businesses \u2784",
+      "department": "Booth",
+      "description": "While sometimes overlooked in the broader business context, closely held firms are a dominant force for national (and global) employment, business activity and GDP. Moreover, recent studies have shown that these businesses tend to outperform and outlast their counterparts (Harvard Business Review, 2012). Admittedly amorphous, the course will begin by exploring the ambiguity of defining closely held businesses.\u00a0 Next, the course will focus on why and how closely held businesses can achieve these extraordinary results so that students can apply these practices to their own careers and families, regardless of the type of business."
+    },
+    {
+      "course": "34210: Entrepreneurship in Healthcare and Life Sciences",
+      "department": "Booth",
+      "description": "Entrepreneurship in Healthcare and Life Sciences is designed to teach students to weave together the hard science that underlies research-driven enterprises with the commercial, financial, and strategic elements into business plans required for new venture creation."
+    },
+    {
+      "course": "34211: Value Creation in Small Businesses",
+      "department": "Booth",
+      "description": "Learn the art and science driving value creation in small businesses. This course equips future operators with battle-tested frameworks and practical tools for driving growth in companies with 10-250 employees. Through real-world case studies and hands-on projects, you'll learn how to pull the key traditional value creation levers: revenue growth, margin expansion, and multiple expansion. Beyond traditional value drivers, you\u2019ll learn how to build a winning team, cultivate a high-performance culture, and harness digital transformation to accelerate equity value creation. Perfect for students pursuing careers in private equity operations, entrepreneurship through acquisition (ETA), or growth-oriented management roles."
+    },
+    {
+      "course": "34214: User Experience Design for Intelligent Product-Service Systems \u2784",
+      "department": "Booth",
+      "description": "User Experience Design for Intelligent Product-Service Systems analyses how modern consumer offerings increasingly integrate physical products and digital services to create unified, seamless user experiences across multiple touchpoints."
+    },
+    {
+      "course": "34215: Structuring Investments and Investing in Structure \u2784",
+      "department": "Booth",
+      "description": "This course will cover key finance and tax topics relating to structured investments, from the transactional level to a portfolio perspective.\u00a0 A key premise of the class is that pattern recognition, fundamental understanding and insights about structuring require a combination of top down and bottom up perspectives across a wide scope of coverage."
+    },
+    {
+      "course": "34219: Institutional Private Capital Investing",
+      "department": "Booth",
+      "description": "Explore the evolution of private markets and the forces shaping today\u2019s industry \u2014 from venture capital in China and unicorns to GP-stake sales and SPACs."
+    },
+    {
+      "course": "34220: Advanced New Venture Strategy Workshop",
+      "department": "Booth",
+      "description": "The New Venture Strategy course is all about selecting a good idea for a start-up business. The Advanced NVS Workshop investigates what happens after the initial operating period where significant growth remains paramount to reaching a liquidity event. Think WeWork as it expanded, Rivian, Uber, Carvana, Tovala, among many others. Each moved well beyond a single market, technology, or product, yet the entrepreneurs needed to make spot-on strategy decisions--in some cases as a matter of life or death for their enterprise."
+    },
+    {
+      "course": "34302: Entrepreneurship through Acquisition",
+      "department": "Booth",
+      "description": "Entrepreneurship Through Acquisition (\u201cETA\u201d) will give students frameworks and real world solutions to use if they decide to pursue an acquisition of and lead a company. The class will walk through the life cycle of a typical path toward finding and running a business including information on fund formation, raising capital, searching for a company, buying a business, leading that business and then ultimately selling it. Approximately half of the course will go through critical points leading up to buying a business, while the other half will address some of the key issues executives face while running a company (identifying metrics, communicating with a team, interviewing, handling HR issues, etc). Although the main focus will be on buying and running a business, the class is designed to be applicable to many other career paths including private equity, venture capital and entrepreneurship."
+    },
+    {
+      "course": "34305: Private Equity Transactions \u2784",
+      "department": "Booth",
+      "description": "This course will examine a variety of business, legal, and practical issues that arise in negotiating and documenting a typical private equity leveraged buyout transaction.\u00a0 The course will follow a private equity transaction through its various stages, with a particular focus on the acquisition agreement, its interaction with the debt financing of the transaction, and the equity arrangements entered into among the transaction participants.\u00a0 The objective is to provide students with an understanding of the key contractual terms and important business and risk allocation issues that they will likely encounter in negotiating these transactions as deal professionals at private equity firms or other organizations active in the M&A market.\u00a0 In addition, the course is intended to provide students with insight as to how different stakeholders--including business founders, management team members, private equity sponsors, lenders, insurance providers and advisors--view and are involved in these transactions."
+    },
+    {
+      "course": "34308: Legal Foundations for Entrepreneurship and VC/PE Investments \u2784",
+      "department": "Booth",
+      "description": "This course is designed for students who are interested in the legal issues that will be relevant to one\u2019s career as 1) an investment professional in a venture capital/growth equity/private equity firm or allocating money to funds; 2) a founder or member of the senior management of a venture/growth-backed or PE-backed company; or 3) a service provider to the venture/growth/private equity industry (i.e. consulting, banking, fundraising, executive search, and wealth management)."
+    },
+    {
+      "course": "34702: Private Equity/Venture Capital Lab",
+      "department": "Booth",
+      "description": "The private equity and venture capital lab is an experiential program intended for students who want to learn more about what it is like to work in private equity or venture capital industries. The program is comprised of (a) an internship and (b) an academic course. Internships are hosted by private equity firms, angel groups, venture capital firms, mezzanine lenders, growth equity firms, buyout firms and many other variations. The academic course is designed to equip students with timely practical tools and impart experience from industry veterans with the goal to accelerate the apprenticeship process of those aspiring to work in the private equity and venture capital industries. The course is split into two sections, one that emphasizes private equity and the other venture capital. Both sections are taught in the winter and spring quarters."
+    },
+    {
+      "course": "34704: Real Estate Lab: Real Estate Challenge",
+      "department": "Booth",
+      "description": "For the autumn quarter, this class will only be offered in in-person mode."
+    },
+    {
+      "course": "34705: Entrepreneurial Discovery",
+      "department": "Booth",
+      "description": "Entrepreneurial success is built with passion, execution, and leadership; however, at the nucleus of a great company is a viable solution and business model that truly addresses customers\u2019 need or empowers an unmet desire. While business ideas are \u201ca dime per dozen\u201d, building a viable business model on the right idea is invaluable but is very difficult.\u00a0 In both start-up entrepreneurship and corporate intrapreneurship, pursuing wrong ideas or models wastes precious time, resources, and energy."
+    },
+    {
+      "course": "34709: Lab to Launch",
+      "department": "Booth",
+      "description": "Lab based innovations have contributed the most important advances to humanity, from energy that power our lives to medicine that cures disease. Billions of dollars are spent each year developing lab based innovations, with new discoveries happening every day. However, limited effort is place on commercializing these discoveries, which could create global scale impact and vast wealth creation. A major reason for this is that the toolset required to be successful in this arena is much different than digital/AI companies, which is currently the focus of most people or traditional corporate management. Therefore, we have created a class tailored to offer a very unique value proposition:"
+    },
+    {
+      "course": "34712: Innovation Lab",
+      "department": "Booth",
+      "description": "The \u201cInnovation Lab\u201d course is exclusively open for Specialized Masters students (Master in Management and Master in Finance) who are studying in London for Winter Quarter 2026.\u00a0\u00a0The purpose of the course is to:"
+    },
+    {
+      "course": "34715: Hacking For Defense",
+      "department": "Booth",
+      "description": "Registration Link: https://forms.gle/1QpcoYuGbsatNV3q7"
+    },
+    {
+      "course": "34901: Asset Pricing I",
+      "department": "Booth",
+      "description": "PhD-level course in Asset Pricing that covers fundamental concepts in Asset Pricing. The first half will be taught by Stefan Nagel. The second half will be taught by Lars Hansen. Please see syllabus link for further details."
+    },
+    {
+      "course": "34902: Asset Pricing II",
+      "department": "Booth",
+      "description": "This course builds on Asset Pricing I. The course focuses on empirical asset pricing. We cover reduced-form factor models, including equity factor models and term-structure models, as a parsimonious representation of the stochastic discount factor, and methods to estimate and test these models. We examine models of subjective belief formation of investors as explanations for the empirically observed risk premium variation, as well as asset demand system approaches to identify and estimate asset pricing models. We further explore machine-learning approaches to empirical asset pricing, leveraging them to enhance conventional prediction, estimation, and inference with respect to expected returns, risk premia, factor-mimicking portfolios, the stochastic discount factor and optimal portfolios, alphas, and models of the risk-return trade-off, while also addressing their limitations and criticisms by highlighting when, where, and why algorithms may fail."
+    },
+    {
+      "course": "34903: Corporate Finance I",
+      "department": "Booth",
+      "description": "Corporate Finance I provides an introduction to the theory of corporate finance and financial intermediation. Some topics in corporate finance include capital structure, security design, security issuance, incomplete financial contracts and corporate control. Topics related to financial intermediation (banking) include financial crises, the role of liquidity creation and the choice of debt maturity for firms and financial intermediaries."
+    },
+    {
+      "course": "34904: Corporate Finance II",
+      "department": "Booth",
+      "description": "This course provides an empirical treatment of major topics in corporate finance and financial intermediation, including: capital structure, investment, bankruptcy, internal capital markets, the real effects of bank lending, financial frictions, and corporate finance implications for macroeconomics."
+    },
+    {
+      "course": "34906: Corporate Finance III",
+      "department": "Booth",
+      "description": "This course covers recent research on the role of financial intermediaries in the economy, macro-financial policies, as well as research on financial development and regulation of the financial system.\u00a0\u00a0 Related topics include the links between financial intermediaries, central banks, regulators, financial markets and corporate finance.\u00a0 The course will cover both empirical and theoretical work."
+    },
+    {
+      "course": "35000: Investments",
+      "department": "Booth",
+      "description": "This course offers the financial theory and quantitative analytical tools necessary for understanding how stock, bond, and option prices are determined, and provides the skills required to make sound investment decisions. The course combines a theoretical framework with applied analysis. Topics covered include: portfolio selection based on mean-variance analysis, models of risk and return (including the CAPM and multifactor models), performance evaluation of mutual funds and hedge funds, market efficiency and the random walk hypothesis, asset pricing anomalies and behavioral finance, derivative security pricing (including options, futures, forwards, and swaps), and the term structure of interest rates."
+    },
+    {
+      "course": "35001: Introductory Finance",
+      "department": "Booth",
+      "description": "The course introduces students to corporate finance, asset pricing, and investments. It is designed for students who have no background in finance and may or may not choose to concentrate in finance. I discuss sources of funds, capital budgeting, capital structure, dividend policy, cost of capital, portfolio theory, the capital asset pricing model, multifactor asset pricing models, valuation, and market efficiency. I provide the students with references to more advanced materials if they decide that they want to wade into the material further. The course is taught primarily with lectures but it relies heavily on numerical examples."
+    },
+    {
+      "course": "35010: Managerial Finance",
+      "department": "Booth",
+      "description": "This course introduces students to corporate finance, asset pricing, and investments. It is designed for students who have no background in finance and may or may not choose to concentrate in finance. I discuss sources of funds, capital budgeting, capital structure, dividend policy, cost of capital, portfolio theory, the capital asset pricing model, multifactor asset pricing models, valuation, and market efficiency. I provide the students with references to more advanced materials if they decide that they want to wade into the material further. I teach the course primarily with lectures and I rely heavily on numerical examples."
+    },
+    {
+      "course": "35100: Financial Instruments",
+      "department": "Booth",
+      "description": "This course develops the basics of derivative security pricing. We cover both simple derivative contracts, such as forward, futures, and swaps, as well as more complex derivatives, such as put and call options and credit derivatives. The focus of the course is on the pricing and hedging of derivative securities through the principles of no-arbitrage and the law of one price. We apply these concepts to dynamic trading models, through the development of the binomial tree model, the Black-Scholes option-pricing model, and the risk neutral pricing methodology. We discuss several important applications of the pricing methodology, such as its implications for risk management, exotic options, the pricing of corporate securities (corporate bonds, callable bonds, equity, etc.), credit derivatives, and real options for investment decisions. We also discuss the role of arbitrageurs in ensuring no arbitrage, and use the 2007 \u2013 2009 crisis also to highlight what happens to the law of one price if arbitrageurs are short in capital."
+    },
+    {
+      "course": "35118: Healthcare Finance",
+      "department": "Booth",
+      "description": "This course discusses the challenges to finance progress in healthcare in the 21st century, and the possible solutions, with a specific focus on drug discovery. The course reviews the current framework for drug approval, including the economics of clinical trials, and introduces the tools used for investment valuation, such as decision trees, financial and real options, Monte Carlo simulations, and portfolio theory applied to drug discovery and development. We review the venture capital and private debt markets as source of funding. We finally discussthe recent area of personalized medicine and targeted therapies, its current challenges, and the promises offered by new technologies, such as machine learning and artificial intelligence, and their impact on healthcare finance. Case studies are used to cement the concepts discussed in class."
+    },
+    {
+      "course": "35120: Portfolio Management",
+      "department": "Booth",
+      "description": "This course presents advanced material related to financial markets, focusing on topics most relevant to portfolio managers.\u00a0 The course is particularly well suited for students considering careers in the investment management industry, but it is designed for anyone who wants to build on the material covered in Bus 35000 (Investments), which is a strict prerequisite.\u00a0 Topics include active vs. passive management, mutual funds, hedge funds, index funds, ETFs, values-based investing, portfolio selection, liquidity, predictability of asset returns, market anomalies, and more. A substantial part of the course is devoted to case studies, academic research, and current events."
+    },
+    {
+      "course": "35121: Behavioral Finance",
+      "department": "Booth",
+      "description": "Over the past four decades, Behavioral Finance has evolved significantly and is now an essential component of the modern finance toolkit\u2014relevant across asset management, investment banking, corporate finance, and finance-related policy work."
+    },
+    {
+      "course": "35126: Quantitative Portfolio Management",
+      "department": "Booth",
+      "description": "This course develops a framework to build and analyze quantitative investment strategies. We will take advantage of recent innovations in AI and extensively use large language models such as those developed by Anthropic, Google, and OpenAI (and related models). You will get an in-depth understanding and hands-on experience how these tools are incredibly useful in quantitative portfolio management (and in the asset management industry at large), and how they can transform the industry in the future."
+    },
+    {
+      "course": "35130: Fixed Income Asset Pricing",
+      "department": "Booth",
+      "description": "The universe of fixed income instruments is large and ever more complex. Besides standard fixed-coupon bonds, several other types of securities are available for investment and trade, from inflation indexed securities (TIPS) to floating-rate notes, from mortgage backed securities to debt instruments issued by government agencies, such as Fannie Mae, Freddie Mac, and Ginnie Mae. In addition, a large market of exchange traded and over-the-counter derivative securities is available for trade in order to undertake sophisticated hedging strategies or to adjust the risk/return characteristics of an investment portfolio."
+    },
+    {
+      "course": "35136: Blockchains and Decentralized Finance",
+      "department": "Booth",
+      "description": "This course provides an information to blockchains and \"decentralized finance\". We will cover the basics of blockchain consensus, and smart contracts. We will then discuss finance applications built on blockchains, including automated market makers, lending platforms, stablecoins, and \"tokenomics\", as well as blockchain-related financial institutions such as cryptocurrency exchanges. We will cover a few other applications on blockchains, such as NFTs and DAOs."
+    },
+    {
+      "course": "35137: Machine Learning in Finance",
+      "department": "Booth",
+      "description": "Machine Learning in Finance focuses on the use of machine learning and AI methods and their applications in finance with a particular focus on problems in asset pricing.\u00a0 This course aims to provide students with the knowledge necessary to best use recent machine learning methods but also to understand their limitations.\u00a0 We will cover such topics as penalized estimation and its use in forecasting, clustering, factor models and unsupervised learning, neural networks and non-linear prediction, text data and large language models."
+    },
+    {
+      "course": "35139: The Economics of Digital Asset Products and Markets",
+      "department": "Booth",
+      "description": "Since the launch of Bitcoin in 2009 by the pseudonymous Satoshi Nakamoto, digital assets have developed into a distinct asset class with growing influence over global financial markets. The increasing institutional participation and increase in applications for cryptocurrencies and blockchain-based systems are challenging conventional notions and regulatory frameworks."
+    },
+    {
+      "course": "35141: Advanced Models of Security Pricing and Credit Risk",
+      "department": "Booth",
+      "description": "This course will analyze complex derivative securities and arbitrage strategies, via mathematical and computational analysis, with a goal of making students familiar with the broad landscape of derivative securities and associated pricing theory."
+    },
+    {
+      "course": "35144: Arbitrage and Corporate Securities \u2784",
+      "department": "Booth",
+      "description": "This 50-unit course focuses on arbitrage in corporate securities. It will focus on real-world examples in the context of academic theory and empirical research. The class sessions will include HBS case studies and lectures with required class participation. In addition, the required readings include several academic articles. The course will explore various corporate arbitrage strategies, including merger arbitrage, convertible arbitrage, closed-end fund arbitrage, dual-listed and dual-class arbitrage, and SPAC arbitrage. Given the limited number of classes available for a 50-unit course, we will approach these topics at a high level."
+    },
+    {
+      "course": "35146: The Family Office",
+      "department": "Booth",
+      "description": "This course is meant for current and future leaders of family offices: members of a family and/or part of a professional management team.\u00a0 \u00a0Students in the course will develop insights into the different roles that family offices play, effective leadership, structure of these offices, defining goals for investment and distribution and other important topics."
+    },
+    {
+      "course": "35150: Advanced Investments",
+      "department": "Booth",
+      "description": "This course covers advanced topics in investments from a macro asset allocation perspective. We take the view of a long-term investor, e.g., a global macro hedge fund or a pension fund, seeking to dynamically allocate investments across broad asset classes such as equities, corporate and sovereign bonds, and private equity. Building an asset allocation strategy requires an understanding of the dynamics of risk and return in these asset classes. We will use empirical techniques, including return forecasting regressions, shrinkage estimation, and out-of-sample evaluation methods to shed light on these empirical dynamics. Furthermore, we will see how data from investor surveys and on investor flows can be used to assess the state of investor sentiment. To use the empirical evidence in asset allocation decisions, we will extend the mean-variance portfolio choice framework that you encountered in your introductory investments class to analyze multi-period portfolio policies over long horizons. We will also evaluate practical rule-of-thumb approaches such as risk parity and naive diversification strategies. We will explore in detail the use of leverage, volatility derivatives, and tail-risk hedging; macro risk factors linked to interest rates and monetary policy; inflation risk and inflation-protected bonds; bubbly assets such as crypto currencies or gold. We will discuss the special challenges that investors face in integrating private equity investments, and other similarly illiquid assets, in an asset allocation framework."
+    },
+    {
+      "course": "35155: The Public and Private Lending Markets: Investment Opportunities and Risks",
+      "department": "Booth",
+      "description": "The market for corporate and sovereign bonds, as well as private corporate loans, has been increasing rapidly in the past decade. Institutional investors, such as pension funds, insurance companies, as well as commercial banks, broker-dealers, and sovereign funds exhibit strong demand for these securities. We first discuss recent trends and the investment opportunities offered by corporate and sovereign bonds, including callable, convertible and other structured securities, their risks and their expected returns. We will then discuss the booming U.S. private credit market, including middle market corporate direct lending, real estate credit, asset-based lending, specialty finance and infrastructure debt; its market participants, and the risk and investment opportunities that it offers to both corporations (who borrow) and investors (who lend). Students will learn to apply factor models and optimization techniques to analyze and construct credit portfolios, as well as asset allocation methods that account for illiquid assets. The class aims to provide economic intuition as well as quantitative tools for managing credit portfolios."
+    },
+    {
+      "course": "35200: Corporation Finance",
+      "department": "Booth",
+      "description": "This course analyzes the major decisions facing corporate financial managers. It examines investment decisions, capital structure choice, and mergers and acquisitions. My primary objective is to teach you how to value a corporation. A revised detailed week by week syllabus and answers to a set of frequently asked questions will be posted by November 1 on the canvas class web page. Note that my policy on case preparation differs from some others teaching this class - see the class web site for details.\u00a0 Importantly the reason why I require 35000 as a strict prerequisite is that we will use the capital asset pricing model within the first 2 weeks of class and we will use Black Scholes during the first half of class. So taking 35000 concurrently does not work.\u00a0 If you are requesting an exemption from the 35000 prerequisite because you are familiar with that material and are instead taking a more advanced class, note that in your request and indicate the more advanced class you will be taking instead of 35000."
+    },
+    {
+      "course": "35201: Cases in Financial Management",
+      "department": "Booth",
+      "description": "A case-based corporate finance course designed to apply and enhance concepts learned in introductory classes (35200 or 35010). The course is structured to provide practical examples and real-world business situations, making it ideal for students considering careers in investment banking and finance departments of corporations, or those for whom practical corporate finance tools and skills are relevant (e.g., strategy, corporate development)."
+    },
+    {
+      "course": "35207: Consumer Finance",
+      "department": "Booth",
+      "description": "Consumer finance is ubiquitous. The US, for example, carries more consumer debt than corporate debt. Consumer finance is also consequential. Consumers\u2019 balance sheets can drive the sales of an individual firm and can shape the trajectory of macroeconomic crises. This course studies the design of consumer financial products and how business leaders more broadly can respond to consumers\u2019 financing needs."
+    },
+    {
+      "course": "35210: International Corporate Finance",
+      "department": "Booth",
+      "description": "This course will explore the challenges of corporate finance and investment in an integrated (and possible de-globalizing) world economy. How should one optimally organize the location of production, control, and financing? What kinds of new concerns emerge when the whole world, rather than just one's domestic economy, becomes the arena of decision making? How does corporate decision making depend on the environment one is doing business in? In a world that is changing fast, this course will focus on finance and economics, but also on geo-politics, climate change, automation, and other important issues confronting us today. We will also have optional guest lectures outside class."
+    },
+    {
+      "course": "35213: Emerging Markets Finance and Entrepreneurship",
+      "department": "Booth",
+      "description": "Emerging markets (EMs) have recently become major contributors to global economic growth, with the past decade witnessing an unprecedented boom in entrepreneurship and private capital flows around the world. This course offers an overview of the key issues faced by high-growth entrepreneurs and investors operating in EMs, using the case method to drive active discussion and analysis. Through debate and highly interactive class discussions, students will engage directly with real-world decisions faced by founders, venture capitalists, and private equity investors. The course is particularly relevant for students interested in entrepreneurship, venture capital (VC), or private equity (PE)\u2014especially growth equity\u2014in global markets. Weekly sessions feature high-profile guest speakers (both founders and investors), allowing students to connect classroom frameworks to current practice."
+    },
+    {
+      "course": "35214: Debt, Distress, and Restructuring",
+      "department": "Booth",
+      "description": "This is an advanced corporate finance class designed to help students develop expertise on the main topics of leveraged finance: credit origination, capital structure, corporate debt, credit cycles, and debt restructuring. In the first part of the class, we will review the types of securities firms issue with an emphasis on their priority over cash flows and their control provisions. We will discuss private credit, leveraged loans, asset-backed debt, private placements, and high yield bonds. We will review basic fixed income asset pricing terms and techniques. We will discuss strategies for determining whether to invest in high yield credit situations for firms."
+    },
+    {
+      "course": "35215: Behavioral and Institutional Finance",
+      "department": "Booth",
+      "description": "This is an advanced course covering a variety of special topics. These topics should include: Understanding financial crises and the role of banks; Investor sentiment, anomalies, and market efficiency; The money management business and the inherent limitations of professional arbitrage; The role of cross-country institutional differences in explaining differences in financial markets and access to finance; Finance and rent-seeking: Are financial people overpaid?; Implications of asset price volatility for corporate finance, including merger waves and financial innovation."
+    },
+    {
+      "course": "35218: Financial Crises",
+      "department": "Booth",
+      "description": "This course focuses on financial crises. Students will learn 1) why financial crises occur, 2) how they impact the economy and 3) what institutions and regulations have evolved to mitigate them. Thankfully, serious financial crises are rare, but their consequences are often felt for centuries. Students will become familiar with the historical crises that gave rise to today\u2019s institutions and regulatory framework and the theoretical models developed to explain past crises that guide policymakers today. Examples include 1) the bank runs that gave rise to our current global regulatory framework and institutions such as the Federal Reserve, 2) sovereign debt and currency crises, 3) the Great Depression and 2008 Global Financial Crises, and 4) stablecoins and their risks."
+    },
+    {
+      "course": "35222: Corporate Governance and Activism - Board and Director Roles in Critical Decisions",
+      "department": "Booth",
+      "description": "This class will provide a detailed and practical education on the functions of corporate boards\u2014and fiduciary duties of directors\u2014in those types of complex circumstances where decision-making process and judgments are critical and, sometimes, the difference between the success and failure of the enterprise.\u00a0 Drawing from the lessons of real-world case studies and taught from the firsthand experiences of principals and professionals who were involved, issues covered will meet at the intersection of business strategy, law, and corporate finance with stakeholder value and board governance being omnipresent considerations."
+    },
+    {
+      "course": "35223: Global Entrepreneurship, Venture Capital and Private Equity",
+      "department": "Booth",
+      "description": "This course is exclusively open to Specialized Masters students (Master in Management and Master in Finance) who are studying in London during Winter Quarter 2026."
+    },
+    {
+      "course": "35600: Seminar: Finance",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "35601: Applied Theory Workshop",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "35908: Research Projects: Finance",
+      "department": "Booth",
+      "description": "This is a research course for Ph.D. students and research-oriented MBA students. The course requirement is a research paper, due at the end of the quarter. The prerequisites are (i) my approval of the research topic, (ii) my judgment that the student has sufficient background to complete the project, and (iii) the topic is in my area of interest and expertise, so I can be helpful in seeing the paper to completion. Empirical paper topics in finance and economics are most likely to meet these criteria. Projects can be carried out independently or in groups of up to three students. There is one class session per week, where verbal progress reports are given, and discussed by the rest of the class. There is a final one-hour presentation of each paper. Weekly attendance is expected. Participation by the instructor is via Zoom."
+    },
+    {
+      "course": "35916: New Developments in Public Finance",
+      "department": "Booth",
+      "description": "This course provides graduate-level discussion of topics and methods in public finance. This course has two objectives. The first is to teach current topics and methods in public finance. The second is to advance students\u2019 development as economists by providing training in the production of high-quality research. This training may help students read, contribute to, and draw from recent progress in this literature."
+    },
+    {
+      "course": "35930: Research Seminar",
+      "department": "Booth",
+      "description": "PhD research seminar for third year students in both Finance and the joint Financial Economics PhD program."
+    },
+    {
+      "course": "35931: Research Seminar",
+      "department": "Booth",
+      "description": "PhD research seminar for third year students in both Finance and the joint Financial Economics PhD program."
+    },
+    {
+      "course": "35932: Research Seminar",
+      "department": "Booth",
+      "description": "PhD research seminar for third year students in both Finance and the joint Financial Economics PhD program."
+    },
+    {
+      "course": "36106: Managerial Decision Modeling",
+      "department": "Booth",
+      "description": "Note: If the above link to my faculty page is not working, please click on this link."
+    },
+    {
+      "course": "36109: Advanced Decision Models with Python",
+      "department": "Booth",
+      "description": "This course focuses on modeling, analyzing and solving managerial decision problems using Python, the de facto programming language of business analytics."
+    },
+    {
+      "course": "36110: Application Development",
+      "department": "Booth",
+      "description": "Note: Due to the intensive support requirements and volume of requests, we can\u2019t allow auditors for this course. We have many more sections available this year, so please plan ahead and enroll as usual through your program (or Take 3 for alums). If you are on the waitlist, you are welcome to attend Day 1 so that you can keep up in case someone drops."
+    },
+    {
+      "course": "36111: Application Development II",
+      "department": "Booth",
+      "description": "Application Development II (BUSN 36111) continues where Application Development (BUSN 36110) ends."
+    },
+    {
+      "course": "36600: Workshop in Operations/Management Science",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "36900: Linear Programming",
+      "department": "Booth",
+      "description": "This course provides a rigorous treatment of linear optimization. It is designed for students who want to build large-scale optimization models and need an understanding of the underlying theory. The course is theoretical in nature and the vast majority of the assignments (as well as the exams) are theorem-proof oriented. It is designed for Ph.D. students only. The course will cover polyhedral theory, theory of systems of linear inequalities, simplex method, network simplex algorithm, polynomial time solvability of linear optimization, conic programming, and interior point methods in linear and semidefinite optimization."
+    },
+    {
+      "course": "36902: Dynamic Programming/Markov Decision Processes",
+      "department": "Booth",
+      "description": "Decisions are often made sequentially and in environments where their outcomes are subject to stochastic variability. Dynamic Programming (DP) provides a powerful tool for obtaining structural insight about, as well computing prescriptions for, such decisions. The method finds wide application in operations management, marketing, economics, and finance among other fields. This course is intended to provide a rigorous introduction to the method with an emphasis on applications from these fields. When appropriate, finite or countable state Markovian settings will be used to obtain theoretical results with a minimum of technical fuss. Implementation and computational issues will be discussed."
+    },
+    {
+      "course": "36905: Approximate Dynamic Programming",
+      "department": "Booth",
+      "description": "While many real-world problems can be formulated as Markov Decision Processes, they have historically suffered in practice due to Bellman\u2019s curse of dimensionality making computation intractable. However, over the last decade or so, researchers have been making significant strides in the area of approximate dynamic programming. A wide range of practical applications have now been successfully explored, in areas ranging from supply chain and distribution management, dynamic pricing and revenue management, marketing/advertising, industrial organization, finance, and others."
+    },
+    {
+      "course": "36906: Stochastic Processes",
+      "department": "Booth",
+      "description": "This course covers basic concepts and methods in applied probability and stochastic modeling. The intended audience is master's and doctoral students in programs such as Computer Science, Statistics, Mathematics, and those in the MS/OM Ph.D. in Booth School of Business. In terms of prerequisites, basic familiarity with probability theory and stochastic processes will be assumed. The exposition will be (mostly) rigorous, yet intentionally skirting some measure-theoretic details; for those interested in such details they can be found in measure theoretic textbooks and other courses (e.g. Measure Theoretic Probability sequence offered by the department of Statistics). A unifying theme in the course will be the use of asymptotic methods which constitute a powerful tool for the study of complex stochastic systems."
+    },
+    {
+      "course": "36914: Queueing Theory",
+      "department": "Booth",
+      "description": "This is an introductory course on the theory of queueing systems and networks, with applications to service systems, computer systems, and manufacturing. The course will expose students to both classical and modern application of queueing theory, and aims to equip students with the basic methodological tools for system performance analysis and policy design."
+    },
+    {
+      "course": "37000: Marketing Strategy",
+      "department": "Booth",
+      "description": "I use a framework-based approach to teach this course. The first half of the class is spent on building a structured approach using customer analysis (assessing how the firm could provide unique benefits to an attractive target market segment); company analysis (assessing strategic fit based on long-term strategy and core capabilities) and competitor analysis (ascertaining how to build sustainable competitive advantage against both \"current\" and \"future\" competitors). The second half of the class uses the strategic marketing analysis described above to identify issues and challenges the firm faces, and articulate marketing objectives that are used to develop the marketing plan (product development, positioning and product strategy; setting prices to capture value, determining potential channel or places of distribution and promotion & communication strategies to communicate benefits to the target market)."
+    },
+    {
+      "course": "37101: Consumer Behavior",
+      "department": "Booth",
+      "description": "The purpose of this course is to inform future managers, analysts, consultants, and advisors of the psychological processes and biases underlying consumer behavior, with emphasis on how to incorporate such insights into marketing and business strategies. Contemporary approaches to business emphasize the importance of adopting a customer focus. Marketing, in particular, begins and ends with the consumer\u2014from determining consumer needs to providing post-purchase satisfaction."
+    },
+    {
+      "course": "37103: Data-Driven Marketing",
+      "department": "Booth",
+      "description": "Rapid advances in information technology during the last decades have enabled firms to create and analyze large databases of customer interactions and transactions. Data-driven marketing is an approach to implement marketing decisions based on a statistical analysis of big data to improve the profitability of marketing using ROI metrics."
+    },
+    {
+      "course": "37105: Data Science for Marketing Decision Making",
+      "department": "Booth",
+      "description": "Marketing decisions in the era of big data and artificial intelligence (AI) are based on a statistical\u00a0analysis of large amounts of transaction and customer data. Using such an analysis we can predict\u00a0the profitability or ROI of different marketing decisions, such as pricing, customer targeting, or\u00a0digital advertising."
+    },
+    {
+      "course": "37201: Lab in Developing New Products and Services",
+      "department": "Booth",
+      "description": "This course provides an in-depth understanding of state-of-the-art practices in new product/service innovation using Design Thinking methods. It offers extensive, hands-on, practical innovation experience."
+    },
+    {
+      "course": "37202: Pricing Strategies",
+      "department": "Booth",
+      "description": "The surge in access to detailed marketing data and analytic tools has elevated pricing to the forefront of corporate strategy and the driving force of strategic revenue growth. Emerging roles like the Chief Growth Officer (CGO) and Chief Revenue Officer (CRO) focus predominantly on pricing decisions. For most companies, improving pricing strategy represents both a strategic goal and a strategic challenge. Most struggle with the same basic questions: How do we formulate a pricing strategy? What should we charge? Which data and methods should we be using to make pricing decisions? Who should be in charge of pricing decision-making?"
+    },
+    {
+      "course": "37209: Brand Management in a Digital Age",
+      "department": "Booth",
+      "description": "This course introduces the principles of brand management as practiced by industry leaders today. Although the implementation of marketing programs has undergone a massive transformation from conventional to digital media, the underlying principles of consumer driven marketing remain essentially the same; we will discuss how great marketing, including digital programming, is driven by a sound understanding of consumer segmentation, brand positioning, distinct product benefits, and relevant in-market executions."
+    },
+    {
+      "course": "37212: Business with Purpose",
+      "department": "Booth",
+      "description": "Business with Purpose: Integrating Profit and Social Value"
+    },
+    {
+      "course": "37215: Product Management",
+      "department": "Booth",
+      "description": "Disclaimer: Course Search provides an overview of each faculty member\u2019s course. Specific details regarding class format, assessment, attendance, etc. can be found in faculty members\u2019 syllabi. Please review syllabi, and address any questions or concerns directly with faculty and/or TAs."
+    },
+    {
+      "course": "37301: Digital Marketing",
+      "department": "Booth",
+      "description": "Companies - both B2C and B2B \u2013 have shifted an increasing portion of their marketing budgets to digital and social media marketing to engage their increasingly digital consumers. Also, with the advent of Generative AI, digital marketing itself is transforming at a rapid pace.\u00a0 All of this has created a significant challenge for the digital marketer: How to keep pace with and stay ahead of the changing digital eco-system."
+    },
+    {
+      "course": "37601: Marketing Workshop",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "37703: Digital Marketing Lab",
+      "department": "Booth",
+      "description": "Companies today expect their marketing professionals to understand what it takes to design, execute and manage digital marketing strategies and campaigns. Marketing professionals, in both B2B and B2C environments, are now expected to know how to select, deploy and use a variety of marketing software platforms & services, including the latest AI-based platforms & tools. As of last count, there are over 15,300 MarTech applications in 49 categories including advertising (AdTech), content marketing, marketing automation, sales automation, websites, social media, sales intelligence, and analytics. The best way to gain such expertise is for these professionals to actually build and execute specific digital marketing programs/strategies using various MarTech platforms in a lab environment."
+    },
+    {
+      "course": "37902: Foundations of Advanced Quantitative Marketing",
+      "department": "Booth",
+      "description": "This course is meant for Ph.D. students with marketing as dissertation or minor area. The focus of the course is on understanding the methods currently available for analyzing panel data (household purchases, physician prescriptions, etc.). The course begins with an introduction to the various aspects of individual behavior and the econometric models currently available to study them. The remainder of the course focuses on specific advances in such analyses. These include, but are not limited to, the study of purchases across product categories, the analysis of dynamic purchase behavior and accounting for endogeneity in such models. Students will write code in R, Matlab or some similar software; no canned routines are allowed for PhD students."
+    },
+    {
+      "course": "37903: Adv Mktg Theory: Behavioral Science Approach",
+      "department": "Booth",
+      "description": "This is a Ph.D. seminar. We will discuss various topics covering current and classic research in consumer behavior with underpinnings in social and cognitive psychology. The class is an advanced research seminar in which students are expected to read, assimilate, and discuss multiple papers on specific topic areas each week. Each student is expected to lead the discussion for an entire topic once or twice in the quarter. Responsibilities will include assigning discussion questions for the week, allocating readings to specific classmates for detailed discussion, and synthesizing the discussion across readings to develop an integrative framework for research in the topic area at the end of that session. Students are also expected to generate research ideas and write a paper for the course."
+    },
+    {
+      "course": "37904: Advanced Quantitative Marketing",
+      "department": "Booth",
+      "description": "This course covers some key topics at the research frontier in quantitative marketing. We formulate and estimate models of consumer decision-making, and then explore the normative and positive consequences of the inferred consumer behavior for optimal marketing decisions and market structure. Topics include: Foundations of demand modeling, measurement of consumer heterogeneity, the origin and evolution of preferences, state dependence in demand, dynamic discrete choice models, learning and memory models, storable goods demand, diffusion models and durable goods demand, stated choice models, advertising dynamics, and search and shopping behavior."
+    },
+    {
+      "course": "37905: Marketing Literature Seminar",
+      "department": "Booth",
+      "description": "The goal of this seminar is to familiarize students with the marketing literature and develop the process of generating research ideas. Each class will involve student presentations of preassigned papers followed by a class discussion."
+    },
+    {
+      "course": "37907: Behavioral Science Research Methods in Marketing",
+      "department": "Booth",
+      "description": "This course will focus on both the philosophical and practical questions involved in conducting behavioral research for academic publication. We will discuss specific research methodologies, best practices and current controversies in research methods. The course assumes prior training in statistics, and the goal of the course is to bridge the gap between formal statistics and day-to-day research practice. The course will provide training in commonly used methods as well as develop your intuition for the logic underlying statistical practice, and when that logic is being violated."
+    },
+    {
+      "course": "37911: Marketing Research Seminar (Winter) \u2784",
+      "department": "Booth",
+      "description": "Intensive year-long research and writing seminar for Booth Marketing PhD behavioral students in the 3rd year and up."
+    },
+    {
+      "course": "37912: Marketing Research Seminar (Spring) \u2784",
+      "department": "Booth",
+      "description": "Intensive year-long research and writing seminar for Booth Marketing PhD behavioral quantitative (-50) and behavioral (-51)students in the 3rd year and up."
+    },
+    {
+      "course": "38000: Managerial Psychology",
+      "department": "Booth",
+      "description": "Managerial psychology is designed to increase your understanding of individual, interpersonal and group behaviors as they relate to organizational performance using the lens of social psychology. We will work together to develop a more complex understanding of processes such as motivation, social perception, interpersonal influence, effective communication, interpersonal problem solving, group decision making, commitment, and leadership. Using a combination of case discussions, demonstrations, role-plays, group activities, and lectures, our primary goal is to offer conceptual frameworks and principles that will help to improve your managerial and leadership effectiveness."
+    },
+    {
+      "course": "38001: Managing in Organizations",
+      "department": "Booth",
+      "description": "Success in management requires understanding the factors that shape individual and group behaviors and attitudes. This course deals with the people part of management; we will develop a complex view of organizational behavior at the individual, interpersonal, and group levels of analysis. We will examine topics such as motivation, evaluation, communication, teamwork, and organizational culture."
+    },
+    {
+      "course": "38002: Managerial Decision Making",
+      "department": "Booth",
+      "description": "This course is designed to make you a better decision maker. Good decision makers know how to recognize decision situations, then how to represent the essential structure of the situations, and how to analyze them with the formal tools from decision theory. But, perhaps more important, they need to be able to think effectively about the inputs into a decision analysis, whether to trust the analysis, and how to use the outputs to guide actions by themselves and their firms. And, maybe most important of all, they need to know how to make effective, unaided intuitive decisions, and to recognize the limits on their intuitive skills. This course will move back and forth between formal, optimal models and behavioral, descriptive models to help you understand and improve your native decision making abilities."
+    },
+    {
+      "course": "38003: Power and Influence in Organizations",
+      "department": "Booth",
+      "description": "Every effective manager needs to know how to wisely manage power and influence. Skill in doing so enables managers to win the cooperation of others, to elicit the most value from diverse organizational resources, and to consistently achieve goals."
+    },
+    {
+      "course": "38103: Strategies and Processes of Negotiation",
+      "department": "Booth",
+      "description": "This course will help you become a more effective negotiator by developing your \u201ctool kit\u201d of negotiation tactics and strategies. You will learn from an extensive set of negotiation experiences in class, practice your skills, and benefit from feedback. In the early class sessions, we introduce basic negotiation concepts and tactics. In the classes that follow, we focus on specific aspects of the negotiation process that are important to many negotiation situations, such as obstacles to effective communication at the bargaining table, the maximization of multiple interests, and tactics for coalition building. In the final set of classes, we put it all together by exploring negotiations that contain elements of both cooperation and competition; that is, these sessions involve cases where the parties can \u201cenlarge the pie\u201d by creating joint gains. Because little in business (or life) gets done without negotiation, this course has the potential to deliver significant upside in your professional and personal outcomes."
+    },
+    {
+      "course": "38105: Advanced Negotiations",
+      "department": "Booth",
+      "description": "This course builds on 38103, Strategies and Processes of Negotiation, and is designed to increase your understanding of the theory and process of negotiation."
+    },
+    {
+      "course": "38107: Crafting and Delivering Persuasive Narratives",
+      "department": "Booth",
+      "description": "The ability to articulate your ideas and convey them in a compelling way is a skill that will make you more effective throughout your career. This new, highly practical 100-unit course offers a comprehensive approach to presenting your ideas effectively and using them to win over various professional audiences. We\u2019ll learn analytical tools and processes, and practice deploying them in a range of situations, from video and podcasts to conference calls, one-on-one meetings, in-person presentations and speeches. We\u2019ll critique each other\u2019s work, which should improve your ability to persuade, to analyze others\u2019 communication, as well as to handle and learn from criticism. You should emerge a better writer and presenter, comfortable communicating your narrative whatever the medium. This course combines for the first time the insights, techniques, and frameworks from two courses formerly offered as stand-alone 50-credit options: Persuasion: Effective Business Communication and Persuasion II: Influence Through Narrative. It is designed for students who have never taken either of these classes."
+    },
+    {
+      "course": "38115: Ethics of Business",
+      "department": "Booth",
+      "description": "The primary aim of this class is to help students define for themselves a canon of business ethics that is tailored to their professional goals. We will build a vocabulary for talking about business ethics by examining the work of a wide variety of authors \u2013 from economists and entrepreneurs to philosophers, journalists, and revolutionaries \u2013 all of whom have written about the place of business (and the business professional) in the modern world. These authors include Benjamin Franklin, Andrew Carnegie, Karl Marx, George Orwell, Ayn Rand, and, most importantly, Adam Smith, whose work we will revisit throughout the course. Topics include:"
+    },
+    {
+      "course": "38119: Designing a Good Life",
+      "department": "Booth",
+      "description": "This class is based on the assumption that you want to live a \u201cgood life\u201d in three senses of the term. First, \u201cgood\u201d in the sense of being successful. Second, \"good\" in the sense of being ethical and honorable. Third, \"good\" in the sense of feeling good: living a life rich in happiness, meaning, purpose, and well-being. If you wanted to increase your odds of living a good life in all three senses, what would you do? If you wanted to lead an organization that was \u201cgood\u201d in all three senses of this term, how would you lead it?"
+    },
+    {
+      "course": "38120: The Study of Behavioral Economics",
+      "department": "Booth",
+      "description": "Behavioral economics applies psychological insights to economic markets and decision making. In this class, we will discuss the recent theoretical and empirical advances that have been made in this increasingly important field of economics. Being thoughtful about the role of psychology can lead to a greater understanding of how the economy works."
+    },
+    {
+      "course": "38122: Diversity in Organizations",
+      "department": "Booth",
+      "description": "The aim of this course is to use insights from behavioral science to promote organizational health as it relates to diversity, equity, and inclusion. Many organizations that are interested in promoting diversity, equity, and inclusion don\u2019t know how to achieve their goals. Thus, the course will not only focus on the question of why (Why should we care about diversity, equity, and inclusion?), but primarily on the question of how (How can we promote diversity, equity, and inclusion? How can we leverage differences effectively?)."
+    },
+    {
+      "course": "38126: Culture (And Why It Matters)",
+      "department": "Booth",
+      "description": "Culture shapes our thought, our relationships, and even how much power money has over us. This class will equip you with the basics of how cultures differ and why they differ. You\u2019ll also learn about exciting recent discoveries, such as why modernization is actually pushing cultures farther apart rather than erasing cultural differences. You'll learn through case challenges, fieldwork, and measuring real-world cultural differences. With these tools, you will be able to better navigate life abroad, negotiate better, and build the culture of the teams you lead."
+    },
+    {
+      "course": "38601: Workshop in Behavioral Science",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "38901: Current Topics in Behavioral Science I",
+      "department": "Booth",
+      "description": "This is a graduate seminar for Ph.D. students interested in behavioral science. The course will be divided into two parts."
+    },
+    {
+      "course": "38914: Foundations of Social Psychology",
+      "department": "Booth",
+      "description": "Intended for Ph.D. students interested in getting an advanced understanding of social psychology. This seminar will focus on foundational topics such as attitude change, emotion, social influence, and social cognition, covering both classic as well as contemporary research. Each week we will try to gain some understanding of how judgment and behavior is influenced by the contexts in which people find themselves. Each week we will try to identify new research directions worth pursuing, in the hope that students will develop new research ideas of their own."
+    },
+    {
+      "course": "38916: Behavioral Economics - Development & Observational Data",
+      "department": "Booth",
+      "description": "Behavioral economics applies psychological insights to economic markets and decision making. In this class, we will discuss the recent theoretical and empirical advances made in this increasingly important field of economics with a focus on behavioral development economics and observational data analysis. Being thoughtful about the role of psychology can lead to a greater understanding of how economic agents make decisions and how the economy works."
+    },
+    {
+      "course": "38917: Topics in Behavioral Economics",
+      "department": "Booth",
+      "description": "This class covers recent work in behavioral economics. Topics include social influence and social pressure, the role of identity in economics, the psychology of poverty, and social preferences. Applications will cover a wide range of fields, including labor economics, finance, political economy, and development economics."
+    },
+    {
+      "course": "39001: Strategy and Structure: Markets and Organizations",
+      "department": "Booth",
+      "description": "Success in management requires both the ability to formulate a winning strategy and the skills to guide employees in executing it. A manager\u2019s brilliant ideas about strategy are ultimately worth little if she or he is unable to translate them into actions that both deliver value to customers and enable the firm to capture a portion of the value created. Yet, managers often overemphasize strategy development while giving short shrift to execution."
+    },
+    {
+      "course": "39101: Technology Strategy",
+      "department": "Booth",
+      "description": "This course focuses on business strategy in the context of technology change.\u00a0 In the past, the class focused on a short list of relatively technology intensive industries.\u00a0 But under the current digital/AI revolution, the concepts and frameworks covered in the class apply to almost all industries.\u00a0 The fundamental principle that underlies the class is that how every companies competes, from their business strategy and business model/operating model, and the structure of the industry they compete in, has been optimized within one or more technology paradigms.\u00a0 Hence, when a new technology paradigms emerges a re-optimization process must follow - their strategy must change or they risk being being disrupted by new entrants to their industry.\u00a0 Engaging in this type of strategy process requires a deeper set of concepts than those provided in a traditional strategy class."
+    },
+    {
+      "course": "40000: Operations Management: Business Process Fundamentals",
+      "department": "Booth",
+      "description": "This core course focuses on the levers for structuring, managing, and improving a firm\u2019s recurring business processes to achieve competitive advantage in customer responsiveness, price, quality, and product or service variety. These levers are as relevant to banks, hospitals, and brokerage firms as they are to traditional manufacturers. The course explores processes both within firms and across firms (i.e., supply chains). Students will examine the fundamental principles underlying state-of-the-art practices, learning how to critically evaluate these and other operational improvement programs."
+    },
+    {
+      "course": "40101: Supply Chain Strategy and Practice",
+      "department": "Booth",
+      "description": "The supply chain of a firm is critical to its performance. Supply chains are networks of organizations that supply and transform materials and distribute final products to consumers. If designed and managed properly, these networks can be a crucial source of competitive advantage for both manufacturing and service enterprises."
+    },
+    {
+      "course": "40108: Revenue Management",
+      "department": "Booth",
+      "description": "This course will focus on the identification, formulation, solution, and implementation of systems for pricing and revenue optimization. The course will develop fundamental understanding of the use of pricing and capacity concepts combined with optimization tools to achieve revenue improvement within the practical context of limited resources and information. Case examples from a variety of industries including airlines, hotels, car rental agencies, internet/media advertising, entertainment, retailing, energy, commodities, freight, and manufacturing will be used to develop skills in designing and implementing solutions in different environments."
+    },
+    {
+      "course": "40110: Managing Service Operations",
+      "department": "Booth",
+      "description": "This class is concerned with the design, delivery, monitoring, and analysis of services. Lines of inquiry include: How to design and improve a service offering for sustained excellence, How to identify and overcome key challenges in service delivery, and How to monitor and analyze the performance of service entities. We consider a wide range of industries, from traditional services such as restaurants and hospitals to more modern internet-based services, and services taken from both the public and private sector."
+    },
+    {
+      "course": "40111: Project Management",
+      "department": "Booth",
+      "description": "Change management has become synonymous with project management, since organizations who want to change their focus or direction increasingly recognize that introducing new products, processes, or programs in a timely and cost effective manner requires professional project management. This course analyzes complex projects and discusses available tools for managing them, covering both the fundamental aspects of modern project management, as well as state-of-the-art knowledge and methodologies for managing real-world projects."
+    },
+    {
+      "course": "40206: Healthcare Business Analytics",
+      "department": "Booth",
+      "description": "One of the today's most exciting and important applications of Business Analytics is Healthcare. \u00a0Every day, more data on provider performance is becoming available to consumers to help them make better informed decisions about their healthcare. Hospital revenues are being driven more and more by clinical results through value-based incentive programs for improving hospital readmissions, patient safety, costs, and patient outcomes. At the same time, population health is improving as Big Data is being used to learn what treatments are most effective at an unprecedented pace and scale. \u00a0Alternative payment models are developing that require providers to take on the full financial risk of patient care. \u00a0These forces are transforming the healthcare industry and public health."
+    },
+    {
+      "course": "40721: Healthcare Analytics Lab",
+      "department": "Booth",
+      "description": "The healthcare industry is now undergoing a transformation as data analysis is being rapidly deployed to improve clinical, operational, and financial outcomes. The Healthcare Analytics Laboratory will focus on applying data-driven analytics and insights to identify and create healthcare delivery efficiencies. Student teams will work on real-world improvement projects with prominent healthcare institutions."
+    },
+    {
+      "course": "40915: Frontiers in AI for Operational Decision-Making",
+      "department": "Booth",
+      "description": "This PhD course explores the integration of artificial intelligence, machine learning, and reinforcement learning into operational decision-making. With an emphasis on practical applications rather than exhaustive theoretical development, the course builds on recent advances in the operations management literature. Class sessions introduce core theoretical concepts from the classical literature to develop intuition, provide direction for deeper study, and frame discussion around contemporary research and applications."
+    },
+    {
+      "course": "41000: Business Statistics",
+      "department": "Booth",
+      "description": "Data science. Machine learning. Statistics. Predictive Analytics. No matter what it\u2019s called, modern business runs on data. This course is an introduction to the fundamentals of probability and statistics with an aim towards building foundational skills in modern data science. Topics to be covered include 1) Exploratory data analysis and descriptive statistics, 2) Basic probability, common pitfalls and fallacies, 3) Statistical modeling, inference, p-values, and A/B testing, and 4) Prediction, regression, and classification. Emphasis will be placed on ethics and privacy in data analysis as well as real-world applications and case studies."
+    },
+    {
+      "course": "41100: Applied Regression Analysis",
+      "department": "Booth",
+      "description": "This course is about regression, a powerful and widely used data analysis technique which is used to understand how different random quantities relate to one another. Students will learn how to use regression to analyze a variety of complex real-world problems, with the aim of gaining insights from the data and also to potentially predict future events. Focus is placed on the understanding of fundamental concepts and its implementation in a programming language (R, or alternative). Real-world examples are used throughout the course to illustrate the application of techniques. Topics covered include: (i) short review of simple linear regression; (ii) multiple regression and model checking and diagnostics; (iii) generalized linear models (e.g. logistic regression); (iv) time series models and forecasting. We will also discuss the use of machine learning in the context of regression."
+    },
+    {
+      "course": "41203: Financial Econometrics",
+      "department": "Booth",
+      "description": "This course covers a variety of topics in financial econometrics. The topics covered are of real- world, practical interest and are closely linked to material covered in other advance finance courses. Topics covered include ARMA models, volatility models (GARCH), factor models, models for time varying correlations, analysis of panel data, cointegration models for long-run co-movement between prices and models for transactions data and the analysis of transactions cost."
+    },
+    {
+      "course": "41204: Machine Learning",
+      "department": "Booth",
+      "description": "This course offers a broad introduction to key concepts in machine learning, with a focus on applications in the business world. We will cover the three core learning paradigms: (i) supervised learning, (ii) unsupervised learning, and (iii) reinforcement learning. Each paradigm will be illustrated through simple examples designed to highlight essential ideas and practical considerations. In addition to the basic learning methods, we will explore topics - such as causal inference, transfer learning and fine-tuning deep neural networks, and AI agents - as time permits. The goal is for students to leave the course with a solid grasp of core machine learning concepts, the ability to engage in informed discussions, and a clearer sense of both the opportunities and limitations of applying machine learning in business contexts."
+    },
+    {
+      "course": "41207: Causal Inference for Business Applications",
+      "department": "Booth",
+      "description": "In recent years, causal inference has become essential for data-driven decision making, as these methods can protect against biases in traditional statistical modeling techniques. In this course, students will learn how to use various methods to draw causal inferences through practical experience and real-world data examples in areas such as policy, marketing and operations. Topics covered will include randomized A/B experiments, difference-in-differences, instrumental variables, and modern machine learning/AI tools."
+    },
+    {
+      "course": "41210: Financial Analytics",
+      "department": "Booth",
+      "description": "Financial Analytics is an in-depth course designed to explore the analysis, exploration, and simplification of large and complex datasets. This course arms students with the essential skills to model and derive insights from data, enabling the development of robust predictive and classification models.\u00a0The curriculum encompasses core concepts and methodologies, such as hypothesis testing, confidence intervals, linear and logistic regression, model selection, multinomial and binary regression, clustering, factor models, and decision trees.\u00a0A strong emphasis is placed on practical computational skills and the fundamental\u00a0principles\u00a0underpinning these methods. Students will actively engage with actual financial datasets, applying their knowledge to develop tailored methodologies for specific applications."
+    },
+    {
+      "course": "41215: Data Intelligence",
+      "department": "Booth",
+      "description": "This course sits at the intersection of Data Science and Artificial Intelligence."
+    },
+    {
+      "course": "41600: Econometrics and Statistics Colloquium",
+      "department": "Booth",
+      "description": "Workshops in each academic area provide a forum for faculty, PhD students, and invited guests to present, discuss, and debate new research."
+    },
+    {
+      "course": "41901: Probability and Statistics",
+      "department": "Booth",
+      "description": "This is a PhD course that introduces fundamental statistical concepts for academic research in business and economics. The topics include linear regression, maximum likelihood, logistic regression, randomized controlled experiments, propensity score matching, instrumental variables regression, regression discontinuity designs, difference-in-differences, and fixed effects regression."
+    },
+    {
+      "course": "41902: Statistical Inference",
+      "department": "Booth",
+      "description": "This Ph.D.-level course is the second in a two-quarter sequence with Business 41901. The central topic is statistical inference using asymptotic approximations. We will cover linear regression models, generalized method of moments, time series. Time permitting; we will discuss factor models."
+    },
+    {
+      "course": "41903: Applied Econometrics",
+      "department": "Booth",
+      "description": "In this Ph.D.-level course, we will discuss statistical methodology for use in causal inference in econometric settings. The course will cover topics such as basic treatment effect models (the linear model, linear IV model, linear panel data models), an introduction to nonparametric estimation, and estimation of treatment effects when effects may be heterogeneous. It is assumed that students are familiar with linear regression and methods of performing classical inference using asymptotic approximations for linear and nonlinear models."
+    },
+    {
+      "course": "41910: Time-series Analysis for Forecasting and Model Building",
+      "department": "Booth",
+      "description": "Forecasting plays an important role in business planning and decision-making. This Ph.D.-level course discusses time series models that have been widely used in business and economic data analysis and forecasting. Both theory and methods of the models are discussed. Real examples are used throughout the course to illustrate applications."
+    },
+    {
+      "course": "41916: Bayes, AI and Deep Learning",
+      "department": "Booth",
+      "description": "This course focuses on the applications of data analytic, machine learning and deep learning methods. We will start with a quick review of basic Bayesian models followed by tools and concepts from artificial intelligence. Students will learn how to use deep learning to analyze a variety of complex real world problems. Numerous empirical examples from finance, internet analytics, and sports are used to illustrate the material covered. Google\u2019s development of deep neural networks and applications will be discussed in detail."
+    },
+    {
+      "course": "41919: Contemporary Bayesian Inference",
+      "department": "Booth",
+      "description": "This is a course on advanced Bayesian inference in the context of contemporary data applications."
+    },
+    {
+      "course": "42001: Competitive Strategy",
+      "department": "Booth",
+      "description": "The course applies microeconomics\u2014mainly the economics of industrial organization\u2014to analyze decisions managers face in business environments. It focuses on strategic decisions that drive profits."
+    },
+    {
+      "course": "42005: Literature and Leadership",
+      "department": "Booth",
+      "description": "Using timeless stories and characters as case studies can illuminate leadership challenges in powerful ways. Great stories offer characters with memorable traits and leadership styles, without losing sight of each character\u2019s complexity. And the settings in those great stories provide us with rich contexts that can serve as archetypal strategic environments."
+    },
+    {
+      "course": "42108: Corporate Governance",
+      "department": "Booth",
+      "description": "The course will introduce students to the functions and duties of directors and boards, and to the topics boards in the United States most commonly face."
+    },
+    {
+      "course": "42116: Game Theory",
+      "department": "Booth",
+      "description": "In terminology of economics a game is any situation where the best course of actions depends on what others will do. Under this definition, most business environments are games. Game theory is a framework for analyzing games. The course will focus on two questions: (i) how to design games (i.e., how to structure the business environment), and (ii) how to play games (i.e., how to predict what others will do and respond appropriately)."
+    },
+    {
+      "course": "42121: Merger & Acquisition Strategy",
+      "department": "Booth",
+      "description": "This course provides an overview of mergers and acquisitions with a focus on the role MA plays in the development and implementation of a firm\u2019s strategy. Students will develop an analytical and theoretical framework to understand the MA process and will also use cases and real-world applications to develop skills necessary to prepare and evaluate the strategic rationale for a proposed transaction. This course uses a strategic corporate development perspective rather than an investment banking/transaction perspective. Topics include strategic rationale for MA transactions, value creation and destruction in MA, the MA process, interplay between strategy and valuation, and implementation/integration issues. The student will apply course learnings in a cumulative project typically by preparing a M&A Plan including the rationale for a proposed acquisition target."
+    },
+    {
+      "course": "42124: Storytelling and Narratives in Business",
+      "department": "Booth",
+      "description": "This course aims to help students excel in one of the business world's most important competencies: the ability to construct and to deliver a powerful, influential narrative."
+    },
+    {
+      "course": "42126: Arts Leadership: Exemplary is Not Enough \u2784",
+      "department": "Booth",
+      "description": "From museums to concert halls to theaters, successful strategies of the past are no longer sufficient. Even before health, political, and social crises of recent years, arts leaders were grappling with how to succeed amidst seismic external shifts (demographic, economic, technological) and changes in the very nature of art-making, art-sharing, and art appreciation. At the same time, many institutions were already burdened by unsustainable financial structures, outmoded managerial practices and the responsibility to serve larger, more demanding, and diverse audiences. As the essential link between artist and audience, organizations have had to adapt rapidly and emphatically in order to thrive, an imperative that has now become a matter of survival. In this class, we examine best current practices in the not-for profit arts sector and consider the kinds of radical approaches that might be necessary for the future."
+    },
+    {
+      "course": "42129: The Political Economy of Climate Change",
+      "department": "Booth",
+      "description": "The last several years have seen an accelerated focus on climate change, whether in the halls of government, the boardrooms of corporations, or the daily lives of individuals.\u00a0 These discussions not only aim to seek solutions to limit warming to levels necessary to mitigate the most disastrous effects, but also to explore how societies and governments balance the immediacy and magnitude of the issue against other needs and goals.\u00a0 Historically, these fights have been viewed as environmentalists versus energy producers.\u00a0 But today\u2019s world is far more complex, with a growing and diverse stakeholder community attempting to exert influence on these discussions, each with competing interests, priorities, and perspectives."
+    },
+    {
+      "course": "42132: Strategy and Digital Disruption \u2784",
+      "department": "Booth",
+      "description": "This course focuses on the dynamics of digital disruption. Innovation and new business models have always transformed industries; Schumpeter observed \u201cthe perennial gale of creative destruction\u201d as a normal part of markets almost a century ago. Today, digital disruptions\u2014driven by modern telecommunications, cloud computing, AI/ML, virtual reality, and other technologies\u2014are major factors influencing \u00a0how industries are evolving. In fact, advances in agentic AI are potentially impacting the very nature of work and almost all organizations in profound ways. We will examine these disruptions primarily from the perspective of the leadership teams of established incumbents, as well as high-growth enterprises. We will discuss how leaders can best address the following key questions:"
+    },
+    {
+      "course": "42133: Media Power: How Media Influences Business, Markets and Regulations",
+      "department": "Booth",
+      "description": "**Students can refer to bid point history and course evaluations under course number\u00a042123/Reputation, Regulation and Communications - How Media Influences Business**"
+    },
+    {
+      "course": "42134: Strategy in the Era of AI and Technological Disruption \u2784",
+      "department": "Booth",
+      "description": "Ted Cannis, Former CEO of Ford Motor Company's - Ford Pro and Customer Service Division"
+    },
+    {
+      "course": "42135: Platforms and Market Design",
+      "department": "Booth",
+      "description": "Textbook markets are an abstraction. Real-world markets are explicitly designed. Many of the world\u2019s most exciting and innovative companies have designed marketplaces as a central part of their business: Amazon, Apple, Google, AirBNB, Uber. Much of finance takes place through designed markets: stock exchanges, futures markets, over-the-counter markets, blockchains. Even dating apps involve market design."
+    },
+    {
+      "course": "42136: Social Impact Strategy",
+      "department": "Booth",
+      "description": "Social and environmental challenges are no longer addressed only by governments or charities. Today, nonprofits, startups, corporations, investors, and public agencies often work side by side \u2014 and sometimes inside the same organizations \u2014 to tackle problems like housing, health, climate, education, and economic opportunity."
+    },
+    {
+      "course": "42201: The Legal Infrastructure of Business",
+      "department": "Booth",
+      "description": "The point of this course is to introduce students to the legal system and legal reasoning with an emphasis on the way that law shapes the strategic environment for businesses. Said differently, this course is about the intersection of law and business strategy.\u00a0There is no textbook for the course and I will post the readings in chunks throughout the quarter. You will be able to download the readings at the course website."
+    },
+    {
+      "course": "42708: Corporate Social Responsibility (CSR) Social Impact Practicum",
+      "department": "Booth",
+      "description": "Applications are now closed. If you wish to be considered as a late addition to the wait list, please email: Caroline.Grossman@chicagobooth.edu"
+    },
+    {
+      "course": "42709: Consulting Lab",
+      "department": "Booth",
+      "description": "Consulting Lab is an experiential lab course designed to give students the experience of engaging with real clients on strategic issues as management consultants. This lab is conducted in partnership with Kearney, a global management consulting firm with offices in over 40 countries. Projects are sourced from real clients by Kearney consultants, who also serve as professional coaches for student teams."
+    },
+    {
+      "course": "42710: Social Impact Lab",
+      "department": "Booth",
+      "description": "In this Social Impact Lab, students work in small groups on consulting projects that are curated to address various economic development needs and opportunities on the South Side. By exploring Chicago\u2019s rich and complex social, economic, and political history, we in turn work with leading institutions to shape their strategies for how to advance local economies particularly with a lens towards generating wealth in the black community."
+    },
+    {
+      "course": "42711: Global Social Entrepreneurship Lab",
+      "department": "Booth",
+      "description": "The Global Social Entrepreneurship Lab (GSEL) is an experiential course in which students ideate, research, validate, and test new concepts for impactful social ventures. Each week we have guest speakers (\u201cFounder-Mentors\u201d) who are founders of award-winning for-profit and non-profit social ventures around the world \u2013 including edtech for refugees in Lebanon, climate tech supporting farmers in Kenya, youth empowerment programs in El Salvador, innovative mental health interventions in the U.S., and microbanks for widows in India, Egypt, and across the globe. Students come into the class without an idea or with an early idea and \u2013 after becoming more proximate to a social or environmental problem, developing and validating potential solution ideas, and testing those ideas \u2013 leave with a pressure-tested social venture that they can take forward."
+    },
+    {
+      "course": "42712: Housing and Social Impact Lab",
+      "department": "Booth",
+      "description": "The objective for this course is to understand housing as a driver of social impact in urban communities. Part of Booth\u2019s Social Impact Curriculum, this course presents a set of ideas, debates, and frameworks for students interested in the people side of housing investment."
+    },
+    {
+      "course": "42715: Strategy Simulation: Creating Value in Complex and Ambiguous Settings",
+      "department": "Booth",
+      "description": "Strategy Simulation: Creating Value in Complex and Ambiguous Settings is designed around an advanced simulation developed by Booth in which participants focus on managing a business. Students compete in teams to grow a struggling start-up into a valuable company poised for IPO, merger, LBO, MBO, or some other strategy determined by the team. Students come away with a C-suite perspective on the core functions of a business at various stages of development, as well as an intensely salient experience that they can draw upon in their careers."
+    },
+    {
+      "course": "43100: AI Essentials",
+      "department": "Booth",
+      "description": "This course is designed to introduce students to the cutting-edge field of Artificial Intelligence (AI). Across detailed lectures, participants will gain insights into the core principles of AI and machine learning, explore the intricacies of natural language processing, discover the potential of vision recognition and image generation technologies, delve into reinforcement learning for sequential decision-making, and learn about the design of recommender systems that power personalized user experiences. The course also examines the burgeoning field of generative AI and the AI-generated content industry, while emphasizing the crucial importance of bias assessment and the principles of responsible AI."
+    },
+    {
+      "course": "43120: Building an AI Company",
+      "department": "Booth",
+      "description": "AI is transforming industries at an unprecedented pace, creating new opportunities for startups and established businesses alike. It represents a fundamental shift in how businesses operate. Yet, while AI\u2019s potential is widely discussed, far less attention is given to how to actually build and scale AI products and companies. AI products have different dynamics from traditional software -from the cold start problem and to ethical risks and usability constraints. Successfully navigating these challenges requires a different strategic approach and operational playbook. This course fills that gap."
+    },
+    {
+      "course": "43130: AI for Good",
+      "department": "Booth",
+      "description": "AI is transforming industries, societies, and daily life\u2014offering immense opportunities for innovation but also posing significant challenges. How can business and product leaders ensure AI is designed and deployed in ways that maximize positive impact on users and society?"
+    },
+    {
+      "course": "43950: Research Topics in Generative AI",
+      "department": "Booth",
+      "description": "This course provides a research-focused introduction to modern Generative AI, with an emphasis on how the underlying ideas translate into applied work in economics, marketing, finance, accounting, and the broader social sciences. Rather than emphasizing implementation details, the course focuses on conceptual frameworks, intellectual foundations, and emerging methodological directions.\u00a0 The aim is to help students understand the structure of contemporary AI models and identify how these tools and ideas can inform their own research agendas."
+    },
+    {
+      "course": "44101: Voice of a Leader: Speaking with Executive Presence",
+      "department": "Booth",
+      "description": "Speaking like a leader doesn\u2019t require you to have formal authority. Organizations are full of people who are not in senior positions but use effective communication to lead initiatives, motivate teams, and unite diverse individuals in pursuit of a shared mission. This course develops your ability to speak like a leader in your organization or sector, whether you\u2019re in the boardroom, at an industry conference, or hosting an internal strategy session."
+    }
+  ]
+}
